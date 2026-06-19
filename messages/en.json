@@ -1,0 +1,101 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "services": "Services",
+    "portfolio": "Portfolio",
+    "contact": "Contact",
+    "hire": "Hire Me"
+  },
+  "hero": {
+    "badge": "Available for Projects ✦",
+    "title1": "Software That Moves",
+    "title2": "Businesses Forward.",
+    "subtitle": "From web and mobile apps to AI and automation — I build new systems or upgrade existing ones to help your business scale globally.",
+    "cta_primary": "View My Work",
+    "cta_secondary": "Start a Project →",
+    "stat1_num": "50",
+    "stat1_label": "Projects Delivered",
+    "stat2_num": "5",
+    "stat2_label": "Years Experience",
+    "stat3_num": "100",
+    "stat3_label": "On-Time Delivery",
+    "trust": "Trusted by businesses worldwide to drive growth through innovative software solutions."
+  },
+  "sections": {
+    "services_title": "What I Build",
+    "services_sub": "Web apps, mobile apps, management systems, AI & automation — built for your business to grow",
+    "portfolio_title": "Selected Work",
+    "portfolio_sub": "Real solutions. Real results.",
+    "testimonials_title": "What Clients Say",
+    "testimonials_sub": "Don't take my word for it — here's what business owners say",
+    "about_title": "Who I Am",
+    "cta_title": "Ready to Build Something Amazing?",
+    "cta_sub": "Let's turn your idea into a working solution — web, mobile, or system."
+  },
+  "contact": {
+    "title": "Start a Project",
+    "name": "Full Name",
+    "email": "Email Address",
+    "phone": "Phone (optional)",
+    "company": "Company (optional)",
+    "service": "Service Needed",
+    "message": "Tell me about your project",
+    "submit": "Send Message",
+    "success": "Message sent! I'll reply within 24 hours.",
+    "whatsapp": "Chat on WhatsApp"
+  },
+  "common": {
+    "view_work": "View Case Study",
+    "all": "All",
+    "systems": "Systems",
+    "web": "Web",
+    "mobile": "Mobile",
+    "automation": "Automation",
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "back": "Go Back",
+    "learn_more": "Learn More"
+  },
+  "about": {
+    "title": "Who I Am",
+    "subtitle": "Software Architect & Solutions Builder",
+    "description": "I'm Faris Elmasry — a software developer who builds custom solutions for businesses. Whether it's a web app, mobile app, management system, or process automation — my focus is always the same: reduce your costs, save your time, and give you full control.",
+    "story_p1": "I'm Faris Elmasry, a software developer. I started building web projects early and quickly found that many businesses were using outdated systems or none at all.",
+    "story_p2": "Today I focus 100% on building custom software solutions that save real businesses real money. Not generic templates — websites, mobile apps, and systems built around how you actually work.",
+    "download_cv": "Download CV",
+    "skills_title": "Technical Skills",
+    "values_quality": "I don't ship code I wouldn't use myself.",
+    "values_communication": "You'll always know where your project stands.",
+    "values_results": "I measure success by your business outcomes, not by my code."
+  },
+  "services_page": {
+    "title": "What I Build & How I Help",
+    "process_title": "How We Work Together",
+    "pricing_title": "Transparent Pricing",
+    "pricing_note": "Starting prices. Final price depends on project scope.",
+    "faq_title": "Frequently Asked Questions",
+    "request_service": "Request this service"
+  },
+  "footer": {
+    "tagline": "Web · Mobile · Systems · Automation",
+    "description": "Custom software solutions — websites, mobile apps, management systems, and process automation that actually work.",
+    "quick_links": "Quick Links",
+    "our_services": "Services",
+    "contact_info": "Contact",
+    "available": "Available for projects",
+    "copyright": "© 2025 Elmasry Tech Solutions",
+    "built_with": "Built with ♥"
+  },
+  "admin": {
+    "dashboard": "Dashboard",
+    "hero_editor": "Hero Editor",
+    "services": "Services",
+    "portfolio": "Portfolio",
+    "testimonials": "Testimonials",
+    "messages": "Messages",
+    "settings": "Settings",
+    "login": "Sign In",
+    "logout": "Sign Out"
+  }
+}

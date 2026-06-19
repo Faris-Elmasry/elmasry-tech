@@ -1,0 +1,106 @@
+// Prisma Schema — elmasry.tech
+// ═══════════════════════════════
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model HeroSection {
+  id               Int      @id @default(1)
+  title_en         String
+  title_ar         String
+  subtitle_en      String
+  subtitle_ar      String
+  badge_en         String   @default("Available for new projects")
+  badge_ar         String   @default("متاح لمشاريع جديدة")
+  cta_primary_en   String   @default("See My Work")
+  cta_primary_ar   String   @default("شوف الأعمال")
+  cta_secondary_en String   @default("Let's Talk")
+  cta_secondary_ar String   @default("كلمني على واتساب")
+  image_url        String?
+  updatedAt        DateTime @updatedAt
+}
+
+model Service {
+  id             Int      @id @default(autoincrement())
+  title_en       String
+  title_ar       String
+  description_en String
+  description_ar String
+  icon           String
+  order          Int      @default(0)
+  featured       Boolean  @default(false)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model Project {
+  id             Int      @id @default(autoincrement())
+  title_en       String
+  title_ar       String
+  slug           String   @unique
+  description_en String
+  description_ar String
+  long_desc_en   String   @db.Text
+  long_desc_ar   String   @db.Text
+  thumbnail      String?
+  images         String[] @default([])
+  tech_stack     String[] @default([])
+  category       String
+  live_url       String?
+  github_url     String?
+  client_name    String?
+  results_en     String?
+  results_ar     String?
+  roi_metric     String?
+  featured       Boolean  @default(false)
+  order          Int      @default(0)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model Testimonial {
+  id              Int      @id @default(autoincrement())
+  client_name     String
+  client_title_en String
+  client_title_ar String
+  client_company  String
+  client_avatar   String?
+  text_en         String
+  text_ar         String
+  rating          Int      @default(5)
+  featured        Boolean  @default(false)
+  createdAt       DateTime @default(now())
+}
+
+model ContactMessage {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  phone     String?
+  company   String?
+  service   String
+  message   String   @db.Text
+  status    String   @default("new")
+  createdAt DateTime @default(now())
+}
+
+model SiteSettings {
+  id        Int      @id @default(autoincrement())
+  key       String   @unique
+  value     String   @db.Text
+  updatedAt DateTime @updatedAt
+}
+
+model AdminUser {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  name      String
+  role      String   @default("admin")
+  createdAt DateTime @default(now())
+}
