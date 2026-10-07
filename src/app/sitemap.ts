@@ -1,37 +1,42 @@
-import { MetadataRoute } from "next";
+import type { MetadataRoute } from "next";
+import prisma from "@/lib/prisma";
+import { services } from "@/lib/content";
+import { locales, localeUrl, defaultLocale } from "@/lib/site";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://elmasry.tech";
+export const revalidate = 3600;
+
+type Entry = MetadataRoute.Sitemap[number];
+
+/** One URL per locale, each listing every language version (hreflang). */
+function localized(path: string, priority: number, changeFrequency: Entry["changeFrequency"], lastModified = new Date()): Entry[] {
+  const languages: Record<string, string> = {};
+  for (const l of locales) languages[l === "ar" ? "ar-EG" : "en"] = localeUrl(l, path);
+  languages["x-default"] = localeUrl(defaultLocale, path);
+  return locales.map((locale) => ({
+    url: localeUrl(locale, path),
+    lastModified,
+    changeFrequency,
+    priority,
+    alternates: { languages },
+  }));
+}
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const locales = ["en", "ar"];
+  const entries: MetadataRoute.Sitemap = [
+    ...localized("", 1, "weekly"),
+    ...localized("/services", 0.9, "monthly"),
+    ...services.flatMap((s) => localized(`/services/${s.slug}`, 0.9, "monthly")),
+    ...localized("/portfolio", 0.7, "weekly"),
+    ...localized("/about", 0.6, "monthly"),
+    ...localized("/contact", 0.7, "yearly"),
+  ];
 
-  // Static pages
-  const staticPages = ["", "/about", "/services", "/portfolio", "/contact"];
-  const staticEntries = locales.flatMap((locale) =>
-    staticPages.map((page) => ({
-      url: `${SITE_URL}/${locale}${page}`,
-      lastModified: new Date(),
-      changeFrequency: "weekly" as const,
-      priority: page === "" ? 1 : 0.8,
-    }))
-  );
-
-  // Dynamic project pages
-  let projectEntries: MetadataRoute.Sitemap = [];
   try {
-    const res = await fetch(`${SITE_URL}/api/projects`, { next: { revalidate: 3600 } });
-    if (res.ok) {
-      const { data } = await res.json();
-      projectEntries = locales.flatMap((locale) =>
-        (data || []).map((project: { slug: string; updatedAt: string }) => ({
-          url: `${SITE_URL}/${locale}/portfolio/${project.slug}`,
-          lastModified: new Date(project.updatedAt),
-          changeFrequency: "monthly" as const,
-          priority: 0.6,
-        }))
-      );
-    }
-  } catch {}
+    const projects = await prisma.project.findMany({ select: { slug: true, updatedAt: true } });
+    for (const p of projects) entries.push(...localized(`/portfolio/${p.slug}`, 0.6, "monthly", p.updatedAt));
+  } catch (error) {
+    console.warn("[sitemap] projects unavailable:", String((error as Error).message).split("\n").pop());
+  }
 
-  return [...staticEntries, ...projectEntries];
+  return entries;
 }

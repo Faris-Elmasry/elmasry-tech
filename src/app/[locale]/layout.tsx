@@ -1,33 +1,78 @@
-import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
+import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
-import { Providers } from "@/components/providers/Providers";
+import { NextIntlClientProvider } from "next-intl";
+import { getMessages, setRequestLocale } from "next-intl/server";
+import { Analytics } from "@vercel/analytics/react";
+import { fontVariables } from "@/app/fonts";
+import { isLocale, locales, site, siteUrl } from "@/lib/site";
+import { JsonLd, organizationJsonLd, websiteJsonLd } from "@/lib/seo";
+import "../globals.css";
 
-const locales = ["en", "ar"] as const;
-type Locale = (typeof locales)[number];
-
-interface LocaleLayoutProps {
-  children: React.ReactNode;
-  params: Promise<{ locale: string }>;
+export function generateStaticParams() {
+  return locales.map((locale) => ({ locale }));
 }
 
-export default async function LocaleLayout({
-  children,
-  params,
-}: LocaleLayoutProps) {
+export async function generateMetadata({ params }: LayoutProps<"/[locale]">): Promise<Metadata> {
   const { locale } = await params;
+  const isAr = locale === "ar";
+  return {
+    metadataBase: new URL(siteUrl),
+    title: {
+      default: isAr
+        ? "شركة برمجة في مصر | مواقع وتطبيقات وأنظمة — Elmasry Tech"
+        : "Software Development Company in Egypt | Elmasry Tech",
+      template: `%s | ${site.name}`,
+    },
+    applicationName: site.name,
+    authors: [{ name: site.legalName, url: siteUrl }],
+    creator: site.legalName,
+    publisher: site.legalName,
+    formatDetection: { telephone: false, email: false, address: false },
+    category: "technology",
+  };
+}
 
-  if (!locales.includes(locale as Locale)) {
-    notFound();
-  }
+export const viewport: Viewport = {
+  themeColor: "#0a0a0b",
+  colorScheme: "dark",
+};
 
-  const messages = await getMessages();
+export default async function LocaleLayout({ children, params }: LayoutProps<"/[locale]">) {
+  const { locale } = await params;
+  if (!isLocale(locale)) notFound();
+  setRequestLocale(locale);
+
+  // Only ship the namespaces client components actually use (Navbar, ContactForm,
+  // error boundary). Server components read the full catalogue on the server.
+  const all = await getMessages();
+  const messages = { nav: all.nav, common: all.common, contact: all.contact };
+  const dir = locale === "ar" ? "rtl" : "ltr";
 
   return (
-    <div lang={locale} dir={locale === "ar" ? "rtl" : "ltr"}>
-      <NextIntlClientProvider messages={messages}>
-        <Providers>{children}</Providers>
-      </NextIntlClientProvider>
-    </div>
+    <html lang={locale === "ar" ? "ar-EG" : "en"} dir={dir} data-theme="dark" className={fontVariables}>
+      <body className="min-h-dvh bg-[var(--bg-primary)] antialiased">
+        {/* Without JS, scroll-reveal content would stay hidden — show it. */}
+        <noscript>
+          <style>{`.rise,.split .word-inner{opacity:1!important;transform:none!important}.scribble path{stroke-dashoffset:0!important}`}</style>
+        </noscript>
+        <JsonLd data={[organizationJsonLd(locale), websiteJsonLd(locale)]} />
+        {/* Chrome/Edge prerender links marked data-prerender (e.g. the language switch,
+            which is a full document load) as soon as the user hovers them → instant switch. */}
+        <script
+          type="speculationrules"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({ prerender: [{ where: { selector_matches: "a[data-prerender]" }, eagerness: "moderate" }] }),
+          }}
+        />
+        <a href="#main-content" className="skip-to-content">
+          {locale === "ar" ? "انتقل للمحتوى" : "Skip to content"}
+        </a>
+        <NextIntlClientProvider messages={messages}>
+          {children}
+        </NextIntlClientProvider>
+        {/* Vercel Analytics only exists on Vercel; elsewhere its script 404s and logs a console error. */}
+        {process.env.VERCEL ? <Analytics /> : null}
+      </body>
+    </html>
   );
 }

@@ -1,25 +1,30 @@
 import { z } from "zod";
 
 // ─── Contact Form Schema ───
+export const contactServices = [
+  "website-development",
+  "mobile-app-development",
+  "custom-software",
+  "ai-chatbots",
+  "business-automation",
+  "ecommerce-development",
+  "ready-made-system",
+  "other",
+] as const;
+
 export const contactSchema = z.object({
-  name: z.string().min(2, "Name too short").max(100),
-  email: z.string().email("Invalid email"),
+  name: z.string().trim().min(2, "Name too short").max(100),
+  email: z.string().trim().email("Invalid email"),
+  // Accept Egyptian and international numbers (digits, spaces, dashes, leading +).
   phone: z
     .string()
-    .regex(/^(\+20|0)[0-9]{10}$/, "Invalid Egyptian phone")
+    .trim()
+    .regex(/^\+?[0-9][0-9\s-]{6,19}$/, "Invalid phone number")
     .optional()
     .or(z.literal("")),
-  company: z.string().max(100).optional(),
-  service: z.enum([
-    "pharmacy",
-    "gym",
-    "clinic",
-    "pos",
-    "web",
-    "mobile",
-    "other",
-  ]),
-  message: z.string().min(10, "Message too short").max(2000),
+  company: z.string().trim().max(100).optional(),
+  service: z.enum(contactServices),
+  message: z.string().trim().min(10, "Message too short").max(2000),
 });
 
 export type ContactFormData = z.infer<typeof contactSchema>;

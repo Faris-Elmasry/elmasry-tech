@@ -14,6 +14,15 @@ const transporter =
       })
     : null;
 
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 export async function sendContactNotification(
   data: ContactFormData
 ): Promise<void> {
@@ -22,11 +31,22 @@ export async function sendContactNotification(
     return;
   }
 
+  // All user input is escaped before being placed in the HTML email.
+  const raw = data;
+  data = {
+    ...raw,
+    name: escapeHtml(raw.name),
+    email: escapeHtml(raw.email),
+    phone: raw.phone ? escapeHtml(raw.phone) : raw.phone,
+    company: raw.company ? escapeHtml(raw.company) : raw.company,
+    message: escapeHtml(raw.message).replace(/\n/g, "<br>"),
+  };
+
   const html = `
     <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 600px; margin: 0 auto;">
       <div style="background: #0A1628; padding: 24px 32px; border-radius: 12px 12px 0 0;">
         <h1 style="color: #ffffff; margin: 0; font-size: 20px;">
-          <span style="color: #1E6FFF;">ELMASRY</span>.TECH — New Inquiry
+          elmasry<span style="color: #2b44ff;">.</span>tech — New inquiry
         </h1>
       </div>
       <div style="background: #ffffff; padding: 32px; border: 1px solid #e2e8f0; border-top: none;">
@@ -66,8 +86,8 @@ export async function sendContactNotification(
   await transporter.sendMail({
     from: `"Elmasry Tech" <${process.env.EMAIL_USER}>`,
     to: process.env.ADMIN_EMAIL,
-    subject: `New inquiry: ${data.service} — ${data.name}`,
+    subject: `New inquiry: ${raw.service} — ${raw.name}`,
     html,
-    replyTo: data.email,
+    replyTo: raw.email,
   });
 }

@@ -1,153 +1,108 @@
-"use client";
-
-import { useTranslations } from "next-intl";
-import { useParams } from "next/navigation";
 import Link from "next/link";
-import { Github, Linkedin, Instagram, Mail, Phone, MapPin } from "lucide-react";
+import { getTranslations } from "next-intl/server";
+import { Logo } from "@/components/layout/Logo";
+import { WhatsAppIcon } from "@/components/layout/WhatsAppIcon";
+import { VelocityMarquee } from "@/components/motion/Kinetic";
+import { services, tr } from "@/lib/content";
+import { site, whatsappLink, type Locale } from "@/lib/site";
 
-const socialLinks = [
-  { icon: Github, href: "https://github.com/fariselmasry", label: "GitHub" },
-  { icon: Linkedin, href: "https://linkedin.com/in/fariselmasry", label: "LinkedIn" },
-  { icon: Instagram, href: "#", label: "Instagram" },
-];
+export async function Footer({ locale }: { locale: Locale }) {
+  const t = await getTranslations("footer");
+  const tn = await getTranslations("nav");
+  const tc = await getTranslations("common");
+  const isAr = locale === "ar";
+  const year = new Date().getFullYear();
 
-const quickLinks = ["home", "about", "services", "portfolio", "contact"] as const;
-
-const serviceLinks = [
-  { en: "Web Development", ar: "تطوير المواقع", hash: "web" },
-  { en: "Mobile Apps (iOS & Android)", ar: "تطبيقات الجوال (iOS و Android)", hash: "mobile" },
-  { en: "Management Systems", ar: "أنظمة الإدارة", hash: "systems" },
-  { en: "POS & Inventory", ar: "نقاط البيع والمخازن", hash: "pos" },
-  { en: "Process Automation", ar: "أتمتة العمليات", hash: "automation" },
-  { en: "Pharmacy System", ar: "نظام الصيدلية", hash: "pharmacy" },
-];
-
-export function Footer() {
-  const t = useTranslations("footer");
-  const tn = useTranslations("nav");
-  const params = useParams();
-  const locale = (params.locale as string) || "en";
+  const company = [
+    { label: tn("home"), href: "" },
+    { label: tn("work"), href: "/portfolio" },
+    { label: tn("about"), href: "/about" },
+    { label: tn("contact"), href: "/contact" },
+  ];
 
   return (
-    <footer className="bg-[var(--bg-secondary)] relative">
-      {/* Top gradient border */}
-      <div className="h-px bg-gradient-to-r from-transparent via-blue-500 to-transparent" />
+    <footer className="relative z-10 overflow-hidden border-t border-[var(--border)] bg-[var(--bg-primary)]">
+      {/* Giant kinetic sign-off that reacts to scroll speed */}
+      <Link href={`/${locale}/contact`} data-cursor={isAr ? "ابدأ" : "let's go"} className="block border-b border-[var(--border)] py-8 sm:py-12">
+        <VelocityMarquee baseSpeed={50}>
+          {[0, 1].map((k) => (
+            <span key={k} className="flex items-center gap-10 pe-10 font-display text-[clamp(3.5rem,11vw,10rem)] font-bold leading-none tracking-[-0.04em]">
+              <span>{isAr ? "لنبنِ معًا" : "Let’s build"}</span>
+              <span className="text-outline-accent">{isAr ? "منتجًا يُحدث فرقًا" : "something real"}</span>
+              <span className="inline-block h-[0.35em] w-[0.35em] rounded-full bg-[var(--accent)]" />
+            </span>
+          ))}
+        </VelocityMarquee>
+      </Link>
 
-      <div className="max-w-7xl mx-auto px-4 py-16">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
-          {/* Col 1 — Brand */}
-          <div className="space-y-4">
-            <Link href={`/${locale}`} className="font-[family-name:var(--font-poppins)] text-xl font-bold inline-block">
-              <span className="text-[var(--text-primary)]">ELMASRY</span>
-              <span className="text-blue-500">.TECH</span>
-            </Link>
-            <p className="text-xs text-[var(--text-muted)] font-medium tracking-wider uppercase">
-              {t("tagline")}
-            </p>
-            <p className="text-sm text-[var(--text-muted)] leading-relaxed">
-              {t("description")}
-            </p>
-            <div className="flex gap-3 pt-2">
-              {socialLinks.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2 rounded-lg text-[var(--text-muted)] hover:text-blue-400 hover:bg-white/5 transition-colors"
-                  aria-label={social.label}
-                >
-                  <social.icon className="h-4 w-4" />
-                </a>
-              ))}
-            </div>
-          </div>
+      <div className="mx-auto grid max-w-[1400px] gap-12 px-5 py-16 sm:px-8 md:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1.2fr]">
+        <div className="max-w-sm space-y-5">
+          <Logo href={`/${locale}`} />
+          <p className="text-sm leading-relaxed text-[var(--text-muted)]">{t("tagline")}</p>
+        </div>
 
-          {/* Col 2 — Quick Links */}
-          <div>
-            <h3 className="font-semibold text-[var(--text-primary)] mb-4">
-              {t("quick_links")}
-            </h3>
-            <ul className="space-y-2.5">
-              {quickLinks.map((key) => (
-                <li key={key}>
-                  <Link
-                    href={key === "home" ? `/${locale}` : `/${locale}/${key}`}
-                    className="text-sm text-[var(--text-muted)] hover:text-blue-400 transition-colors"
-                  >
-                    {tn(key)}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+        <nav aria-label={t("services")}>
+          <h2 className="label mb-5">{t("services")}</h2>
+          <ul className="space-y-3 text-sm">
+            {services.map((s) => (
+              <li key={s.slug}>
+                <Link href={`/${locale}/services/${s.slug}`} className="text-[var(--text-primary)] transition-colors hover:text-[var(--accent)]">
+                  {tr(s.label, locale)}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
 
-          {/* Col 3 — Services */}
-          <div>
-            <h3 className="font-semibold text-[var(--text-primary)] mb-4">
-              {t("our_services")}
-            </h3>
-            <ul className="space-y-2.5">
-              {serviceLinks.map((service) => (
-                <li key={service.hash}>
-                  <Link
-                    href={`/${locale}/services#${service.hash}`}
-                    className="text-sm text-[var(--text-muted)] hover:text-blue-400 transition-colors"
-                  >
-                    {locale === "ar" ? service.ar : service.en}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+        <nav aria-label={t("company")}>
+          <h2 className="label mb-5">{t("company")}</h2>
+          <ul className="space-y-3 text-sm">
+            {company.map((l) => (
+              <li key={l.href}>
+                <Link href={`/${locale}${l.href}`} className="text-[var(--text-primary)] transition-colors hover:text-[var(--accent)]">
+                  {l.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
 
-          {/* Col 4 — Contact */}
-          <div>
-            <h3 className="font-semibold text-[var(--text-primary)] mb-4">
-              {t("contact_info")}
-            </h3>
-            <ul className="space-y-3">
-              <li className="flex items-center gap-2.5">
-                <Mail className="h-4 w-4 text-blue-400 shrink-0" />
-                <a
-                  href="mailto:faris@elmasry.tech"
-                  className="text-sm text-[var(--text-muted)] hover:text-blue-400 transition-colors"
-                >
-                  faris@elmasry.tech
-                </a>
-              </li>
-              <li className="flex items-center gap-2.5">
-                <Phone className="h-4 w-4 text-blue-400 shrink-0" />
-                <a
-                  href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP || "+201000000000"}`}
-                  className="text-sm text-[var(--text-muted)] hover:text-blue-400 transition-colors"
-                >
-                  WhatsApp
-                </a>
-              </li>
-              <li className="flex items-center gap-2.5">
-                <MapPin className="h-4 w-4 text-blue-400 shrink-0" />
-                <span className="text-sm text-[var(--text-muted)]">
-                  {locale === "ar" ? "القاهرة، مصر" : "Cairo, Egypt"}
-                </span>
-              </li>
-              <li className="flex items-center gap-2.5 pt-1">
-                <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-                <span className="text-sm text-green-400">
-                  {t("available")}
-                </span>
-              </li>
-            </ul>
-          </div>
+        <div>
+          <h2 className="label mb-5">{t("contact")}</h2>
+          <ul className="space-y-3 text-sm">
+            <li>
+              <a href={whatsappLink(tc("whatsapp_message"))} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:text-[var(--accent)]">
+                <WhatsAppIcon className="h-4 w-4" />
+                <span dir="ltr">{site.whatsapp}</span>
+              </a>
+            </li>
+            <li>
+              <a href={`mailto:${site.email}`} className="hover:text-[var(--accent)]">
+                {site.email}
+              </a>
+            </li>
+            <li className="text-[var(--text-muted)]">
+              {site.city[locale]}
+              {isAr ? "، " : ", "}
+              {site.country[locale]}
+            </li>
+            <li className="flex gap-4 pt-2">
+              <a href={site.social.linkedin} target="_blank" rel="noopener noreferrer" className="label hover:text-[var(--text-primary)]">
+                LinkedIn
+              </a>
+              <a href={site.social.github} target="_blank" rel="noopener noreferrer" className="label hover:text-[var(--text-primary)]">
+                GitHub
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
 
-      {/* Bottom bar */}
-      <div className="border-t border-[var(--border)]">
-        <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col sm:flex-row items-center justify-between gap-2">
-          <p className="text-xs text-[var(--text-subtle)]">{t("copyright")}</p>
-          <p className="text-xs text-[var(--text-subtle)]">{t("built_with")}</p>
-        </div>
+      <div className="mx-auto flex max-w-[1400px] flex-col gap-2 border-t border-[var(--border)] px-5 py-6 text-xs text-[var(--text-subtle)] sm:flex-row sm:justify-between sm:px-8">
+        <p>
+          © {year} {site.legalName}. {t("rights")}
+        </p>
+        <p>{t("made_in")}</p>
       </div>
     </footer>
   );

@@ -15,10 +15,10 @@ interface BadgeProps {
 const variantStyles: Record<BadgeVariant, string> = {
   default:
     "bg-[var(--bg-card)] text-[var(--text-muted)] border border-[var(--border)]",
-  blue: "bg-blue-500/15 text-blue-400 border border-blue-500/25",
-  green: "bg-green-500/15 text-green-400 border border-green-500/25",
-  amber: "bg-amber-500/15 text-amber-400 border border-amber-500/25",
-  red: "bg-red-500/15 text-red-400 border border-red-500/25",
+  blue: "bg-[var(--accent)]/10 text-[var(--accent)] border border-[var(--accent)]/25",
+  green: "bg-[var(--success)]/10 text-[var(--success)] border border-[var(--success)]/25",
+  amber: "bg-[var(--warning)]/10 text-[var(--warning)] border border-[var(--warning)]/25",
+  red: "bg-[var(--danger)]/10 text-[var(--danger)] border border-[var(--danger)]/25",
   outline:
     "bg-transparent text-[var(--text-muted)] border border-[var(--border)]",
 };

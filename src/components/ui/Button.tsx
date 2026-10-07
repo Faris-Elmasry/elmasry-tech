@@ -1,11 +1,11 @@
 "use client";
 
 import { forwardRef, type ButtonHTMLAttributes, type ReactNode } from "react";
-import { cn } from "@/lib/utils";
-import { Loader2 } from "lucide-react";
 import Link from "next/link";
+import { Loader2 } from "lucide-react";
+import { cn } from "@/lib/utils";
 
-type ButtonVariant = "primary" | "ghost" | "outline" | "danger";
+type ButtonVariant = "primary" | "accent" | "ghost" | "outline" | "danger";
 type ButtonSize = "sm" | "md" | "lg";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -19,59 +19,68 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const variantStyles: Record<ButtonVariant, string> = {
-  primary:
-    "bg-blue-500 text-white hover:bg-blue-400 shadow-[0_0_20px_rgba(30,111,255,0.25)] hover:shadow-[0_0_30px_rgba(30,111,255,0.4)] active:scale-[0.98]",
-  ghost:
-    "bg-transparent text-[var(--text-primary)] hover:bg-white/5 active:bg-white/10",
+  // Signal-orange pill — the main call to action.
+  primary: "bg-[var(--accent)] text-[var(--accent-ink)] hover:bg-[var(--text-primary)]",
+  accent: "bg-[var(--accent)] text-[var(--accent-ink)] hover:bg-[var(--text-primary)]",
   outline:
-    "border border-blue-500 text-blue-500 bg-transparent hover:bg-blue-500/10 active:bg-blue-500/20",
-  danger:
-    "bg-red-600 text-white hover:bg-red-500 active:scale-[0.98]",
+    "border border-[var(--border-hover)] text-[var(--text-primary)] hover:border-[var(--text-primary)] hover:bg-[var(--text-primary)] hover:text-[var(--bg-primary)]",
+  ghost: "text-[var(--text-primary)] hover:bg-white/[0.06]",
+  danger: "bg-[var(--danger)] text-white hover:opacity-90",
 };
 
 const sizeStyles: Record<ButtonSize, string> = {
-  sm: "px-4 py-2 text-sm gap-1.5 rounded-lg",
-  md: "px-6 py-2.5 text-sm gap-2 rounded-lg",
-  lg: "px-8 py-3 text-base gap-2.5 rounded-xl",
+  sm: "h-9 px-4 text-sm gap-1.5",
+  md: "h-11 px-5 text-sm gap-2",
+  lg: "h-14 px-7 text-base gap-2.5",
 };
 
+/**
+ * Pill button. The label "rolls" on hover: a copy slides up from below while
+ * the original slides out — a small crafted detail instead of a colour fade.
+ */
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  (
-    {
-      variant = "primary",
-      size = "md",
-      loading = false,
-      leftIcon,
-      rightIcon,
-      fullWidth = false,
-      href,
-      className,
-      children,
-      disabled,
-      ...props
-    },
-    ref
-  ) => {
+  ({ variant = "primary", size = "md", loading = false, leftIcon, rightIcon, fullWidth = false, href, className, children, disabled, ...props }, ref) => {
     const classes = cn(
-      "inline-flex items-center justify-center font-medium transition-all duration-200 cursor-pointer select-none",
-      "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500",
-      "disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none",
+      "group/btn relative inline-flex items-center justify-center overflow-hidden rounded-full font-medium whitespace-nowrap select-none",
+      "transition-[background-color,color,border-color,transform] duration-300 active:scale-[0.97]",
+      "disabled:pointer-events-none disabled:opacity-50",
       variantStyles[variant],
       sizeStyles[size],
       fullWidth && "w-full",
       className
     );
 
+    const label =
+      typeof children === "string" ? (
+        <span className="relative block overflow-hidden">
+          <span className="block transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover/btn:-translate-y-full">
+            {children}
+          </span>
+          <span aria-hidden="true" className="absolute inset-0 block translate-y-full transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover/btn:translate-y-0">
+            {children}
+          </span>
+        </span>
+      ) : (
+        children
+      );
+
     const content = (
       <>
         {loading && <Loader2 className="h-4 w-4 animate-spin" />}
         {!loading && leftIcon}
-        {children}
+        {label}
         {!loading && rightIcon}
       </>
     );
 
     if (href && !disabled) {
+      if (/^(https?:|mailto:|tel:)/.test(href)) {
+        return (
+          <a href={href} className={classes} {...(href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}>
+            {content}
+          </a>
+        );
+      }
       return (
         <Link href={href} className={classes}>
           {content}
@@ -80,12 +89,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     }
 
     return (
-      <button
-        ref={ref}
-        className={classes}
-        disabled={disabled || loading}
-        {...props}
-      >
+      <button ref={ref} className={classes} disabled={disabled || loading} {...props}>
         {content}
       </button>
     );
