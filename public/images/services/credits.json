@@ -1,0 +1,38 @@
+{
+  "website-development": {
+    "id": "fPkvU7RDmCo",
+    "by": "Caspar Camille Rubin",
+    "alt": "MacBook Pro with images of computer language codes",
+    "link": "https://unsplash.com/photos/fPkvU7RDmCo"
+  },
+  "mobile-app-development": {
+    "id": "0VGG7cqTwCo",
+    "by": "Rodion Kutsaiev",
+    "alt": "person holding smartphone",
+    "link": "https://unsplash.com/photos/0VGG7cqTwCo"
+  },
+  "custom-software": {
+    "id": "hpjSkU2UYSU",
+    "by": "Carlos Muza",
+    "alt": "laptop computer on glass-top table",
+    "link": "https://unsplash.com/photos/hpjSkU2UYSU"
+  },
+  "ai-chatbots": {
+    "id": "MrWOCGKFVDg",
+    "by": "Javier Miranda",
+    "alt": "A dark sphere surrounded by a copper wire frame and floating metallic spheres",
+    "link": "https://unsplash.com/photos/MrWOCGKFVDg"
+  },
+  "business-automation": {
+    "id": "OnI_TNcIv9U",
+    "by": "Tyler",
+    "alt": "a rack of electronic equipment in a dark room",
+    "link": "https://unsplash.com/photos/OnI_TNcIv9U"
+  },
+  "ecommerce-development": {
+    "id": "3YSDTzqnVtQ",
+    "by": "Nathana Rebouças",
+    "alt": "a person holding a credit card in front of a machine",
+    "link": "https://unsplash.com/photos/3YSDTzqnVtQ"
+  }
+}

@@ -34,7 +34,7 @@ export async function WhyBlock({ locale, index }: { locale: Locale; index: strin
   const isAr = locale === "ar";
   const items = [1, 2, 3, 4] as const;
   return (
-    <section data-shape="scatter" data-shape-dim="0.25" className={`${shell} py-28 sm:py-40`}>
+    <section className={`${shell} py-28 sm:py-40`}>
       <Rise>
         <p className="label flex items-center gap-3">
           <span className="text-[var(--accent)]">{index}</span>
@@ -81,7 +81,7 @@ export async function WorkBlock({ locale, projects, index }: { locale: Locale; p
   const tw = await getTranslations("work_page");
   const label = (c: string) => (["system", "web", "mobile", "saas", "other"].includes(c) ? tw(c as "system") : c);
   return (
-    <section data-shape="scatter" data-shape-dim="0.2" className={`${shell} py-28 sm:py-40`}>
+    <section className={`${shell} py-28 sm:py-40`}>
       <Heading index={index} label={t("work_eyebrow")} title={t("work_title")} />
       {projects.length > 0 ? (
         <div className="mt-16 grid gap-x-8 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
@@ -160,7 +160,7 @@ export async function CtaBlock({ locale }: { locale: Locale }) {
   const t = await getTranslations("home");
   const tc = await getTranslations("common");
   return (
-    <section data-shape="ring" data-shape-scale="1.1" className="relative flex min-h-[90vh] items-center justify-center px-5 py-28 text-center">
+    <section className="relative flex min-h-[90vh] items-center justify-center px-5 py-28 text-center">
       <div className="max-w-4xl">
         <h2 className="font-display text-[clamp(2.8rem,8vw,7.5rem)] font-bold leading-[0.95] tracking-[-0.045em]">
           <SplitWords text={t("cta_title")} />

@@ -46,7 +46,7 @@ export default async function ServicesPage({ params }: PageProps<"/[locale]/serv
           faqJsonLd(faqs.map((f) => ({ q: tr(f.q, locale), a: tr(f.a, locale) }))),
         ]}
       />
-      <PageHeader shape="globe" eyebrow={t("eyebrow")} title={t("title")} sub={t("subtitle")} />
+      <PageHeader eyebrow={t("eyebrow")} title={t("title")} sub={t("subtitle")} />
       <section className="mx-auto max-w-7xl px-5 pb-24 sm:px-8">
         <ServicesList locale={locale} />
       </section>

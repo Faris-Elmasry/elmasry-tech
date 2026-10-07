@@ -62,7 +62,7 @@ export function SystemsRail({
   const demoMsg = rtl ? "مرحبًا، أود طلب عرض تجريبي لنظام" : "Hi, I'd like a demo of";
 
   return (
-    <section ref={outer} data-shape="grid" data-shape-dim="0.55" className="relative" style={distance ? { height: `calc(100vh + ${distance}px)` } : undefined}>
+    <section ref={outer} className="relative" style={distance ? { height: `calc(100vh + ${distance}px)` } : undefined}>
      <div className={distance ? "sticky top-0 flex h-screen flex-col justify-center overflow-hidden" : "flex flex-col justify-center overflow-hidden py-24"}>
       <div className="mx-auto mb-14 flex w-full max-w-[1400px] flex-col justify-between gap-8 px-5 sm:px-8 lg:flex-row lg:items-end">
         <div className="max-w-3xl">

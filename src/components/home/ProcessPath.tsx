@@ -31,7 +31,7 @@ export function ProcessPath({ locale, index, label, title }: { locale: Locale; i
   });
 
   return (
-    <section data-shape="scatter" data-shape-dim="0.3" className="relative mx-auto max-w-[1400px] px-5 py-28 sm:px-8 sm:py-40">
+    <section className="relative mx-auto max-w-[1400px] px-5 py-28 sm:px-8 sm:py-40">
       <Heading index={index} label={label} title={title} />
 
       <div className="relative mt-20">

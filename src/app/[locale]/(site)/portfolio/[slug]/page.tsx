@@ -67,7 +67,7 @@ export default async function ProjectPage({ params }: PageProps<"/[locale]/portf
           workLd,
         ]}
       />
-      <PageHeader shape="dashboard" eyebrow={category} title={title} sub={localize(project, "description", locale)}>
+      <PageHeader eyebrow={category} title={title} sub={localize(project, "description", locale)}>
         <Reveal delay={0.1} className="mt-10 flex flex-wrap items-center gap-3">
           {project.roi_metric && (
             <span className="rounded-full bg-[var(--highlight)] px-4 py-2 text-sm font-medium text-[#121110]">{project.roi_metric}</span>

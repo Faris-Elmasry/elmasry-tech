@@ -41,7 +41,7 @@ export default async function PortfolioPage({ params }: PageProps<"/[locale]/por
   return (
     <>
       <JsonLd data={breadcrumbJsonLd(locale, [{ name: t("eyebrow"), path: "/portfolio" }])} />
-      <PageHeader shape="dashboard" eyebrow={t("eyebrow")} title={t("title")} sub={t("subtitle")} />
+      <PageHeader eyebrow={t("eyebrow")} title={t("title")} sub={t("subtitle")} />
       <section className="mx-auto max-w-7xl px-5 pb-28 sm:px-8">
         {projects.length > 0 ? (
           <PortfolioGrid projects={projects} locale={locale} labels={labels} emptyLabel={t("empty")} />

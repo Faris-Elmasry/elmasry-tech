@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, type ComponentType, type ReactNode } from "react";
+import { usePathname } from "next/navigation";
 import { ReactLenis } from "lenis/react";
 import { Cursor } from "@/components/experience/Cursor";
 import { RevealObserver } from "@/components/motion/Interactive";
@@ -13,8 +14,11 @@ import { RevealObserver } from "@/components/motion/Interactive";
  */
 function DeferredParticles() {
   const [Field, setField] = useState<ComponentType | null>(null);
+  const pathname = usePathname();
 
   useEffect(() => {
+    // Only pages with a [data-shape] section (the home hero) need WebGL at all.
+    if (Field || !document.querySelector("[data-shape]")) return;
     let cancelled = false;
     const load = () => {
       cleanup();
@@ -47,7 +51,7 @@ function DeferredParticles() {
       cancelled = true;
       cleanup();
     };
-  }, []);
+  }, [pathname, Field]);
 
   return Field ? <Field /> : null;
 }

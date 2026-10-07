@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Hero } from "@/components/home/Hero";
-import { ServicesStory } from "@/components/home/ServicesStory";
+import { ServicesShowcase } from "@/components/home/ServicesShowcase";
 import { SystemsRail } from "@/components/home/SystemsRail";
 import { ProcessPath } from "@/components/home/ProcessPath";
 import { CtaBlock, FaqBlock, KeywordBand, TestimonialsBlock, WhyBlock, WorkBlock } from "@/components/home/HomeBlocks";
@@ -35,7 +35,6 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
   const locale = (await params).locale as Locale;
   setRequestLocale(locale);
   const t = await getTranslations("home");
-  const ts = await getTranslations("services_page");
 
   const [projects, testimonials] = await Promise.all([getProjects({ featured: true, limit: 3 }), getTestimonials()]);
 
@@ -46,14 +45,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
     <>
       <JsonLd data={faqJsonLd(faqs.map((f) => ({ q: tr(f.q, locale), a: tr(f.a, locale) })))} />
       <Hero locale={locale} />
-      <ServicesStory
-        locale={locale}
-        index={next()}
-        label={t("services_eyebrow")}
-        title={t("services_title")}
-        sub={t("services_sub")}
-        cta={ts("details")}
-      />
+      <ServicesShowcase locale={locale} index={next()} label={t("services_eyebrow")} title={t("services_sub")} />
       <KeywordBand locale={locale} />
       <SystemsRail
         locale={locale}

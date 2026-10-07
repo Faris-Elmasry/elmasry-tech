@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { PageHeader } from "@/components/sections/PageHeader";
 import { CtaSection, ProcessSection } from "@/components/sections/HomeSections";
-import { Rise as Reveal } from "@/components/motion/Kinetic";
+import { Circled, Rise, SplitWords, VelocityMarquee } from "@/components/motion/Kinetic";
+import { LazyComputer } from "@/components/three/LazyComputer";
 import { breadcrumbJsonLd, buildMetadata, JsonLd } from "@/lib/seo";
 import { stack } from "@/lib/content";
 import type { Locale } from "@/lib/site";
@@ -24,72 +24,103 @@ export default async function AboutPage({ params }: PageProps<"/[locale]/about">
   const locale = (await params).locale as Locale;
   setRequestLocale(locale);
   const t = await getTranslations("about");
+  const isAr = locale === "ar";
+
+  const facts = isAr
+    ? ["مهندسان مؤسسان", "القاهرة، مصر", "العربية والإنجليزية", "تسليم أسبوعي"]
+    : ["Two founding engineers", "Cairo, Egypt", "Arabic & English", "Weekly delivery"];
+
+  const principles = [
+    { key: "value_1", title: isAr ? "الوضوح" : "Clarity" },
+    { key: "value_2", title: isAr ? "الإيقاع" : "Cadence" },
+    { key: "value_3", title: isAr ? "الأثر" : "Impact" },
+  ] as const;
 
   return (
     <>
       <JsonLd data={breadcrumbJsonLd(locale, [{ name: t("eyebrow"), path: "/about" }])} />
-      <PageHeader shape="brain" eyebrow={t("eyebrow")} title={t("title")} sub={t("intro")} />
 
-      <section className="mx-auto grid max-w-7xl gap-14 px-5 pb-24 sm:px-8 lg:grid-cols-[1fr_1.4fr]">
-        <Reveal>
-          <h2 className="font-display text-3xl font-semibold tracking-[-0.03em]">{t("story_title")}</h2>
-        </Reveal>
-        <div className="space-y-6 text-xl leading-relaxed text-[var(--text-muted)] text-pretty">
-          <Reveal>
-            {locale === "en" ? (
-              // Drop cap only for Latin script — splitting an Arabic word breaks letter joining.
-              <p>
-                <span className="float-start me-3 mt-1 font-serif text-7xl leading-[0.8] text-[var(--text-primary)]">
-                  {t("story_p1").charAt(0)}
-                </span>
-                {t("story_p1").slice(1)}
-              </p>
-            ) : (
-              <p>{t("story_p1")}</p>
-            )}
-          </Reveal>
-          <Reveal delay={0.1}>
-            <p className="text-[var(--text-primary)]">{t("story_p2")}</p>
-          </Reveal>
-        </div>
-      </section>
-
-      <section className="border-y border-[var(--border)] bg-[var(--bg-secondary)] py-24">
-        <div className="mx-auto max-w-7xl px-5 sm:px-8">
-          <Reveal>
-            <h2 className="font-display text-3xl font-semibold tracking-[-0.03em]">{t("values_title")}</h2>
-          </Reveal>
-          <ol className="mt-12 grid gap-10 md:grid-cols-3">
-            {(["value_1", "value_2", "value_3"] as const).map((key, i) => (
-              <Reveal as="li" key={key} delay={i * 0.08} className="border-t border-[var(--border-hover)] pt-6">
-                <span className="font-serif text-5xl italic text-[var(--accent)]">{i + 1}</span>
-                <p className="mt-4 text-lg leading-relaxed">{t(key)}</p>
-              </Reveal>
+      {/* Hero: copy + the interactive studio computer */}
+      <section className="relative mx-auto grid min-h-[100svh] max-w-[1400px] items-center gap-10 px-5 pb-16 pt-28 sm:px-8 lg:grid-cols-[1fr_1.15fr]">
+        <div>
+          <p className="label in flex items-center gap-3">
+            <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent)]" />
+            {t("eyebrow")}
+          </p>
+          <h1 className="mt-6 font-display text-[clamp(2.3rem,4.8vw,4.3rem)] font-bold leading-[1.03] tracking-[-0.035em] text-balance">
+            {t("title")}
+          </h1>
+          <p className="in mt-6 max-w-xl text-lg leading-relaxed text-[var(--text-muted)]" style={{ "--d": "120ms" } as React.CSSProperties}>
+            {t("intro")}
+          </p>
+          <ul className="in mt-8 flex flex-wrap gap-2" style={{ "--d": "220ms" } as React.CSSProperties}>
+            {facts.map((f) => (
+              <li key={f} className="rounded-full border border-[var(--border)] px-4 py-2 text-sm text-[var(--text-muted)]">
+                {f}
+              </li>
             ))}
-          </ol>
+          </ul>
         </div>
+        <LazyComputer locale={locale} label={isAr ? "كمبيوتر ثلاثي الأبعاد تفاعلي — اضغط واكتب" : "Interactive 3D computer — click and type"} />
       </section>
 
-      <section className="mx-auto max-w-7xl px-5 py-24 sm:px-8">
-        <div className="grid gap-12 lg:grid-cols-[1fr_1.4fr]">
-          <Reveal>
-            <h2 className="font-display text-3xl font-semibold tracking-[-0.03em]">{t("team_title")}</h2>
-            <p className="mt-3 text-[var(--text-muted)]">{t("team_note")}</p>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <ul dir="ltr" className="flex flex-wrap gap-2">
-              {stack.map((s) => (
-                <li key={s} className="rounded-full border border-[var(--border)] px-4 py-2 font-mono text-sm text-[var(--text-muted)]">
-                  {s}
-                </li>
-              ))}
-            </ul>
-          </Reveal>
-        </div>
+      {/* Story as a manifesto */}
+      <section className="mx-auto max-w-[1400px] px-5 py-28 sm:px-8 sm:py-40">
+        <Rise>
+          <h2 className="label flex items-center gap-3">
+            <span className="text-[var(--accent)]">01</span>
+            <span className="h-px w-10 bg-[var(--border-hover)]" />
+            {t("story_title")}
+          </h2>
+        </Rise>
+        <Rise delay={0.1}>
+          <p className="mt-8 max-w-4xl text-xl leading-relaxed text-[var(--text-muted)] sm:text-2xl sm:leading-relaxed">{t("story_p1")}</p>
+        </Rise>
+        <p className="mt-12 max-w-5xl font-display text-[clamp(1.9rem,4vw,3.6rem)] font-bold leading-[1.1] tracking-[-0.03em]">
+          <SplitWords text={isAr ? "لذلك نبدأ بفهم العمل، ثم نبني" : "So we start by understanding the work, then build"} />{" "}
+          <Circled>{isAr ? "الحل المناسب" : "the right fit"}</Circled>{" "}
+          <SplitWords text={isAr ? "له — ويبقى ملكك بالكامل." : "for it — and it’s fully yours."} delay={0.2} />
+        </p>
       </section>
 
-      <ProcessSection locale={locale} index="01" />
-      <div className="pt-24" />
+      {/* Principles — each row expands on hover */}
+      <section className="border-y border-[var(--border)]">
+        <div className="mx-auto max-w-[1400px] px-5 pt-20 sm:px-8">
+          <h2 className="label flex items-center gap-3">
+            <span className="text-[var(--accent)]">02</span>
+            <span className="h-px w-10 bg-[var(--border-hover)]" />
+            {t("values_title")}
+          </h2>
+        </div>
+        <ul className="mt-10">
+          {principles.map((p, i) => (
+            <li key={p.key} className="group relative isolate overflow-hidden border-t border-[var(--border)]">
+              <span className="absolute inset-0 -z-10 origin-bottom scale-y-0 bg-[var(--accent)] transition-transform duration-700 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:scale-y-100" />
+              <div className="mx-auto grid max-w-[1400px] items-baseline gap-4 px-5 py-10 sm:px-8 md:grid-cols-[6rem_1fr_1.4fr]">
+                <span className="font-mono text-sm text-[var(--text-subtle)] transition-colors group-hover:text-[var(--accent-ink)]">0{i + 1}</span>
+                <h3 className="font-display text-[clamp(2.4rem,6vw,5rem)] font-bold leading-none tracking-[-0.04em] transition-colors group-hover:text-[var(--accent-ink)]">
+                  {p.title}
+                </h3>
+                <p className="max-w-lg text-lg leading-relaxed text-[var(--text-muted)] transition-colors group-hover:text-[var(--accent-ink)]">{t(p.key)}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {/* Stack ticker */}
+      <section className="py-16">
+        <p className="label mx-auto mb-6 max-w-[1400px] px-5 sm:px-8">{isAr ? "التقنيات التي نعمل بها" : "Technologies we work with"}</p>
+        <VelocityMarquee baseSpeed={30}>
+          {stack.map((s) => (
+            <span key={s} className="pe-10 font-display text-4xl font-bold tracking-[-0.02em] text-[var(--text-muted)] sm:text-6xl">
+              {s}
+            </span>
+          ))}
+        </VelocityMarquee>
+      </section>
+
+      <ProcessSection locale={locale} index="03" />
       <CtaSection locale={locale} />
     </>
   );

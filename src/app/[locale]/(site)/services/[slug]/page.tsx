@@ -4,7 +4,6 @@ import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { ArrowUpRight, Check } from "lucide-react";
 import { PageHeader } from "@/components/sections/PageHeader";
-import { serviceShapes } from "@/components/home/ServicesStory";
 import { CtaSection, FaqSection, ProcessSection } from "@/components/sections/HomeSections";
 import { Rise as Reveal } from "@/components/motion/Kinetic";
 import { Button } from "@/components/ui/Button";
@@ -68,7 +67,7 @@ export default async function ServicePage({ params }: PageProps<"/[locale]/servi
           serviceLd,
         ]}
       />
-      <PageHeader shape={serviceShapes[slug]} eyebrow={tr(service.label, locale)} title={title} sub={tr(service.summary, locale)}>
+      <PageHeader image={`/images/services/${slug}.jpg`} eyebrow={tr(service.label, locale)} title={title} sub={tr(service.summary, locale)}>
         <Reveal delay={0.15} className="mt-10 flex flex-wrap gap-3">
           <Button href={`/${locale}/contact?service=${slug}`} size="lg" rightIcon={<ArrowUpRight className="h-5 w-5 rtl-flip" />}>
             {t("request")}

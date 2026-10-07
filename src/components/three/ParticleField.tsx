@@ -103,7 +103,8 @@ interface Target {
   dim: number;
 }
 
-const DEFAULT_TARGET: Target = { shape: "scatter", x: 0, scale: 1, dim: 0.5 };
+// Outside any [data-shape] section the field fades out completely (hero-only by design).
+const DEFAULT_TARGET: Target = { shape: "code", x: 0.25, scale: 0.85, dim: 0 };
 
 function readTarget(el: Element, rtl: boolean): Target {
   const ds = (el as HTMLElement).dataset;
@@ -313,7 +314,9 @@ export default function ParticleField() {
         uniforms.uMouse.value.set(99, 99, 0);
       }
 
-      renderer.render(scene, camera);
+      // Skip GPU work entirely while the field is invisible.
+      if (uniforms.uOpacity.value > 0.005) renderer.render(scene, camera);
+      else if (current.dim === 0) renderer.clear();
     }
 
     const onVisibility = () => {

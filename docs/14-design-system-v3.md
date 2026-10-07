@@ -65,3 +65,13 @@ Syne 700 (Latin display) · Reem Kufi 700 (Arabic display, preloaded — Arabic 
 | /en mobile | 92 | 100 | 100 | 100 |
 
 Mobile is limited by Lighthouse's simulated slow-4G LCP (~3.2–3.4 s simulated); the observed LCP in the same runs was ~0.25 s. Remaining levers: fewer/lighter fonts, smaller framework JS, a CDN close to Egypt (TTFB).
+
+## v3.1 — less particles, more substance (2026-10-07)
+Owner feedback: the particle object appeared everywhere and stopped feeling special.
+- **Particles are hero-only** (`</>` glyph). Every other `data-shape` was removed; the field fades to zero and stops rendering elsewhere, and WebGL is not even loaded on pages without a `[data-shape]` section.
+- **Services showcase** (`components/home/ServicesShowcase.tsx`): a giant index of the six services. Hovering a row (or, on touch, scrolling it to the centre) wipes that service's real photo in behind the whole section (clip-path reveal + scale) and swaps the detail panel. Photos: `public/images/services/*.jpg` (Unsplash, free licence — credits in `credits.json`), served through `next/image` (AVIF/WebP).
+- **Service pages** open with their real photo as a graded, slowly pushing-in header (`PageHeader image=`).
+- **About page — the studio computer** (`components/three/Computer3D.tsx`, `terminal.ts`, `LazyComputer.tsx`): a procedural 3D monitor, 61-key keyboard mapped to `KeyboardEvent.code`, and an orange coffee mug. The visitor presses **Power on** (three.js loads only then — zero cost on page view), watches a boot sequence, then types on their own keyboard: the matching 3D keys press and glow, and the text appears on the 3D screen. It is a working bilingual mini-terminal: `help`, `about`, `services`, `stack`, `contact`, `hire` (opens the contact page), `clear`, `date`. Works with soft keyboards on phones (hidden input). Renders on demand only (no idle 60 fps).
+- About page rebuilt: split hero with the computer, manifesto with a hand-circled phrase, principles that fill orange on hover, a velocity-reactive stack ticker.
+
+Lighthouse after v3.1 (local prod): `/ar` mobile 95 · desktop 99; `/ar/about` mobile 88 · desktop 100; accessibility, best practices and SEO 100 on all.

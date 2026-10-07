@@ -48,7 +48,7 @@ export default async function ContactPage({ params, searchParams }: PageProps<"/
   return (
     <>
       <JsonLd data={[breadcrumbJsonLd(locale, [{ name: t("eyebrow"), path: "/contact" }]), contactLd]} />
-      <PageHeader shape="ring" eyebrow={t("eyebrow")} title={t("title")} sub={t("subtitle")} />
+      <PageHeader eyebrow={t("eyebrow")} title={t("title")} sub={t("subtitle")} />
 
       <section className="mx-auto grid max-w-7xl gap-16 px-5 pb-28 sm:px-8 lg:grid-cols-[1fr_1.6fr]">
         <Reveal className="space-y-8">
