@@ -4,6 +4,7 @@ import { Logo } from "@/components/layout/Logo";
 import { WhatsAppIcon } from "@/components/layout/WhatsAppIcon";
 import { VelocityMarquee } from "@/components/motion/Kinetic";
 import { services, tr } from "@/lib/content";
+import { readySystems } from "@/lib/systems";
 import { site, whatsappLink, type Locale } from "@/lib/site";
 
 export async function Footer({ locale }: { locale: Locale }) {
@@ -15,6 +16,8 @@ export async function Footer({ locale }: { locale: Locale }) {
 
   const company = [
     { label: tn("home"), href: "" },
+    { label: tn("services"), href: "/services" },
+    { label: tn("systems"), href: "/systems" },
     { label: tn("work"), href: "/portfolio" },
     { label: tn("about"), href: "/about" },
     { label: tn("contact"), href: "/contact" },
@@ -35,7 +38,7 @@ export async function Footer({ locale }: { locale: Locale }) {
         </VelocityMarquee>
       </Link>
 
-      <div className="mx-auto grid max-w-[1400px] gap-12 px-5 py-16 sm:px-8 md:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1.2fr]">
+      <div className="mx-auto grid max-w-[1400px] gap-12 px-5 py-16 sm:px-8 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_0.8fr_1.2fr]">
         <div className="max-w-sm space-y-5">
           <Logo href={`/${locale}`} />
           <p className="text-sm leading-relaxed text-[var(--text-muted)]">{t("tagline")}</p>
@@ -48,6 +51,19 @@ export async function Footer({ locale }: { locale: Locale }) {
               <li key={s.slug}>
                 <Link href={`/${locale}/services/${s.slug}`} className="text-[var(--text-primary)] transition-colors hover:text-[var(--accent)]">
                   {tr(s.label, locale)}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <nav aria-label={t("systems")}>
+          <h2 className="label mb-5">{t("systems")}</h2>
+          <ul className="space-y-3 text-sm">
+            {readySystems.map((s) => (
+              <li key={s.slug}>
+                <Link href={`/${locale}/systems/${s.slug}`} className="text-[var(--text-primary)] transition-colors hover:text-[var(--accent)]">
+                  {tr(s.name, locale)}
                 </Link>
               </li>
             ))}
@@ -102,7 +118,15 @@ export async function Footer({ locale }: { locale: Locale }) {
         <p>
           © {year} {site.legalName}. {t("rights")}
         </p>
-        <p>{t("made_in")}</p>
+        <p className="flex flex-wrap gap-x-5 gap-y-2">
+          <Link href={`/${locale}/privacy`} className="hover:text-[var(--text-primary)]">
+            {t("privacy")}
+          </Link>
+          <Link href={`/${locale}/terms`} className="hover:text-[var(--text-primary)]">
+            {t("terms")}
+          </Link>
+          <span>{t("made_in")}</span>
+        </p>
       </div>
     </footer>
   );

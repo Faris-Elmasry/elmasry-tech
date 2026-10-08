@@ -1,12 +1,15 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { Mail, MapPin } from "lucide-react";
+import { Clock, Mail, MapPin } from "lucide-react";
 import { PageHeader } from "@/components/sections/PageHeader";
 import { ContactForm } from "@/components/sections/ContactForm";
 import { Rise as Reveal } from "@/components/motion/Kinetic";
 import { Button } from "@/components/ui/Button";
 import { WhatsAppIcon } from "@/components/layout/WhatsAppIcon";
+import { StepsSection } from "@/components/sections/Blocks";
+import { FaqSection } from "@/components/sections/HomeSections";
 import { services, tr } from "@/lib/content";
+import { contactSteps, workingHours } from "@/lib/company";
 import { breadcrumbJsonLd, buildMetadata, JsonLd, organizationId } from "@/lib/seo";
 import { localeUrl, site, whatsappLink, type Locale } from "@/lib/site";
 import type { contactServices } from "@/lib/validators";
@@ -79,13 +82,41 @@ export default async function ContactPage({ params, searchParams }: PageProps<"/
               <MapPin className="mt-1 h-4 w-4 shrink-0" />
               {t("location")}
             </li>
+            <li className="flex items-start gap-2 text-[var(--text-muted)]">
+              <Clock className="mt-1 h-4 w-4 shrink-0" />
+              {tr(workingHours, locale)}
+            </li>
           </ul>
+          <div className="rounded-2xl border border-[var(--border)] p-6">
+            <p className="font-display text-lg font-semibold">{isAr ? "لتسريع الرد، أخبرنا بـ:" : "To speed things up, tell us:"}</p>
+            <ul className="mt-4 space-y-2 text-[var(--text-muted)]">
+              {(isAr
+                ? ["ما المشكلة التي تريد حلها؟", "من سيستخدم النظام، وكم عددهم؟", "هل لديك نظام أو بيانات حالية؟", "الموعد والميزانية التقريبية إن وُجدت."]
+                : ["What problem are you solving?", "Who will use it, and how many people?", "Any existing system or data?", "Rough deadline and budget, if you have one."]
+              ).map((q) => (
+                <li key={q} className="flex gap-3">
+                  <span className="mt-2.5 h-1 w-1 shrink-0 rounded-full bg-[var(--accent)]" />
+                  {q}
+                </li>
+              ))}
+            </ul>
+          </div>
         </Reveal>
 
         <Reveal delay={0.1} className="rounded-3xl border border-[var(--border)] bg-[var(--bg-card)] p-6 sm:p-10">
           <ContactForm serviceLabels={serviceLabels} initialService={typeof service === "string" ? service : undefined} />
         </Reveal>
       </section>
+
+      <StepsSection
+        locale={locale}
+        index="01"
+        label={isAr ? "ماذا بعد الإرسال" : "What happens next"}
+        title={isAr ? "ثلاث خطوات واضحة، دون أي التزام." : "Three clear steps — no commitment."}
+        steps={contactSteps}
+        className="pt-0 sm:pt-0"
+      />
+      <FaqSection locale={locale} index="02" />
     </>
   );
 }

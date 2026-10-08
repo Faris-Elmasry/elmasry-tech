@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import prisma from "@/lib/prisma";
 import { services } from "@/lib/content";
+import { readySystems } from "@/lib/systems";
 import { locales, localeUrl, defaultLocale } from "@/lib/site";
 
 export const revalidate = 3600;
@@ -26,9 +27,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...localized("", 1, "weekly"),
     ...localized("/services", 0.9, "monthly"),
     ...services.flatMap((s) => localized(`/services/${s.slug}`, 0.9, "monthly")),
+    ...localized("/systems", 0.9, "monthly"),
+    ...readySystems.flatMap((s) => localized(`/systems/${s.slug}`, 0.8, "monthly")),
     ...localized("/portfolio", 0.7, "weekly"),
     ...localized("/about", 0.6, "monthly"),
     ...localized("/contact", 0.7, "yearly"),
+    ...localized("/privacy", 0.2, "yearly"),
+    ...localized("/terms", 0.2, "yearly"),
   ];
 
   try {

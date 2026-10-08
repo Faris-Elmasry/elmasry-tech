@@ -1,5 +1,6 @@
 {
   "nav": {
+    "systems": "Systems",
     "home": "Home",
     "services": "Services",
     "work": "Work",
@@ -136,6 +137,9 @@
     "whatsapp_message": "Hi Elmasry Tech, I’d like to discuss a project."
   },
   "footer": {
+    "systems": "Systems",
+    "privacy": "Privacy",
+    "terms": "Terms",
     "tagline": "Software development company in Egypt — websites, mobile apps, custom systems, AI and automation.",
     "services": "Services",
     "company": "Company",

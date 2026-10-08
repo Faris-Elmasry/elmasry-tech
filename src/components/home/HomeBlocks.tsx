@@ -130,14 +130,15 @@ export async function TestimonialsBlock({ locale, testimonials, index }: { local
   );
 }
 
-export async function FaqBlock({ locale, index }: { locale: Locale; index: string }) {
+/** FAQ accordion. Defaults to the company-wide FAQs; inner pages can pass their own `items`. */
+export async function FaqBlock({ locale, index, items = faqs, title }: { locale: Locale; index: string; items?: typeof faqs; title?: string }) {
   const t = await getTranslations("home");
   return (
     <section className="relative bg-[var(--bg-primary)]">
       <div className={`${shell} grid gap-14 py-28 sm:py-40 lg:grid-cols-[1fr_1.4fr]`}>
-        <Heading index={index} label={t("faq_eyebrow")} title={t("faq_title")} className="lg:sticky lg:top-28 lg:self-start" />
+        <Heading index={index} label={t("faq_eyebrow")} title={title ?? t("faq_title")} className="lg:sticky lg:top-28 lg:self-start" />
         <div className="border-t border-[var(--border)]">
-          {faqs.map((f, i) => (
+          {items.map((f, i) => (
             // Native <details>: accessible, works without JS, answers stay crawlable.
             <details key={i} className="group border-b border-[var(--border)]" {...(i === 0 ? { open: true } : {})}>
               <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-7 font-display text-xl font-semibold transition-colors hover:text-[var(--accent)] [&::-webkit-details-marker]:hidden">

@@ -50,6 +50,8 @@
   --accent-hover: #ff7a45;
   --accent-ink: #0a0a0b;
   --accent-glow: rgba(255, 91, 31, 0.25);
+  /* Fill for check bullets and result badges (inner pages). */
+  --highlight: #ff5b1f;
   --border: rgba(237, 234, 227, 0.1);
   --border-hover: rgba(237, 234, 227, 0.24);
   --success: #5ee38a;

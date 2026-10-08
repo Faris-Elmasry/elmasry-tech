@@ -3,6 +3,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { PageHeader } from "@/components/sections/PageHeader";
 import { ServicesList } from "@/components/sections/ServicesList";
 import { SystemsSection } from "@/components/sections/SystemsSection";
+import { EngagementSection, IndustriesSection } from "@/components/sections/Blocks";
 import { CtaSection, FaqSection, ProcessSection } from "@/components/sections/HomeSections";
 import { faqs, services, tr } from "@/lib/content";
 import { breadcrumbJsonLd, buildMetadata, faqJsonLd, JsonLd } from "@/lib/seo";
@@ -51,8 +52,10 @@ export default async function ServicesPage({ params }: PageProps<"/[locale]/serv
         <ServicesList locale={locale} />
       </section>
       <SystemsSection locale={locale} index="02" />
-      <ProcessSection locale={locale} index="03" />
-      <FaqSection locale={locale} index="04" />
+      <EngagementSection locale={locale} index="03" />
+      <IndustriesSection locale={locale} index="04" />
+      <ProcessSection locale={locale} index="05" />
+      <FaqSection locale={locale} index="06" />
       <CtaSection locale={locale} />
     </>
   );

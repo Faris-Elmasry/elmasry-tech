@@ -4,7 +4,9 @@ import { CtaSection, ProcessSection } from "@/components/sections/HomeSections";
 import { Circled, Rise, SplitWords, VelocityMarquee } from "@/components/motion/Kinetic";
 import { LazyComputer } from "@/components/three/LazyComputer";
 import { breadcrumbJsonLd, buildMetadata, JsonLd } from "@/lib/seo";
-import { stack } from "@/lib/content";
+import { CommitmentsSection, IndustriesSection } from "@/components/sections/Blocks";
+import { stack, tr } from "@/lib/content";
+import { companyFacts, teamRoles } from "@/lib/company";
 import type { Locale } from "@/lib/site";
 
 export async function generateMetadata({ params }: PageProps<"/[locale]/about">): Promise<Metadata> {
@@ -81,6 +83,19 @@ export default async function AboutPage({ params }: PageProps<"/[locale]/about">
           <Circled>{isAr ? "الحل المناسب" : "the right fit"}</Circled>{" "}
           <SplitWords text={isAr ? "له — ويبقى ملكك بالكامل." : "for it — and it’s fully yours."} delay={0.2} />
         </p>
+        <Rise delay={0.1}>
+          <p className="mt-12 max-w-4xl text-xl leading-relaxed text-[var(--text-muted)] sm:text-2xl sm:leading-relaxed">{t("story_p2")}</p>
+        </Rise>
+
+        {/* Company at a glance — factual, no inflated counters */}
+        <dl className="mt-20 grid grid-cols-2 gap-px overflow-hidden rounded-[1.75rem] border border-[var(--border)] bg-[var(--border)] lg:grid-cols-4">
+          {companyFacts.map((f, i) => (
+            <Rise key={f.value} delay={i * 0.06} className="flex flex-col-reverse justify-end bg-[var(--bg-primary)] p-7 sm:p-9">
+              <dt className="mt-4 text-sm text-[var(--text-muted)]">{tr(f.label, locale)}</dt>
+              <dd className="whitespace-nowrap font-display text-[clamp(1.8rem,4.5vw,3.8rem)] font-bold leading-none tracking-[-0.03em]">{f.value}</dd>
+            </Rise>
+          ))}
+        </dl>
       </section>
 
       {/* Principles — each row expands on hover */}
@@ -108,6 +123,39 @@ export default async function AboutPage({ params }: PageProps<"/[locale]/about">
         </ul>
       </section>
 
+      {/* How a project team is formed (roles, not headcount) */}
+      <section className="mx-auto max-w-[1400px] px-5 py-24 sm:px-8 sm:py-32">
+        <div className="grid gap-14 lg:grid-cols-[1fr_1.4fr]">
+          <div className="lg:sticky lg:top-28 lg:self-start">
+            <h2 className="label flex items-center gap-3">
+              <span className="text-[var(--accent)]">03</span>
+              <span className="h-px w-10 bg-[var(--border-hover)]" />
+              {t("team_title")}
+            </h2>
+            <p className="mt-6 font-display text-[clamp(2rem,4vw,3.4rem)] font-bold leading-[1.05] tracking-[-0.03em] text-balance">
+              {isAr ? "فريق صغير متكامل، يعمل على مشروعك من البداية للنهاية." : "A small, complete team on your project from start to finish."}
+            </p>
+            <p className="mt-6 max-w-md text-lg leading-relaxed text-[var(--text-muted)]">
+              {isAr
+                ? "يقود المؤسسون كل مشروع بأنفسهم، ونشكّل حوله الأدوار التي يحتاجها — دون طبقات إدارية تبطئ العمل."
+                : "The founders lead every project personally, and we form the roles it needs around them — without layers of management slowing things down."}
+            </p>
+          </div>
+          <ol className="border-t border-[var(--border)]">
+            {teamRoles.map((r, i) => (
+              <Rise as="li" key={r.role.en} delay={i * 0.05} className="grid gap-3 border-b border-[var(--border)] py-8 sm:grid-cols-[3rem_1fr_1.3fr] sm:gap-8">
+                <span className="font-mono text-sm text-[var(--text-subtle)]">0{i + 1}</span>
+                <h3 className="font-display text-xl font-bold">{tr(r.role, locale)}</h3>
+                <p className="leading-relaxed text-[var(--text-muted)]">{tr(r.text, locale)}</p>
+              </Rise>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      <CommitmentsSection locale={locale} index="04" />
+      <IndustriesSection locale={locale} index="05" />
+
       {/* Stack ticker */}
       <section className="py-16">
         <p className="label mx-auto mb-6 max-w-[1400px] px-5 sm:px-8">{isAr ? "التقنيات التي نعمل بها" : "Technologies we work with"}</p>
@@ -120,7 +168,7 @@ export default async function AboutPage({ params }: PageProps<"/[locale]/about">
         </VelocityMarquee>
       </section>
 
-      <ProcessSection locale={locale} index="03" />
+      <ProcessSection locale={locale} index="06" />
       <CtaSection locale={locale} />
     </>
   );

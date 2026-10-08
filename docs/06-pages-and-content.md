@@ -45,3 +45,28 @@ See [09-admin-and-auth.md](09-admin-and-auth.md).
 
 ## Brand/identity facts in use
 Name "Elmasry Tech Solutions" / "ELMASRY.TECH" (Arabic "إلماسري تك"); owner Faris Elmasry; email faris@elmasry.tech; location Cairo; GitHub/LinkedIn `fariselmasry`; Twitter `@fariselmasry`; WhatsApp is a **placeholder** number. Tone: first-person freelancer ("I build…").
+
+---
+
+## v0.3 — inner pages completed (2026-10-08)
+
+The home page was left untouched; everything below is about the inner pages. The page descriptions above predate v0.2/v0.3.
+
+| Page | Sections (in order) | Content source |
+|---|---|---|
+| `/services` | header · 6 service rows · systems rail · **ways to engage** · **industries** · process · FAQ · CTA | `lib/content.ts`, `lib/company.ts` |
+| `/services/[slug]` | photo header · details + what’s included · **problems we solve** · **what you receive + timeline + stack** · **typical projects** · process · **service FAQ** (+2 general) · other services · CTA | `lib/service-details.ts` |
+| `/systems` (new) | header · 8 system cards with mini screen · how it works · ways to engage · “need something custom” · systems FAQ · CTA | `lib/systems.ts` |
+| `/systems/[slug]` (new, 8 × 2 locales, SSG) | header + demo/quote buttons · overview + audience + **illustrative app screen** · 6 modules · highlights · integrations · getting started · engagement · FAQ · other systems · CTA | `lib/systems.ts` |
+| `/portfolio` | DB projects grid (only if any) · **our products** (system cards) · client work under NDA + private walkthrough CTA · what we build (services) · CTA | DB + `lib/systems.ts` |
+| `/about` | hero + 3D computer · story (both paragraphs) · **company facts** · principles · **team roles** · **commitments** · **industries** · stack ticker · process · CTA | `messages`, `lib/company.ts` |
+| `/contact` | header · WhatsApp/email/location/**hours** + “tell us” checklist · form · **what happens next** · FAQ | `lib/company.ts` |
+| `/privacy`, `/terms` (new) | legal document with sticky table of contents | `lib/legal.ts` — have a lawyer review |
+
+Shared pieces: `components/sections/Blocks.tsx` (StepsSection, EngagementSection, IndustriesSection, CommitmentsSection, SystemCard), `SystemScreen.tsx` (HTML/CSS app mock-up labelled “sample data”), `LegalPage.tsx`. `FaqBlock` now takes optional `items`/`title` (home still uses the defaults).
+
+Navbar gained **Systems**; footer gained a Systems column, Services/Systems in Company, and Privacy/Terms links. Sitemap includes all new URLs.
+
+Assumptions to confirm with the owner: working hours (Sun–Thu 10:00–18:00 Cairo), the typical timelines per service, the system module lists, and the legal text. Company facts are deliberately limited to verifiable ones (founded 2023, 6 services, 8 systems, AR/EN) — no project counters or testimonials were invented.
+
+Fixed: `--highlight` CSS token was referenced (check bullets, ROI badges) but never defined, so those rendered without a background.
