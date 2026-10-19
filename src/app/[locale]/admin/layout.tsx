@@ -1,5 +1,4 @@
 import { getServerSession } from "next-auth";
-import { redirect } from "next/navigation";
 import { authOptions } from "@/lib/auth";
 import { AdminSidebar } from "@/components/admin/Sidebar";
 
@@ -21,10 +20,10 @@ export default async function AdminLayout({ children, params }: AdminLayoutProps
   }
 
   return (
-    <div className="flex min-h-screen bg-[var(--bg-primary)]">
+    <div className="min-h-screen bg-[var(--bg-primary)]">
       <AdminSidebar locale={locale} userName={session.user.name} userEmail={session.user.email} />
-      <div className="flex-1 ml-64 max-lg:ml-0">
-        <div className="p-6 lg:p-8">{children}</div>
+      <div className="lg:ms-64">
+        <div className="p-4 sm:p-6 lg:p-8">{children}</div>
       </div>
     </div>
   );

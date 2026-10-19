@@ -1,14 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { Eye, EyeOff, Lock, Mail } from "lucide-react";
 
-export default function AdminLoginPage() {
+function LoginForm() {
   const router = useRouter();
+  const { locale } = useParams<{ locale: string }>();
+  const ar = locale === "ar";
+  // back to the admin page that sent you here — only an admin path of this site, never an outside URL
+  const from = useSearchParams().get("callbackUrl") ?? "";
+  const next = /^\/(ar|en)\/admin(\/[\w-]+)*$/.test(from) && !from.includes("/login") ? from : `/${locale}/admin/messages`;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -28,15 +33,19 @@ export default function AdminLoginPage() {
       });
 
       if (result?.error) {
-        setError(result.error === "TooManyAttempts" ? "Too many attempts. Wait 15 minutes and try again." : "Invalid email or password");
+        setError(
+          result.error === "TooManyAttempts"
+            ? ar ? "محاولات كتير غلط. استنى ربع ساعة وجرّب تاني." : "Too many attempts. Wait 15 minutes and try again."
+            : ar ? "الإيميل أو الباسورد غلط" : "Invalid email or password"
+        );
         setLoading(false);
         return;
       }
 
-      router.push("/en/admin");
+      router.push(next);
       router.refresh();
     } catch {
-      setError("Something went wrong. Please try again.");
+      setError(ar ? "حصلت مشكلة. جرّب تاني." : "Something went wrong. Please try again.");
       setLoading(false);
     }
   };
@@ -46,24 +55,24 @@ export default function AdminLoginPage() {
       <div className="w-full max-w-md">
         {/* Logo */}
         <div className="text-center mb-8">
-          <h1 className="font-[family-name:var(--font-poppins)] text-3xl font-bold">
-            <span className="text-[var(--text-primary)]">ELMASRY</span>
-            <span className="text-blue-500">.TECH</span>
+          <h1 className="text-3xl font-bold text-[var(--text-primary)]" dir="ltr">
+            elmasry<span className="text-[var(--accent)]">/</span>tech
           </h1>
-          <p className="text-[var(--text-muted)] mt-2">Admin Panel</p>
+          <p className="text-[var(--text-muted)] mt-2">{ar ? "لوحة الإدارة" : "Admin"}</p>
         </div>
 
         {/* Login Card */}
         <div className="bg-[var(--bg-card)] border border-[var(--border)] rounded-2xl p-8">
           <h2 className="text-xl font-semibold text-[var(--text-primary)] mb-6">
-            Sign In
+            {ar ? "تسجيل الدخول" : "Sign in"}
           </h2>
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <Input
-              label="Email"
+              label={ar ? "الإيميل" : "Email"}
               type="email"
-              placeholder="admin@elmasry.tech"
+              dir="ltr"
+              autoComplete="username"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               leftIcon={<Mail className="h-4 w-4" />}
@@ -71,8 +80,10 @@ export default function AdminLoginPage() {
             />
 
             <Input
-              label="Password"
+              label={ar ? "الباسورد" : "Password"}
               type={showPassword ? "text" : "password"}
+              dir="ltr"
+              autoComplete="current-password"
               placeholder="••••••••"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -82,7 +93,7 @@ export default function AdminLoginPage() {
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
                   className="cursor-pointer"
-                  aria-label={showPassword ? "Hide password" : "Show password"}
+                  aria-label={showPassword ? (ar ? "اخفي الباسورد" : "Hide password") : (ar ? "اظهر الباسورد" : "Show password")}
                 >
                   {showPassword ? (
                     <EyeOff className="h-4 w-4" />
@@ -107,11 +118,19 @@ export default function AdminLoginPage() {
               fullWidth
               loading={loading}
             >
-              Sign In
+              {ar ? "ادخل" : "Sign in"}
             </Button>
           </form>
         </div>
       </div>
     </div>
+  );
+}
+
+export default function AdminLoginPage() {
+  return (
+    <Suspense>
+      <LoginForm />
+    </Suspense>
   );
 }

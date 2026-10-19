@@ -7,6 +7,8 @@ export async function GET() {
     const settings = await prisma.siteSettings.findMany();
     const data: Record<string, string> = {};
     for (const s of settings) {
+      // keys starting with "_" are private (e.g. scripts/ensure-admin.mjs's marker)
+      if (s.key.startsWith("_")) continue;
       data[s.key] = s.value;
     }
 
@@ -31,7 +33,7 @@ export async function PUT(request: Request) {
     }
 
     await prisma.$transaction(
-      updates.map((u) =>
+      updates.filter((u) => typeof u.key === "string" && !u.key.startsWith("_")).map((u) =>
         prisma.siteSettings.upsert({
           where: { key: u.key },
           update: { value: u.value },
