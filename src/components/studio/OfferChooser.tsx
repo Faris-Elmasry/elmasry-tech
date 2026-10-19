@@ -1,5 +1,6 @@
 "use client";
 
+import { sysName } from "@/lib/systems";
 import { useId, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -63,7 +64,7 @@ export function OfferChooser({ locale, systems }: { locale: Locale; systems: Cho
 
   const message = isAr
     ? `أهلًا، عايز عرض تجريبي لـ ${sys.name}. طريقة الدفع: ${payCopy[pay].label}. عدد الأماكن: ${sizeCopy[size].label}.`
-    : `Hi, I’d like a free demo of the ${sys.name} system. Payment: ${payCopy[pay].label}. Size: ${sizeCopy[size].label}.`;
+    : `Hi, I’d like a free demo of the ${sysName(sys.name)}. Payment: ${payCopy[pay].label}. Size: ${sizeCopy[size].label}.`;
 
   const option = (checked: boolean) =>
     cn(

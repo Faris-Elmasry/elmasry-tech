@@ -282,7 +282,8 @@ export default function RequestsPage() {
                       )}
                     </span>
                   </button>
-                  <div className="flex shrink-0 flex-wrap items-center gap-2">
+                  {/* shrink-0 pushed the status select past the card on a 390px phone */}
+                  <div className="flex min-w-0 flex-wrap items-center gap-2 sm:shrink-0">
                     {m.phone && (
                       <>
                         <a href={waHref(m)} target="_blank" rel="noopener noreferrer" className="inline-flex h-9 items-center gap-1.5 rounded-lg bg-[#25D366] px-3 text-sm font-semibold text-[#06210f]">

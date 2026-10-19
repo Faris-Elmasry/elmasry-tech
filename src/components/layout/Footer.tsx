@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
-import { ArrowUp, ArrowUpRight } from "lucide-react";
+import { ArrowUp, ArrowUpRight, Phone } from "lucide-react";
 import { Logo } from "@/components/layout/Logo";
 import { CairoClock } from "@/components/layout/Navbar";
 import { WhatsAppIcon } from "@/components/layout/WhatsAppIcon";
@@ -51,7 +51,13 @@ export async function Footer({ locale }: { locale: Locale }) {
             <li>
               <a href={whatsappLink(tc("whatsapp_message"))} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-[var(--text-primary)] transition-colors hover:text-[var(--accent)]">
                 <WhatsAppIcon className="h-4 w-4 text-[#25D366]" />
-                <span dir="ltr">{site.whatsapp}</span>
+                <span dir="ltr">{site.phoneDisplay}</span>
+              </a>
+            </li>
+            <li>
+              <a href={site.tel} className="inline-flex items-center gap-2 text-[var(--text-primary)] transition-colors hover:text-[var(--accent)]">
+                <Phone aria-hidden="true" className="h-4 w-4 text-[var(--text-muted)]" />
+                {locale === "ar" ? "اتصل بينا" : "Call us"}
               </a>
             </li>
             {site.email && (

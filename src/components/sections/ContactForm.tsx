@@ -118,13 +118,13 @@ export function ContactForm({
                 <Field id="name" label={t("name")} error={errors.name && t("error_name")}>
                   <input id="name" autoComplete="name" className={field} aria-invalid={!!errors.name} aria-describedby={describe("name")} {...register("name")} />
                 </Field>
-                <Field id="company" label={t("company")} error={errors.company?.message}>
+                <Field id="company" label={t("company")} error={errors.company && t("error_long")}>
                   <input id="company" autoComplete="organization" className={field} {...register("company")} />
                 </Field>
                 <Field id="phone" label={t("phone")} error={errors.phone && t("error_phone")}>
-                  <input id="phone" type="tel" autoComplete="tel" dir="ltr" placeholder="+20 1XX XXX XXXX" className={cn(field, "text-start rtl:text-end")} aria-invalid={!!errors.phone} aria-describedby={describe("phone")} {...register("phone")} />
+                  <input id="phone" type="tel" autoComplete="tel" dir="ltr" placeholder="01X XXXX XXXX" className={cn(field, "text-start rtl:text-end")} aria-invalid={!!errors.phone} aria-describedby={describe("phone")} {...register("phone")} />
                 </Field>
-                <Field id="email" label={t("email")} error={errors.email?.message}>
+                <Field id="email" label={t("email")} error={errors.email && t("error_email")}>
                   <input id="email" type="email" autoComplete="email" dir="ltr" className={cn(field, "text-start rtl:text-end")} aria-invalid={!!errors.email} aria-describedby={describe("email")} {...register("email")} />
                 </Field>
               </div>
@@ -157,7 +157,7 @@ export function ContactForm({
             </Group>
 
             <Group n="03" title={t("step_3")}>
-              <Field id="message" label={t("message")} error={errors.message?.message}>
+              <Field id="message" label={t("message")} error={errors.message && t("error_long")}>
                 <textarea
                   id="message"
                   rows={4}

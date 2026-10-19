@@ -15,7 +15,7 @@ import { SystemRequest } from "@/components/sections/SystemRequest";
 import { DynamicIcon } from "@/components/ui/DynamicIcon";
 import { WhatsAppIcon } from "@/components/layout/WhatsAppIcon";
 import { getService, tr } from "@/lib/content";
-import { getSystem, readySystems, serviceSystems, systemFaqs, systemSteps } from "@/lib/systems";
+import { getSystem, readySystems, serviceSystems, sysName, systemFaqs, systemSteps } from "@/lib/systems";
 import { breadcrumbJsonLd, buildMetadata, faqJsonLd, JsonLd, organizationId } from "@/lib/seo";
 import { seoFor } from "@/lib/seo-copy";
 import { localeUrl, locales, siteUrl, whatsappLink, type Locale } from "@/lib/site";
@@ -59,7 +59,7 @@ export default async function SystemPage({ params }: PageProps<"/[locale]/system
   const systemsLabel = isAr ? "الأنظمة الجاهزة" : "Ready-made systems";
   const index = readySystems.findIndex((s) => s.slug === slug);
   const others = readySystems.filter((s) => s.slug !== slug);
-  const demoMsg = isAr ? `أهلًا، عايز أحجز عرض تجريبي مجاني لـ ${name}.` : `Hi, I’d like to book a free demo of the ${name} system.`;
+  const demoMsg = isAr ? `أهلًا، عايز أحجز عرض تجريبي مجاني لـ ${name}.` : `Hi, I’d like to book a free demo of the ${sysName(name)}.`;
 
   const productLd = {
     "@context": "https://schema.org",
@@ -123,7 +123,7 @@ export default async function SystemPage({ params }: PageProps<"/[locale]/system
         <ShortVersion
           locale={locale}
           items={[
-            isAr ? `نظام جاهز لـ ${system.audience.ar.slice(0, 2).join(" و")}.` : `A ready-made system for ${system.audience.en.slice(0, 2).join(" and ").toLowerCase()}.`,
+            isAr ? `نظام جاهز يناسب ${system.audience.ar.slice(0, 2).join(" و")}.` : `A ready-made system for ${system.audience.en.slice(0, 2).join(" and ").toLowerCase()}.`,
             system.highlights[locale].slice(0, 3).join(isAr ? "، " : ", ") + ".",
             isAr ? "عرض تجريبي 30 دقيقة، وتبعت لنا ملفاتك — والتجهيز علينا." : "A 30-minute demo, then send us your files — we do the setup.",
             isAr ? "احجز العرض التجريبي المجاني على الواتساب." : "Book the free demo on WhatsApp.",
@@ -238,7 +238,7 @@ export default async function SystemPage({ params }: PageProps<"/[locale]/system
         id="request"
         index="05"
         label={isAr ? "اطلبه" : "Get it"}
-        title={isAr ? `عايز ${name}؟ قولنا إزاي.` : `Want the ${name} system? Tell us how.`}
+        title={isAr ? `عايز ${name}؟ قولنا إزاي.` : `Want the ${sysName(name)}? Tell us how.`}
         sub={isAr ? "اختار اللي يناسبك، وسيب اسمك ورقمك، وهنكلّمك نتفق على التفاصيل والسعر." : "Pick what suits you, leave your name and number, and we’ll call to agree the details and price."}
         tone="card"
       >
@@ -253,7 +253,8 @@ export default async function SystemPage({ params }: PageProps<"/[locale]/system
       <section className="border-t border-[var(--border)]">
         <div className="mx-auto w-full max-w-[1400px] px-5 py-16 sm:px-8">
           <p className="label mb-6">{isAr ? "خدمات مرتبطة" : "Related services"}</p>
-          <ul className="mb-14 grid gap-px overflow-hidden rounded-[1.25rem] border border-[var(--border)] bg-[var(--border)] sm:grid-cols-2 lg:grid-cols-3">
+          {/* columns follow the count: 2 services in 3 columns left an empty highlighted cell */}
+          <ul className={`mb-14 grid gap-px overflow-hidden rounded-[1.25rem] border border-[var(--border)] bg-[var(--border)] sm:grid-cols-2 ${relatedServices.length % 3 === 0 ? "lg:grid-cols-3" : ""}`}>
             {relatedServices.map((sv) => (
               <li key={sv.slug} className="bg-[var(--bg-primary)]">
                 <Link href={`/${locale}/services/${sv.slug}`} className="group flex h-full items-center justify-between gap-4 p-6 transition-colors duration-500 hover:bg-[var(--bg-card)]">
@@ -292,7 +293,7 @@ export default async function SystemPage({ params }: PageProps<"/[locale]/system
         </div>
       </section>
 
-      <SignOff locale={locale} message={demoMsg} title={isAr ? `شوف ${name} شغال على شغلك أنت.` : `See the ${name} system running on your business.`} />
+      <SignOff locale={locale} message={demoMsg} title={isAr ? `شوف ${name} شغال على شغلك أنت.` : `See the ${sysName(name)} running on your business.`} />
     </>
   );
 }

@@ -67,7 +67,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
           index={idx.work}
           label={isAr ? "شغلنا" : "Our work"}
           title={isAr ? "متشوفش صور وبس — جرّبه بنفسك." : "Don’t just look at pictures — try it yourself."}
-          sub={isAr ? "مواقع شغالة، وتطبيقات على المتاجر، وأنظمة تقدر تدخل عليها بحساب تجربة." : "Live websites, apps on the stores, and systems you can log into with a demo account."}
+          sub={isAr ? "مشاريع حقيقية شغالة أونلاين — افتحها وشوف بنفسك." : "Real projects, live online — open them and see for yourself."}
         >
           <WorkShowcase items={work} locale={locale} />
         </Chapter>

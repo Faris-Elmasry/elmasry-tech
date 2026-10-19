@@ -17,50 +17,40 @@ export default async function Image() {
           flexDirection: "column",
           justifyContent: "space-between",
           padding: 72,
-          background: "#f5f2ec",
+          // the site's own look (dark, orange accent) — it was a light card with another logo
+          background: "#0a0a0b",
           backgroundImage:
-            "linear-gradient(rgba(18,17,16,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(18,17,16,0.06) 1px, transparent 1px)",
+            "linear-gradient(rgba(237,234,227,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(237,234,227,0.05) 1px, transparent 1px)",
           backgroundSize: "56px 56px",
-          color: "#121110",
+          color: "#edeae3",
           fontFamily: "sans-serif",
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
-          <div
-            style={{
-              width: 64,
-              height: 64,
-              borderRadius: 18,
-              background: "#121110",
-              color: "#f5f2ec",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              fontSize: 40,
-              fontWeight: 700,
-              position: "relative",
-            }}
-          >
-            e
-            <div style={{ position: "absolute", top: 8, right: 8, width: 12, height: 12, borderRadius: 12, background: "#d8ff3c" }} />
+          <div style={{ display: "flex", alignItems: "center", fontSize: 40, fontWeight: 700, color: "#ff5b1f", letterSpacing: -1 }}>
+            {"<"}
+            <div style={{ width: 12, height: 12, borderRadius: 12, background: "#ff5b1f", margin: "0 6px" }} />
+            {">"}
           </div>
-          <div style={{ fontSize: 36, fontWeight: 700, letterSpacing: -1 }}>elmasry.tech</div>
+          <div style={{ display: "flex", fontSize: 36, fontWeight: 700, letterSpacing: -1 }}>
+            elmasry<span style={{ color: "#ff5b1f" }}>/</span>tech
+          </div>
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div style={{ fontSize: 78, fontWeight: 700, letterSpacing: -3, lineHeight: 1.02, maxWidth: 950 }}>
             We build the software your business runs on.
           </div>
-          <div style={{ display: "flex", gap: 14, marginTop: 36, fontSize: 26, color: "#57534b" }}>
+          <div style={{ display: "flex", gap: 14, marginTop: 36, fontSize: 26, color: "#a8a49b" }}>
             {["Websites", "iOS & Android", "ERP & POS", "AI & Automation"].map((s) => (
-              <div key={s} style={{ border: "1px solid rgba(18,17,16,0.2)", borderRadius: 999, padding: "8px 20px", display: "flex" }}>
+              <div key={s} style={{ border: "1px solid rgba(237,234,227,0.2)", borderRadius: 999, padding: "8px 20px", display: "flex" }}>
                 {s}
               </div>
             ))}
           </div>
         </div>
-        <div style={{ display: "flex", justifyContent: "space-between", fontSize: 22, color: "#57534b" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", fontSize: 22, color: "#a8a49b" }}>
           <div style={{ display: "flex" }}>Software development company · Cairo, Egypt</div>
-          <div style={{ display: "flex", color: "#2b44ff" }}>Arabic · English</div>
+          <div style={{ display: "flex", color: "#ff5b1f" }}>Arabic · English</div>
         </div>
       </div>
     ),

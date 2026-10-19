@@ -559,3 +559,8 @@ export const serviceSystems: Record<string, string[]> = {
   "business-automation": ["accounting-hr", "inventory-warehouse"],
   "ecommerce-development": ["pos-cashier", "inventory-warehouse"],
 };
+
+/** "Gym system" stays as is, "Cashier & sales" becomes "Cashier & sales system" — no "Gym system system". */
+export function sysName(name: string): string {
+  return /system/i.test(name) ? name : `${name} system`;
+}

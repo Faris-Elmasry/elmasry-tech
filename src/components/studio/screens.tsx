@@ -126,7 +126,7 @@ export function SiteMock({ locale, className }: L & { className?: string }) {
             <li key={n} className="flex items-center justify-between px-4 py-2.5">
               <span>{n}</span>
               <span dir="ltr" className="text-[var(--text-muted)]">
-                {p} EGP
+                {p} {locale === "ar" ? "ج.م" : "EGP"}
               </span>
             </li>
           ))}
@@ -177,7 +177,7 @@ export function AppMock({ locale, className }: L & { className?: string }) {
               <span className="min-w-0 flex-1">
                 <span className="block truncate">{n}</span>
                 <span dir="ltr" className="block text-start text-[0.75rem] text-[var(--text-muted)]">
-                  {p} EGP
+                  {p} {locale === "ar" ? "ج.م" : "EGP"}
                 </span>
               </span>
               <span className="flex items-center gap-1.5 rounded-full border border-[var(--border)] px-1.5 py-1 text-[0.8rem]">
@@ -207,7 +207,7 @@ export function AppMock({ locale, className }: L & { className?: string }) {
         </div>
         <div className="mt-auto flex items-center justify-between rounded-full bg-[var(--accent)] px-5 py-3 text-[0.92rem] font-semibold text-[var(--accent-ink)]">
           <span>{isAr ? "ادفع" : "Pay"}</span>
-          <span dir="ltr">315 EGP</span>
+          <span dir="ltr">{locale === "ar" ? "315 ج.م" : "315 EGP"}</span>
         </div>
       </div>
       <nav className="mt-3 grid shrink-0 grid-cols-4 border-t border-[var(--border)] bg-[#141416] px-2 pb-5 pt-2">
@@ -226,18 +226,19 @@ export function AppMock({ locale, className }: L & { className?: string }) {
 
 export function ChatMock({ locale, className, compact = false }: L & { className?: string; compact?: boolean }) {
   const isAr = locale === "ar";
+  // the phone is the customer's (the header is the clinic): the customer's lines go out (green), the clinic's come in
   const msgs: [boolean, string, string][] = isAr
     ? [
-        [false, "مساء الخير، الكشف بكام؟ وفيه مواعيد بكرة؟", "11:42 م"],
-        [true, "مساء النور! الكشف 350 جنيه. بكرة فيه 5:30 و 7:00 مع د. أحمد. أحجز لحضرتك أنهي ميعاد؟", "11:42 م"],
-        [false, "7 لو سمحت", "11:43 م"],
-        [true, "تم الحجز. بكرة 7:00 م. هبعت لك تذكير قبلها بساعتين.", "11:43 م"],
+        [true, "مساء الخير، الكشف بكام؟ وفيه مواعيد بكرة؟", "11:42 م"],
+        [false, "مساء النور! الكشف 350 جنيه. بكرة فيه 5:30 و 7:00 مع د. أحمد. أحجز لحضرتك أنهي ميعاد؟", "11:42 م"],
+        [true, "7 لو سمحت", "11:43 م"],
+        [false, "تم الحجز. بكرة 7:00 م. هبعت لك تذكير قبلها بساعتين.", "11:43 م"],
       ]
     : [
-        [false, "Hi, how much is a check-up? Any slots tomorrow?", "11:42 pm"],
-        [true, "Good evening! A check-up is 350 EGP. Tomorrow we have 5:30 and 7:00 with Dr. Ahmed. Which one suits you?", "11:42 pm"],
-        [false, "7 please", "11:43 pm"],
-        [true, "Booked. Tomorrow at 7:00 pm. I’ll remind you two hours before.", "11:43 pm"],
+        [true, "Hi, how much is a check-up? Any slots tomorrow?", "11:42 pm"],
+        [false, "Good evening! A check-up is 350 EGP. Tomorrow we have 5:30 and 7:00 with Dr. Ahmed. Which one suits you?", "11:42 pm"],
+        [true, "7 please", "11:43 pm"],
+        [false, "Booked. Tomorrow at 7:00 pm. I’ll remind you two hours before.", "11:43 pm"],
       ];
   return (
     <PhoneFrame className={className} label={pick(locale, "Sample WhatsApp conversation with an assistant", "مثال لمحادثة واتساب مع مساعد ذكي")}>
@@ -353,7 +354,7 @@ export function StoreMock({ locale, className }: L & { className?: string }) {
             <p className="text-sm text-[var(--text-muted)]">{isAr ? "قمصان" : "Shirts"}</p>
             <p className="mt-1 text-[1.35rem] font-bold leading-tight">{isAr ? "قميص كتان أبيض" : "White linen shirt"}</p>
             <p dir="ltr" className="mt-2 text-start text-lg rtl:text-end">
-              650 EGP
+              650 {locale === "ar" ? "ج.م" : "EGP"}
             </p>
             <div className="mt-4 flex gap-2">
               {["S", "M", "L"].map((sz) => (
@@ -503,7 +504,7 @@ export function OverviewMock({ locale, className }: L & { className?: string }) 
               <div className="flex items-baseline justify-between gap-3">
                 <span className="truncate text-[0.95rem]">{n}</span>
                 <span dir="ltr" className="font-mono text-[0.95rem]">
-                  {v} EGP
+                  {v} {locale === "ar" ? "ج.م" : "EGP"}
                 </span>
               </div>
               <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-[var(--border)]">
@@ -553,7 +554,7 @@ export function HelloPhone({ locale, className }: L & { className?: string }) {
   const msgs: [boolean, string, string][] = isAr
     ? [
         [true, "أهلًا، عندي صيدلية وفرعين، والجرد والصلاحية تاعبيني. ممكن نتكلم؟", "10:02 ص"],
-        [false, "أهلًا بيك! أكيد. يناسبك بكرة الساعة 12 مكالمة 30 دقيقة؟ هنسمع منك الأول، ومن غير أي التزام.", "10:04 ص"],
+        [false, "أهلًا بيك! أكيد. يناسبك بكرة الساعة 12 الضهر؟ هي مكالمة 30 دقيقة، هنسمع منك الأول ومن غير أي التزام.", "10:04 ص"],
         [true, "تمام، مستني.", "10:05 ص"],
       ]
     : [

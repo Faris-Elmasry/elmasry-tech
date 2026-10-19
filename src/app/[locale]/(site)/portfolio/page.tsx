@@ -12,8 +12,10 @@ import { Button } from "@/components/ui/Button";
 import { WhatsAppIcon } from "@/components/layout/WhatsAppIcon";
 import { services, tr } from "@/lib/content";
 import { serviceDetails } from "@/lib/service-details";
-import { readySystems } from "@/lib/systems";
+import { readySystems, sysName } from "@/lib/systems";
 import { getProjects } from "@/lib/data";
+import { work } from "@/lib/work";
+import { WorkShowcase } from "@/components/studio/WorkShowcase";
 import { breadcrumbJsonLd, buildMetadata, JsonLd } from "@/lib/seo";
 import { whatsappLink, type Locale } from "@/lib/site";
 import { seoFor } from "@/lib/seo-copy";
@@ -35,6 +37,10 @@ export default async function PortfolioPage({ params }: PageProps<"/[locale]/por
   const label = isAr ? "أعمالنا" : "Work";
   const seo = seoFor("portfolio");
   const projects = await getProjects();
+  // section numbers follow what is shown: live client work, our systems, published projects, private work, what we build
+  let n = 0;
+  const next = () => String(++n).padStart(2, "0");
+  const idx = { work: work.length > 0 ? next() : "", systems: next(), projects: projects.length > 0 ? next() : "", nda: next(), build: next() };
   const category = (c: string) => (["system", "web", "mobile", "saas", "other"].includes(c) ? t(c as "system") : c);
 
   return (
@@ -75,13 +81,25 @@ export default async function PortfolioPage({ params }: PageProps<"/[locale]/por
         }
       />
 
-      {/* 01 — horizontally pinned gallery of our own products */}
+      {/* live client work — the same projects as the homepage (it was missing here) */}
+      {work.length > 0 && (
+        <Chapter
+          index={idx.work}
+          label={isAr ? "شغل لعملائنا" : "Client work"}
+          title={isAr ? "مشاريع حقيقية شغالة أونلاين." : "Real projects, live online."}
+          sub={isAr ? "افتحها وشوف بنفسك." : "Open them and see for yourself."}
+        >
+          <WorkShowcase items={work} locale={locale} />
+        </Chapter>
+      )}
+
+      {/* horizontally pinned gallery of our own products */}
       <section id="gallery" className="scroll-mt-16 border-t border-[var(--border)]">
         <div className="mx-auto grid w-full max-w-[1400px] gap-6 px-5 pt-20 sm:px-8 sm:pt-28 lg:grid-cols-12 lg:gap-10">
           <Rise className="lg:col-span-3">
             <p className="label flex items-center gap-3 lg:pt-3">
               <span className="text-[var(--accent)]">
-                01
+                {idx.systems}
               </span>
               <span aria-hidden="true" className="h-px w-8 bg-[var(--border-hover)]" />
               {isAr ? "منتجاتنا" : "Our products"}
@@ -89,7 +107,7 @@ export default async function PortfolioPage({ params }: PageProps<"/[locale]/por
           </Rise>
           <Rise className="lg:col-span-9">
             <h2 className="font-display text-[clamp(2.1rem,4.4vw,4rem)] font-bold leading-[1.04] tracking-[-0.035em] text-balance">
-              {isAr ? "تمن أنظمة بنيناها، وشغالة كل يوم." : "Eight systems we built, running every day."}
+              {isAr ? "أنظمة جاهزة بنقدّمها لنشاطك." : "Ready-made systems we offer."}
             </h2>
           </Rise>
         </div>
@@ -114,7 +132,7 @@ export default async function PortfolioPage({ params }: PageProps<"/[locale]/por
                   </ul>
                   <div className="mt-6 flex flex-wrap gap-x-6 gap-y-3 md:mt-auto md:pt-8">
                     <ArrowLink href={`/${locale}/systems/${s.slug}`}>{isAr ? "التفاصيل" : "Details"}</ArrowLink>
-                    <ArrowLink href={whatsappLink(isAr ? `أهلًا، عايز عرض تجريبي لـ ${s.name.ar}.` : `Hi, I’d like a demo of the ${s.name.en} system.`)}>
+                    <ArrowLink href={whatsappLink(isAr ? `أهلًا، عايز عرض تجريبي لـ ${s.name.ar}.` : `Hi, I’d like a demo of the ${sysName(s.name.en)}.`)}>
                       {isAr ? "جرّبه" : "Try it"}
                     </ArrowLink>
                   </div>
@@ -127,7 +145,7 @@ export default async function PortfolioPage({ params }: PageProps<"/[locale]/por
 
       {/* 02 — published client projects (from the admin panel), if any */}
       {projects.length > 0 && (
-        <Chapter index="02" label={isAr ? "مشاريع منشورة" : "Published projects"} title={isAr ? "مشاريع عملاء سمحوا لنا نعرضها." : "Client projects we’re allowed to show."}>
+        <Chapter index={idx.projects} label={isAr ? "مشاريع منشورة" : "Published projects"} title={isAr ? "مشاريع عملاء سمحوا لنا نعرضها." : "Client projects we’re allowed to show."}>
           <ul className="grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
             {projects.map((p, i) => {
               const title = localize(p, "title", locale);
@@ -161,9 +179,9 @@ export default async function PortfolioPage({ params }: PageProps<"/[locale]/por
 
       {/* 03 — client work under NDA */}
       <Chapter
-        index={projects.length > 0 ? "03" : "02"}
-        label={isAr ? "شغل العملاء" : "Client work"}
-        title={isAr ? "شغل عملائنا سرّهم. بنوريه في اجتماع خاص بس." : "Our clients’ work is theirs. We show it in private."}
+        index={idx.nda}
+        label={isAr ? "شغل خاص" : "Private work"}
+        title={isAr ? "وفيه شغل تاني لعملاء بنوريه في اجتماع خاص بس." : "More client work, shown only in private."}
         tone="card"
       >
         <Rise className="grid gap-10 lg:grid-cols-12 lg:items-center">
@@ -195,7 +213,7 @@ export default async function PortfolioPage({ params }: PageProps<"/[locale]/por
       </Chapter>
 
       {/* 04 — what we build (hover reveal) */}
-      <Chapter index={projects.length > 0 ? "04" : "03"} label={isAr ? "بنبني إيه" : "What we build"} title={isAr ? "ست حاجات بنعملها كويس." : "Six things we do well."}>
+      <Chapter index={idx.build} label={isAr ? "بنبني إيه" : "What we build"} title={isAr ? "ست حاجات بنعملها كويس." : "Six things we do well."}>
         <HoverReveal
           rows={services.map((s) => ({
             title: tr(s.label, locale),

@@ -64,12 +64,12 @@ export default async function AboutPage({ params }: PageProps<"/[locale]/about">
         <dl className="in mb-6 grid grid-cols-2 overflow-hidden rounded-[1.25rem] border border-[var(--border)] lg:grid-cols-4" style={{ "--d": "320ms" } as React.CSSProperties}>
           {companyFacts.map((f, i) => (
             <div
-              key={f.value}
+              key={tr(f.label, "en")}
               className={`flex flex-col-reverse justify-end gap-3 bg-[var(--bg-card)]/60 p-6 sm:p-7 ${i % 2 === 1 ? "border-s border-[var(--border)]" : ""} ${i >= 2 ? "border-t border-[var(--border)] lg:border-t-0" : ""} ${i === 2 ? "lg:border-s" : ""}`}
             >
               <dt className="text-[var(--text-muted)]">{tr(f.label, locale)}</dt>
               <dd dir="ltr" className="text-start font-display text-[clamp(2rem,4vw,3.2rem)] font-bold leading-none tracking-[-0.03em] rtl:text-end">
-                {f.value}
+                {typeof f.value === "string" ? f.value : tr(f.value, locale)}
               </dd>
             </div>
           ))}
@@ -180,7 +180,7 @@ export default async function AboutPage({ params }: PageProps<"/[locale]/about">
       </Chapter>
 
       {/* 04 — who we build for (hover image reveal) */}
-      <Chapter index="04" label={isAr ? "بنشتغل مع مين" : "Who we work with"} title={isAr ? "أصحاب شغل حقيقي، في كل المجالات." : "Real businesses, in every field."} tone="card">
+      <Chapter index="04" label={isAr ? "بنشتغل مع مين" : "Who we work with"} title={isAr ? "بنبني لمين." : "Who we build for."} tone="card">
         <HoverReveal rows={industries.map((it) => ({ title: tr(it.name, locale), text: tr(it.text, locale), photo: it.photo }))} />
       </Chapter>
 

@@ -54,7 +54,7 @@ export default async function NotFound() {
               </Button>
             </Magnetic>
             <Button href={whatsappLink(t("whatsapp_message"))} variant="outline" size="lg" leftIcon={<WhatsAppIcon className="h-5 w-5 text-[#25D366]" />}>
-              WhatsApp
+              {isAr ? "واتساب" : "WhatsApp"}
             </Button>
           </div>
         </div>

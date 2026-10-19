@@ -122,7 +122,7 @@ export const app = {
 
 export const dash = {
   title: { en: "Today", ar: "النهارده" },
-  date: { en: "Sun, 12 Oct", ar: "الأحد 12 أكتوبر" },
+  date: { en: "Mon, 12 Oct", ar: "الاتنين 12 أكتوبر" },
   tiles: [
     { label: { en: "Sales today", ar: "مبيعات النهارده" }, value: 12450, money: true, note: { en: "12% more than yesterday", ar: "12% أكتر من امبارح" }, tone: "up" },
     { label: { en: "Profit", ar: "المكسب" }, value: 3980, money: true, note: { en: "8% more than yesterday", ar: "8% أكتر من امبارح" }, tone: "up" },

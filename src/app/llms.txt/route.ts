@@ -11,7 +11,7 @@ export function GET() {
   const lines = [
     `# ${site.name}`,
     "",
-    `> ${site.name} is a software company in Cairo, Egypt (شركة برمجة في مصر). We build websites, mobile apps (iOS & Android), custom business systems (ERP, POS/cashier, inventory, accounting), WhatsApp chatbots and AI assistants, and business automation for companies in Egypt and the Gulf. We also offer ready-made systems that can be rented monthly or bought once, with a free live demo. Languages: Arabic and English.`,
+    `> ${site.name} is a software company in Cairo, Egypt (شركة برمجة في مصر). We build websites, mobile apps (iOS & Android), custom business systems (ERP, POS/cashier, inventory, accounting), WhatsApp chatbots and AI assistants, and business automation for clients in Egypt and abroad (including the Netherlands). We also offer ready-made systems that can be rented monthly or bought once, with a free live demo. Languages: Arabic and English.`,
     "",
     "## Main pages",
     `- [Home (Arabic)](${localeUrl("ar")}): overview of what we build`,
@@ -20,7 +20,7 @@ export function GET() {
     `- [Ready-made systems](${localeUrl("ar", "/systems")}): systems to rent or buy, with a free demo`,
     `- [Work](${localeUrl("ar", "/portfolio")}): our work`,
     `- [About](${localeUrl("ar", "/about")})`,
-    `- [Contact](${localeUrl("ar", "/contact")}): free consultation; email ${site.email}`,
+    `- [Contact](${localeUrl("ar", "/contact")}): free consultation${site.email ? `; email ${site.email}` : ""}; WhatsApp ${site.whatsapp}`,
     "",
     "## Services",
     ...services.map((s) => `- [${s.label.en} — ${s.label.ar}](${localeUrl("ar", `/services/${s.slug}`)})`),

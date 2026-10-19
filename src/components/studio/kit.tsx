@@ -260,8 +260,10 @@ export function Figure({
       {caption && (
         <figcaption className="mt-3 flex items-baseline gap-3 text-sm text-[var(--text-muted)]">
           {fig && (
-            <span dir="ltr" className="shrink-0 font-mono text-xs text-[var(--accent)]">
-              Fig. {fig}
+            <span className="shrink-0 font-mono text-xs text-[var(--accent)]">
+              <span className="rtl:hidden">Fig. </span>
+              <span className="ltr:hidden">شكل </span>
+              <span dir="ltr">{fig}</span>
             </span>
           )}
           <span>{caption}</span>
@@ -346,7 +348,7 @@ export function ConsultActions({ locale, message, size = "lg", consultLabel }: {
         size={size}
         leftIcon={<WhatsAppIcon className="h-5 w-5 text-[#25D366]" />}
       >
-        WhatsApp
+        {isAr ? "واتساب" : "WhatsApp"}
       </Button>
     </>
   );

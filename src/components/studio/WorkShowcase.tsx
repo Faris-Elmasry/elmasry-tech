@@ -56,9 +56,20 @@ function Device({ item, playing, sizes }: { item: WorkItem; playing: boolean; si
     return (
       <div className="relative h-full max-h-full w-auto" style={{ aspectRatio: "9 / 19" }}>
         <div className="absolute inset-0 rounded-[2.2rem] border border-[var(--border-hover)] bg-[#0c0c0d] p-2 shadow-[0_30px_60px_-30px_rgba(0,0,0,0.9)]">
-          <div className="relative h-full w-full overflow-hidden rounded-[1.8rem] bg-[#101012]">
-            <Media item={item} playing={playing} sizes="240px" />
-            <span className="absolute left-1/2 top-2 h-4 w-20 -translate-x-1/2 rounded-full bg-black" />
+          <div className="relative flex h-full w-full flex-col overflow-hidden rounded-[1.8rem] bg-[#101012]">
+            {/* status bar, like a real phone: the page starts under it, so the notch hides nothing */}
+            <div dir="ltr" className="relative flex h-7 shrink-0 items-center justify-between bg-black px-5 text-[0.6rem] font-semibold text-white">
+              <span>9:41</span>
+              <span className="absolute left-1/2 top-1.5 h-4 w-16 -translate-x-1/2 rounded-full bg-[#0c0c0d] ring-1 ring-white/5" />
+              <span className="flex items-center gap-1" aria-hidden="true">
+                <svg width="14" height="9" viewBox="0 0 14 9" fill="currentColor"><rect x="0" y="6" width="2.5" height="3" rx=".5" /><rect x="3.8" y="4" width="2.5" height="5" rx=".5" /><rect x="7.6" y="2" width="2.5" height="7" rx=".5" /><rect x="11.4" y="0" width="2.5" height="9" rx=".5" /></svg>
+                <svg width="20" height="9" viewBox="0 0 20 9" fill="none"><rect x=".5" y=".5" width="16" height="8" rx="2" stroke="currentColor" opacity=".5" /><rect x="2" y="2" width="12" height="5" rx="1" fill="currentColor" /><rect x="17.5" y="3" width="1.5" height="3" rx=".5" fill="currentColor" opacity=".5" /></svg>
+              </span>
+            </div>
+            <div className="relative min-h-0 flex-1">
+              <Media item={item} playing={playing} sizes="240px" />
+            </div>
+            <span className="absolute bottom-1.5 left-1/2 h-1 w-24 -translate-x-1/2 rounded-full bg-white/60" aria-hidden="true" />
           </div>
         </div>
       </div>
@@ -237,16 +248,16 @@ export function WorkShowcase({ items, locale }: { items: WorkItem[]; locale: Loc
             >
               {/* Content keeps a fixed width so expanding reveals it instead of reflowing it */}
               <div className="absolute inset-y-0 start-0 flex w-[var(--open,44rem)] flex-col p-6">
-                <div className={cn(`min-h-0 flex-1 transition-opacity duration-700 ${EASE}`, on ? "opacity-100" : "opacity-45")}>
+                <div className={cn(`min-h-0 flex-1 transition-opacity duration-700 ${EASE}`, item.type === "app" && "flex justify-center", on ? "opacity-100" : "opacity-45")}>
                   <Device item={item} playing={wide && on && canPlay} sizes={desktopSizes} />
                 </div>
                 <div className="mt-5 flex items-end justify-between gap-6">
                   <div className="min-w-0">
-                    <div className="flex items-center gap-3">
+                    <div className={cn("flex items-center gap-3 transition-opacity duration-500", on ? "opacity-100" : "opacity-0")}>
                       <Badge kind={item.kind} locale={locale} />
                       <span className="label">{String(i + 1).padStart(2, "0")}</span>
                     </div>
-                    <h3 className="mt-3 title-sm truncate text-2xl font-bold">{item.name[locale]}</h3>
+                    <h3 className={cn("mt-3 title-sm truncate text-2xl font-bold transition-opacity duration-500", on ? "opacity-100" : "opacity-0")}>{item.name[locale]}</h3>
                     <p className={cn(`mt-1 max-w-md leading-relaxed text-[var(--text-muted)] transition-opacity duration-500`, on ? "opacity-100" : "opacity-0")}>{item.summary[locale]}</p>
                   </div>
                 </div>
@@ -263,6 +274,14 @@ export function WorkShowcase({ items, locale }: { items: WorkItem[]; locale: Loc
                   on ? "opacity-0" : "opacity-100"
                 )}
               />
+              {/* Collapsed cards: the name at the card's own width (it was cut: «WE Manager», «/E Management») */}
+              <div
+                aria-hidden="true"
+                className={cn(`pointer-events-none absolute inset-x-0 bottom-0 p-6 transition-opacity duration-500`, on ? "opacity-0" : "opacity-100")}
+              >
+                <span className="label">{String(i + 1).padStart(2, "0")}</span>
+                <p className="mt-2 title-sm text-xl font-bold leading-tight text-balance">{item.name[locale]}</p>
+              </div>
               {/* Collapsed cards: an invisible button-sized target keeps them keyboard-reachable */}
               {!on && (
                 <button
@@ -283,7 +302,7 @@ export function WorkShowcase({ items, locale }: { items: WorkItem[]; locale: Loc
         className="-mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain scroll-px-5 px-5 pb-2 [scrollbar-width:none] sm:-mx-8 sm:scroll-px-8 sm:px-8 lg:hidden [&::-webkit-scrollbar]:hidden"
       >
         {items.map((item, i) => (
-          <article key={item.slug} data-work-card={i} className="flex w-[86vw] max-w-[28rem] shrink-0 snap-start flex-col rounded-[1.5rem] border border-[var(--border-hover)] bg-[var(--bg-card)] p-5">
+          <article key={item.slug} data-work-card={i} className="flex w-[80vw] max-w-[28rem] shrink-0 snap-start flex-col rounded-[1.5rem] border border-[var(--border-hover)] bg-[var(--bg-card)] p-5">
             <div className={cn("relative", item.type === "app" ? "h-[26rem]" : "aspect-[4/3]")}>
               <Device item={item} playing={!wide && mobileIndex === i && canPlay} sizes="86vw" />
             </div>
@@ -299,6 +318,23 @@ export function WorkShowcase({ items, locale }: { items: WorkItem[]; locale: Loc
           </article>
         ))}
       </div>
+      {/* where you are and how many there are — on phones the others were hidden behind a 5px sliver */}
+      {items.length > 1 && (
+        <div className="mt-4 flex items-center justify-center gap-2 lg:hidden">
+          {items.map((item, i) => (
+            <button
+              key={item.slug}
+              type="button"
+              aria-label={isAr ? `${item.name.ar} (${i + 1} من ${items.length})` : `${item.name.en} (${i + 1} of ${items.length})`}
+              aria-current={mobileIndex === i}
+              onClick={() => rail.current?.querySelector<HTMLElement>(`[data-work-card="${i}"]`)?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "start" })}
+              className="flex h-8 min-w-8 items-center justify-center"
+            >
+              <span className={cn("block h-2 rounded-full transition-all duration-300", mobileIndex === i ? "w-6 bg-[var(--accent)]" : "w-2 bg-[var(--border-hover)]")} />
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

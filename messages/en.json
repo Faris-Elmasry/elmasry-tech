@@ -72,6 +72,8 @@
     "step_2": "What you need",
     "step_3": "Your message",
     "error_phone": "Enter a valid mobile number, e.g. 01012345678",
+    "error_email": "Enter a valid email, or leave it empty.",
+    "error_long": "This is longer than allowed.",
     "error_name": "Enter your name"
   },
   "common": {

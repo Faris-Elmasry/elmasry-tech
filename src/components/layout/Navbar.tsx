@@ -243,7 +243,7 @@ export function Navbar() {
             </Link>
             <a href={wa} target="_blank" rel="noopener noreferrer" className="inline-flex h-14 items-center justify-center gap-2 rounded-full border border-[var(--border-hover)] font-medium">
               <WhatsAppIcon className="h-5 w-5 text-[#25D366]" />
-              WhatsApp
+              {locale === "ar" ? "واتساب" : "WhatsApp"}
             </a>
           </div>
           <p className="flex flex-wrap justify-between gap-x-6 gap-y-1 pt-3 text-sm text-[var(--text-muted)]">
@@ -261,10 +261,11 @@ export function Navbar() {
         href={wa}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="WhatsApp"
+        aria-label={locale === "ar" ? "كلّمنا على واتساب" : "Chat on WhatsApp"}
         data-cursor="chat"
         className={cn(
-          "fixed bottom-5 end-5 z-50 inline-flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_12px_30px_-8px_rgba(37,211,102,0.55)] transition-[transform,opacity] duration-300 hover:scale-110 active:scale-95",
+          // on phones it sat on the FAQ +/× and the slider arrows (which are on the end side): start side there
+          "fixed bottom-4 start-4 z-50 inline-flex h-12 w-12 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_12px_30px_-8px_rgba(37,211,102,0.55)] transition-[transform,opacity] duration-300 hover:scale-110 active:scale-95 sm:bottom-5 sm:start-auto sm:end-5 sm:h-14 sm:w-14",
           open && "pointer-events-none scale-75 opacity-0"
         )}
       >

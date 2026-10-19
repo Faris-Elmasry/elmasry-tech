@@ -223,8 +223,8 @@ export const faqs: { q: T; a: T }[] = [
   {
     q: { en: "Do you work with clients outside Egypt?", ar: "بتشتغلوا مع عملاء برّه مصر؟" },
     a: {
-      en: "Yes. We work with clients in the Gulf and beyond, in Arabic and English, over WhatsApp, video calls and email.",
-      ar: "أيوه. بنشتغل مع عملاء في الخليج وبرّه، بالعربي والإنجليزي، على واتساب ومكالمات الفيديو والإيميل.",
+      en: "Yes — we already work with clients in the Netherlands, in Arabic and English, over WhatsApp and video calls.",
+      ar: "أيوه — بنشتغل فعلًا مع عملاء في هولندا، بالعربي والإنجليزي، على واتساب ومكالمات الفيديو.",
     },
   },
 ];

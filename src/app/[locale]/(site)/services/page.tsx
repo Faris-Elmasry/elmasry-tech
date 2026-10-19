@@ -153,7 +153,7 @@ export default async function ServicesPage({ params }: PageProps<"/[locale]/serv
         index="02"
         label={isAr ? "مش متأكد؟" : "Not sure?"}
         title={isAr ? "لو الجملة دي شبهك، يبقى دي البداية." : "If this sounds like you, start here."}
-        sub={isAr ? "كلام أصحاب الشغل اللي بنقابلهم كل يوم — وكل جملة بتودّيك للخدمة المناسبة." : "Things business owners tell us every week — each one leads to the service that fixes it."}
+        sub={isAr ? "كلام بنسمعه كتير من أصحاب الشغل — وكل جملة بتودّيك للخدمة المناسبة." : "Things business owners often tell us — each one leads to the service that fixes it."}
       >
         <HoverReveal
           rows={services.map((s) => ({

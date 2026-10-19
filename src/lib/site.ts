@@ -19,6 +19,14 @@ const whatsappRaw = process.env.NEXT_PUBLIC_WHATSAPP || "+201090036987";
 /** False until a real number is configured (NEXT_PUBLIC_WHATSAPP). */
 export const hasRealPhone = whatsappRaw.replace(/[^\d]/g, "") !== PLACEHOLDER_WHATSAPP.replace(/[^\d]/g, "");
 
+function formatPhone(raw: string): string {
+  const d = raw.replace(/[^\d]/g, "");
+  const nb = "\u00a0";
+  // Egyptian mobile: 20 + 1x + 8 digits → +20 1xx xxx xxxx
+  if (/^201\d{9}$/.test(d)) return `+20${nb}${d.slice(2, 5)}${nb}${d.slice(5, 8)}${nb}${d.slice(8)}`;
+  return `+${d}`;
+}
+
 export const site = {
   name: "Elmasry Tech",
   legalName: "Elmasry Tech Solutions",
@@ -32,6 +40,10 @@ export const site = {
   email: (process.env.NEXT_PUBLIC_CONTACT_EMAIL || "").trim() || null,
   whatsapp: whatsappRaw,
   whatsappDigits: whatsappRaw.replace(/[^\d]/g, ""),
+  /** "+20 109 003 6987" (no-break spaces) — the raw "+201090036987" was hard to read */
+  phoneDisplay: formatPhone(whatsappRaw),
+  /** tel: link — there was no way to just call */
+  tel: `tel:+${whatsappRaw.replace(/[^\d]/g, "")}`,
   city: { en: "Cairo", ar: "القاهرة" },
   country: { en: "Egypt", ar: "مصر" },
   social: {

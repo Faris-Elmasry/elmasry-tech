@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { Clock, Mail, MapPin } from "lucide-react";
+import { Clock, Mail, MapPin, Phone } from "lucide-react";
 import { Rise } from "@/components/motion/Kinetic";
 import { Chapter, Faq, StudioHero } from "@/components/studio/kit";
 import { ContactForm } from "@/components/sections/ContactForm";
@@ -78,8 +78,14 @@ export default async function ContactPage({ params, searchParams }: PageProps<"/
               )}
               <li className="flex items-start gap-3">
                 <WhatsAppIcon className="mt-1 h-4 w-4 shrink-0 text-[var(--text-muted)]" />
-                <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" dir="ltr" className="link-draw">
-                  {site.whatsapp}
+                <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" className="link-draw">
+                  {isAr ? "واتساب" : "WhatsApp"} <span dir="ltr">{site.phoneDisplay}</span>
+                </a>
+              </li>
+              <li className="flex items-start gap-3">
+                <Phone aria-hidden="true" className="mt-1 h-4 w-4 shrink-0 text-[var(--text-muted)]" />
+                <a href={site.tel} className="link-draw">
+                  {isAr ? "اتصل بينا" : "Call us"} <span dir="ltr">{site.phoneDisplay}</span>
                 </a>
               </li>
               <li className="flex items-start gap-3 text-[var(--text-muted)]">

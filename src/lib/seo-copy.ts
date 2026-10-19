@@ -15,7 +15,7 @@ export type PageSeo = { title: T; description: T; h1?: T; intro?: T };
 
 export const pageSeo: Record<string, PageSeo> = {
   "home": {
-    title: { en: "Software Company in Egypt — Apps & Systems", ar: "شركة برمجة في مصر | مواقع وتطبيقات وأنظمة" },
+    title: { en: "Software Company in Egypt — Apps & Systems", ar: "شركة برمجة في مصر — مواقع وتطبيقات وأنظمة" },
     description: { en: "Software company in Egypt building websites, mobile apps and ready business systems for shops, clinics and companies. Book a free consultation today.", ar: "شركة برمجة في مصر بتعمل تصميم مواقع وتطبيقات وأنظمة جاهزة للمحلات والعيادات والشركات من القاهرة. احجز استشارة مجانية أو عرض تجريبي مجاني النهارده." },
   },
   "services": {
@@ -32,15 +32,15 @@ export const pageSeo: Record<string, PageSeo> = {
   },
   "portfolio": {
     title: { en: "Our Software & Web Design Work in Egypt", ar: "أعمالنا في البرمجة وتصميم المواقع" },
-    description: { en: "Our software and web design work in Egypt: eight business systems we built, live demos you can try, and private client walkthroughs. Ask for a free demo.", ar: "أعمالنا في البرمجة وتصميم المواقع: أنظمة بنيناها بنفسنا وتقدر تجرّبها في عرض حي، وشغل عملائنا بنعرضه في اجتماع خاص. اطلب عرض تجريبي أو استشارة مجانية." },
+    description: { en: "Our software and web design work: live websites, apps and systems for clients in Egypt and the Netherlands, plus ready-made business systems. Ask for a free demo.", ar: "أعمالنا في البرمجة وتصميم المواقع: مواقع وتطبيقات وأنظمة شغالة لعملاء في مصر وهولندا، وأنظمة جاهزة بنقدّمها لنشاطك. اطلب عرض تجريبي أو استشارة مجانية." },
     h1: { en: "Our software & web design work", ar: "أعمالنا في البرمجة وتصميم المواقع" },
-    intro: { en: "Our software and web design work, shown as real screens: these are systems we designed and built ourselves — you can try any of them in a live demo. Our clients’ private work is shown only in a private meeting, because their secrets are safe with us.", ar: "أعمالنا في البرمجة وتصميم المواقع على الشاشة: دي أنظمتنا اللي صمّمناها وبنيناها بنفسنا، وتقدر تجرّب أي واحد منها في عرض حي. شغل عملائنا الخاص بنعرضه في اجتماع خاص بس — لأن أسرارهم أمانة." },
+    intro: { en: "Our software and web design work, shown as real screens: live projects for our clients that you can open yourself, and the ready-made systems we offer — ask for a demo of any of them. Client work that isn't public is shown only in a private meeting.", ar: "أعمالنا في البرمجة وتصميم المواقع على الشاشة: مشاريع شغالة لعملائنا تقدر تفتحها بنفسك، وأنظمة جاهزة بنقدّمها — واطلب عرض لأي واحد منها. وشغل العملاء اللي مش منشور بنعرضه في اجتماع خاص بس." },
   },
   "about": {
     title: { en: "About Us — Software Company in Cairo, Egypt", ar: "عن شركة برمجة مصرية في القاهرة" },
-    description: { en: "About Elmasry Tech, a software company in Cairo founded by engineers: websites, apps and business systems for Egypt and the Gulf, with support after launch", ar: "عن Elmasry Tech، شركة برمجة مصرية في القاهرة أسسها مهندسين: بنعمل مواقع وتطبيقات وأنظمة للشركات في مصر والخليج ونفضل معاك بعد التسليم. احجز استشارة مجانية." },
+    description: { en: "About Elmasry Tech, a software company in Cairo: websites, apps and business systems for clients in Egypt and abroad, with support after launch.", ar: "عن Elmasry Tech، شركة برمجة مصرية في القاهرة: بنعمل مواقع وتطبيقات وأنظمة لعملاء في مصر وبره مصر، ونفضل معاك بعد التسليم. احجز استشارة مجانية." },
     h1: { en: "About our software company in Cairo", ar: "عن شركة برمجة مصرية في القاهرة" },
-    intro: { en: "Elmasry Tech is a software company in Cairo, Egypt, founded by engineers. We build websites, apps and business systems for companies in Egypt and the Gulf — and we stay after launch.", ar: "Elmasry Tech شركة برمجة مصرية في القاهرة، أسسها مهندسين. بنبني مواقع وتطبيقات وأنظمة لشركات في مصر والخليج — وبنفضل موجودين بعد التسليم." },
+    intro: { en: "Elmasry Tech is a software company in Cairo, Egypt. We build websites, apps and business systems for clients in Egypt and abroad — and we stay after launch.", ar: "Elmasry Tech شركة برمجة مصرية في القاهرة. بنبني مواقع وتطبيقات وأنظمة لعملاء في مصر وبره مصر — وبنفضل موجودين بعد التسليم." },
   },
   "contact": {
     title: { en: "Contact Our Software Team — Free Consultation", ar: "تواصل مع شركة برمجة — استشارة مجانية" },
@@ -50,11 +50,11 @@ export const pageSeo: Record<string, PageSeo> = {
   },
   "privacy": {
     title: { en: "Privacy Policy", ar: "سياسة الخصوصية" },
-    description: { en: "Elmasry Tech privacy policy in plain words: what this website collects, why, how long we keep it, and how to get a copy or deletion. Questions? Email us.", ar: "سياسة الخصوصية في Elmasry Tech بكلام واضح: بنجمع إيه من الموقع وليه، وبنحتفظ بيه قد إيه، وإزاي تطلب نسخة من بياناتك أو تمسحها. عندك سؤال؟ ابعت لنا إيميل." },
+    description: { en: "Elmasry Tech privacy policy in plain words: what this website collects, why, how long we keep it, and how to get a copy or deletion. Questions? Message us on WhatsApp.", ar: "سياسة الخصوصية في Elmasry Tech بكلام واضح: بنجمع إيه من الموقع وليه، وبنحتفظ بيه قد إيه، وإزاي تطلب نسخة من بياناتك أو تمسحها. عندك سؤال؟ ابعت لنا على واتساب." },
   },
   "terms": {
     title: { en: "Terms of Service", ar: "الشروط والأحكام" },
-    description: { en: "Elmasry Tech terms of service in plain words: written offers, payment in parts, who owns the code, support periods and confidentiality. Questions? Email us", ar: "الشروط والأحكام في Elmasry Tech بكلام واضح: العرض المكتوب، والدفع على دفعات، ومين يملك الكود، وفترة الدعم والسرية. عندك سؤال عن أي بند؟ ابعت لنا إيميل." },
+    description: { en: "Elmasry Tech terms of service in plain words: written offers, payment in parts, who owns the code, support periods and confidentiality. Questions? Message us on WhatsApp.", ar: "الشروط والأحكام في Elmasry Tech بكلام واضح: العرض المكتوب، والدفع على دفعات، ومين يملك الكود، وفترة الدعم والسرية. عندك سؤال عن أي بند؟ ابعت لنا على واتساب." },
   },
   "service:website-development": {
     title: { en: "Website Design in Egypt — Sites That Sell", ar: "تصميم مواقع في مصر — موقع يجيب لك عملاء" },
