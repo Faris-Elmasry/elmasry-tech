@@ -15,6 +15,10 @@ const securityHeaders = [
   { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
   { key: "X-Frame-Options", value: "SAMEORIGIN" },
   { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
+  // HTTPS only from now on for a year (ignored over plain http, e.g. local dev)
+  { key: "Strict-Transport-Security", value: "max-age=31536000; includeSubDomains" },
+  // the parts of a CSP that can't break the site: no plugins, no foreign <base>, no framing, forms post only here
+  { key: "Content-Security-Policy", value: "object-src 'none'; base-uri 'self'; frame-ancestors 'self'; form-action 'self'" },
 ];
 
 const nextConfig: NextConfig = {

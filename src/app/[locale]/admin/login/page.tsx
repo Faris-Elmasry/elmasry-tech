@@ -28,7 +28,7 @@ export default function AdminLoginPage() {
       });
 
       if (result?.error) {
-        setError("Invalid email or password");
+        setError(result.error === "TooManyAttempts" ? "Too many attempts. Wait 15 minutes and try again." : "Invalid email or password");
         setLoading(false);
         return;
       }
