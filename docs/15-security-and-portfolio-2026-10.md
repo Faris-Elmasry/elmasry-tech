@@ -73,3 +73,35 @@ Details are in the café repo: `docs/12-qa-fixes-and-security-2026-10.md`.
 - `main` was pushed (`44e2cb6` plus this docs commit).
 - On 2026-10-20 the server did not answer for the site's sslip.io address, so the site still has to be deployed on Dokploy.
 - After it's deployed, re-run the checks in section 2 against the live URL.
+
+## 5. Launch review (same day, later)
+
+A page-by-page review found more to fix. Everything below is in commits `09827de` → `2cee575`.
+
+**Content and copy**
+- **Invented content removed:** three seeded "client projects" with made-up numbers were live on `/portfolio`, and there were two seeded testimonials. The seed no longer creates any.
+- `/portfolio` shows the real client work. Systems are described as "ready-made systems we offer".
+- Copy no longer claims "the Gulf" or "founded by engineers".
+- English words on Arabic pages are translated, and the form errors are too.
+
+**Contact details**
+- The email is hidden until `NEXT_PUBLIC_CONTACT_EMAIL` is set.
+- The GitHub link is fixed.
+- The phone has a display format and a `tel:` link.
+
+**Admin**
+- It is in Arabic and opens on the requests page.
+- It has a phone menu.
+- Its menu only lists what works.
+- A password changed from the admin survives deploys.
+
+**Dependencies:** Next 16.4.2 and friends. Production vulnerabilities went from 18 (2 critical) to 2 high.
+
+**Still for the owner to confirm:**
+- the legal name "Elmasry Tech Solutions" (footer, privacy, terms);
+- the about page's "small complete team" and "founders" wording;
+- the LinkedIn URL;
+- the App Store / Google Play links for Itafa2na.
+
+Launch steps: [16](16-launch-and-domain.md).
+
