@@ -22,15 +22,22 @@ export const hasRealPhone = whatsappRaw.replace(/[^\d]/g, "") !== PLACEHOLDER_WH
 export const site = {
   name: "Elmasry Tech",
   legalName: "Elmasry Tech Solutions",
-  domain: "elmasry.tech",
-  email: "faris@elmasry.tech",
+  /** The public host, from NEXT_PUBLIC_SITE_URL — changing the domain is that one variable. */
+  domain: new URL(siteUrl).host,
+  /**
+   * Contact email, shown only once a mailbox exists (NEXT_PUBLIC_CONTACT_EMAIL). It was a fixed
+   * faris@elmasry.tech before the domain was even bought — mail to it bounced. Without it the
+   * site offers WhatsApp, phone and the form.
+   */
+  email: (process.env.NEXT_PUBLIC_CONTACT_EMAIL || "").trim() || null,
   whatsapp: whatsappRaw,
   whatsappDigits: whatsappRaw.replace(/[^\d]/g, ""),
   city: { en: "Cairo", ar: "القاهرة" },
   country: { en: "Egypt", ar: "مصر" },
   social: {
-    github: "https://github.com/fariselmasry",
-    linkedin: "https://linkedin.com/in/fariselmasry",
+    // github.com/fariselmasry was a 404; the account is Faris-Elmasry
+    github: process.env.NEXT_PUBLIC_GITHUB || "https://github.com/Faris-Elmasry",
+    linkedin: process.env.NEXT_PUBLIC_LINKEDIN || "https://linkedin.com/in/fariselmasry",
   },
   foundingYear: 2023,
 } as const;

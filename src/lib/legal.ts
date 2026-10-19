@@ -7,7 +7,7 @@
 // render as a bullet list. Each section opens with a one-line plain summary
 // (`short`, colloquial Egyptian in Arabic).
 
-import type { Locale } from "@/lib/site";
+import { site, type Locale } from "@/lib/site";
 
 type T = Record<Locale, string>;
 
@@ -28,9 +28,10 @@ export interface LegalDoc {
   sections: LegalSection[];
 }
 
+// the email line appears only when a mailbox is configured (see site.email)
 const CONTACT = {
-  en: "Email: faris@elmasry.tech — WhatsApp/phone: +20\u00a0109\u00a0003\u00a06987 — Cairo, Egypt.",
-  ar: "البريد الإلكتروني: \u2066faris@elmasry.tech\u2069 — واتساب/هاتف: \u2066+20\u00a0109\u00a0003\u00a06987\u2069 — القاهرة، مصر.",
+  en: `${site.email ? `Email: ${site.email} — ` : ""}WhatsApp/phone: +20\u00a0109\u00a0003\u00a06987 — Cairo, Egypt.`,
+  ar: `${site.email ? `البريد الإلكتروني: \u2066${site.email}\u2069 — ` : ""}واتساب/هاتف: \u2066+20\u00a0109\u00a0003\u00a06987\u2069 — القاهرة، مصر.`,
 };
 
 export const privacyPolicy: LegalDoc = {

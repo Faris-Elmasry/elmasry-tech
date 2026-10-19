@@ -1,5 +1,6 @@
 import prisma from "@/lib/prisma";
 import { successResponse, errorResponse, requireAdmin, setCacheHeaders } from "@/lib/api";
+import { projectSchema } from "@/lib/validators";
 import { revalidatePath } from "next/cache";
 
 interface Params {
@@ -29,15 +30,18 @@ export async function PUT(request: Request, { params }: Params) {
     if (authError) return authError;
 
     const { slug } = await params;
-    const body = await request.json();
+    // only the project's own fields — the raw body could overwrite any column (id, createdAt…)
+    const parsed = projectSchema.partial().safeParse(await request.json());
+    if (!parsed.success) {
+      return errorResponse(parsed.error.errors[0].message, 400);
+    }
 
     const project = await prisma.project.update({
       where: { slug },
-      data: body,
+      data: parsed.data,
     });
 
     revalidatePath("/", "layout");
-    revalidatePath(`/en/portfolio/${slug}`);
     return successResponse(project);
   } catch (error) {
     console.error("PUT /api/projects/[slug] error:", error);

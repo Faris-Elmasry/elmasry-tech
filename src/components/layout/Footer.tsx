@@ -54,11 +54,13 @@ export async function Footer({ locale }: { locale: Locale }) {
                 <span dir="ltr">{site.whatsapp}</span>
               </a>
             </li>
-            <li>
-              <a href={`mailto:${site.email}`} className="text-[var(--text-primary)] transition-colors hover:text-[var(--accent)]">
-                {site.email}
-              </a>
-            </li>
+            {site.email && (
+              <li>
+                <a href={`mailto:${site.email}`} className="text-[var(--text-primary)] transition-colors hover:text-[var(--accent)]">
+                  {site.email}
+                </a>
+              </li>
+            )}
             <li className="pt-1">
               <CairoClock label={tn("cairo")} />
             </li>

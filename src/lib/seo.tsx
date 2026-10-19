@@ -72,7 +72,7 @@ export function organizationJsonLd(locale: Locale) {
     url: siteUrl,
     logo: `${siteUrl}/icon.svg`,
     image: `${siteUrl}/${locale}/opengraph-image`,
-    email: site.email,
+    ...(site.email ? { email: site.email } : {}),
     ...(hasRealPhone ? { telephone: site.whatsapp } : {}),
     foundingDate: String(site.foundingYear),
     description: isAr
@@ -108,7 +108,7 @@ export function organizationJsonLd(locale: Locale) {
       "@type": "ContactPoint",
       contactType: "sales",
       ...(hasRealPhone ? { telephone: site.whatsapp } : {}),
-      email: site.email,
+      ...(site.email ? { email: site.email } : {}),
       availableLanguage: ["Arabic", "English"],
       areaServed: "EG",
     },

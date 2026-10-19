@@ -68,12 +68,14 @@ export default async function ContactPage({ params, searchParams }: PageProps<"/
               {t("whatsapp")}
             </Button>
             <ul className="mt-7 space-y-4 border-t border-[var(--border)] pt-6">
-              <li className="flex items-start gap-3">
-                <Mail aria-hidden="true" className="mt-1 h-4 w-4 shrink-0 text-[var(--text-muted)]" />
-                <a href={`mailto:${site.email}`} className="link-draw">
-                  {site.email}
-                </a>
-              </li>
+              {site.email && (
+                <li className="flex items-start gap-3">
+                  <Mail aria-hidden="true" className="mt-1 h-4 w-4 shrink-0 text-[var(--text-muted)]" />
+                  <a href={`mailto:${site.email}`} className="link-draw">
+                    {site.email}
+                  </a>
+                </li>
+              )}
               <li className="flex items-start gap-3">
                 <WhatsAppIcon className="mt-1 h-4 w-4 shrink-0 text-[var(--text-muted)]" />
                 <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" dir="ltr" className="link-draw">

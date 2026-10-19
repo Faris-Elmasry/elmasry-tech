@@ -4,7 +4,7 @@ import { ReadingToc } from "@/components/studio/ReadingToc";
 import { JsonLd, breadcrumbJsonLd } from "@/lib/seo";
 import { tr } from "@/lib/content";
 import type { LegalDoc, LegalSection } from "@/lib/legal";
-import { site, type Locale } from "@/lib/site";
+import { site, whatsappLink, type Locale } from "@/lib/site";
 
 /**
  * Long-form legal document, written to be read: every section opens with a
@@ -72,10 +72,21 @@ export function LegalPage({ doc, locale, path }: { doc: LegalDoc; locale: Locale
             ))}
             <div className="mt-6 flex flex-col gap-4 border-t border-[var(--border)] pt-10 text-[var(--text-muted)] sm:flex-row sm:items-center sm:justify-between">
               <p>
-                {isAr ? "عندك سؤال عن الصفحة دي؟ ابعت لنا على " : "Questions about this page? Email "}
-                <a href={`mailto:${site.email}`} className="link-draw text-[var(--text-primary)]">
-                  {site.email}
-                </a>
+                {site.email ? (
+                  <>
+                    {isAr ? "عندك سؤال عن الصفحة دي؟ ابعت لنا على " : "Questions about this page? Email "}
+                    <a href={`mailto:${site.email}`} className="link-draw text-[var(--text-primary)]">
+                      {site.email}
+                    </a>
+                  </>
+                ) : (
+                  <>
+                    {isAr ? "عندك سؤال عن الصفحة دي؟ كلّمنا على " : "Questions about this page? Message us on "}
+                    <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" className="link-draw text-[var(--text-primary)]">
+                      {isAr ? "واتساب" : "WhatsApp"}
+                    </a>
+                  </>
+                )}
               </p>
               <Link href={other.href} className="link-draw text-[var(--text-primary)]">
                 {other.label}

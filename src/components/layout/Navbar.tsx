@@ -248,9 +248,11 @@ export function Navbar() {
           </div>
           <p className="flex flex-wrap justify-between gap-x-6 gap-y-1 pt-3 text-sm text-[var(--text-muted)]">
             <span>{t("menu_hours")}</span>
-            <a href={`mailto:${site.email}`} className="hover:text-[var(--text-primary)]">
-              {site.email}
-            </a>
+            {site.email && (
+              <a href={`mailto:${site.email}`} className="hover:text-[var(--text-primary)]">
+                {site.email}
+              </a>
+            )}
           </p>
         </div>
       </div>
