@@ -62,3 +62,26 @@ Target: rank on Google Egypt (google.com.eg) for Arabic and English software-ser
 
 ## Sources
 yellowpages.com.eg (computer-software, website-design categories) · designrush.com/agency/software-development/eg · clutch.co/profile/alexapp · appinventiv.com/eg/mobile-app-development-company-in-egypt · perfectiongeeks.com (Cairo page) · dexef.com (+ /apps/restaurant-accounting, /apps/supermarket-software, /apps/fastest-cashier-program) · daftra.com/hub (أفضل برنامج محاسبة في مصر) · wafeq.com/ar-eg · edara.io · capterra (Edara, Foodics) · medoc.care · inyad.com (أفضل 5 برامج كاشير في مصر) · techsy.io (mobile-app-cost) · studyshoot.com (website-design-prices) · Google URL-structure docs · Yoast on Arabic slugs.
+
+---
+
+## v0.4 — SEO pass (2026-10-16)
+
+### On-site (done in code)
+- **One keyword per page** in `<title>` (keyword first, brand once via the template), 140–155-char description with a CTA, and an **H1 that contains the keyword**: the H1 is two spans — a small keyword line + the big creative line — so the design keeps its voice and Google gets the term. Home H1: «شركة برمجة في مصر · Elmasry Tech» + «بنبني البرامج اللي شغلك ماشي عليها.»
+- **Structured data:** Organization+ProfessionalService with an `OfferCatalog` linking every service and system to its page; Service schema per service, SoftwareApplication per system, FAQPage wherever an FAQ is visible, BreadcrumbList everywhere, Article schema on guides. The placeholder WhatsApp number is **never** emitted as `telephone` (`hasRealPhone` in `lib/site.ts`).
+- **Guides** (`/guides`, 7 articles) answer the informational queries that rank in Egypt (cost of a website/app, choosing a cashier program, ERP vs accounting software, WhatsApp chatbot, e-invoice integration, choosing a software company), each linking to the matching service/system pages.
+- **`/llms.txt`** describes the company and links the main pages for AI assistants / answer engines.
+- **Search Console / Bing verification**: set `GOOGLE_SITE_VERIFICATION` / `BING_SITE_VERIFICATION` in the env (rendered as meta tags).
+- Lighthouse (local prod build): desktop 100/100/100/100 on `/ar`; mobile SEO 100, best-practices 100, a11y 100, performance ~85–91 (limited by the React/Next runtime under Lighthouse's simulated slow 4G).
+- **Avoided on purpose:** city "doorway" pages (one thin page per city) — Google treats them as spam. Use one real address + Google Business Profile instead.
+
+### Off-site checklist (owner actions — these move rankings more than code)
+1. **Real contact facts**: real WhatsApp/phone (`NEXT_PUBLIC_WHATSAPP`), office address (street, district) → add to `site.ts` and the Organization schema.
+2. **Google Business Profile** (Cairo address, category "Software company", hours, photos of the team/office, website link). Ask every client for a review.
+3. **Google Search Console + Bing Webmaster Tools**: verify, submit `https://elmasry.tech/sitemap.xml`, watch queries/CTR monthly.
+4. **Directories with backlinks**: Clutch, GoodFirms, TechBehemoths, DesignRush, Wuzzuf company page, LinkedIn company page.
+5. **Client sites**: a small "تصميم وتطوير Elmasry Tech" credit link in each client site's footer (with permission).
+6. **Social profiles** (Facebook page is critical in Egypt, Instagram, LinkedIn) linking to the site; add them to `site.social` (they feed `sameAs`).
+7. **Keep publishing**: 2 guides/month on real customer questions; update the cost guides yearly.
+8. **Pricing page**: pages with real price ranges rank for «سعر/تكلفة تصميم موقع» — publish one when real "starting from" prices are decided.

@@ -1,8 +1,9 @@
-// Structured, bilingual marketing content. Copy is written for search intent
-// in Egypt (Arabic + English) — see docs/12-seo.md for the keyword map.
-// Tone: professional Modern Standard Arabic / confident, specific English.
-// Keyword lists intentionally keep the colloquial terms people actually search
-// (e.g. "سيستم كاشير"), even where the visible copy uses formal Arabic.
+// Structured, bilingual marketing content.
+// Visible copy is written for business owners, not engineers: plain words,
+// no jargon (no "ERP", "POS", "SaaS", "KPI" in what people read). Arabic is
+// warm, simple and Egyptian-friendly. `keywords` keeps the terms people
+// actually type into Google; page titles, meta descriptions and H1 keyword
+// lines live in lib/seo-copy.ts.
 
 import type { Locale } from "@/lib/site";
 
@@ -14,14 +15,14 @@ export interface Service {
   icon: string;
   /** Short label used in nav, chips and the contact form. */
   label: T;
-  /** H1 / H2 — contains the primary keyword. */
+  /** Descriptive title (keyword-friendly, still plain). */
   title: T;
+  /** One plain sentence: what it is. */
   summary: T;
+  /** Two or three plain sentences: what changes for you. */
   body: T;
+  /** What you get, in everyday words. */
   features: Record<Locale, string[]>;
-  /** Meta title/description for the service's own page. */
-  seoTitle: T;
-  seoDescription: T;
   keywords: Record<Locale, string[]>;
 }
 
@@ -29,24 +30,19 @@ export const services: Service[] = [
   {
     slug: "website-development",
     icon: "Globe",
-    label: { en: "Websites & Web Apps", ar: "المواقع وتطبيقات الويب" },
-    title: { en: "Website design & web application development", ar: "تصميم المواقع وتطوير تطبيقات الويب" },
+    label: { en: "Websites", ar: "المواقع الإلكترونية" },
+    title: { en: "Website design & development", ar: "تصميم وبرمجة المواقع" },
     summary: {
-      en: "Fast, bilingual websites and web platforms engineered to rank on Google and convert visitors into customers.",
-      ar: "مواقع ومنصات ويب سريعة وثنائية اللغة، مصممة لتتصدر نتائج البحث وتحوّل الزوار إلى عملاء.",
+      en: "A fast, good-looking website that explains what you do and turns visitors into calls and WhatsApp messages.",
+      ar: "موقع سريع وشكله محترم، بيشرح شغلك ببساطة ويحوّل الزائر لمكالمة أو رسالة واتساب.",
     },
     body: {
-      en: "From corporate websites and landing pages to customer portals and SaaS dashboards. We build on Next.js and modern infrastructure, structure Arabic and English content properly, and ship technical SEO from day one — so your site loads instantly, works on every device, and scales with your business.",
-      ar: "من مواقع الشركات وصفحات الهبوط إلى بوابات العملاء ولوحات التحكم ومنصات SaaS. نعتمد على Next.js وبنية تحتية حديثة، وننظّم المحتوى العربي والإنجليزي باحترافية، ونطبّق أساسيات السيو التقني منذ اليوم الأول؛ ليُحمَّل موقعك فورًا، ويعمل على جميع الأجهزة، وينمو مع نمو أعمالك.",
+      en: "We write and design every page around one question: what should the visitor do next? Your site works on every phone, in Arabic and English, shows up on Google, and comes with a simple dashboard so you can change prices, photos and text yourself.",
+      ar: "بنصمّم كل صفحة حوالين سؤال واحد: الزائر المفروض يعمل إيه بعد كده؟ موقعك هيشتغل على أي موبايل، بالعربي والإنجليزي، ويظهر على جوجل، ومعاه لوحة تحكم بسيطة تغيّر منها الأسعار والصور والكلام بنفسك.",
     },
     features: {
-      en: ["Corporate websites & landing pages", "Custom web apps & portals", "Arabic RTL + English", "Technical SEO & Core Web Vitals", "Content management dashboard"],
-      ar: ["مواقع الشركات وصفحات الهبوط", "تطبيقات ويب وبوابات مخصصة", "دعم كامل للعربية والإنجليزية", "سيو تقني وأداء عالٍ", "لوحة تحكم لإدارة المحتوى"],
-    },
-    seoTitle: { en: "Website Design & Web Development in Egypt", ar: "تصميم مواقع في مصر | تطوير مواقع الشركات" },
-    seoDescription: {
-      en: "Professional website design and web app development in Egypt. Bilingual Arabic/English, SEO-ready, fast and fully custom. Get a free consultation.",
-      ar: "شركة تصميم مواقع وتطوير تطبيقات ويب في مصر. مواقع احترافية بالعربية والإنجليزية، سريعة ومتوافقة مع محركات البحث. احصل على استشارة مجانية.",
+      en: ["Company websites & one-page offers", "Arabic and English", "Shows up on Google", "WhatsApp & call buttons everywhere", "Edit it yourself — no developer needed"],
+      ar: ["مواقع شركات وصفحات عروض", "عربي وإنجليزي", "يظهر في بحث جوجل", "زرار واتساب واتصال في كل صفحة", "تعدّل بنفسك من غير مبرمج"],
     },
     keywords: {
       en: ["website design Egypt", "web development company Egypt", "web application development", "landing page design"],
@@ -56,24 +52,19 @@ export const services: Service[] = [
   {
     slug: "mobile-app-development",
     icon: "Smartphone",
-    label: { en: "Mobile Apps", ar: "تطبيقات الجوال" },
-    title: { en: "iOS & Android mobile app development", ar: "تصميم وتطوير تطبيقات الجوال لأندرويد و iOS" },
+    label: { en: "Mobile apps", ar: "تطبيقات الموبايل" },
+    title: { en: "iPhone & Android app development", ar: "تصميم وبرمجة تطبيقات الموبايل" },
     summary: {
-      en: "Native-quality iOS and Android apps from a single codebase — designed, engineered and published to the stores.",
-      ar: "تطبيقات أندرويد و iOS بجودة التطبيقات الأصلية من قاعدة كود واحدة — تصميمًا وتطويرًا ونشرًا على المتاجر.",
+      en: "An app with your name on it, on the App Store and Google Play — for orders, bookings or your own team.",
+      ar: "تطبيق باسمك على App Store و Google Play — للطلبات أو الحجوزات أو لفريق شغلك.",
     },
     body: {
-      en: "We design and build cross-platform apps with Flutter and React Native: customer apps, delivery and booking apps, internal staff tools and companion apps for your systems. Every engagement covers UX design, API and admin panel, push notifications, payments, analytics and App Store / Google Play publishing.",
-      ar: "نطوّر تطبيقات متعددة المنصات باستخدام Flutter و React Native: تطبيقات العملاء، وتطبيقات التوصيل والحجز، وأدوات الموظفين الداخلية، والتطبيقات المرتبطة بأنظمتك. ويشمل كل مشروع تصميم تجربة المستخدم، وواجهة API ولوحة تحكم، والإشعارات، والدفع الإلكتروني، والتحليلات، والنشر على App Store و Google Play.",
+      en: "Your customers order, book and pay from their phone, and you see everything in one dashboard. We design it, build it once for both iPhone and Android, publish it to the stores under your name, and keep it updated.",
+      ar: "عميلك يطلب ويحجز ويدفع من موبايله، وأنت تشوف كل حاجة في لوحة واحدة. بنصمّمه ونبنيه مرة واحدة يشتغل على الآيفون والأندرويد، وننزّله على المتاجر باسمك، ونفضل نحدّثه.",
     },
     features: {
-      en: ["Flutter / React Native", "UI/UX design & interactive prototype", "Payments & push notifications", "Admin panel & API", "Store publishing & updates"],
-      ar: ["Flutter / React Native", "تصميم واجهات ونموذج تفاعلي", "دفع إلكتروني وإشعارات فورية", "لوحة تحكم وواجهة API", "النشر على المتاجر والتحديثات"],
-    },
-    seoTitle: { en: "Mobile App Development in Egypt — iOS & Android", ar: "تصميم وبرمجة تطبيقات الجوال في مصر" },
-    seoDescription: {
-      en: "Mobile app development company in Egypt. iOS and Android apps with Flutter & React Native — design, backend, admin panel and store launch.",
-      ar: "شركة برمجة تطبيقات جوال في مصر. تصميم وتطوير تطبيقات أندرويد و iOS باستخدام Flutter و React Native مع لوحة تحكم ونشر على المتاجر.",
+      en: ["One app for iPhone and Android", "Orders, bookings and payments", "Notifications to your customers", "A dashboard for you and your team", "Published on the stores in your name"],
+      ar: ["تطبيق واحد للآيفون والأندرويد", "طلبات وحجوزات ودفع", "إشعارات توصل لعملائك", "لوحة تحكم ليك ولفريقك", "منشور على المتاجر باسمك"],
     },
     keywords: {
       en: ["mobile app development Egypt", "app development company Cairo", "iOS app development", "Android app development", "Flutter developers Egypt"],
@@ -83,24 +74,19 @@ export const services: Service[] = [
   {
     slug: "custom-software",
     icon: "LayoutDashboard",
-    label: { en: "Custom Software & ERP", ar: "الأنظمة والبرامج المخصصة" },
-    title: { en: "Custom software, ERP & business management systems", ar: "تطوير الأنظمة المخصصة وبرامج ERP وإدارة الأعمال" },
+    label: { en: "Custom systems", ar: "أنظمة مفصّلة على شغلك" },
+    title: { en: "Custom business systems", ar: "برمجة أنظمة إدارة حسب الطلب" },
     summary: {
-      en: "Systems designed around how your business actually operates — sales, inventory, accounting, HR and reporting in one place.",
-      ar: "أنظمة مصممة وفق آلية عمل شركتك الفعلية — المبيعات والمخازن والحسابات والموارد البشرية والتقارير في منصة واحدة.",
+      en: "One program for sales, stock, money and staff — built around the way your business already works.",
+      ar: "برنامج واحد للمبيعات والمخزن والفلوس والموظفين — متفصّل على طريقة شغلك أنت.",
     },
     body: {
-      en: "Off-the-shelf software forces you to change your workflow. We build ERP, CRM and management systems that fit it: multi-branch inventory, invoicing, e-invoice-ready accounting, HR and payroll, role-based permissions and live dashboards — cloud or on-premise, online or offline.",
-      ar: "تفرض البرامج الجاهزة عليك تغيير إجراءات عملك؛ أما نحن فنبني أنظمة ERP و CRM وإدارة أعمال تناسبها: مخازن متعددة الفروع، وفوترة، وحسابات متوافقة مع منظومة الفاتورة الإلكترونية، وموارد بشرية ورواتب، وصلاحيات حسب الدور، ولوحات متابعة لحظية — سحابيًا أو على خوادمك، متصلًا أو دون اتصال.",
+      en: "Ready-made programs make you change how you work. We do the opposite: we sit with you, learn your daily routine, and build a system that follows it — with clear permissions for each employee and live numbers you can check from your phone.",
+      ar: "البرامج الجاهزة بتخليك تغيّر طريقة شغلك. إحنا بنعمل العكس: نقعد معاك، نفهم يومك ماشي إزاي، ونبني نظام ماشي على نفس الطريقة — بصلاحيات واضحة لكل موظف، وأرقام لحظية تشوفها من موبايلك.",
     },
     features: {
-      en: ["ERP / CRM tailored to your workflow", "Multi-branch inventory", "E-invoice (ETA) ready accounting", "Roles, permissions & audit log", "Cloud or on-premise"],
-      ar: ["ERP / CRM مصمم وفق إجراءاتك", "مخازن متعددة الفروع", "حسابات متوافقة مع الفاتورة الإلكترونية", "صلاحيات وسجل كامل للعمليات", "سحابي أو على خوادمك"],
-    },
-    seoTitle: { en: "Custom Software & ERP Development in Egypt", ar: "برمجة الأنظمة المخصصة وبرامج ERP في مصر" },
-    seoDescription: {
-      en: "Custom software development in Egypt: ERP, CRM, inventory, accounting and management systems built around your workflow. Cloud or on-premise.",
-      ar: "تطوير أنظمة وبرامج إدارة مخصصة في مصر: ERP و CRM ومخازن وحسابات ومبيعات مصممة وفق إجراءات عملك، سحابيًا أو على خوادمك.",
+      en: ["Sales, stock, money and staff in one place", "Every branch on one screen", "Each employee sees only what they need", "Ready for the Tax Authority e-invoice", "On the internet or on your own computer"],
+      ar: ["المبيعات والمخزن والفلوس والموظفين في مكان واحد", "كل الفروع على شاشة واحدة", "كل موظف يشوف اللي يخصه بس", "جاهز للفاتورة الإلكترونية", "على النت أو على جهازك عندك"],
     },
     keywords: {
       en: ["custom software development Egypt", "ERP development Egypt", "business management system", "CRM development"],
@@ -110,24 +96,19 @@ export const services: Service[] = [
   {
     slug: "ai-chatbots",
     icon: "BrainCircuit",
-    label: { en: "AI Solutions", ar: "حلول الذكاء الاصطناعي" },
-    title: { en: "AI solutions, chatbots & WhatsApp bots", ar: "حلول الذكاء الاصطناعي وروبوتات المحادثة وواتساب" },
+    label: { en: "AI assistants", ar: "مساعد ذكي وردود آلية" },
+    title: { en: "AI assistants & WhatsApp chatbots", ar: "شات بوت وردود آلية على واتساب بالذكاء الاصطناعي" },
     summary: {
-      en: "Practical AI that answers customers, reads documents and drafts work — connected securely to your own data.",
-      ar: "ذكاء اصطناعي عملي يرد على العملاء، ويقرأ المستندات، ويُنجز المهام — متصلًا ببياناتك بشكل آمن.",
+      en: "A smart assistant that answers your customers on WhatsApp day and night — and passes them to you when it should.",
+      ar: "مساعد ذكي بيرد على عملائك على واتساب ليل ونهار — ويحوّلهم ليك لما يكون لازم.",
     },
     body: {
-      en: "We integrate large language models into real workflows: Arabic-speaking customer-service assistants on WhatsApp and your website, assistants that search your internal documents, invoice and ID data extraction, and intelligent reporting. Our focus is measurable time saved, data privacy and controlled running costs.",
-      ar: "ندمج النماذج اللغوية الكبيرة في سير العمل الفعلي: مساعدون يتحدثون العربية لخدمة العملاء عبر واتساب وموقعك، ومساعدون يبحثون في مستنداتك الداخلية، واستخراج البيانات من الفواتير والهويات، وتقارير ذكية. ونركّز على توفير وقت يمكن قياسه، وحماية خصوصية بياناتك، وضبط تكاليف التشغيل.",
+      en: "Most messages are the same few questions: prices, opening hours, availability, bookings. Your assistant answers them instantly in Egyptian Arabic or English, only from information you approve, and hands the chat to a real person whenever it isn’t sure.",
+      ar: "أغلب الرسائل هي نفس الأسئلة: السعر كام، مواعيدكم إيه، الحاجة متاحة، عايز أحجز. المساعد بيرد عليها فورًا بالمصري أو بالإنجليزي، ومن المعلومات اللي أنت موافق عليها بس، ولو مش متأكد بيحوّل المحادثة لحد من فريقك.",
     },
     features: {
-      en: ["Arabic customer-service chatbots", "WhatsApp Business bots", "Document Q&A on your data", "OCR & data extraction", "AI features inside your app"],
-      ar: ["روبوتات محادثة عربية لخدمة العملاء", "روبوتات واتساب للأعمال", "مساعد يجيب من مستنداتك", "استخراج البيانات من الصور والفواتير", "خصائص ذكاء اصطناعي داخل تطبيقك"],
-    },
-    seoTitle: { en: "AI Solutions, Chatbots & WhatsApp Bots in Egypt", ar: "حلول الذكاء الاصطناعي وروبوتات المحادثة في مصر" },
-    seoDescription: {
-      en: "AI development in Egypt: Arabic chatbots, WhatsApp bots, document assistants and data extraction integrated with your systems.",
-      ar: "حلول ذكاء اصطناعي في مصر: روبوتات محادثة عربية، وروبوتات واتساب لخدمة العملاء، ومساعدون أذكياء لمستنداتك، واستخراج البيانات — متكاملة مع أنظمتك.",
+      en: ["Replies on WhatsApp and your website", "Understands Egyptian Arabic", "Takes bookings and orders", "Hands over to a person when needed", "Reads invoices and IDs into your system"],
+      ar: ["يرد على واتساب وعلى موقعك", "فاهم اللهجة المصرية", "ياخد حجوزات وطلبات", "يحوّل لموظف وقت اللزوم", "يقرأ الفواتير والبطاقات ويدخّلها على نظامك"],
     },
     keywords: {
       en: ["AI solutions Egypt", "chatbot development Egypt", "WhatsApp bot", "AI integration"],
@@ -137,24 +118,19 @@ export const services: Service[] = [
   {
     slug: "business-automation",
     icon: "Workflow",
-    label: { en: "Automation", ar: "أتمتة الأعمال" },
-    title: { en: "Business process automation & integrations", ar: "أتمتة العمليات وتكامل الأنظمة" },
+    label: { en: "Automation", ar: "أتمتة الشغل المتكرر" },
+    title: { en: "Automating repetitive work", ar: "أتمتة العمليات وربط البرامج ببعض" },
     summary: {
-      en: "Eliminate copy-paste between spreadsheets and apps. We connect your tools and automate the repetitive work.",
-      ar: "تخلّص من النقل اليدوي للبيانات بين الجداول والبرامج؛ نربط أدواتك ونؤتمت المهام المتكررة.",
+      en: "Stop copying the same order into three places. Your tools talk to each other and the routine work does itself.",
+      ar: "كفاية تنقل نفس الطلب في تلات أماكن. برامجك تكلّم بعض، والشغل المتكرر يخلص لوحده.",
     },
     body: {
-      en: "We map your manual processes and replace them with reliable automations: order and invoice flows, CRM and accounting sync, automated WhatsApp and email notifications, scheduled reports, and integrations with payment gateways, couriers and e-invoicing.",
-      ar: "نحلّل إجراءاتك اليدوية ونستبدلها بأتمتة موثوقة: دورة الطلبات والفواتير، ومزامنة نظام العملاء مع الحسابات، وإشعارات واتساب والبريد الإلكتروني التلقائية، والتقارير المجدولة، والتكامل مع بوابات الدفع وشركات الشحن والفاتورة الإلكترونية.",
+      en: "We watch how an order, an invoice or a report moves through your business today, then connect the steps so it flows by itself: the order lands, the invoice is made, the customer gets a WhatsApp update and you get a summary every morning.",
+      ar: "بنشوف الطلب أو الفاتورة أو التقرير بيمشي إزاي عندك النهارده، وبعدين نربط الخطوات ببعض فتمشي لوحدها: الطلب يوصل، الفاتورة تطلع، العميل يجيله تحديث على واتساب، وأنت يوصلك ملخص كل صباح.",
     },
     features: {
-      en: ["Workflow automation (n8n & custom)", "API integrations", "Automated WhatsApp & email", "Scheduled reporting", "Payment & courier integrations"],
-      ar: ["أتمتة سير العمل", "تكامل الأنظمة عبر API", "رسائل واتساب وبريد تلقائية", "تقارير مجدولة", "تكامل بوابات الدفع والشحن"],
-    },
-    seoTitle: { en: "Business Process Automation & Integrations in Egypt", ar: "أتمتة العمليات وتكامل الأنظمة في مصر" },
-    seoDescription: {
-      en: "Automate repetitive work: workflow automation, API integrations, automated WhatsApp/email and reports for businesses in Egypt.",
-      ar: "أتمتة الأعمال في مصر: تكامل الأنظمة، ورسائل واتساب وبريد تلقائية، وتقارير مجدولة لتقليل العمل اليدوي والأخطاء.",
+      en: ["Orders flow from WhatsApp to invoice", "Automatic WhatsApp and email updates", "A daily report every morning", "Your current programs, connected", "Alerts if anything goes wrong"],
+      ar: ["الطلب يمشي من واتساب للفاتورة لوحده", "تحديثات واتساب وإيميل تلقائية", "تقرير يومي كل صباح", "برامجك الحالية متوصلة ببعض", "تنبيه لو حاجة وقفت"],
     },
     keywords: {
       en: ["business process automation Egypt", "workflow automation", "API integration services"],
@@ -164,24 +140,19 @@ export const services: Service[] = [
   {
     slug: "ecommerce-development",
     icon: "ShoppingCart",
-    label: { en: "E-commerce & POS", ar: "المتاجر ونقاط البيع" },
-    title: { en: "E-commerce stores & POS (cashier) systems", ar: "المتاجر الإلكترونية وأنظمة نقاط البيع (الكاشير)" },
+    label: { en: "Online stores", ar: "المتاجر الأونلاين" },
+    title: { en: "Online stores & shop cashier systems", ar: "تصميم متجر إلكتروني ونظام كاشير" },
     summary: {
-      en: "Sell online and in-store from one stock — online store, POS and inventory always in sync.",
-      ar: "بِع عبر الإنترنت وفي فروعك من مخزون واحد — متجر إلكتروني ونقطة بيع ومخازن متزامنة دائمًا.",
+      en: "Sell online and in your shop from the same stock — the website, the cashier and every branch always agree.",
+      ar: "بيع أونلاين وفي المحل من نفس المخزون — الموقع والكاشير وكل الفروع دايمًا متفقين.",
     },
     body: {
-      en: "Online stores with local payment gateways and shipping, plus POS systems for retail, restaurants and cafés that keep working when the connection drops. Stock, pricing and reports stay in sync across every branch and channel.",
-      ar: "متاجر إلكترونية متكاملة مع بوابات الدفع وشركات الشحن المحلية، وأنظمة نقاط بيع للمحلات والمطاعم والمقاهي تستمر في العمل حتى عند انقطاع الإنترنت. ويبقى المخزون والأسعار والتقارير متزامنة بين جميع الفروع والقنوات.",
+      en: "Customers pay the way they like — card, wallet, instalments or cash on delivery — and shipping is booked for you. In the shop, the cashier keeps selling even when the internet drops, and every sale updates the same stock.",
+      ar: "العميل يدفع بالطريقة اللي تريحه — فيزا أو محفظة أو تقسيط أو كاش عند الاستلام — والشحن بيتحجز لوحده. وفي المحل، الكاشير بيكمّل بيع حتى لو النت فصل، وكل بيعة بتتخصم من نفس المخزون.",
     },
     features: {
-      en: ["Online store with local payments", "Offline-capable POS", "Barcode & receipt printers", "Multi-branch stock sync", "Sales & profit reporting"],
-      ar: ["متجر إلكتروني بوسائل دفع محلية", "نقطة بيع تعمل دون إنترنت", "قارئ باركود وطابعة فواتير", "مزامنة المخزون بين الفروع", "تقارير المبيعات والأرباح"],
-    },
-    seoTitle: { en: "E-commerce Development & POS Systems in Egypt", ar: "تصميم متجر إلكتروني ونظام كاشير في مصر" },
-    seoDescription: {
-      en: "E-commerce store development and POS systems in Egypt — local payment gateways, offline cashier, inventory and multi-branch reporting.",
-      ar: "تصميم متاجر إلكترونية وأنظمة نقاط بيع (كاشير) في مصر — دفع محلي، وكاشير يعمل دون إنترنت، ومخازن وتقارير لجميع الفروع.",
+      en: ["A store that’s easy to buy from", "Card, wallets, instalments, cash on delivery", "Shipping booked automatically", "A shop cashier that works offline", "One stock for the store and every branch"],
+      ar: ["متجر سهل الشراء منه", "فيزا ومحافظ وتقسيط وكاش عند الاستلام", "حجز الشحن تلقائي", "كاشير للمحل يشتغل من غير نت", "مخزون واحد للمتجر وكل الفروع"],
     },
     keywords: {
       en: ["ecommerce development Egypt", "POS system Egypt", "cashier system"],
@@ -194,107 +165,66 @@ export function getService(slug: string) {
   return services.find((s) => s.slug === slug);
 }
 
-/** Ready-made systems we build/deploy (seed for the upcoming systems catalog). */
-export const systems: { icon: string; name: T; hint: T }[] = [
-  { icon: "ScanBarcode", name: { en: "POS & cashier", ar: "نقاط البيع والكاشير" }, hint: { en: "Retail, cafés, restaurants", ar: "المحلات والمقاهي والمطاعم" } },
-  { icon: "Boxes", name: { en: "Inventory & warehouses", ar: "المخازن والمستودعات" }, hint: { en: "Multi-branch stock, transfers", ar: "مخزون الفروع والتحويلات" } },
-  { icon: "Stethoscope", name: { en: "Clinic management", ar: "إدارة العيادات" }, hint: { en: "Bookings, records, billing", ar: "الحجوزات وملفات المرضى والفواتير" } },
-  { icon: "Pill", name: { en: "Pharmacy system", ar: "نظام الصيدليات" }, hint: { en: "Expiry alerts, stock, sales", ar: "تنبيهات الصلاحية والمخزون والمبيعات" } },
-  { icon: "Dumbbell", name: { en: "Gym management", ar: "إدارة الصالات الرياضية" }, hint: { en: "Memberships, attendance", ar: "الاشتراكات والحضور" } },
-  { icon: "UtensilsCrossed", name: { en: "Restaurant system", ar: "نظام المطاعم" }, hint: { en: "Orders, kitchen, delivery", ar: "الطلبات والمطبخ والتوصيل" } },
-  { icon: "GraduationCap", name: { en: "Schools & academies", ar: "المدارس والأكاديميات" }, hint: { en: "Students, fees, schedules", ar: "الطلاب والرسوم والجداول" } },
-  { icon: "Calculator", name: { en: "Accounting & HR", ar: "الحسابات والموارد البشرية" }, hint: { en: "Invoices, payroll, reports", ar: "الفواتير والرواتب والتقارير" } },
-];
-
-/** How clients can engage (pricing is shared on request until the pricing module ships). */
-export const engagement: { icon: string; title: T; text: T }[] = [
-  {
-    icon: "PlayCircle",
-    title: { en: "Live demo", ar: "عرض تجريبي" },
-    text: { en: "See the system running with your scenarios before you decide.", ar: "شاهد النظام يعمل على سيناريوهات عملك قبل اتخاذ القرار." },
-  },
-  {
-    icon: "CalendarClock",
-    title: { en: "Monthly subscription", ar: "اشتراك شهري" },
-    text: { en: "Fully hosted, with updates and support included.", ar: "استضافة كاملة مع التحديثات والدعم الفني." },
-  },
-  {
-    icon: "KeyRound",
-    title: { en: "Perpetual licence", ar: "ترخيص دائم" },
-    text: { en: "One-time licence installed on your own devices or servers.", ar: "ترخيص لمرة واحدة يُثبَّت على أجهزتك أو خوادمك." },
-  },
-  {
-    icon: "PencilRuler",
-    title: { en: "Custom build", ar: "تطوير مخصص" },
-    text: { en: "Scoped to your workflow, with a fixed proposal in 48 hours.", ar: "مصمم وفق إجراءاتك، مع عرض محدد النطاق والتكلفة خلال 48 ساعة." },
-  },
-];
-
 export const process: { title: T; text: T }[] = [
   {
-    title: { en: "Discovery", ar: "التحليل والاستكشاف" },
-    text: { en: "A free 30-minute session to understand your operations, goals and constraints.", ar: "جلسة مجانية لمدة 30 دقيقة لفهم طبيعة عملك وأهدافك ومتطلباتك." },
+    title: { en: "A free chat", ar: "مكالمة مجانية" },
+    text: { en: "30 minutes to understand your business, your goals and what’s getting in the way.", ar: "30 دقيقة نفهم فيها شغلك وهدفك وإيه اللي معطّلك." },
   },
   {
-    title: { en: "Proposal", ar: "العرض الفني والمالي" },
-    text: { en: "A clear scope, timeline and fixed price within 48 hours.", ar: "نطاق عمل وجدول زمني وتكلفة محددة خلال 48 ساعة." },
+    title: { en: "A clear offer", ar: "عرض واضح" },
+    text: { en: "What we’ll build, how long it takes and the exact price — in writing, within 48 hours.", ar: "هنبني إيه، وفي قد إيه، وبكام بالظبط — مكتوب، خلال 48 ساعة." },
   },
   {
-    title: { en: "Iterative delivery", ar: "التطوير على مراحل" },
-    text: { en: "Weekly demos so you see progress and can steer early.", ar: "عرض أسبوعي لما تم إنجازه لتتابع التقدم وتوجّه العمل مبكرًا." },
+    title: { en: "Built step by step", ar: "بناء خطوة بخطوة" },
+    text: { en: "Every week you see and try what’s ready, and tell us what to change.", ar: "كل أسبوع تشوف وتجرّب اللي خلص، وتقول لنا نعدّل إيه." },
   },
   {
-    title: { en: "Launch & support", ar: "الإطلاق والدعم" },
-    text: { en: "Deployment, team training, documentation and a dedicated support period.", ar: "النشر وتدريب فريقك والتوثيق، مع فترة دعم فني مخصصة." },
+    title: { en: "Launch & support", ar: "التشغيل والدعم" },
+    text: { en: "We launch it, train your team and stay with you after.", ar: "بنشغّله، وندرّب فريقك، ونفضل معاك بعدها." },
   },
 ];
 
 export const faqs: { q: T; a: T }[] = [
   {
-    q: { en: "How much does a website or app cost in Egypt?", ar: "كم تبلغ تكلفة تصميم موقع أو تطبيق في مصر؟" },
+    q: { en: "How much will it cost?", ar: "التكلفة هتبقى كام؟" },
     a: {
-      en: "Cost depends on scope: the number of pages or screens, integrations, admin features and languages. After a free discovery session we send a fixed, itemised proposal within 48 hours.",
-      ar: "تعتمد التكلفة على نطاق المشروع: عدد الصفحات أو الشاشات، والتكامل مع الأنظمة الأخرى، ولوحة التحكم، واللغات المطلوبة. وبعد جلسة استكشاف مجانية نرسل لك عرضًا مفصّلًا بتكلفة ثابتة خلال 48 ساعة.",
+      en: "It depends on what you need — how many pages or screens, and what it should connect to. After a free chat we send a written offer with one fixed price within 48 hours. No surprises later.",
+      ar: "بتعتمد على اللي محتاجه — عدد الصفحات أو الشاشات، وهيتربط بإيه. بعد مكالمة مجانية بنبعت لك عرض مكتوب بسعر ثابت خلال 48 ساعة. من غير مفاجآت بعد كده.",
     },
   },
   {
-    q: { en: "How long does a project take?", ar: "ما المدة المتوقعة لتنفيذ المشروع؟" },
+    q: { en: "How long does it take?", ar: "بياخد وقت قد إيه؟" },
     a: {
-      en: "A corporate website typically takes 2–4 weeks, a mobile app or custom system 6–12 weeks, and larger ERP projects are delivered in phases.",
-      ar: "يستغرق موقع الشركة عادةً من أسبوعين إلى أربعة أسابيع، وتطبيق الجوال أو النظام المخصص من 6 إلى 12 أسبوعًا، بينما تُسلَّم مشاريع ERP الكبيرة على مراحل.",
+      en: "A company website usually takes 2–4 weeks. An app or a custom system takes 6–12 weeks, and bigger systems are delivered in parts so you start using them early.",
+      ar: "موقع الشركة غالبًا من أسبوعين لأربعة. التطبيق أو النظام المخصوص من 6 لـ 12 أسبوع، والأنظمة الكبيرة بنسلّمها على أجزاء عشان تبدأ تستخدمها بدري.",
     },
   },
   {
-    q: { en: "Can I try a system before buying?", ar: "هل يمكنني تجربة النظام قبل الشراء؟" },
+    q: { en: "Can I try a system before I pay?", ar: "ينفع أجرّب النظام قبل ما أدفع؟" },
     a: {
-      en: "Yes. Our ready-made systems come with a live demo, and you can choose a monthly subscription or a perpetual licence.",
-      ar: "نعم. تتوفر لأنظمتنا الجاهزة عروض تجريبية حيّة، ويمكنك الاختيار بين الاشتراك الشهري أو الترخيص الدائم.",
+      en: "Yes. Every ready-made system has a free live demo on your own scenarios. Then you choose: rent it monthly or buy it once.",
+      ar: "أيوه. كل نظام جاهز ليه عرض تجريبي مجاني على شغلك أنت. وبعدها تختار: إيجار شهري أو شراء مرة واحدة.",
     },
   },
   {
-    q: { en: "Do I own the source code?", ar: "هل أمتلك الكود المصدري؟" },
+    q: { en: "Will it be mine?", ar: "هيبقى ملكي؟" },
     a: {
-      en: "For custom projects, yes — you receive the source code, documentation and every account. Ready-made systems are covered by their licence terms.",
-      ar: "في المشاريع المخصصة نعم؛ تستلم الكود المصدري والتوثيق وجميع الحسابات. أما الأنظمة الجاهزة فتخضع لشروط الترخيص الخاصة بها.",
+      en: "For anything we build for you, yes — you receive the full source, the accounts and the documentation in your name. Ready-made systems come with a licence to use them.",
+      ar: "أي حاجة بنبنيها مخصوص ليك، أيوه — بتستلم الكود كامل والحسابات والتوثيق باسمك. والأنظمة الجاهزة بتيجي بترخيص استخدام.",
     },
   },
   {
-    q: { en: "Can I pay in installments?", ar: "هل يمكن الدفع على دفعات؟" },
+    q: { en: "Can I pay in parts?", ar: "ينفع أدفع على دفعات؟" },
     a: {
-      en: "Yes. Custom projects are paid in milestones tied to delivery.",
-      ar: "نعم. تُسدَّد المشاريع المخصصة على دفعات مرتبطة بمراحل التسليم.",
+      en: "Yes. Projects are paid in parts, each one tied to something you receive.",
+      ar: "أيوه. المشاريع بتتدفع على دفعات، كل دفعة قصادها حاجة بتستلمها.",
     },
   },
   {
-    q: { en: "Do you work with clients outside Egypt?", ar: "هل تعملون مع عملاء خارج مصر؟" },
+    q: { en: "Do you work with clients outside Egypt?", ar: "بتشتغلوا مع عملاء برّه مصر؟" },
     a: {
-      en: "Yes. We work remotely with clients in the Gulf and worldwide, in Arabic and English, over WhatsApp, Zoom and email.",
-      ar: "نعم. نعمل عن بُعد مع عملاء في الخليج وحول العالم بالعربية والإنجليزية، عبر واتساب و Zoom والبريد الإلكتروني.",
+      en: "Yes. We work with clients in the Gulf and beyond, in Arabic and English, over WhatsApp, video calls and email.",
+      ar: "أيوه. بنشتغل مع عملاء في الخليج وبرّه، بالعربي والإنجليزي، على واتساب ومكالمات الفيديو والإيميل.",
     },
   },
-];
-
-export const stack = [
-  "Next.js", "React", "TypeScript", "Node.js", "Laravel", "Flutter", "React Native",
-  "PostgreSQL", "MySQL", "Tailwind CSS", "Docker", "OpenAI", "n8n", "AWS",
 ];

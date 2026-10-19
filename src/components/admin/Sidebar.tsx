@@ -26,7 +26,7 @@ const labels: Record<string, string> = {
   services: "Services",
   portfolio: "Portfolio",
   testimonials: "Testimonials",
-  messages: "Messages",
+  messages: "Requests · الطلبات",
   settings: "Settings",
 };
 

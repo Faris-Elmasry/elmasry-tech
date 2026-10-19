@@ -1,4 +1,7 @@
 @import "tailwindcss";
+/* Archived heroes/demos are kept in the repo but not used by the site — keep
+   their classes out of the shipped stylesheet. */
+@source not "../components/archive";
 
 /* ══════════════════════════════════════════════════════════════
    ELMASRY TECH — "SIGNAL" DESIGN SYSTEM
@@ -272,11 +275,79 @@ html.has-cursor summary { cursor: none; }
 
 /* Detail panel swap in the services showcase */
 @keyframes swap-in {
-  from { opacity: 0; transform: translateY(12px); filter: blur(4px); }
-  to { opacity: 1; transform: none; filter: none; }
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: none; }
 }
 .swap-in { animation: swap-in 0.6s var(--ease-out-expo) both; }
 
-/* Slow push-in for header photos */
-@keyframes photo-in { from { transform: scale(1.12); } to { transform: scale(1); } }
-.photo-in { animation: photo-in 2.4s var(--ease-out-expo) both; }
+
+/* Scroll cue used by the homepage hero. */
+@keyframes scrollcue { 0% { transform: translateY(-100%); } 100% { transform: translateY(200%); } }
+
+/* Small/medium headings: Syne in Latin, but the clean Arabic sans in RTL —
+   the decorative Kufi display face breaks down below ~2rem. */
+.title-sm { font-family: var(--font-display); }
+[dir="rtl"] .title-sm { font-family: var(--font-arabic-var), var(--font-sans); font-weight: 700; letter-spacing: 0 !important; line-height: 1.5; }
+
+/* Ember cursor core: white-hot centre, orange corona that flickers. */
+.ember-core > span {
+  position: absolute;
+  left: -6px;
+  top: -6px;
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: radial-gradient(circle, #fff7e6 0%, #ffd08a 30%, #ff7a2e 62%, #ff5b1f 100%);
+  transition: transform 0.3s var(--ease-out-expo);
+}
+/* Glow on its own layer; the flicker animates opacity only (compositor, no repaint). */
+.ember-core > i {
+  position: absolute;
+  left: -22px;
+  top: -22px;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(255, 120, 45, 0.55) 0%, rgba(255, 91, 31, 0.22) 40%, rgba(255, 91, 31, 0) 70%);
+  animation: ember-flicker 1.6s ease-in-out infinite;
+  will-change: opacity;
+}
+.ember-core.is-active > span { transform: scale(1.5); }
+@keyframes ember-flicker {
+  0%, 100% { opacity: 0.75; }
+  50% { opacity: 1; }
+}
+.cursor-bubble { border-color: rgba(255, 120, 50, 0.45); box-shadow: 0 0 24px -6px rgba(255, 91, 31, 0.5); }
+
+/* Lion hero frame: dissolve every edge of the photo into the near-black page
+   (no visible rectangle, no divider). The inner side — toward the copy — fades
+   furthest. Two gradients intersected: horizontal × vertical. */
+.lion-mask {
+  --lion-v: linear-gradient(to bottom, transparent 0, #000 9%, #000 82%, transparent 100%);
+  --lion-h: linear-gradient(to right, transparent 0, #000 10%, #000 90%, transparent 100%);
+  -webkit-mask-image: var(--lion-v), var(--lion-h);
+  -webkit-mask-composite: source-in;
+  mask-image: var(--lion-v), var(--lion-h);
+  mask-composite: intersect;
+}
+@media (min-width: 1024px) {
+  .lion-mask { --lion-h: linear-gradient(to right, transparent 0, #000 20%, #000 90%, transparent 100%); }
+  [dir="rtl"] .lion-mask { --lion-h: linear-gradient(to left, transparent 0, #000 20%, #000 90%, transparent 100%); }
+}
+
+
+/* ── Inner pages ("studio" kit) ──
+   Notebook paper for the "before" side of comparisons: cream page with a red
+   margin line (.paper) and blue rules that line up with 2.75rem text lines
+   (.paper-lines). */
+.paper {
+  background-color: #f1ead9;
+  background-image: linear-gradient(90deg, transparent 2.4rem, rgba(190, 70, 60, 0.4) 2.4rem, rgba(190, 70, 60, 0.4) calc(2.4rem + 1px), transparent calc(2.4rem + 1px));
+  font-family: var(--font-sans);
+}
+[dir="rtl"] .paper {
+  background-image: linear-gradient(270deg, transparent 2.4rem, rgba(190, 70, 60, 0.4) 2.4rem, rgba(190, 70, 60, 0.4) calc(2.4rem + 1px), transparent calc(2.4rem + 1px));
+}
+.paper-lines {
+  background-image: repeating-linear-gradient(to bottom, transparent 0, transparent calc(2.75rem - 1px), rgba(70, 110, 160, 0.3) calc(2.75rem - 1px), rgba(70, 110, 160, 0.3) 2.75rem);
+}

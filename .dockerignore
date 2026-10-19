@@ -1,0 +1,8 @@
+node_modules
+.next
+.git
+.env*
+!.env.example
+docs/screens
+*.log
+src/components/archive/**/*.mp4

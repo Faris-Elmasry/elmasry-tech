@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
-import { defaultLocale, locales, localeUrl, ogLocale, site, siteUrl, type Locale } from "@/lib/site";
+import { defaultLocale, hasRealPhone, locales, localeUrl, ogLocale, site, siteUrl, type Locale } from "@/lib/site";
+import { services } from "@/lib/content";
+import { readySystems } from "@/lib/systems";
 
 interface PageSeo {
   locale: Locale;
@@ -71,7 +73,7 @@ export function organizationJsonLd(locale: Locale) {
     logo: `${siteUrl}/icon.svg`,
     image: `${siteUrl}/${locale}/opengraph-image`,
     email: site.email,
-    telephone: site.whatsapp,
+    ...(hasRealPhone ? { telephone: site.whatsapp } : {}),
     foundingDate: String(site.foundingYear),
     description: isAr
       ? "شركة برمجة في مصر لتصميم وتطوير المواقع وتطبيقات الموبايل والبرامج والأنظمة المخصصة وحلول الذكاء الاصطناعي والأتمتة."
@@ -87,10 +89,25 @@ export function organizationJsonLd(locale: Locale) {
     ],
     knowsLanguage: ["ar", "en"],
     sameAs: Object.values(site.social),
+    // What we offer, each linked to its own page (helps Google map services → URLs).
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: isAr ? "خدمات وأنظمة Elmasry Tech" : "Elmasry Tech services and systems",
+      itemListElement: [
+        ...services.map((s) => ({
+          "@type": "Offer",
+          itemOffered: { "@type": "Service", name: s.label[locale], url: localeUrl(locale, `/services/${s.slug}`) },
+        })),
+        ...readySystems.map((s) => ({
+          "@type": "Offer",
+          itemOffered: { "@type": "SoftwareApplication", name: s.name[locale], applicationCategory: "BusinessApplication", url: localeUrl(locale, `/systems/${s.slug}`) },
+        })),
+      ],
+    },
     contactPoint: {
       "@type": "ContactPoint",
       contactType: "sales",
-      telephone: site.whatsapp,
+      ...(hasRealPhone ? { telephone: site.whatsapp } : {}),
       email: site.email,
       availableLanguage: ["Arabic", "English"],
       areaServed: "EG",

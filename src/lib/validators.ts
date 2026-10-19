@@ -12,22 +12,50 @@ export const contactServices = [
   "other",
 ] as const;
 
+export const requestKinds = ["contact", "quote", "demo"] as const;
+export const requestPlans = ["cloud", "local", "source"] as const;
+export const requestStatuses = ["new", "contacted", "negotiating", "won", "lost"] as const;
+
+/** Egyptian mobile (01x…, 201x…, +201x…) or any international number with +. Stored as +<digits>. */
+export function normalizePhone(raw: string): string | null {
+  const d = raw.replace(/[^\d+]/g, "").replace(/^00/, "+");
+  if (/^01[0125]\d{8}$/.test(d)) return `+2${d}`;
+  if (/^\+?201[0125]\d{8}$/.test(d)) return `+${d.replace(/^\+/, "")}`;
+  if (/^\+\d{8,15}$/.test(d)) return d;
+  return null;
+}
+
 export const contactSchema = z.object({
   name: z.string().trim().min(2, "Name too short").max(100),
-  email: z.string().trim().email("Invalid email"),
-  // Accept Egyptian and international numbers (digits, spaces, dashes, leading +).
+  // Phone is how we follow up (call / WhatsApp), so it is required; email is optional.
   phone: z
     .string()
     .trim()
-    .regex(/^\+?[0-9][0-9\s-]{6,19}$/, "Invalid phone number")
-    .optional()
-    .or(z.literal("")),
+    .refine((v) => normalizePhone(v) !== null, "Invalid phone number")
+    .transform((v) => normalizePhone(v) as string),
+  email: z.string().trim().email("Invalid email").optional().or(z.literal("")),
   company: z.string().trim().max(100).optional(),
   service: z.enum(contactServices),
-  message: z.string().trim().min(10, "Message too short").max(2000),
+  message: z.string().trim().max(2000).optional().default(""),
+  kind: z.enum(requestKinds).optional().default("contact"),
+  system: z
+    .string()
+    .regex(/^[a-z0-9-]{2,60}$/)
+    .optional(),
+  plan: z.enum(requestPlans).optional(),
+  page: z.string().max(200).optional(),
+  /** Honeypot: hidden from people; bots fill it, and the API then quietly drops the request. */
+  website: z.string().max(200).optional(),
 });
 
-export type ContactFormData = z.infer<typeof contactSchema>;
+export const requestUpdateSchema = z.object({
+  status: z.enum(requestStatuses).optional(),
+  notes: z.string().max(5000).optional(),
+  followUpAt: z.string().datetime().nullable().optional(),
+});
+
+export type ContactFormData = z.input<typeof contactSchema>;
+export type ContactRequest = z.output<typeof contactSchema>;
 
 // ─── Project Schema ───
 export const projectSchema = z.object({

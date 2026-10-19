@@ -1,5 +1,6 @@
 import prisma from "@/lib/prisma";
 import { successResponse, errorResponse, requireAdmin } from "@/lib/api";
+import { requestUpdateSchema } from "@/lib/validators";
 
 interface Params {
   params: Promise<{ id: string }>;
@@ -11,11 +12,13 @@ export async function PATCH(request: Request, { params }: Params) {
     if (authError) return authError;
 
     const { id } = await params;
-    const body = await request.json();
+    const parsed = requestUpdateSchema.safeParse(await request.json());
+    if (!parsed.success) return errorResponse(parsed.error.errors[0].message, 400);
+    const { followUpAt, ...rest } = parsed.data;
 
     const message = await prisma.contactMessage.update({
       where: { id: parseInt(id) },
-      data: { status: body.status },
+      data: { ...rest, ...(followUpAt !== undefined ? { followUpAt: followUpAt ? new Date(followUpAt) : null } : {}) },
     });
 
     return successResponse(message);

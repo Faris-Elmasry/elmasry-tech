@@ -4,6 +4,7 @@ import { LegalPage } from "@/components/sections/LegalPage";
 import { privacyPolicy } from "@/lib/legal";
 import { tr } from "@/lib/content";
 import { buildMetadata } from "@/lib/seo";
+import { seoFor } from "@/lib/seo-copy";
 import type { Locale } from "@/lib/site";
 
 export async function generateMetadata({ params }: PageProps<"/[locale]/privacy">): Promise<Metadata> {
@@ -11,8 +12,8 @@ export async function generateMetadata({ params }: PageProps<"/[locale]/privacy"
   return buildMetadata({
     locale,
     path: "/privacy",
-    title: tr(privacyPolicy.title, locale),
-    description: tr(privacyPolicy.intro, locale),
+    title: tr(seoFor("privacy").title, locale),
+    description: tr(seoFor("privacy").description, locale),
   });
 }
 

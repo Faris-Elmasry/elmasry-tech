@@ -77,16 +77,33 @@ model Testimonial {
   createdAt       DateTime @default(now())
 }
 
+/// Every request from the website: contact form, "request a quote" on a
+/// ready-made system, and later demo sign-ups. The admin "Requests" page works
+/// through these as a simple pipeline.
 model ContactMessage {
-  id        Int      @id @default(autoincrement())
-  name      String
-  email     String
-  phone     String?
-  company   String?
-  service   String
-  message   String   @db.Text
-  status    String   @default("new")
-  createdAt DateTime @default(now())
+  id         Int       @id @default(autoincrement())
+  name       String
+  email      String?
+  phone      String?
+  company    String?
+  service    String
+  message    String    @default("") @db.Text
+  /// contact | quote | demo
+  kind       String    @default("contact")
+  /// ready-made system slug (see src/lib/systems.ts)
+  system     String?
+  /// cloud | local | source
+  plan       String?
+  /// page the request was sent from
+  page       String?
+  /// new | contacted | negotiating | won | lost
+  status     String    @default("new")
+  notes      String    @default("") @db.Text
+  followUpAt DateTime?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @default(now()) @updatedAt
+
+  @@index([status, createdAt])
 }
 
 model SiteSettings {

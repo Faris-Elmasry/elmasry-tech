@@ -5,7 +5,8 @@ export const display = Syne({
   subsets: ["latin"],
   weight: ["700"],
   variable: "--font-display-var",
-  display: "swap",
+  // "optional": the hero H1 (LCP) paints at once and never re-paints on a late swap.
+  display: "optional",
 });
 
 // Latin body.
@@ -28,14 +29,14 @@ export const arabicDisplay = Reem_Kufi({
   subsets: ["arabic"],
   weight: ["700"],
   variable: "--font-arabic-display-var",
-  display: "swap",
+  display: "optional",
   // Preloaded: it renders the Arabic H1 (the LCP element on /ar).
 });
 
 // Arabic body — IBM Plex Sans Arabic: clean, professional, and ~4x lighter than Noto Kufi.
 export const arabic = IBM_Plex_Sans_Arabic({
   subsets: ["arabic"],
-  weight: ["400", "500"],
+  weight: ["400", "500", "700"],
   variable: "--font-arabic-var",
   display: "swap",
   preload: false,

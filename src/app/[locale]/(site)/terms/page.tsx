@@ -4,6 +4,7 @@ import { LegalPage } from "@/components/sections/LegalPage";
 import { termsOfService } from "@/lib/legal";
 import { tr } from "@/lib/content";
 import { buildMetadata } from "@/lib/seo";
+import { seoFor } from "@/lib/seo-copy";
 import type { Locale } from "@/lib/site";
 
 export async function generateMetadata({ params }: PageProps<"/[locale]/terms">): Promise<Metadata> {
@@ -11,8 +12,8 @@ export async function generateMetadata({ params }: PageProps<"/[locale]/terms">)
   return buildMetadata({
     locale,
     path: "/terms",
-    title: tr(termsOfService.title, locale),
-    description: tr(termsOfService.intro, locale),
+    title: tr(seoFor("terms").title, locale),
+    description: tr(seoFor("terms").description, locale),
   });
 }
 

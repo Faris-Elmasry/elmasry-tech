@@ -1,0 +1,139 @@
+{
+  "grocery": {
+    "file": "grocery.webp",
+    "source": "Pexels",
+    "url": "https://www.pexels.com/photo/store-with-fresh-fruits-16154014/",
+    "author": "Rossella Fasoli",
+    "authorUrl": "https://www.pexels.com/@rossella-fasoli-507860397/",
+    "licence": "Pexels License (free to use, no attribution required)",
+    "licenceUrl": "https://www.pexels.com/license/"
+  },
+  "warehouse": {
+    "file": "warehouse.webp",
+    "source": "Pexels",
+    "url": "https://www.pexels.com/photo/man-holding-digital-tablet-4484155/",
+    "author": "Tiger Lily",
+    "authorUrl": "https://www.pexels.com/@tiger-lily/",
+    "licence": "Pexels License (free to use, no attribution required)",
+    "licenceUrl": "https://www.pexels.com/license/"
+  },
+  "pharmacy": {
+    "file": "pharmacy.webp",
+    "source": "Pexels",
+    "url": "https://www.pexels.com/photo/professional-pharmacist-in-modern-drugstore-space-for-text-13119976/",
+    "author": "Abdul batin",
+    "authorUrl": "https://www.pexels.com/@abdul-batin-235375905/",
+    "licence": "Pexels License (free to use, no attribution required)",
+    "licenceUrl": "https://www.pexels.com/license/"
+  },
+  "gym": {
+    "file": "gym-v2.webp",
+    "source": "Pexels",
+    "url": "https://www.pexels.com/photo/man-working-out-in-the-gym-9152548/",
+    "author": "See the Pexels page",
+    "licence": "Pexels License (free to use, no attribution required)",
+    "licenceUrl": "https://www.pexels.com/license/"
+  },
+  "clinic": {
+    "file": "clinic-v2.webp",
+    "source": "Pexels",
+    "url": "https://www.pexels.com/photo/crop-man-doctor-showing-pills-in-clinic-4021801/",
+    "author": "See the Pexels page",
+    "licence": "Pexels License (free to use, no attribution required)",
+    "licenceUrl": "https://www.pexels.com/license/"
+  },
+  "restaurant": {
+    "file": "restaurant.webp",
+    "source": "Pexels",
+    "url": "https://www.pexels.com/photo/worker-using-a-touchscreen-monitor-12935044/",
+    "author": "iMin Technology",
+    "authorUrl": "https://www.pexels.com/@imin-technology-276315592/",
+    "licence": "Pexels License (free to use, no attribution required)",
+    "licenceUrl": "https://www.pexels.com/license/"
+  },
+  "classroom": {
+    "file": "classroom-v2.webp",
+    "source": "Pexels",
+    "url": "https://www.pexels.com/photo/photo-of-man-teaching-on-white-board-6325988/",
+    "author": "See the Pexels page",
+    "licence": "Pexels License (free to use, no attribution required)",
+    "licenceUrl": "https://www.pexels.com/license/"
+  },
+  "receipts": {
+    "file": "receipts-v2.webp",
+    "source": "Pexels",
+    "url": "https://www.pexels.com/photo/an-accountant-s-workspace-6694492/",
+    "author": "Tima Miroshnichenko",
+    "authorUrl": "https://www.pexels.com/@tima-miroshnichenko/",
+    "licence": "Pexels License (free to use, no attribution required)",
+    "licenceUrl": "https://www.pexels.com/license/"
+  },
+  "developer": {
+    "file": "developer.webp",
+    "source": "Pexels",
+    "url": "https://www.pexels.com/photo/developer-working-on-code-in-a-modern-office-36706460/",
+    "author": "Zayed Hossain",
+    "authorUrl": "https://www.pexels.com/@zayed-hossain-52728970/",
+    "licence": "Pexels License (free to use, no attribution required)",
+    "licenceUrl": "https://www.pexels.com/license/"
+  },
+  "team": {
+    "file": "team-v2.webp",
+    "source": "Pexels",
+    "url": "https://www.pexels.com/photo/people-having-a-meeting-8276128/",
+    "author": "PNW Production",
+    "authorUrl": "https://www.pexels.com/@pnw-prod/",
+    "licence": "Pexels License (free to use, no attribution required)",
+    "licenceUrl": "https://www.pexels.com/license/"
+  },
+  "cairo-street": {
+    "file": "cairo-street.webp",
+    "source": "Pexels",
+    "url": "https://www.pexels.com/photo/man-balancing-bread-on-bicycle-in-urban-street-34803505/",
+    "author": "Agung Pandit Wiguna",
+    "authorUrl": "https://www.pexels.com/@panditwiguna/",
+    "licence": "Pexels License (free to use, no attribution required)",
+    "licenceUrl": "https://www.pexels.com/license/"
+  },
+  "consultation": {
+    "file": "consultation-v2.webp",
+    "source": "Pexels",
+    "url": "https://www.pexels.com/photo/men-looking-at-a-laptop-8439682/",
+    "author": "See the Pexels page",
+    "licence": "Pexels License (free to use, no attribution required)",
+    "licenceUrl": "https://www.pexels.com/license/"
+  },
+  "shop-phone": {
+    "file": "shop-phone-v2.webp",
+    "source": "Pexels",
+    "url": "https://www.pexels.com/photo/man-looking-at-his-phone-while-carrying-a-shopping-basket-8476604/",
+    "author": "See the Pexels page",
+    "licence": "Pexels License (free to use, no attribution required)",
+    "licenceUrl": "https://www.pexels.com/license/"
+  },
+  "cafe-cashier": {
+    "file": "cafe-cashier-v2.webp",
+    "source": "Pexels",
+    "url": "https://www.pexels.com/photo/man-behind-the-counter-3738387/",
+    "author": "See the Pexels page",
+    "licence": "Pexels License (free to use, no attribution required)",
+    "licenceUrl": "https://www.pexels.com/license/"
+  },
+  "delivery": {
+    "file": "delivery.webp",
+    "source": "Pexels",
+    "url": "https://www.pexels.com/photo/man-riding-on-a-motorbike-20496224/",
+    "author": "UMUT 🆁🅰🆆",
+    "authorUrl": "https://www.pexels.com/@umudicreative/",
+    "licence": "Pexels License (free to use, no attribution required)",
+    "licenceUrl": "https://www.pexels.com/license/"
+  },
+  "boutique": {
+    "file": "boutique-v2.webp",
+    "source": "Pexels",
+    "url": "https://www.pexels.com/photo/bearded-man-sitting-looking-at-the-person-in-gray-plaid-suit-6050399/",
+    "author": "See the Pexels page",
+    "licence": "Pexels License (free to use, no attribution required)",
+    "licenceUrl": "https://www.pexels.com/license/"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "note": "Photos used in the /demos/world 3D tour. All from Pexels under the Pexels License (free to use, no attribution required). Credited here anyway.",
+  "license": { "name": "Pexels License", "url": "https://www.pexels.com/license/" },
+  "photos": [
+    { "file": "cafe-latte.webp", "subject": "Latte with heart art", "author": "Kevin Menajang", "source": "https://www.pexels.com/photo/shallow-focus-photography-of-cafe-late-982612/" },
+    { "file": "croissants.webp", "subject": "Fresh croissants in a bakery display", "author": "James Collington", "source": "https://www.pexels.com/photo/close-up-of-freshly-baked-croissants-in-bakery-display-30403209/" },
+    { "file": "customer-on-sofa.webp", "subject": "Woman smiling while using her phone on the sofa", "author": "Helena Lopes", "source": "https://www.pexels.com/photo/woman-smiling-while-using-phone-on-sofa-in-home-27176011/" },
+    { "file": "shop-owner.webp", "subject": "Smiling business owner holding an open sign", "author": "Vitaly Gariev", "source": "https://www.pexels.com/photo/smiling-business-owner-holding-open-sign-outdoors-36729529/" },
+    { "file": "customer-avatar.webp", "subject": "Portrait of a young man smiling", "author": "Jonathan Borba", "source": "https://www.pexels.com/photo/portrait-of-a-young-man-smiling-19456424/" }
+  ]
+}

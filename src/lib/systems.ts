@@ -1,6 +1,8 @@
 // Ready-made systems catalog (bilingual). Each entry powers /systems/[slug]
-// and the cards on /systems and /portfolio. The `screen` block feeds an
-// illustrative UI mock-up (sample data, clearly labelled as such on the page).
+// and the system cards across the site. Visible copy is plain language for
+// owners (no "POS", "ERP", "KPI" jargon); keywords keep the search terms.
+// The `screen` block feeds illustrative UI mock-ups (sample data, labelled as
+// such on the page). `before` is the paper/Excel life the system replaces.
 
 import type { Locale } from "@/lib/site";
 
@@ -31,6 +33,11 @@ export interface ReadySystem {
   modules: SystemModule[];
   highlights: Record<Locale, string[]>;
   integrations: Record<Locale, string[]>;
+  /** Handwritten-notebook lines: how the work is done before the system. */
+  before: Record<Locale, string[]>;
+  /** Photo under /public/images/site. */
+  photo: string;
+  photoAlt: T;
   screen: SystemScreen;
   keywords: Record<Locale, string[]>;
 }
@@ -39,33 +46,39 @@ export const readySystems: ReadySystem[] = [
   {
     slug: "pos-cashier",
     icon: "ScanBarcode",
-    name: { en: "POS & cashier", ar: "نقاط البيع والكاشير" },
-    hint: { en: "Retail, cafés, restaurants", ar: "المحلات والمقاهي والمطاعم" },
-    tagline: { en: "A fast cashier that keeps selling when the internet drops.", ar: "كاشير سريع يواصل البيع حتى عند انقطاع الإنترنت." },
+    name: { en: "Cashier & sales", ar: "الكاشير والمبيعات" },
+    hint: { en: "Shops, cafés, restaurants", ar: "المحلات والكافيهات والمطاعم" },
+    tagline: { en: "A fast cashier that keeps selling when the internet drops.", ar: "كاشير سريع، بيكمّل بيع حتى لو النت فصل." },
     summary: {
-      en: "Point-of-sale for shops, cafés and multi-branch retail: barcode scanning, receipts, shifts, returns and live sales reports — working offline and syncing automatically when the connection is back.",
-      ar: "نظام نقاط بيع للمحلات والمقاهي وسلاسل الفروع: قراءة الباركود، وطباعة الفواتير، وإدارة الورديات والمرتجعات، وتقارير مبيعات لحظية — يعمل دون إنترنت ويزامن البيانات تلقائيًا عند عودة الاتصال.",
+      en: "For shops, cafés and chains: scan, print the receipt, close the shift to the last pound — and see today’s sales from your phone. It keeps working offline and catches up by itself.",
+      ar: "للمحلات والكافيهات والسلاسل: امسح الباركود، اطبع الفاتورة، اقفل الوردية بالمليم — وشوف مبيعات النهارده من موبايلك. بيشتغل من غير نت ويحدّث نفسه أول ما يرجع.",
     },
     audience: {
-      en: ["Retail shops & supermarkets", "Cafés & restaurants", "Mobile & electronics stores", "Multi-branch chains"],
-      ar: ["المحلات والسوبر ماركت", "المقاهي والمطاعم", "محلات الموبايل والإلكترونيات", "السلاسل متعددة الفروع"],
+      en: ["Shops & supermarkets", "Cafés & restaurants", "Mobile & electronics stores", "Chains with branches"],
+      ar: ["المحلات والسوبر ماركت", "الكافيهات والمطاعم", "محلات الموبايل والإلكترونيات", "السلاسل اللي ليها فروع"],
     },
     modules: [
-      { title: { en: "Sales screen", ar: "شاشة البيع" }, text: { en: "Barcode, quick keys, discounts, split payments and held invoices.", ar: "باركود، وأزرار سريعة، وخصومات، ودفع مقسّم، وتعليق الفواتير." } },
-      { title: { en: "Shifts & cash drawer", ar: "الورديات والخزينة" }, text: { en: "Open/close shifts, cash counts and variance per cashier.", ar: "فتح وإغلاق الورديات، وجرد النقدية، وفروقات كل كاشير." } },
-      { title: { en: "Returns & exchanges", ar: "المرتجعات والاستبدال" }, text: { en: "Linked to the original invoice with stock restored automatically.", ar: "مرتبطة بالفاتورة الأصلية مع إعادة الكمية للمخزون تلقائيًا." } },
-      { title: { en: "Customers & loyalty", ar: "العملاء والولاء" }, text: { en: "Customer accounts, credit balances and loyalty points.", ar: "حسابات العملاء، والأرصدة الآجلة، ونقاط الولاء." } },
-      { title: { en: "Stock & purchasing", ar: "المخزون والمشتريات" }, text: { en: "Purchase invoices, suppliers, reorder alerts and stocktakes.", ar: "فواتير الشراء، والموردون، وتنبيهات إعادة الطلب، والجرد." } },
-      { title: { en: "Reports", ar: "التقارير" }, text: { en: "Sales by item, cashier, branch and hour; gross profit per day.", ar: "المبيعات حسب الصنف والكاشير والفرع والساعة، وإجمالي الربح اليومي." } },
+      { title: { en: "Selling screen", ar: "شاشة البيع" }, text: { en: "Barcode, quick buttons, discounts, paying half cash half card, and parked bills.", ar: "باركود، وزراير سريعة، وخصومات، ودفع نص كاش ونص فيزا، وتعليق الفاتورة." } },
+      { title: { en: "Shifts & cash drawer", ar: "الورديات والدرج" }, text: { en: "Open and close shifts, count the cash, and see any difference per cashier.", ar: "افتح واقفل الوردية، اعدّ الفلوس، وشوف أي فرق لكل كاشير." } },
+      { title: { en: "Returns & exchanges", ar: "المرتجع والاستبدال" }, text: { en: "Linked to the original receipt, and the item goes back to stock by itself.", ar: "مربوط بالفاتورة الأصلية، والصنف بيرجع المخزن لوحده." } },
+      { title: { en: "Customers & points", ar: "العملاء والنقاط" }, text: { en: "Customer accounts, money they owe, and loyalty points.", ar: "حسابات العملاء، والآجل، ونقاط الولاء." } },
+      { title: { en: "Stock & buying", ar: "المخزن والمشتريات" }, text: { en: "Supplier bills, an alert before items run out, and stock counts.", ar: "فواتير الموردين، وتنبيه قبل ما الصنف يخلص، والجرد." } },
+      { title: { en: "Reports", ar: "التقارير" }, text: { en: "Sales by item, cashier, branch and hour — and today’s profit.", ar: "المبيعات حسب الصنف والكاشير والفرع والساعة — ومكسب النهارده." } },
     ],
     highlights: {
-      en: ["Works offline, syncs when online", "Thermal receipt & barcode printers", "Role-based cashier permissions", "Multi-branch, one dashboard", "E-invoice / e-receipt ready", "Arabic & English receipts"],
-      ar: ["يعمل دون إنترنت ويزامن عند الاتصال", "طابعات فواتير حرارية وطابعات باركود", "صلاحيات مخصصة لكل كاشير", "فروع متعددة بلوحة متابعة واحدة", "جاهز للفاتورة والإيصال الإلكتروني", "فواتير بالعربية والإنجليزية"],
+      en: ["Works offline, catches up online", "Receipt and barcode printers", "Each cashier sees only their part", "All branches on one screen", "Ready for e-receipts", "Receipts in Arabic or English"],
+      ar: ["يشتغل من غير نت ويحدّث لما يرجع", "طابعات فواتير وباركود", "كل كاشير يشوف اللي يخصه", "كل الفروع على شاشة واحدة", "جاهز للإيصال الإلكتروني", "فواتير بالعربي أو الإنجليزي"],
     },
     integrations: {
-      en: ["Barcode scanners", "Thermal printers", "Cash drawers", "Card terminals", "Online store sync"],
-      ar: ["قارئات الباركود", "الطابعات الحرارية", "أدراج النقدية", "ماكينات الدفع بالبطاقة", "مزامنة المتجر الإلكتروني"],
+      en: ["Barcode scanners", "Receipt printers", "Cash drawers", "Card machines", "Your online store"],
+      ar: ["قارئ الباركود", "طابعة الفواتير", "درج الفلوس", "ماكينة الفيزا", "متجرك الأونلاين"],
     },
+    before: {
+      en: ["Sales written in a notebook", "Cash counted twice, still short", "“How much did we sell today?” — nobody knows"],
+      ar: ["المبيعات مكتوبة في كشكول", "الفلوس بتتعد مرتين وبرضه ناقصة", "«بعنا بكام النهارده؟» — محدش عارف"],
+    },
+    photo: "/images/site/grocery.webp",
+    photoAlt: { en: "A grocer arranging fruit in his shop", ar: "صاحب محل بيرتّب الفاكهة في محله" },
     screen: {
       nav: [{ en: "Sales", ar: "البيع" }, { en: "Shifts", ar: "الورديات" }, { en: "Stock", ar: "المخزون" }, { en: "Reports", ar: "التقارير" }],
       stats: [
@@ -88,33 +101,39 @@ export const readySystems: ReadySystem[] = [
   {
     slug: "inventory-warehouse",
     icon: "Boxes",
-    name: { en: "Inventory & warehouses", ar: "المخازن والمستودعات" },
-    hint: { en: "Multi-branch stock, transfers", ar: "مخزون الفروع والتحويلات" },
-    tagline: { en: "Know exactly what you have, where it is, and what it cost.", ar: "اعرف بدقة ما لديك، وأين هو، وكم كلّفك." },
+    name: { en: "Stock & warehouses", ar: "المخازن والمخزون" },
+    hint: { en: "Branch stock and transfers", ar: "مخزون الفروع والتحويلات" },
+    tagline: { en: "Know what you have, where it is, and what it cost you.", ar: "اعرف عندك إيه، وفين، وكلّفك كام." },
     summary: {
-      en: "Inventory control for distributors, wholesalers and multi-branch businesses: warehouses and locations, transfers, batches and expiry, average cost and stock valuation — with a full movement history for every item.",
-      ar: "إدارة مخزون للموزعين وتجار الجملة والشركات متعددة الفروع: المستودعات والمواقع، والتحويلات، والتشغيلات وتواريخ الصلاحية، ومتوسط التكلفة وتقييم المخزون — مع سجل حركة كامل لكل صنف.",
+      en: "For distributors, wholesalers and companies with branches: every item, every shelf and every move between branches — with expiry alerts and the real value of your stock, any time.",
+      ar: "للموزعين وتجار الجملة والشركات اللي ليها فروع: كل صنف، وكل رف، وكل حركة بين الفروع — مع تنبيهات الصلاحية وقيمة مخزونك الحقيقية في أي وقت.",
     },
     audience: {
-      en: ["Distributors & wholesalers", "Factories & workshops", "Import / export companies", "Multi-branch retailers"],
-      ar: ["الموزعون وتجار الجملة", "المصانع والورش", "شركات الاستيراد والتصدير", "متاجر التجزئة متعددة الفروع"],
+      en: ["Distributors & wholesalers", "Factories & workshops", "Importers", "Shops with branches"],
+      ar: ["الموزعين وتجار الجملة", "المصانع والورش", "المستوردين", "المحلات اللي ليها فروع"],
     },
     modules: [
-      { title: { en: "Items & units", ar: "الأصناف والوحدات" }, text: { en: "Variants, multiple units, barcodes and price lists.", ar: "الأصناف المتغيرة، والوحدات المتعددة، والباركود، وقوائم الأسعار." } },
-      { title: { en: "Warehouses & locations", ar: "المستودعات والمواقع" }, text: { en: "Unlimited warehouses with shelves and bins.", ar: "عدد غير محدود من المستودعات مع الأرفف والخانات." } },
-      { title: { en: "Transfers", ar: "التحويلات" }, text: { en: "Branch-to-branch transfers with approval and receipt.", ar: "تحويلات بين الفروع مع الاعتماد وإذن الاستلام." } },
-      { title: { en: "Batches & expiry", ar: "التشغيلات والصلاحية" }, text: { en: "FEFO picking and near-expiry alerts.", ar: "صرف الأقرب انتهاءً أولًا وتنبيهات قرب انتهاء الصلاحية." } },
-      { title: { en: "Stocktaking", ar: "الجرد" }, text: { en: "Full or cycle counts from a phone, with variance reports.", ar: "جرد كامل أو دوري من الهاتف مع تقارير الفروقات." } },
-      { title: { en: "Valuation", ar: "تقييم المخزون" }, text: { en: "Average cost, stock value and slow-moving items.", ar: "متوسط التكلفة، وقيمة المخزون، والأصناف الراكدة." } },
+      { title: { en: "Items & units", ar: "الأصناف والوحدات" }, text: { en: "Sizes and colours, carton or piece, barcodes and price lists.", ar: "المقاسات والألوان، بالكرتونة أو بالقطعة، والباركود وقوايم الأسعار." } },
+      { title: { en: "Warehouses & shelves", ar: "المخازن والأرفف" }, text: { en: "As many warehouses as you need, down to the shelf.", ar: "عدد مخازن زي ما تحب، لحد مستوى الرف." } },
+      { title: { en: "Transfers", ar: "التحويلات" }, text: { en: "Send stock between branches with approval and a receiving note.", ar: "ابعت بضاعة بين الفروع بموافقة وإذن استلام." } },
+      { title: { en: "Expiry dates", ar: "تواريخ الصلاحية" }, text: { en: "The nearest expiry goes out first, with alerts before it’s too late.", ar: "الأقرب في الصلاحية يخرج الأول، مع تنبيه قبل فوات الأوان." } },
+      { title: { en: "Stock counts", ar: "الجرد" }, text: { en: "Count from a phone camera and see the differences straight away.", ar: "اجرد بكاميرا الموبايل وشوف الفروقات على طول." } },
+      { title: { en: "Stock value", ar: "قيمة المخزون" }, text: { en: "What your stock is worth, and what’s been sitting too long.", ar: "مخزونك يسوى كام، وإيه اللي قاعد بقاله كتير." } },
     ],
     highlights: {
-      en: ["Item movement history (audit trail)", "Mobile stocktaking with camera barcode", "Reorder points per warehouse", "Purchase & sales integration", "Approvals for transfers & adjustments", "Excel import / export"],
-      ar: ["سجل حركة لكل صنف", "جرد من الهاتف بكاميرا الباركود", "حد إعادة طلب لكل مستودع", "تكامل مع المشتريات والمبيعات", "اعتمادات للتحويلات والتسويات", "استيراد وتصدير Excel"],
+      en: ["Full history of every item", "Count stock with your phone", "Reorder alert per warehouse", "Linked to sales and buying", "Approvals for transfers", "Import and export Excel"],
+      ar: ["تاريخ كامل لكل صنف", "جرد بالموبايل", "تنبيه إعادة طلب لكل مخزن", "مربوط بالبيع والشراء", "موافقات على التحويلات", "استيراد وتصدير إكسل"],
     },
     integrations: {
-      en: ["POS", "Accounting", "Online store", "Barcode printers"],
-      ar: ["نقاط البيع", "الحسابات", "المتجر الإلكتروني", "طابعات الباركود"],
+      en: ["Cashier", "Accounts", "Online store", "Barcode printers"],
+      ar: ["الكاشير", "الحسابات", "المتجر الأونلاين", "طابعات الباركود"],
     },
+    before: {
+      en: ["Stock lives in someone’s head", "Branch calls: “do we have it?”", "Expired boxes found too late"],
+      ar: ["المخزون عايش في دماغ حد", "الفرع يتصل: «عندنا منه؟»", "الكراتين المنتهية بتتلاقي متأخر"],
+    },
+    photo: "/images/site/warehouse.webp",
+    photoAlt: { en: "A warehouse worker checking stock on a tablet", ar: "موظف مخزن بيراجع المخزون على تابلت" },
     screen: {
       nav: [{ en: "Items", ar: "الأصناف" }, { en: "Warehouses", ar: "المستودعات" }, { en: "Transfers", ar: "التحويلات" }, { en: "Stocktake", ar: "الجرد" }],
       stats: [
@@ -137,33 +156,39 @@ export const readySystems: ReadySystem[] = [
   {
     slug: "clinic-management",
     icon: "Stethoscope",
-    name: { en: "Clinic management", ar: "إدارة العيادات" },
-    hint: { en: "Bookings, records, billing", ar: "الحجوزات وملفات المرضى والفواتير" },
-    tagline: { en: "Bookings, patient files and billing — without the paper.", ar: "الحجوزات وملفات المرضى والفواتير — دون أوراق." },
+    name: { en: "Clinic system", ar: "نظام العيادات" },
+    hint: { en: "Bookings, patient files, bills", ar: "الحجوزات وملفات المرضى والفواتير" },
+    tagline: { en: "Bookings, patient files and bills — without the paper.", ar: "الحجوزات وملفات المرضى والفواتير — من غير ورق." },
     summary: {
-      en: "For clinics, medical centres and dental practices: online and reception booking, WhatsApp reminders, electronic patient records, prescriptions, billing and insurance — with privacy and permissions built in.",
-      ar: "للعيادات والمراكز الطبية وعيادات الأسنان: حجز من الاستقبال أو أونلاين، وتذكير عبر واتساب، وملف طبي إلكتروني، وروشتات، وفواتير وتأمين — مع خصوصية وصلاحيات مدمجة.",
+      en: "For clinics, medical centres and dentists: bookings at reception or online, WhatsApp reminders so fewer patients forget, the patient’s full file, prescriptions and bills — private and protected.",
+      ar: "للعيادات والمراكز الطبية وعيادات الأسنان: الحجز من الاستقبال أو أونلاين، وتذكير على واتساب عشان المريض مينساش، وملف المريض كامل، والروشتة والفاتورة — بخصوصية وأمان.",
     },
     audience: {
-      en: ["Private clinics", "Multi-specialty medical centres", "Dental practices", "Physiotherapy & beauty clinics"],
-      ar: ["العيادات الخاصة", "المراكز الطبية متعددة التخصصات", "عيادات الأسنان", "مراكز العلاج الطبيعي والتجميل"],
+      en: ["Private clinics", "Medical centres", "Dental clinics", "Physiotherapy & beauty"],
+      ar: ["العيادات الخاصة", "المراكز الطبية", "عيادات الأسنان", "العلاج الطبيعي والتجميل"],
     },
     modules: [
-      { title: { en: "Appointments", ar: "المواعيد" }, text: { en: "Doctor calendars, walk-ins, queue and online booking page.", ar: "جداول الأطباء، والكشف الفوري، وقائمة الانتظار، وصفحة حجز أونلاين." } },
-      { title: { en: "Patient records", ar: "الملف الطبي" }, text: { en: "History, diagnoses, attachments and visit notes.", ar: "التاريخ المرضي، والتشخيصات، والمرفقات، وملاحظات الزيارة." } },
-      { title: { en: "Prescriptions", ar: "الروشتات" }, text: { en: "Printable prescriptions with templates per doctor.", ar: "روشتات قابلة للطباعة بقوالب لكل طبيب." } },
-      { title: { en: "Billing & insurance", ar: "الفواتير والتأمين" }, text: { en: "Services price list, packages, insurance claims and receipts.", ar: "قائمة أسعار الخدمات، والباقات، ومطالبات التأمين، والإيصالات." } },
-      { title: { en: "Reminders", ar: "التذكيرات" }, text: { en: "Automatic WhatsApp / SMS reminders to cut no-shows.", ar: "تذكير تلقائي عبر واتساب أو SMS لتقليل حالات عدم الحضور." } },
-      { title: { en: "Reports", ar: "التقارير" }, text: { en: "Revenue per doctor and service, visits and follow-ups.", ar: "الإيرادات لكل طبيب وخدمة، وعدد الزيارات والمتابعات." } },
+      { title: { en: "Appointments", ar: "المواعيد" }, text: { en: "Each doctor’s calendar, walk-ins, the waiting list and an online booking page.", ar: "جدول كل دكتور، والكشف الفوري، وقايمة الانتظار، وصفحة حجز أونلاين." } },
+      { title: { en: "Patient file", ar: "ملف المريض" }, text: { en: "History, diagnoses, attachments and notes from every visit.", ar: "التاريخ المرضي، والتشخيص، والمرفقات، وملاحظات كل زيارة." } },
+      { title: { en: "Prescriptions", ar: "الروشتات" }, text: { en: "Printed prescriptions with each doctor’s own template.", ar: "روشتات مطبوعة بقالب كل دكتور." } },
+      { title: { en: "Bills & insurance", ar: "الفواتير والتأمين" }, text: { en: "Service prices, packages, insurance claims and receipts.", ar: "أسعار الخدمات، والباقات، ومطالبات التأمين، والإيصالات." } },
+      { title: { en: "Reminders", ar: "التذكير" }, text: { en: "Automatic WhatsApp or SMS reminders, so fewer empty slots.", ar: "تذكير تلقائي على واتساب أو رسالة، فالمواعيد الفاضية تقل." } },
+      { title: { en: "Reports", ar: "التقارير" }, text: { en: "Income per doctor and service, visits and follow-ups.", ar: "الدخل لكل دكتور وخدمة، والزيارات والمتابعات." } },
     ],
     highlights: {
-      en: ["Role-based access to medical data", "Doctor & reception views", "Online booking page", "WhatsApp reminders", "Multi-branch & multi-doctor", "Daily automatic backups"],
-      ar: ["صلاحيات دقيقة للبيانات الطبية", "واجهات للطبيب والاستقبال", "صفحة حجز أونلاين", "تذكيرات عبر واتساب", "فروع وأطباء متعددون", "نسخ احتياطي يومي تلقائي"],
+      en: ["Medical files only for the right people", "Separate doctor and reception screens", "Online booking page", "WhatsApp reminders", "Many doctors and branches", "Automatic daily backup"],
+      ar: ["الملف الطبي للي ليه حق بس", "شاشة للدكتور وشاشة للاستقبال", "صفحة حجز أونلاين", "تذكير على واتساب", "دكاترة وفروع كتير", "نسخة احتياطية كل يوم لوحدها"],
     },
     integrations: {
-      en: ["WhatsApp Business", "SMS gateway", "Payment links", "Lab results upload"],
-      ar: ["واتساب للأعمال", "بوابة الرسائل النصية", "روابط الدفع", "رفع نتائج التحاليل"],
+      en: ["WhatsApp", "SMS", "Payment links", "Lab results upload"],
+      ar: ["واتساب", "الرسائل", "لينكات الدفع", "رفع نتايج التحاليل"],
     },
+    before: {
+      en: ["Bookings in a paper diary", "Patient files in a cabinet", "No-shows nobody reminded"],
+      ar: ["الحجوزات في أجندة ورق", "ملفات المرضى في دولاب", "مواعيد ضاعت عشان محدش فكّر المريض"],
+    },
+    photo: "/images/site/clinic-v2.webp",
+    photoAlt: { en: "A doctor holding a handful of medicine in a clinic", ar: "دكتور ماسك أدوية في إيده جوه العيادة" },
     screen: {
       nav: [{ en: "Calendar", ar: "المواعيد" }, { en: "Patients", ar: "المرضى" }, { en: "Billing", ar: "الفواتير" }, { en: "Reports", ar: "التقارير" }],
       stats: [
@@ -173,7 +198,7 @@ export const readySystems: ReadySystem[] = [
       ],
       chart: [40, 66, 72, 58, 80, 54, 30],
       rows: [
-        { name: { en: "10:30 · Follow-up", ar: "10:30 · متابعة" }, meta: { en: "Dr. Sara · Room 2", ar: "د. سارة · غرفة 2" }, value: { en: "Checked in", ar: "حضر" } },
+        { name: { en: "10:30 · Follow-up", ar: "10:30 · متابعة" }, meta: { en: "Dr. Ahmed · Room 2", ar: "د. أحمد · غرفة 2" }, value: { en: "Checked in", ar: "حضر" } },
         { name: { en: "11:00 · New patient", ar: "11:00 · مريض جديد" }, meta: { en: "Dr. Omar · Room 1", ar: "د. عمر · غرفة 1" }, value: { en: "Confirmed", ar: "مؤكد" } },
         { name: { en: "11:15 · Consultation", ar: "11:15 · استشارة" }, meta: { en: "Reminder sent", ar: "تم إرسال التذكير" }, value: { en: "Booked", ar: "محجوز" } },
       ],
@@ -188,31 +213,37 @@ export const readySystems: ReadySystem[] = [
     icon: "Pill",
     name: { en: "Pharmacy system", ar: "نظام الصيدليات" },
     hint: { en: "Expiry alerts, stock, sales", ar: "تنبيهات الصلاحية والمخزون والمبيعات" },
-    tagline: { en: "Fewer expired boxes, faster counters, clearer margins.", ar: "هالك أقل، وصرف أسرع، وأرباح أوضح." },
+    tagline: { en: "Fewer expired boxes, a faster counter, clearer profit.", ar: "هالك أقل، وصرف أسرع، ومكسب أوضح." },
     summary: {
-      en: "Built for single pharmacies and chains: a fast dispensing counter, drug database with alternatives, batches and expiry tracking, supplier purchasing and returns, delivery orders and branch transfers.",
-      ar: "مصمم للصيدليات المستقلة والسلاسل: شاشة صرف سريعة، وقاعدة أدوية مع البدائل، وتتبع التشغيلات وتواريخ الصلاحية، ومشتريات ومرتجعات الموردين، وطلبات التوصيل، والتحويل بين الفروع.",
+      en: "For single pharmacies and chains: a fast counter, a medicine list with alternatives, expiry tracking, supplier orders and returns, delivery orders and transfers between branches.",
+      ar: "للصيدليات الفردي والسلاسل: صرف سريع، وقايمة أدوية بالبدايل، ومتابعة الصلاحية، وطلبيات الموردين والمرتجع، وطلبات التوصيل، والتحويل بين الفروع.",
     },
     audience: {
-      en: ["Independent pharmacies", "Pharmacy chains", "Medical supply stores", "Pharmacies with delivery"],
-      ar: ["الصيدليات المستقلة", "سلاسل الصيدليات", "محلات المستلزمات الطبية", "الصيدليات التي تقدم التوصيل"],
+      en: ["Independent pharmacies", "Pharmacy chains", "Medical supply shops", "Pharmacies with delivery"],
+      ar: ["الصيدليات المستقلة", "سلاسل الصيدليات", "محلات المستلزمات الطبية", "الصيدليات اللي بتوصّل"],
     },
     modules: [
-      { title: { en: "Dispensing counter", ar: "شاشة الصرف" }, text: { en: "Search by name, active ingredient or barcode; strips and boxes.", ar: "بحث بالاسم أو المادة الفعالة أو الباركود، والبيع بالشريط أو العلبة." } },
-      { title: { en: "Alternatives", ar: "البدائل" }, text: { en: "Suggests available alternatives with the same active ingredient.", ar: "يقترح البدائل المتاحة بنفس المادة الفعالة." } },
-      { title: { en: "Expiry control", ar: "متابعة الصلاحية" }, text: { en: "Batch tracking, near-expiry alerts and returns to supplier.", ar: "تتبع التشغيلات، وتنبيهات قرب الانتهاء، والمرتجع للمورد." } },
-      { title: { en: "Purchasing", ar: "المشتريات" }, text: { en: "Supplier orders, bonuses, discounts and balances.", ar: "طلبيات الموردين، والبونص، والخصومات، والأرصدة." } },
-      { title: { en: "Delivery orders", ar: "طلبات التوصيل" }, text: { en: "Phone/WhatsApp orders, rider assignment and settlement.", ar: "طلبات الهاتف وواتساب، وتعيين الطيار، والتسوية." } },
-      { title: { en: "Chain management", ar: "إدارة السلسلة" }, text: { en: "Transfers, central pricing and reports across branches.", ar: "التحويلات، والتسعير المركزي، والتقارير لجميع الفروع." } },
+      { title: { en: "Counter", ar: "شاشة الصرف" }, text: { en: "Search by name, ingredient or barcode; sell by strip or box.", ar: "دوّر بالاسم أو المادة الفعالة أو الباركود، وبيع بالشريط أو بالعلبة." } },
+      { title: { en: "Alternatives", ar: "البدايل" }, text: { en: "Suggests what you have with the same active ingredient.", ar: "يقترح الموجود عندك بنفس المادة الفعالة." } },
+      { title: { en: "Expiry control", ar: "متابعة الصلاحية" }, text: { en: "Alerts before boxes expire, and returns to the supplier.", ar: "تنبيه قبل ما العلب تنتهي، والمرتجع للمورد." } },
+      { title: { en: "Buying", ar: "المشتريات" }, text: { en: "Supplier orders, bonuses, discounts and balances.", ar: "طلبيات الموردين، والبونص، والخصم، والأرصدة." } },
+      { title: { en: "Delivery orders", ar: "طلبات التوصيل" }, text: { en: "Phone and WhatsApp orders, the rider and the money he brings back.", ar: "طلبات التليفون والواتساب، والطيار، والفلوس اللي راجع بيها." } },
+      { title: { en: "Branches", ar: "الفروع" }, text: { en: "Transfers, one price list and reports for all branches.", ar: "التحويلات، وقايمة أسعار واحدة، وتقارير لكل الفروع." } },
     ],
     highlights: {
-      en: ["Near-expiry & shortage alerts", "Sell by strip or box", "Customer medication history", "Supplier balances & bonuses", "Shift & cash control", "Works offline at the counter"],
-      ar: ["تنبيهات قرب الانتهاء والنواقص", "البيع بالشريط أو بالعلبة", "سجل أدوية العميل", "أرصدة الموردين والبونص", "متابعة الورديات والخزينة", "شاشة الصرف تعمل دون إنترنت"],
+      en: ["Expiry and shortage alerts", "Sell by strip or by box", "Each customer’s medicine history", "Supplier balances & bonuses", "Shift and cash control", "The counter works offline"],
+      ar: ["تنبيهات الصلاحية والنواقص", "بيع بالشريط أو بالعلبة", "سجل أدوية كل عميل", "أرصدة الموردين والبونص", "متابعة الوردية والدرج", "شاشة الصرف تشتغل من غير نت"],
     },
     integrations: {
-      en: ["Barcode scanners", "Receipt printers", "WhatsApp orders", "Accounting"],
-      ar: ["قارئات الباركود", "طابعات الإيصالات", "طلبات واتساب", "الحسابات"],
+      en: ["Barcode scanners", "Receipt printers", "WhatsApp orders", "Accounts"],
+      ar: ["قارئ الباركود", "طابعة الإيصالات", "طلبات الواتساب", "الحسابات"],
     },
+    before: {
+      en: ["Expiry dates checked by hand", "Shortages discovered at the counter", "Delivery money tracked on paper"],
+      ar: ["الصلاحية بتتراجع بالإيد", "النواقص بتبان وأنت بتصرف", "فلوس التوصيل متسجلة في ورقة"],
+    },
+    photo: "/images/site/pharmacy.webp",
+    photoAlt: { en: "A pharmacist reaching for a box on the pharmacy shelves", ar: "صيدلي بيجيب علبة من على رفوف الصيدلية" },
     screen: {
       nav: [{ en: "Counter", ar: "الصرف" }, { en: "Stock", ar: "المخزون" }, { en: "Suppliers", ar: "الموردون" }, { en: "Delivery", ar: "التوصيل" }],
       stats: [
@@ -235,33 +266,39 @@ export const readySystems: ReadySystem[] = [
   {
     slug: "gym-management",
     icon: "Dumbbell",
-    name: { en: "Gym management", ar: "إدارة الصالات الرياضية" },
+    name: { en: "Gym system", ar: "نظام الجيم" },
     hint: { en: "Memberships, attendance", ar: "الاشتراكات والحضور" },
-    tagline: { en: "Memberships that renew themselves, doors that know who’s in.", ar: "اشتراكات تتجدد بسهولة، وبوابة تعرف من دخل." },
+    tagline: { en: "Memberships that renew, and a door that knows who’s in.", ar: "اشتراكات بتتجدد بسهولة، وباب عارف مين دخل." },
     summary: {
-      en: "For gyms, fitness studios and sports academies: membership plans and freezes, attendance by QR, fingerprint or card, personal-training sessions, classes, renewals and collections — plus a member app.",
-      ar: "للصالات الرياضية واستوديوهات اللياقة والأكاديميات الرياضية: باقات الاشتراك والتجميد، والحضور بالـ QR أو البصمة أو الكارت، وحصص التدريب الشخصي، والكلاسات، والتجديد والتحصيل — مع تطبيق للأعضاء.",
+      en: "For gyms, studios and sports academies: plans and freezes, check-in by QR, fingerprint or card, personal-training sessions, classes, renewals and payments — plus an app for your members.",
+      ar: "للجيمات والاستوديوهات والأكاديميات الرياضية: الباقات والتجميد، والدخول بالـ QR أو البصمة أو الكارت، وحصص البرايفت، والكلاسات، والتجديد والتحصيل — ومعاه تطبيق لأعضائك.",
     },
     audience: {
-      en: ["Gyms & fitness clubs", "Ladies-only studios", "Sports academies", "CrossFit & martial-arts boxes"],
-      ar: ["الصالات والأندية الرياضية", "استوديوهات السيدات", "الأكاديميات الرياضية", "صالات الكروس فيت والفنون القتالية"],
+      en: ["Gyms & clubs", "Ladies-only studios", "Sports academies", "CrossFit & martial arts"],
+      ar: ["الجيمات والنوادي", "استوديوهات السيدات", "الأكاديميات الرياضية", "الكروس فيت والفنون القتالية"],
     },
     modules: [
-      { title: { en: "Memberships", ar: "الاشتراكات" }, text: { en: "Plans, freezes, upgrades, family and corporate packages.", ar: "الباقات، والتجميد، والترقية، وباقات العائلة والشركات." } },
-      { title: { en: "Access & attendance", ar: "الدخول والحضور" }, text: { en: "QR, fingerprint or RFID card at the door.", ar: "الدخول بالـ QR أو البصمة أو كارت RFID." } },
-      { title: { en: "Classes & PT", ar: "الكلاسات والتدريب الشخصي" }, text: { en: "Class schedules, capacity, trainer sessions and commissions.", ar: "جداول الكلاسات، والسعة، وحصص المدربين، وعمولاتهم." } },
-      { title: { en: "Renewals & collections", ar: "التجديد والتحصيل" }, text: { en: "Expiry reminders, instalments and payment links.", ar: "تذكير بانتهاء الاشتراك، والأقساط، وروابط الدفع." } },
-      { title: { en: "Member app", ar: "تطبيق الأعضاء" }, text: { en: "Bookings, QR pass, progress and notifications.", ar: "الحجوزات، وكارت QR، والمتابعة، والإشعارات." } },
-      { title: { en: "Shop & reports", ar: "المتجر والتقارير" }, text: { en: "Supplements shop, revenue and retention reports.", ar: "متجر المكملات، وتقارير الإيرادات واستمرار الأعضاء." } },
+      { title: { en: "Memberships", ar: "الاشتراكات" }, text: { en: "Plans, freezes, upgrades, family and company packages.", ar: "الباقات، والتجميد، والترقية، وباقات العيلة والشركات." } },
+      { title: { en: "Check-in", ar: "الدخول والحضور" }, text: { en: "QR, fingerprint or card at the door.", ar: "QR أو بصمة أو كارت على الباب." } },
+      { title: { en: "Classes & trainers", ar: "الكلاسات والمدربين" }, text: { en: "Class times, places left, trainer sessions and commissions.", ar: "مواعيد الكلاسات، والأماكن الفاضية، وحصص المدربين وعمولاتهم." } },
+      { title: { en: "Renewals", ar: "التجديد والتحصيل" }, text: { en: "Reminders before a plan ends, instalments and payment links.", ar: "تذكير قبل الاشتراك ما يخلص، وأقساط، ولينكات دفع." } },
+      { title: { en: "Member app", ar: "تطبيق الأعضاء" }, text: { en: "Bookings, a QR pass, progress and notifications.", ar: "الحجز، وكارت QR، والمتابعة، والإشعارات." } },
+      { title: { en: "Shop & reports", ar: "الشوب والتقارير" }, text: { en: "Supplements shop, income, and who stopped coming.", ar: "شوب المكملات، والدخل، ومين بطّل ييجي." } },
     ],
     highlights: {
-      en: ["Automatic expiry reminders", "Freeze & transfer rules", "Trainer commission reports", "Turnstile & fingerprint support", "Member mobile app", "Multi-branch memberships"],
-      ar: ["تذكير تلقائي بانتهاء الاشتراك", "قواعد التجميد والنقل", "تقارير عمولات المدربين", "دعم البوابات وأجهزة البصمة", "تطبيق جوال للأعضاء", "اشتراكات صالحة لعدة فروع"],
+      en: ["Automatic renewal reminders", "Freeze and transfer rules", "Trainer commission reports", "Turnstiles and fingerprint", "Member mobile app", "One plan, many branches"],
+      ar: ["تذكير تلقائي بالتجديد", "قواعد التجميد والنقل", "تقارير عمولات المدربين", "البوابات والبصمة", "تطبيق موبايل للأعضاء", "اشتراك واحد لكذا فرع"],
     },
     integrations: {
       en: ["Fingerprint devices", "Turnstiles", "Payment links", "WhatsApp reminders"],
-      ar: ["أجهزة البصمة", "البوابات الدوارة", "روابط الدفع", "تذكيرات واتساب"],
+      ar: ["أجهزة البصمة", "البوابات", "لينكات الدفع", "تذكير واتساب"],
     },
+    before: {
+      en: ["Members listed in an Excel sheet", "Expired plans still coming in", "Renewals chased by phone"],
+      ar: ["الأعضاء في شيت إكسل", "اشتراكات خلصت ولسه بتدخل", "التجديد بالتليفون والتحايل"],
+    },
+    photo: "/images/site/gym-v2.webp",
+    photoAlt: { en: "A member training on a machine at the gym", ar: "عضو بيتمرّن على جهاز في الجيم" },
     screen: {
       nav: [{ en: "Members", ar: "الأعضاء" }, { en: "Check-ins", ar: "الحضور" }, { en: "Classes", ar: "الكلاسات" }, { en: "Renewals", ar: "التجديد" }],
       stats: [
@@ -273,7 +310,7 @@ export const readySystems: ReadySystem[] = [
       rows: [
         { name: { en: "Ahmed K. · Gold 12M", ar: "أحمد ك. · ذهبي 12 شهرًا" }, meta: { en: "Checked in 18:42", ar: "دخول 18:42" }, value: { en: "Active", ar: "نشط" } },
         { name: { en: "HIIT · 19:00", ar: "HIIT · 19:00" }, meta: { en: "Coach Nour", ar: "الكوتش نور" }, value: "18/20" },
-        { name: { en: "Mona S. · 3M", ar: "منى س. · 3 أشهر" }, meta: { en: "Expires in 2 days", ar: "ينتهي خلال يومين" }, value: { en: "Reminded", ar: "تم التذكير" } },
+        { name: { en: "Mahmoud S. · 3M", ar: "محمود س. · 3 أشهر" }, meta: { en: "Expires in 2 days", ar: "ينتهي خلال يومين" }, value: { en: "Reminded", ar: "تم التذكير" } },
       ],
     },
     keywords: {
@@ -284,33 +321,39 @@ export const readySystems: ReadySystem[] = [
   {
     slug: "restaurant-system",
     icon: "UtensilsCrossed",
-    name: { en: "Restaurant system", ar: "نظام المطاعم" },
+    name: { en: "Restaurants & cafés", ar: "المطاعم والكافيهات" },
     hint: { en: "Orders, kitchen, delivery", ar: "الطلبات والمطبخ والتوصيل" },
-    tagline: { en: "From the table to the kitchen to the rider — one flow.", ar: "من الطاولة إلى المطبخ إلى الطيار — في مسار واحد." },
+    tagline: { en: "From the table to the kitchen to the rider — one flow.", ar: "من الترابيزة للمطبخ للطيار — في سكة واحدة." },
     summary: {
-      en: "Restaurant and café operations: dine-in tables, takeaway and delivery, kitchen display, recipes that deduct ingredients, delivery zones and riders, and aggregator orders in the same screen.",
-      ar: "تشغيل المطاعم والمقاهي: الصالة والطاولات، والتيك أواي والتوصيل، وشاشة المطبخ، ووصفات تخصم الخامات تلقائيًا، ومناطق التوصيل والطيارين، وطلبات التطبيقات الخارجية في شاشة واحدة.",
+      en: "For restaurants and cafés: tables, takeaway and delivery, a kitchen screen, recipes that take ingredients out of stock with every sale, delivery areas and riders — and app orders on the same screen.",
+      ar: "للمطاعم والكافيهات: الصالة والترابيزات، والتيك أواي والتوصيل، وشاشة المطبخ، ووصفات بتخصم الخامات مع كل بيعة، ومناطق التوصيل والطيارين — وطلبات التطبيقات على نفس الشاشة.",
     },
     audience: {
-      en: ["Restaurants & cafés", "Cloud kitchens", "Bakeries & dessert shops", "Food chains"],
-      ar: ["المطاعم والمقاهي", "المطابخ السحابية", "المخابز ومحلات الحلويات", "سلاسل الأطعمة"],
+      en: ["Restaurants & cafés", "Delivery-only kitchens", "Bakeries & desserts", "Food chains"],
+      ar: ["المطاعم والكافيهات", "مطابخ التوصيل", "المخابز والحلويات", "سلاسل الأكل"],
     },
     modules: [
-      { title: { en: "Order taking", ar: "استقبال الطلبات" }, text: { en: "Dine-in, takeaway, delivery and call-centre orders.", ar: "طلبات الصالة والتيك أواي والتوصيل والكول سنتر." } },
-      { title: { en: "Tables & waiters", ar: "الطاولات والويترز" }, text: { en: "Floor plan, table transfer, split bills and service charge.", ar: "مخطط الصالة، ونقل الطاولات، وتقسيم الحساب، والخدمة." } },
-      { title: { en: "Kitchen display", ar: "شاشة المطبخ" }, text: { en: "Orders routed by station with prep timers.", ar: "توجيه الطلبات لكل قسم مع مؤقت التحضير." } },
-      { title: { en: "Recipes & costing", ar: "الوصفات والتكلفة" }, text: { en: "Ingredients deducted per sale; food-cost per dish.", ar: "خصم الخامات مع كل بيع، وتكلفة كل صنف." } },
-      { title: { en: "Delivery", ar: "التوصيل" }, text: { en: "Zones, delivery fees, rider assignment and settlement.", ar: "المناطق، ورسوم التوصيل، وتعيين الطيار، والتسوية." } },
-      { title: { en: "Reports", ar: "التقارير" }, text: { en: "Best sellers, peak hours, waste and branch comparison.", ar: "الأكثر مبيعًا، وساعات الذروة، والهالك، ومقارنة الفروع." } },
+      { title: { en: "Taking orders", ar: "استقبال الطلبات" }, text: { en: "Dine-in, takeaway, delivery and phone orders.", ar: "صالة وتيك أواي وتوصيل وطلبات التليفون." } },
+      { title: { en: "Tables & waiters", ar: "الترابيزات والويترز" }, text: { en: "Floor plan, moving tables, splitting bills and service.", ar: "رسمة الصالة، ونقل الترابيزات، وتقسيم الحساب، والخدمة." } },
+      { title: { en: "Kitchen screen", ar: "شاشة المطبخ" }, text: { en: "Each order goes to the right station with a timer.", ar: "كل طلب يروح للقسم الصح ومعاه عدّاد وقت." } },
+      { title: { en: "Recipes & cost", ar: "الوصفات والتكلفة" }, text: { en: "Ingredients deducted with each sale; the real cost of every dish.", ar: "الخامات بتتخصم مع كل بيعة، والتكلفة الحقيقية لكل طبق." } },
+      { title: { en: "Delivery", ar: "التوصيل" }, text: { en: "Areas, delivery fees, riders and their money.", ar: "المناطق، ومصاريف التوصيل، والطيارين وحسابهم." } },
+      { title: { en: "Reports", ar: "التقارير" }, text: { en: "Best sellers, rush hours, waste and branch comparison.", ar: "الأكتر بيعًا، وساعات الزحمة، والهالك، ومقارنة الفروع." } },
     ],
     highlights: {
-      en: ["Kitchen display & printers", "Recipe-based stock deduction", "Delivery zones & riders", "Menu QR ordering", "Offline-capable cashier", "Multi-branch menus & prices"],
-      ar: ["شاشة وطابعات المطبخ", "خصم المخزون حسب الوصفة", "مناطق التوصيل والطيارون", "طلب من المنيو عبر QR", "كاشير يعمل دون إنترنت", "منيو وأسعار لكل فرع"],
+      en: ["Kitchen screen & printers", "Stock deducted by recipe", "Delivery areas & riders", "Order from a QR menu", "The cashier works offline", "Menus and prices per branch"],
+      ar: ["شاشة وطابعات المطبخ", "خصم الخامات بالوصفة", "مناطق التوصيل والطيارين", "طلب من منيو QR", "الكاشير يشتغل من غير نت", "منيو وأسعار لكل فرع"],
     },
     integrations: {
       en: ["Kitchen printers", "Delivery apps", "Caller ID", "Online menu"],
-      ar: ["طابعات المطبخ", "تطبيقات التوصيل", "إظهار رقم المتصل", "المنيو الإلكتروني"],
+      ar: ["طابعات المطبخ", "تطبيقات التوصيل", "إظهار رقم المتصل", "المنيو الأونلاين"],
     },
+    before: {
+      en: ["Orders shouted to the kitchen", "Delivery money counted at midnight", "Nobody knows the real cost of a dish"],
+      ar: ["الطلبات بتتنده للمطبخ", "فلوس التوصيل بتتعد نص الليل", "محدش عارف الطبق بيتكلف كام بجد"],
+    },
+    photo: "/images/site/restaurant.webp",
+    photoAlt: { en: "A restaurant worker taking an order on a touch screen", ar: "موظف مطعم بياخد طلب على شاشة تاتش" },
     screen: {
       nav: [{ en: "Orders", ar: "الطلبات" }, { en: "Tables", ar: "الطاولات" }, { en: "Kitchen", ar: "المطبخ" }, { en: "Delivery", ar: "التوصيل" }],
       stats: [
@@ -333,33 +376,39 @@ export const readySystems: ReadySystem[] = [
   {
     slug: "school-management",
     icon: "GraduationCap",
-    name: { en: "Schools & academies", ar: "المدارس والأكاديميات" },
-    hint: { en: "Students, fees, schedules", ar: "الطلاب والرسوم والجداول" },
-    tagline: { en: "Students, fees and timetables — and parents kept in the loop.", ar: "الطلاب والرسوم والجداول — وأولياء الأمور على اطلاع دائم." },
+    name: { en: "Schools & centres", ar: "المدارس ومراكز التعليم" },
+    hint: { en: "Students, fees, timetables", ar: "الطلاب والمصاريف والجداول" },
+    tagline: { en: "Students, fees and timetables — with parents in the loop.", ar: "الطلاب والمصاريف والجداول — وأولياء الأمور في الصورة." },
     summary: {
-      en: "For schools, training centres and online academies: admissions, student files, timetables, attendance, grades, fee plans and instalments — with a parent/student portal and notifications.",
-      ar: "للمدارس ومراكز التدريب والأكاديميات الأونلاين: القبول، وملفات الطلاب، والجداول، والحضور، والدرجات، وخطط الرسوم والأقساط — مع بوابة لأولياء الأمور والطلاب وإشعارات فورية.",
+      en: "For schools, training centres and academies: registration, student files, timetables, attendance, grades, fees and instalments — with a page for parents and students and instant notifications.",
+      ar: "للمدارس والسناتر والأكاديميات: التسجيل، وملفات الطلاب، والجداول، والحضور، والدرجات، والمصاريف والأقساط — مع صفحة لأولياء الأمور والطلاب وإشعارات فورية.",
     },
     audience: {
       en: ["Private & international schools", "Training centres", "Language & coding academies", "Nurseries"],
       ar: ["المدارس الخاصة والدولية", "مراكز التدريب", "أكاديميات اللغات والبرمجة", "الحضانات"],
     },
     modules: [
-      { title: { en: "Admissions", ar: "القبول والتسجيل" }, text: { en: "Applications, interviews, documents and enrolment.", ar: "طلبات الالتحاق، والمقابلات، والمستندات، والتسجيل." } },
+      { title: { en: "Registration", ar: "التسجيل والقبول" }, text: { en: "Applications, interviews, documents and enrolment.", ar: "طلبات الالتحاق، والمقابلات، والأوراق، والتسجيل." } },
       { title: { en: "Students & classes", ar: "الطلاب والفصول" }, text: { en: "Student files, classes, groups and transfers.", ar: "ملفات الطلاب، والفصول، والمجموعات، والتحويلات." } },
-      { title: { en: "Timetables & attendance", ar: "الجداول والحضور" }, text: { en: "Weekly schedules, teacher loads and daily attendance.", ar: "الجداول الأسبوعية، ونصاب المعلمين، والحضور اليومي." } },
-      { title: { en: "Exams & grades", ar: "الامتحانات والدرجات" }, text: { en: "Assessments, grade books and report cards.", ar: "التقييمات، وكشوف الدرجات، والشهادات." } },
-      { title: { en: "Fees & instalments", ar: "الرسوم والأقساط" }, text: { en: "Fee plans, discounts, siblings and overdue follow-up.", ar: "خطط الرسوم، والخصومات، وخصم الإخوة، ومتابعة المتأخرات." } },
-      { title: { en: "Parent portal", ar: "بوابة أولياء الأمور" }, text: { en: "Grades, attendance, invoices and announcements.", ar: "الدرجات، والحضور، والفواتير، والإعلانات." } },
+      { title: { en: "Timetables & attendance", ar: "الجداول والحضور" }, text: { en: "Weekly timetables, teacher loads and daily attendance.", ar: "الجدول الأسبوعي، ونصاب المدرسين، والحضور اليومي." } },
+      { title: { en: "Exams & grades", ar: "الامتحانات والدرجات" }, text: { en: "Tests, grade sheets and report cards.", ar: "الامتحانات، وكشوف الدرجات، والشهادات." } },
+      { title: { en: "Fees & instalments", ar: "المصاريف والأقساط" }, text: { en: "Fee plans, sibling discounts and late payments.", ar: "خطط المصاريف، وخصم الإخوات، والمتأخرات." } },
+      { title: { en: "Parents’ page", ar: "صفحة ولي الأمر" }, text: { en: "Grades, attendance, invoices and announcements.", ar: "الدرجات، والحضور، والفواتير، والإعلانات." } },
     ],
     highlights: {
-      en: ["Parent & student portal", "Instalment plans with reminders", "Bus & transport lists", "Teacher accounts & permissions", "Arabic & English report cards", "Online payments"],
-      ar: ["بوابة لأولياء الأمور والطلاب", "خطط أقساط مع تذكير تلقائي", "قوائم الباصات والنقل", "حسابات وصلاحيات للمعلمين", "شهادات بالعربية والإنجليزية", "دفع إلكتروني للرسوم"],
+      en: ["A page for parents and students", "Instalments with reminders", "Bus and transport lists", "Teacher accounts", "Report cards in Arabic & English", "Pay fees online"],
+      ar: ["صفحة لأولياء الأمور والطلاب", "أقساط بتذكير تلقائي", "قوايم الباصات", "حسابات للمدرسين", "شهادات بالعربي والإنجليزي", "دفع المصاريف أونلاين"],
     },
     integrations: {
-      en: ["Payment gateways", "WhatsApp / SMS", "Zoom / Google Meet", "Accounting"],
-      ar: ["بوابات الدفع", "واتساب ورسائل SMS", "Zoom و Google Meet", "الحسابات"],
+      en: ["Online payment", "WhatsApp / SMS", "Zoom / Google Meet", "Accounts"],
+      ar: ["الدفع الأونلاين", "واتساب ورسائل", "Zoom و Google Meet", "الحسابات"],
     },
+    before: {
+      en: ["Attendance on paper sheets", "Fees tracked in three notebooks", "Parents call to ask about grades"],
+      ar: ["الحضور على ورق", "المصاريف متسجلة في تلات كشاكيل", "أولياء الأمور بيتصلوا يسألوا على الدرجات"],
+    },
+    photo: "/images/site/classroom-v2.webp",
+    photoAlt: { en: "A teacher explaining a lesson at the whiteboard", ar: "مدرّس بيشرح الدرس على السبورة" },
     screen: {
       nav: [{ en: "Students", ar: "الطلاب" }, { en: "Attendance", ar: "الحضور" }, { en: "Grades", ar: "الدرجات" }, { en: "Fees", ar: "الرسوم" }],
       stats: [
@@ -382,33 +431,39 @@ export const readySystems: ReadySystem[] = [
   {
     slug: "accounting-hr",
     icon: "Calculator",
-    name: { en: "Accounting & HR", ar: "الحسابات والموارد البشرية" },
-    hint: { en: "Invoices, payroll, reports", ar: "الفواتير والرواتب والتقارير" },
-    tagline: { en: "Books that close on time and payroll that adds up.", ar: "حسابات تُقفل في موعدها، ورواتب دقيقة دون مراجعات مرهقة." },
+    name: { en: "Accounts & payroll", ar: "الحسابات والمرتبات" },
+    hint: { en: "Invoices, salaries, reports", ar: "الفواتير والمرتبات والتقارير" },
+    tagline: { en: "Books that close on time, and salaries that add up.", ar: "حسابات بتتقفل في ميعادها، ومرتبات مظبوطة." },
     summary: {
-      en: "General ledger, invoicing, receivables and payables, banks and cheques, e-invoice (ETA) integration, plus HR: employee files, attendance, leave, payroll and social insurance — with financial statements on demand.",
-      ar: "دفتر الأستاذ العام، والفوترة، والمدينون والدائنون، والبنوك والشيكات، والتكامل مع منظومة الفاتورة الإلكترونية، بالإضافة إلى الموارد البشرية: ملفات الموظفين، والحضور، والإجازات، والرواتب، والتأمينات — مع قوائم مالية عند الطلب.",
+      en: "Invoices, who owes you and whom you owe, banks and cheques, the Tax Authority e-invoice — plus your staff: files, attendance, leave, salaries and insurance. Your profit and loss whenever you ask.",
+      ar: "الفواتير، واللي ليك واللي عليك، والبنوك والشيكات، والفاتورة الإلكترونية — ومعاها الموظفين: الملفات، والحضور، والإجازات، والمرتبات، والتأمينات. ومكسبك وخسارتك وقت ما تحب.",
     },
     audience: {
-      en: ["SMEs & trading companies", "Contracting & services firms", "Accounting offices", "Companies with 10–500 employees"],
-      ar: ["الشركات الصغيرة والمتوسطة والتجارية", "شركات المقاولات والخدمات", "مكاتب المحاسبة", "الشركات من 10 إلى 500 موظف"],
+      en: ["Small & medium companies", "Contracting & services", "Accounting offices", "Teams of 10 to 500 people"],
+      ar: ["الشركات الصغيرة والمتوسطة", "المقاولات والخدمات", "مكاتب المحاسبة", "فرق من 10 لـ 500 موظف"],
     },
     modules: [
-      { title: { en: "General ledger", ar: "الأستاذ العام" }, text: { en: "Chart of accounts, journal entries, cost centres and periods.", ar: "دليل الحسابات، والقيود اليومية، ومراكز التكلفة، والفترات." } },
-      { title: { en: "Sales & purchases", ar: "المبيعات والمشتريات" }, text: { en: "Quotes, invoices, credit notes, receivables and payables.", ar: "عروض الأسعار، والفواتير، والإشعارات الدائنة، والمدينون والدائنون." } },
-      { title: { en: "Banks & cheques", ar: "البنوك والشيكات" }, text: { en: "Bank accounts, reconciliation and cheque portfolio.", ar: "الحسابات البنكية، والتسويات، وحافظة الشيكات." } },
-      { title: { en: "E-invoicing", ar: "الفاتورة الإلكترونية" }, text: { en: "Submission to the Egyptian Tax Authority portal.", ar: "إرسال الفواتير إلى منظومة مصلحة الضرائب المصرية." } },
-      { title: { en: "HR & attendance", ar: "شؤون الموظفين والحضور" }, text: { en: "Employee files, shifts, leave and fingerprint import.", ar: "ملفات الموظفين، والورديات، والإجازات، واستيراد البصمة." } },
-      { title: { en: "Payroll", ar: "الرواتب" }, text: { en: "Allowances, deductions, loans, insurance and payslips.", ar: "البدلات، والاستقطاعات، والسلف، والتأمينات، وكشوف الرواتب." } },
+      { title: { en: "Accounts", ar: "الحسابات" }, text: { en: "Your accounts list, daily entries and cost centres.", ar: "دليل الحسابات، والقيود اليومية، ومراكز التكلفة." } },
+      { title: { en: "Sales & buying", ar: "المبيعات والمشتريات" }, text: { en: "Quotations, invoices, returns — who owes you and whom you owe.", ar: "عروض الأسعار، والفواتير، والمرتجعات — اللي ليك واللي عليك." } },
+      { title: { en: "Banks & cheques", ar: "البنوك والشيكات" }, text: { en: "Bank accounts, matching statements and cheques.", ar: "حسابات البنوك، ومطابقة الكشوف، والشيكات." } },
+      { title: { en: "E-invoice", ar: "الفاتورة الإلكترونية" }, text: { en: "Sent to the Egyptian Tax Authority directly.", ar: "بتتبعت لمصلحة الضرائب على طول." } },
+      { title: { en: "Staff & attendance", ar: "الموظفين والحضور" }, text: { en: "Files, shifts, leave and fingerprint attendance.", ar: "الملفات، والورديات، والإجازات، وحضور البصمة." } },
+      { title: { en: "Salaries", ar: "المرتبات" }, text: { en: "Allowances, deductions, advances, insurance and payslips.", ar: "البدلات، والخصومات، والسلف، والتأمينات، وكشف المرتب." } },
     ],
     highlights: {
-      en: ["ETA e-invoice integration", "Trial balance, P&L, balance sheet", "Cost centres & projects", "Payroll with social insurance", "Approval workflows", "Full audit log"],
-      ar: ["تكامل مع منظومة الفاتورة الإلكترونية", "ميزان المراجعة وقائمة الدخل والميزانية", "مراكز التكلفة والمشروعات", "رواتب مع التأمينات الاجتماعية", "دورات اعتماد للمستندات", "سجل كامل لكل العمليات"],
+      en: ["Tax Authority e-invoice", "Profit & loss on demand", "Cost per project or branch", "Salaries with insurance", "Approvals before payments", "A record of every change"],
+      ar: ["الفاتورة الإلكترونية", "المكسب والخسارة وقت ما تحب", "التكلفة لكل مشروع أو فرع", "مرتبات بالتأمينات", "موافقات قبل الصرف", "سجل بكل تعديل"],
     },
     integrations: {
-      en: ["ETA e-invoice", "Fingerprint devices", "Banks (Excel import)", "POS & inventory"],
-      ar: ["منظومة الفاتورة الإلكترونية", "أجهزة البصمة", "البنوك (استيراد Excel)", "نقاط البيع والمخازن"],
+      en: ["Tax Authority e-invoice", "Fingerprint devices", "Bank statements (Excel)", "Cashier & stock"],
+      ar: ["منظومة الفاتورة الإلكترونية", "أجهزة البصمة", "كشوف البنك (إكسل)", "الكاشير والمخزن"],
     },
+    before: {
+      en: ["Invoices in a drawer, entries in Excel", "Salaries recalculated every month", "Profit known only at year end"],
+      ar: ["الفواتير في درج والقيود في إكسل", "المرتبات بتتحسب من الأول كل شهر", "المكسب بيتعرف آخر السنة بس"],
+    },
+    photo: "/images/site/receipts-v2.webp",
+    photoAlt: { en: "An accountant going over invoices and cash with a phone calculator", ar: "محاسب بيراجع فواتير وفلوس بالآلة الحاسبة على الموبايل" },
     screen: {
       nav: [{ en: "Ledger", ar: "الأستاذ" }, { en: "Invoices", ar: "الفواتير" }, { en: "Payroll", ar: "الرواتب" }, { en: "Reports", ar: "التقارير" }],
       stats: [
@@ -434,60 +489,73 @@ export function getSystem(slug: string) {
   return readySystems.find((s) => s.slug === slug);
 }
 
-/** Shared facts for every ready-made system (shown on the catalog and detail pages). */
+/** Shared steps for every ready-made system. */
 export const systemSteps: { title: T; text: T }[] = [
   {
-    title: { en: "Live demo", ar: "عرض تجريبي حيّ" },
-    text: { en: "A 30-minute walkthrough using your own scenarios, online or at your site.", ar: "جولة لمدة 30 دقيقة على سيناريوهات عملك الفعلية، أونلاين أو في مقرّك." },
+    title: { en: "A free demo", ar: "عرض تجريبي مجاني" },
+    text: { en: "30 minutes on your own day-to-day — online, or at your place.", ar: "30 دقيقة على شغلك أنت — أونلاين أو عندك في المكان." },
   },
   {
-    title: { en: "Configuration", ar: "التهيئة" },
-    text: { en: "We set up branches, users, price lists and your branding, and import your existing data.", ar: "نهيّئ الفروع والمستخدمين وقوائم الأسعار وهويتك البصرية، وننقل بياناتك الحالية." },
+    title: { en: "We set it up for you", ar: "نجهّزه لك" },
+    text: { en: "Branches, users, prices and your logo — and we move your old data in ourselves.", ar: "الفروع والمستخدمين والأسعار واللوجو بتاعك — وننقل بياناتك القديمة بنفسنا." },
   },
   {
-    title: { en: "Training & go-live", ar: "التدريب والتشغيل" },
-    text: { en: "Hands-on training for each role, then we stay with you through the first weeks of operation.", ar: "تدريب عملي لكل دور وظيفي، ثم نرافقك خلال الأسابيع الأولى من التشغيل." },
+    title: { en: "Training & first day", ar: "التدريب وأول يوم" },
+    text: { en: "Hands-on training for each person, and we stay with you through the first weeks.", ar: "تدريب عملي لكل شخص، ونفضل معاك أول كام أسبوع." },
   },
   {
     title: { en: "Support & updates", ar: "الدعم والتحديثات" },
-    text: { en: "Support over WhatsApp and phone, regular updates and automatic backups.", ar: "دعم فني عبر واتساب والهاتف، وتحديثات دورية، ونسخ احتياطي تلقائي." },
+    text: { en: "Help on WhatsApp and phone, regular updates and automatic backups.", ar: "دعم على واتساب والتليفون، وتحديثات مستمرة، ونسخة احتياطية لوحدها." },
   },
 ];
 
 export const systemFaqs: { q: T; a: T }[] = [
   {
-    q: { en: "Can the system be customised for my business?", ar: "هل يمكن تخصيص النظام حسب طبيعة عملي؟" },
+    q: { en: "Can it be adjusted to how I work?", ar: "ينفع يتظبط على طريقة شغلي؟" },
     a: {
-      en: "Yes. Every ready-made system is configurable (branches, roles, price lists, print layouts), and we can add custom modules or reports on top as a separate, clearly priced scope.",
-      ar: "نعم. جميع أنظمتنا الجاهزة قابلة للتهيئة (الفروع، والصلاحيات، وقوائم الأسعار، وتصميم المطبوعات)، ويمكننا إضافة وحدات أو تقارير مخصصة كنطاق عمل منفصل بتكلفة واضحة.",
+      en: "Yes. Branches, permissions, prices and printed layouts are all set up for you, and we can add extra screens or reports with a clear price.",
+      ar: "أيوه. الفروع والصلاحيات والأسعار وشكل المطبوعات كلها بتتظبط لك، ونقدر نضيف شاشات أو تقارير زيادة بسعر واضح.",
     },
   },
   {
-    q: { en: "Does it work without internet?", ar: "هل يعمل النظام دون إنترنت؟" },
+    q: { en: "Does it work without internet?", ar: "بيشتغل من غير نت؟" },
     a: {
-      en: "Counter-facing systems (POS, pharmacy, restaurant) keep working offline and sync automatically once the connection is back. Management dashboards need a connection.",
-      ar: "الأنظمة التي تعمل على الكاشير (نقاط البيع، والصيدليات، والمطاعم) تستمر في العمل دون إنترنت وتزامن البيانات تلقائيًا عند عودة الاتصال، أما لوحات الإدارة فتحتاج إلى اتصال.",
+      en: "The counter (cashier, pharmacy, restaurant) keeps working offline and catches up automatically when the internet is back. Owner dashboards need a connection.",
+      ar: "الكاشير والصيدلية والمطعم بيكمّلوا شغل من غير نت ويتحدّثوا لوحدهم أول ما يرجع. لوحة صاحب الشغل محتاجة نت.",
     },
   },
   {
-    q: { en: "Can you move my data from my current program?", ar: "هل يمكنكم نقل بياناتي من البرنامج الحالي؟" },
+    q: { en: "Can you move my data from my current program?", ar: "تقدروا تنقلوا بياناتي من البرنامج اللي عندي؟" },
     a: {
-      en: "Yes. We import items, customers, suppliers and opening balances from Excel or from most common systems as part of setup.",
-      ar: "نعم. ننقل الأصناف والعملاء والموردين والأرصدة الافتتاحية من ملفات Excel أو من أغلب البرامج المنتشرة كجزء من التهيئة.",
+      en: "Yes. We move items, customers, suppliers and opening balances from Excel or most common programs — it’s part of the setup.",
+      ar: "أيوه. بننقل الأصناف والعملاء والموردين والأرصدة من الإكسل أو من أغلب البرامج المنتشرة — وده جزء من التجهيز.",
     },
   },
   {
-    q: { en: "Where is my data stored, and is it backed up?", ar: "أين تُحفظ بياناتي، وهل يوجد نسخ احتياطي؟" },
+    q: { en: "Where is my data kept? Is there a backup?", ar: "بياناتي بتتحفظ فين؟ وفيه نسخة احتياطية؟" },
     a: {
-      en: "On our managed cloud with daily encrypted backups, or on your own server if you choose a perpetual licence. Your data is always yours and can be exported at any time.",
-      ar: "على سحابتنا المُدارة مع نسخ احتياطي يومي مشفّر، أو على خادمك الخاص إذا اخترت الترخيص الدائم. بياناتك ملكك دائمًا ويمكن تصديرها في أي وقت.",
+      en: "On our managed servers with a protected backup every day — or on your own computer if you buy it once. Your data is always yours, and you can export it any time.",
+      ar: "على السيرفرات بتاعتنا بنسخة احتياطية محمية كل يوم — أو على جهازك أنت لو اشتريته مرة واحدة. بياناتك ملكك دايمًا وتقدر تطلّعها في أي وقت.",
     },
   },
   {
-    q: { en: "What hardware do I need?", ar: "ما الأجهزة التي أحتاجها؟" },
+    q: { en: "What devices do I need?", ar: "محتاج أجهزة إيه؟" },
     a: {
-      en: "Any modern Windows PC, laptop or tablet works. We recommend tested barcode scanners and printers, and can supply and install them.",
-      ar: "يعمل النظام على أي كمبيوتر ويندوز حديث أو لابتوب أو تابلت. ونرشّح لك قارئات باركود وطابعات مُجرّبة، ويمكننا توريدها وتركيبها.",
+      en: "Any recent Windows computer, laptop or tablet. We recommend tested barcode scanners and printers, and can supply and install them.",
+      ar: "أي كمبيوتر ويندوز حديث أو لابتوب أو تابلت. وبنرشّح لك قارئ باركود وطابعات مجرّبة، ونقدر نوردها ونركّبها.",
     },
   },
 ];
+
+/**
+ * Which ready-made systems fit each service (used for internal links both
+ * ways: service page → systems, system page → services).
+ */
+export const serviceSystems: Record<string, string[]> = {
+  "website-development": ["clinic-management", "restaurant-system", "school-management"],
+  "mobile-app-development": ["restaurant-system", "gym-management", "pharmacy-system"],
+  "custom-software": ["inventory-warehouse", "accounting-hr", "pos-cashier"],
+  "ai-chatbots": ["clinic-management", "restaurant-system"],
+  "business-automation": ["accounting-hr", "inventory-warehouse"],
+  "ecommerce-development": ["pos-cashier", "inventory-warehouse"],
+};

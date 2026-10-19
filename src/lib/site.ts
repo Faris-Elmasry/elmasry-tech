@@ -13,7 +13,11 @@ export const siteUrl = (
   process.env.NEXT_PUBLIC_SITE_URL || "https://elmasry.tech"
 ).replace(/\/$/, "");
 
-const whatsappRaw = process.env.NEXT_PUBLIC_WHATSAPP || "+201000000000";
+const PLACEHOLDER_WHATSAPP = "+201000000000";
+// Company WhatsApp / phone (override with NEXT_PUBLIC_WHATSAPP).
+const whatsappRaw = process.env.NEXT_PUBLIC_WHATSAPP || "+201090036987";
+/** False until a real number is configured (NEXT_PUBLIC_WHATSAPP). */
+export const hasRealPhone = whatsappRaw.replace(/[^\d]/g, "") !== PLACEHOLDER_WHATSAPP.replace(/[^\d]/g, "");
 
 export const site = {
   name: "Elmasry Tech",

@@ -29,6 +29,11 @@ export async function generateMetadata({ params }: LayoutProps<"/[locale]">): Pr
     publisher: site.legalName,
     formatDetection: { telephone: false, email: false, address: false },
     category: "technology",
+    // Paste the codes from Google Search Console / Bing Webmaster Tools into the env.
+    verification: {
+      ...(process.env.GOOGLE_SITE_VERIFICATION ? { google: process.env.GOOGLE_SITE_VERIFICATION } : {}),
+      ...(process.env.BING_SITE_VERIFICATION ? { other: { "msvalidate.01": process.env.BING_SITE_VERIFICATION } } : {}),
+    },
   };
 }
 
