@@ -26,4 +26,4 @@ Sidebar: collapsible (persisted), nav to the 7 pages, user name/email, Sign out.
 
 ## Security posture (summary — details in known issues)
 Good: bcrypt (cost 12), Zod on most writes, JWT secret from env, `.env*` ignored, admin routes excluded from robots, auth enforced inside API handlers.
-Needs work: admin-login rate limiter unused; project PUT unvalidated; email HTML unescaped; default credentials committed in `help.text` and `seed.ts`; settings API lets admin write arbitrary keys (low risk); public `GET /api/hero` writes to DB when empty.
+Fixed 2026-10-20: admin login and contact form are rate-limited (in memory without Upstash), email HTML is escaped, no credentials in the code (but the old password is still in git history — change it). Needs work: project PUT unvalidated; settings API lets admin write arbitrary keys (low risk); public `GET /api/hero` writes to DB when empty.

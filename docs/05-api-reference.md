@@ -7,7 +7,7 @@ Cache = `Cache-Control: s-maxage=N, stale-while-revalidate=86400` on the respons
 | Method & path | Auth | Body / query | Cache | Reval | Notes |
 |---|---|---|---|---|---|
 | `GET/POST /api/auth/[...nextauth]` | — | NextAuth | — | — | Credentials login |
-| `POST /api/contact` | Public | `contactSchema` | — | — | Rate-limited (5/h/IP) if Upstash set; saves `ContactMessage`; emails admin (non-blocking, failure logged) → `201 {sent,id}` |
+| `POST /api/contact` | Public | `contactSchema` | — | — | Rate-limited 5/h per visitor (Upstash if set, otherwise in memory; visitor = X-Real-IP or the last X-Forwarded-For entry); saves `ContactMessage`; emails admin (non-blocking, failure logged) → `201 {sent,id}` |
 | `GET /api/contact` | Admin | `page`, `limit`, `status` | 0 | — | `{messages,total,unread,page,limit}` (`total` respects filter; `unread` always global) |
 | `PATCH /api/contact/[id]` | Admin | `{status}` | — | — | No validation of status value |
 | `DELETE /api/contact/[id]` | Admin | — | — | — | |

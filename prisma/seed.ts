@@ -12,18 +12,25 @@ async function main() {
   console.log("🌱 Seeding database...\n");
 
   // ─── Admin User ───
-  const hashedPassword = await hash("Admin@123", 12);
-  const admin = await prisma.adminUser.upsert({
-    where: { email: "admin@elmasry.tech" },
-    update: {},
-    create: {
-      email: "admin@elmasry.tech",
-      password: hashedPassword,
-      name: "Faris Elmasry",
-      role: "admin",
-    },
-  });
-  console.log("✓ Admin user created:", admin.email);
+  // From the environment only: the email and password used to be written here (and in
+  // help.text), and the repo is public. Same variables as scripts/ensure-admin.mjs.
+  const adminEmail = process.env.ADMIN_EMAIL?.trim().toLowerCase();
+  const adminPassword = process.env.ADMIN_PASSWORD;
+  if (adminEmail && adminPassword && adminPassword.length >= 10) {
+    const admin = await prisma.adminUser.upsert({
+      where: { email: adminEmail },
+      update: {},
+      create: {
+        email: adminEmail,
+        password: await hash(adminPassword, 12),
+        name: process.env.ADMIN_NAME || "Faris Elmasry",
+        role: "admin",
+      },
+    });
+    console.log("✓ Admin user ready:", admin.email);
+  } else {
+    console.log("• Admin user skipped: set ADMIN_EMAIL and ADMIN_PASSWORD (10+ characters)");
+  }
 
   // ─── Hero Section ───
   const hero = await prisma.heroSection.upsert({

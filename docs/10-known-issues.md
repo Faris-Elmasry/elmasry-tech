@@ -3,11 +3,11 @@
 Found by reading the code. Grouped by priority. Items marked ✅ were fixed in the v0.2 redesign/SEO pass (2026-10-06); everything else is still open.
 
 ## 🔴 Fix before any public launch
-1. **Credentials in git** — `help.text` (tracked) contains the admin email + plaintext password, and `prisma/seed.ts` hard-codes the same password. Delete `help.text`, rotate the password, make the seed read it from env, and consider scrubbing git history if the repo is/was pushed anywhere.
+1. ⚠️ partly fixed (2026-10-20) **Credentials in git** — `help.text` is untracked and ignored, and `prisma/seed.ts` reads `ADMIN_EMAIL`/`ADMIN_PASSWORD` from the environment. **Still open:** the old password is in the public repo's history (commit `e735739`) — it must be treated as known: change it everywhere it was used, and decide whether to rewrite history. See [15](15-security-and-portfolio-2026-10.md).
 2. ✅ **`middleware.ts` is deprecated in Next 16** → rename to `proxy.ts` (`npx @next/codemod@canary middleware-to-proxy .`; guide: `node_modules/next/dist/docs/01-app/03-api-reference/03-file-conventions/proxy.md`).
 3. ✅ **Email HTML injection** — `lib/email.ts` interpolates `name`, `message`, etc. unescaped into HTML sent to the admin. Escape values.
 4. **`PUT /api/projects/[slug]` is unvalidated** (`data: body`) — any column can be overwritten; also only revalidates the `/en` project path.
-5. **Admin login brute-force** — `adminLoginRateLimit` exists but is never applied (NextAuth route unprotected).
+5. ✅ (2026-10-20) **Admin login brute-force** — the login is limited to 10 tries / 15 min per visitor and 8 per account, in memory when Upstash isn't set. See [15](15-security-and-portfolio-2026-10.md).
 6. ✅ (public pages + sitemap now use `lib/data.ts`) **Self-fetching server pages** — home, project detail, sitemap call `${NEXT_PUBLIC_SITE_URL}/api/...`; breaks at build/deploy if the URL is wrong/unreachable. Prefer calling Prisma directly in server components.
 
 ## 🟠 Content/product inconsistencies (blocks the "software company" repositioning)

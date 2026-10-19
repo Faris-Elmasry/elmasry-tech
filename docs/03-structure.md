@@ -5,7 +5,7 @@ elmasry-tech/
 ├─ AGENTS.md / CLAUDE.md        AI-agent rules (CLAUDE.md just imports AGENTS.md)
 ├─ docs/                        ← this documentation
 ├─ README.md                    create-next-app default (not updated)
-├─ help.text                    ⚠ tracked scratch file containing admin login (see known issues)
+├─ help.text                    private local notes — untracked and in .gitignore (it held the admin login)
 ├─ .env / .env.example          env (real .env is git-ignored)
 ├─ next.config.ts               next-intl plugin; images: utfs.io + avif/webp
 ├─ prisma.config.ts             Prisma 7 config (schema path, seed command, DATABASE_URL)
