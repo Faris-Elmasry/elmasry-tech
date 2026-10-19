@@ -101,6 +101,15 @@ async function main() {
       console.warn("  (network never went idle — continuing)");
     }
     await page.waitForTimeout(1500);
+    // A cookie banner covers the preview: decline/accept it like a visitor would
+    for (const name of [/^(weigeren|decline|reject|refuse|رفض)/i, /^(accepteren|accept|agree|allow|ok|موافق|قبول)/i]) {
+      const btn = page.getByRole("button", { name }).first();
+      if (await btn.isVisible().catch(() => false)) {
+        await btn.click().catch(() => {});
+        await page.waitForTimeout(600);
+        break;
+      }
+    }
     // Poster: the first screen, exactly as a visitor sees it.
     const png = await page.screenshot({ type: "png" });
     await sharp(png)
