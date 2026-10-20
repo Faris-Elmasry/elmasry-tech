@@ -2,31 +2,38 @@
 /**
  * capture-previews.mjs — record the homepage "Our work" previews.
  *
- * For every project it opens the live URL in headless Chromium, records a
- * ~7 s smooth auto-scroll, and writes:
- *   public/images/work/<slug>.webm         (muted, compressed with ffmpeg if available)
- *   public/images/work/<slug>-poster.webp  (first frame, via sharp)
- * Websites and systems are recorded at 1440×900; apps (their web version) at 390×844.
+ * For every project it opens the live URL in headless Chromium and records a
+ * slow, smooth scroll through the first screens, FRAME BY FRAME (scroll a few
+ * pixels, take a sharp screenshot, repeat), so the video never stutters and
+ * stays crisp. The page's clock is faked and advanced one frame at a time, so
+ * sliders, counters and JS animations move at the speed you see in the video.
+ * It writes:
+ *   public/images/work/<slug>.mp4          (H.264 — plays everywhere)
+ *   public/images/work/<slug>.webm         (VP9 — smaller, used first where supported)
+ *   public/images/work/<slug>-poster.webp  (first frame)
+ * Websites and systems: 1440×900 viewport. Apps (their mobile web version): 390×844 at 2x.
  *
  * USAGE
  *   node scripts/capture-previews.mjs                 # every entry in src/lib/work.ts with a url/demoUrl
  *   node scripts/capture-previews.mjs --only=slug1,slug2
  *   node scripts/capture-previews.mjs --list=previews.json
  *        previews.json = [{ "slug": "nour-cafe", "url": "https://…", "type": "website" }, …]
- *   Options: --seconds=7  --out=public/images/work  --keep-raw (keep Playwright's original webm)
+ *   Options: --screens=3 (how far to scroll)  --speed=150 (css px per second)  --out=public/images/work
  *
  * ENVIRONMENT (all optional)
- *   PLAYWRIGHT_PATH   path to the playwright package
- *                     (default: /home/faris_elmasry_2/.npm/_npx/6bcb61ec6d5aea22/node_modules/playwright)
+ *   PLAYWRIGHT_PATH   path to the playwright package (default: node_modules/playwright)
+ *   CHROME_PATH       Chromium binary (default: Playwright's own)
  *   CHROME_LIBS       extra LD_LIBRARY_PATH for Chromium's system libraries
  *                     (default: ~/.local/chrome-deps/usr/lib/x86_64-linux-gnu:~/.local/chromelibs/usr/lib/x86_64-linux-gnu)
- *   FFMPEG            ffmpeg binary (default: "ffmpeg" on PATH; skipped if missing)
+ *   FFMPEG            ffmpeg binary (default: "ffmpeg" on PATH; required)
  *
- * After it runs, it prints the `preview` objects to paste into src/lib/work.ts.
+ * Always watch every video before publishing it (the site shows no photos of women).
+ * Then set `preview: { video: "/images/work/<slug>", poster: "/images/work/<slug>-poster.webp" }`
+ * in src/lib/work.ts (the player adds .webm / .mp4).
  */
 
 import { spawnSync } from "node:child_process";
-import { mkdirSync, mkdtempSync, readFileSync, readdirSync, renameSync, rmSync, statSync } from "node:fs";
+import { mkdirSync, mkdtempSync, readFileSync, rmSync, statSync } from "node:fs";
 import { createRequire } from "node:module";
 import { homedir, tmpdir } from "node:os";
 import { join, resolve } from "node:path";
@@ -41,9 +48,13 @@ const args = Object.fromEntries(
     return [k, v ?? true];
   })
 );
-const SECONDS = Number(args.seconds ?? 7);
+const SCREENS = Number(args.screens ?? 3);
+const SPEED = Number(args.speed ?? 150);
+const FPS = 30;
+const HOLD_START = 1.2; // seconds on the first screen before scrolling
+const HOLD_END = 1.0;
 const OUT = resolve(root, String(args.out ?? "public/images/work"));
-const PLAYWRIGHT = process.env.PLAYWRIGHT_PATH ?? "/home/faris_elmasry_2/.npm/_npx/6bcb61ec6d5aea22/node_modules/playwright";
+const PLAYWRIGHT = process.env.PLAYWRIGHT_PATH ?? join(root, "node_modules/playwright");
 const LIBS =
   process.env.CHROME_LIBS ??
   [join(homedir(), ".local/chrome-deps/usr/lib/x86_64-linux-gnu"), join(homedir(), ".local/chromelibs/usr/lib/x86_64-linux-gnu")].join(":");
@@ -61,9 +72,13 @@ async function loadList() {
   return work.map((w) => ({ slug: w.slug, url: w.url ?? w.demoUrl, type: w.type }));
 }
 
-const hasFfmpeg = spawnSync(FFMPEG, ["-version"], { stdio: "ignore" }).status === 0;
+function ffmpeg(argv) {
+  const r = spawnSync(FFMPEG, ["-y", "-loglevel", "error", ...argv], { stdio: "inherit" });
+  if (r.status !== 0) throw new Error(`ffmpeg failed: ${argv.join(" ")}`);
+}
 
 async function main() {
+  if (spawnSync(FFMPEG, ["-version"], { stdio: "ignore" }).status !== 0) throw new Error("ffmpeg is required (set FFMPEG=/path/to/ffmpeg)");
   let list = (await loadList()).filter((x) => x.url);
   if (args.only) {
     const only = String(args.only).split(",");
@@ -77,24 +92,22 @@ async function main() {
 
   const { chromium } = require(PLAYWRIGHT);
   const sharp = require(join(root, "node_modules/sharp"));
-  const browser = await chromium.launch({ env: { ...process.env, LD_LIBRARY_PATH: [LIBS, process.env.LD_LIBRARY_PATH].filter(Boolean).join(":") } });
-  const snippets = [];
+  const browser = await chromium.launch({
+    executablePath: process.env.CHROME_PATH || undefined,
+    env: { ...process.env, LD_LIBRARY_PATH: [LIBS, process.env.LD_LIBRARY_PATH].filter(Boolean).join(":") },
+  });
 
   for (const item of list) {
     const mobile = item.type === "app";
     const viewport = mobile ? { width: 390, height: 844 } : { width: 1440, height: 900 };
-    const raw = mkdtempSync(join(tmpdir(), `rec-${item.slug}-`));
+    const outWidth = mobile ? 540 : 1280;
     console.log(`● ${item.slug}  ${item.url}  (${viewport.width}×${viewport.height})`);
 
-    const context = await browser.newContext({
-      viewport,
-      deviceScaleFactor: 1,
-      isMobile: mobile,
-      hasTouch: mobile,
-      recordVideo: { dir: raw, size: viewport },
-    });
-    const started = Date.now();
+    const context = await browser.newContext({ viewport, deviceScaleFactor: mobile ? 2 : 1, isMobile: mobile, hasTouch: mobile });
     const page = await context.newPage();
+    // Fake clock: time runs normally while the page loads, then advances exactly one frame per
+    // captured frame — so sliders, counters and JS animations move at the speed you see in the video.
+    await page.clock.install();
     try {
       await page.goto(item.url, { waitUntil: "networkidle", timeout: 60_000 });
     } catch {
@@ -110,61 +123,48 @@ async function main() {
         break;
       }
     }
-    // Poster: the first screen, exactly as a visitor sees it.
-    const png = await page.screenshot({ type: "png" });
-    await sharp(png)
-      .resize({ width: mobile ? 780 : 1440, withoutEnlargement: true })
-      .webp({ quality: 72, effort: 6 })
-      .toFile(join(OUT, `${item.slug}-poster.webp`));
-
-    const scrollStart = (Date.now() - started) / 1000;
-    // Smooth, eased scroll down (at most ~4 screens), a short hold, then back up a little.
-    await page.evaluate(async (ms) => {
-      const max = Math.min(document.documentElement.scrollHeight - innerHeight, innerHeight * 4);
-      const ease = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
-      const t0 = performance.now();
-      await new Promise((done) => {
-        const step = (now) => {
-          const t = Math.min(1, (now - t0) / (ms * 0.8));
-          window.scrollTo(0, max * ease(t));
-          if (t < 1) requestAnimationFrame(step);
-          else setTimeout(done, ms * 0.2);
-        };
-        requestAnimationFrame(step);
-      });
-    }, SECONDS * 1000);
-    await context.close(); // flushes the video file
-
-    const recorded = readdirSync(raw).find((f) => f.endsWith(".webm"));
-    if (!recorded) {
-      console.warn("  no video recorded, skipping");
-      continue;
+    // Chat widgets pop a bubble over the page: close it like a visitor would
+    for (const btn of await page.getByRole("button", { name: /^(close|sluit|sluiten|dismiss|إغلاق|×)$/i }).all()) {
+      if (await btn.isVisible().catch(() => false)) await btn.click({ timeout: 2000 }).catch(() => {});
     }
-    const src = join(raw, recorded);
-    const dest = join(OUT, `${item.slug}.webm`);
-    if (hasFfmpeg) {
-      // Drop the page-load part, cap the length, scale, VP9 at a small bitrate, no audio.
-      const width = mobile ? 390 : 1120;
-      const r = spawnSync(
-        FFMPEG,
-        ["-y", "-loglevel", "error", "-ss", scrollStart.toFixed(2), "-i", src, "-t", String(SECONDS), "-vf", `scale=${width}:-2,fps=30`, "-c:v", "libvpx-vp9", "-b:v", "0", "-crf", "40", "-row-mt", "1", "-an", dest],
-        { stdio: "inherit" }
-      );
-      if (r.status !== 0) {
-        console.warn("  ffmpeg failed — keeping the raw recording");
-        renameSync(src, dest);
-      }
-    } else {
-      renameSync(src, dest);
+    // Native scrolling only: smooth-scroll CSS would delay every step
+    await page.addStyleTag({ content: "html,body{scroll-behavior:auto!important}" });
+    await page.evaluate(() => window.scrollTo(0, 0));
+    await page.waitForTimeout(1500);
+
+    const distance = await page.evaluate((screens) => Math.max(0, Math.min(document.documentElement.scrollHeight - innerHeight, innerHeight * screens)), SCREENS);
+    const scrollSeconds = Math.max(4, distance / SPEED);
+    // gentle start and stop, steady speed in between
+    const ease = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2) * 0.35 + t * 0.65;
+    const steps = Math.round(scrollSeconds * FPS);
+    const positions = [
+      ...Array(Math.round(HOLD_START * FPS)).fill(0),
+      ...Array.from({ length: steps }, (_, i) => Math.round(distance * ease((i + 1) / steps))),
+      ...Array(Math.round(HOLD_END * FPS)).fill(distance),
+    ];
+
+    const frames = mkdtempSync(join(tmpdir(), `frames-${item.slug}-`));
+    const started = Date.now();
+    await page.clock.pauseAt((await page.evaluate(() => Date.now())) + 500);
+    for (let i = 0; i < positions.length; i++) {
+      if (i === 0 || positions[i] !== positions[i - 1]) await page.evaluate((y) => window.scrollTo(0, y), positions[i]);
+      await page.clock.runFor(Math.round(1000 / FPS));
+      await page.screenshot({ type: "jpeg", quality: 92, path: join(frames, `f${String(i).padStart(5, "0")}.jpg`) });
     }
-    if (!args["keep-raw"]) rmSync(raw, { recursive: true, force: true });
+    await context.close();
+    console.log(`  ${positions.length} frames in ${Math.round((Date.now() - started) / 1000)} s`);
+
+    const input = ["-framerate", String(FPS), "-i", join(frames, "f%05d.jpg")];
+    const vf = ["-vf", `scale=${outWidth}:-2:flags=lanczos,format=yuv420p`];
+    const base = join(OUT, item.slug);
+    ffmpeg([...input, ...vf, "-c:v", "libx264", "-preset", "slow", "-crf", "25", "-movflags", "+faststart", "-an", `${base}.mp4`]);
+    ffmpeg([...input, ...vf, "-c:v", "libvpx-vp9", "-b:v", "0", "-crf", "36", "-row-mt", "1", "-deadline", "good", "-cpu-used", "2", "-an", `${base}.webm`]);
+    await sharp(join(frames, "f00000.jpg")).resize({ width: outWidth }).webp({ quality: 82 }).toFile(`${base}-poster.webp`);
+    rmSync(frames, { recursive: true, force: true });
     const kb = (f) => Math.round(statSync(f).size / 1024);
-    console.log(`  → ${dest.replace(root + "/", "")} (${kb(dest)} KB), poster ${kb(join(OUT, `${item.slug}-poster.webp`))} KB`);
-    snippets.push(`  ${item.slug}: preview: { video: "/images/work/${item.slug}.webm", poster: "/images/work/${item.slug}-poster.webp" },`);
+    console.log(`  → ${item.slug}.mp4 ${kb(`${base}.mp4`)} KB, .webm ${kb(`${base}.webm`)} KB, poster ${kb(`${base}-poster.webp`)} KB`);
   }
   await browser.close();
-  if (!hasFfmpeg) console.log("\n(ffmpeg not found: videos are Playwright's raw webm — larger files.)");
-  if (snippets.length) console.log("\nPaste into src/lib/work.ts:\n" + snippets.join("\n"));
 }
 
 main().catch((e) => {

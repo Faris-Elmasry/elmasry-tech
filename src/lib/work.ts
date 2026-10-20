@@ -3,9 +3,9 @@
 // demos of our own products. The homepage section does not render at all while
 // this list is empty — no placeholders, no invented projects.
 //
-// Previews: run `node scripts/capture-previews.mjs` to record a short scrolling
-// video + poster for every entry with a `url`/`demoUrl`; files land in
-// public/images/work/<slug>.webm and public/images/work/<slug>-poster.webp.
+// Previews: run `node scripts/capture-previews.mjs` to record a slow, sharp
+// scrolling video + poster for every entry with a `url`/`demoUrl`; files land in
+// public/images/work/<slug>.mp4, <slug>.webm and <slug>-poster.webp.
 
 import type { Locale } from "@/lib/site";
 
@@ -30,9 +30,11 @@ export type WorkItem = {
   /** e.g. the demo login: { en: "Login: demo / demo123", ar: "الدخول: demo / demo123" } */
   demoNote?: T;
   preview?: {
-    /** webm/mp4 under /public/images/work (muted, looping). */
-    video?: string;
-    /** WebP poster (always required when `preview` is set). */
+    /** H.264 video under /public/images/work (muted) — plays everywhere. */
+    mp4: string;
+    /** VP9 version of the same video — smaller; browsers that can play it use it first. */
+    webm?: string;
+    /** WebP poster: the video's first frame. */
     poster: string;
   };
   tags?: Record<Locale, string[]>;
@@ -49,7 +51,7 @@ export const work: WorkItem[] = [
       en: "Egypt's home-finishing marketplace — website and mobile app: post a job once and get quotes from nearby craftsmen and material suppliers.",
     },
     url: "https://itafa2na.tech/",
-    preview: { video: "/images/work/itafa2na.webm", poster: "/images/work/itafa2na-poster.webp" },
+    preview: { mp4: "/images/work/itafa2na.mp4", webm: "/images/work/itafa2na.webm", poster: "/images/work/itafa2na-poster.webp" },
     tags: { ar: ["تطبيق موبايل", "سوق إلكتروني", "مصر"], en: ["Mobile app", "Marketplace", "Egypt"] },
   },
   {
@@ -62,7 +64,7 @@ export const work: WorkItem[] = [
       en: "QHSE compliance software with a mobile app: ISO and VCA documents, records, certificates and live status per requirement in one place.",
     },
     url: "https://online-ms.io/",
-    preview: { video: "/images/work/online-ms.webm", poster: "/images/work/online-ms-poster.webp" },
+    preview: { mp4: "/images/work/online-ms.mp4", webm: "/images/work/online-ms.webm", poster: "/images/work/online-ms-poster.webp" },
     tags: { ar: ["نظام SaaS", "تطبيق موبايل", "هولندا"], en: ["SaaS", "Mobile app", "Netherlands"] },
   },
   {
@@ -75,7 +77,7 @@ export const work: WorkItem[] = [
       en: "Website for an ISO and VCA certification consultancy in the Netherlands, tied to their online management system.",
     },
     url: "https://we-management.nl/",
-    preview: { video: "/images/work/we-management.webm", poster: "/images/work/we-management-poster.webp" },
+    preview: { mp4: "/images/work/we-management.mp4", webm: "/images/work/we-management.webm", poster: "/images/work/we-management-poster.webp" },
     tags: { ar: ["موقع شركة", "هولندا"], en: ["Company website", "Netherlands"] },
   },
   {
@@ -88,7 +90,7 @@ export const work: WorkItem[] = [
       en: "Website for a Dutch software house: websites, custom software and AI automation for small businesses.",
     },
     url: "https://smoothware.nl/",
-    preview: { video: "/images/work/smoothware.webm", poster: "/images/work/smoothware-poster.webp" },
+    preview: { mp4: "/images/work/smoothware.mp4", webm: "/images/work/smoothware.webm", poster: "/images/work/smoothware-poster.webp" },
     tags: { ar: ["موقع شركة", "هولندا"], en: ["Company website", "Netherlands"] },
   },
 ];

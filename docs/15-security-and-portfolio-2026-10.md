@@ -13,8 +13,11 @@ What was done on 2026-10-20, how it was tested, and what is still open.
 | `we-management` | WE Management | website | https://we-management.nl/ |
 | `smoothware` | Smoothware | website | https://smoothware.nl/ |
 
-- **Previews:** `node scripts/capture-previews.mjs` records them into `public/images/work/<slug>.webm` and `<slug>-poster.webp`.
-  - The script now closes a cookie banner before recording.
+- **Previews:** `node scripts/capture-previews.mjs` records them into `public/images/work/<slug>.mp4`, `.webm` and `<slug>-poster.webp`.
+  - It records frame by frame (scroll a few pixels, sharp screenshot, repeat) with the page clock advanced one frame at a time, so the scroll is slow and smooth and sliders/counters move at real speed.
+  - It closes cookie banners and chat pop-ups before recording.
+  - Redesigned the same evening: a project list beside one large stage; each video plays to the end, then the next project starts.
+  - The first Smoothware take landed on a slider frame with a woman in it; it was re-recorded and checked frame by frame.
 - **Image check:** every video was reviewed frame by frame. There are no photos of women (the owner's rule for the site).
 - **Store links:** the Itafa2na App Store / Google Play links are not on its website. Add `appStore` / `playStore` to the entry when they're available.
 - **Checked:** Arabic and English at 1440 px and 390 px, with no horizontal scroll.
