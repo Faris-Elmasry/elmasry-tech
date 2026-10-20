@@ -62,7 +62,7 @@ export default async function SystemsPage({ params }: PageProps<"/[locale]/syste
       <StudioHero
         locale={locale}
         crumbs={[{ name: label }]}
-        sheet={isAr ? "08 أنظمة" : "08 systems"}
+        sheet={isAr ? `${String(readySystems.length).padStart(2, "0")} أنظمة` : `${String(readySystems.length).padStart(2, "0")} systems`}
         kicker={isAr ? "أنظمة جاهزة · للشراء أو الإيجار" : "Ready-made · to buy or to rent"}
         keyword={tr(seo.h1!, locale)}
         title={isAr ? "سيب الكشكول. شغلك كله على شاشة واحدة." : "Put the notebook down. Your whole business, on one screen."}
@@ -159,7 +159,7 @@ export default async function SystemsPage({ params }: PageProps<"/[locale]/syste
       </Chapter>
 
       {/* 03 — all systems */}
-      <Chapter index="03" label={isAr ? "كل الأنظمة" : "All systems"} title={isAr ? "تمن أنظمة، كل واحد لنوع شغل." : "Eight systems, each made for one kind of business."}>
+      <Chapter index="03" label={isAr ? "كل الأنظمة" : "All systems"} title={isAr ? `${readySystems.length} أنظمة، كل واحد لنوع شغل.` : `${readySystems.length} systems, each made for one kind of business.`}>
         <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {readySystems.map((s, i) => (
             <Rise as="li" key={s.slug} delay={(i % 4) * 0.05}>

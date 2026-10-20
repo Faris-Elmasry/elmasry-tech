@@ -7,6 +7,7 @@ import {
   CalendarClock,
   Code,
   Dumbbell,
+  Gamepad2,
   Globe,
   GraduationCap,
   HeartPulse,
@@ -23,6 +24,7 @@ import {
   Store,
   Truck,
   UtensilsCrossed,
+  Wifi,
   Workflow,
   type LucideIcon,
 } from "lucide-react";
@@ -38,6 +40,7 @@ const icons: Record<string, LucideIcon> = {
   CalendarClock,
   Code,
   Dumbbell,
+  Gamepad2,
   Globe,
   GraduationCap,
   HeartPulse,
@@ -54,6 +57,7 @@ const icons: Record<string, LucideIcon> = {
   Store,
   Truck,
   UtensilsCrossed,
+  Wifi,
   Workflow,
 };
 

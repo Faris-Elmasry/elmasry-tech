@@ -43,6 +43,117 @@ export interface ReadySystem {
 }
 
 export const readySystems: ReadySystem[] = [
+  // Our own, finished products first (they run in shops today); described by what they really do.
+  {
+    slug: "cafe-playstation",
+    icon: "Gamepad2",
+    name: { en: "Café & PlayStation system", ar: "نظام الكافيه والبلايستيشن" },
+    hint: { en: "Rooms by the hour, orders, shifts", ar: "الرومات بالساعة والطلبات والورديات" },
+    tagline: { en: "Every minute on every console, every cup on every bill.", ar: "كل دقيقة على كل جهاز، وكل كوباية على كل حساب." },
+    summary: {
+      en: "For cafés, PlayStation and gaming lounges, billiards and VIP rooms: time by the hour with single/multi prices, packages and fixed hours, table and room orders, a bar screen, reservations with deposits, blind cash counts at shift close and a Z report — on a PC in the shop, working without internet, with the owner's numbers on his phone.",
+      ar: "للكافيهات وصالات البلايستيشن والجيمنج والبلياردو والرومات الـ VIP: الوقت بالساعة بسعر سنجل ومالتي، والباقات والساعات الثابتة، وطلبات الترابيزات والرومات، وشاشة للبار، والحجوزات بعربون، وعدّ الدرج «أعمى» في قفل الوردية وتقرير Z — على كمبيوتر في المحل، شغال من غير نت، وأرقام صاحب المحل على موبايله.",
+    },
+    audience: {
+      en: ["PlayStation & gaming lounges", "Cafés and coffee shops", "Billiards halls", "VIP gaming rooms"],
+      ar: ["صالات البلايستيشن والجيمنج", "الكافيهات والقهاوي", "صالات البلياردو", "رومات الـ VIP"],
+    },
+    modules: [
+      { title: { en: "Time & rooms", ar: "الوقت والرومات" }, text: { en: "Open time, fixed hours or an amount; single/multi prices by the hour; pause, change room or mode.", ar: "وقت مفتوح أو ساعات ثابتة أو بمبلغ؛ سعر سنجل ومالتي بالساعة؛ إيقاف مؤقت ونقل روم أو وضع." } },
+      { title: { en: "Orders & bar", ar: "الطلبات والبار" }, text: { en: "Orders on tables and rooms, with sugar and extras; the bar sees them on its screen and the floor knows when they're ready.", ar: "طلبات على الترابيزات والرومات بالسكر والإضافات؛ البار بيشوفها على شاشته، والصالة بتعرف لما تجهز." } },
+      { title: { en: "Packages & reservations", ar: "الباقات والحجوزات" }, text: { en: "Hours + a free drink packages; bookings with a deposit that follows the guests.", ar: "باقات ساعات ومعاها مشروب ببلاش؛ حجوزات بعربون بيمشي مع الزباين." } },
+      { title: { en: "Shift & drawer", ar: "الوردية والدرج" }, text: { en: "Blind count at close, approvals for discounts and voids, a Z report that reconciles line by line.", ar: "عدّ أعمى في القفل، وموافقات على الخصم والإلغاء، وتقرير Z بيتطابق سطر بسطر." } },
+      { title: { en: "Stock & tab", ar: "المخزون والنوتة" }, text: { en: "Recipes take stock as you sell; suppliers, purchases and customers on a tab with a limit.", ar: "الوصفات بتخصم من المخزون مع البيع؛ الموردين والمشتريات، والزباين على النوتة بحد." } },
+      { title: { en: "Owner's phone", ar: "موبايل صاحب المحل" }, text: { en: "Today's sales, running rooms and the month — from anywhere, through the cloud link.", ar: "مبيعات النهارده والرومات الشغالة والشهر — من أي مكان عن طريق ربط السحابة." } },
+    ],
+    highlights: {
+      en: ["Works offline on the shop PC", "Power-cut handling for running rooms", "Blind shift count", "Approvals by PIN or by code", "Tablets for waiters", "58/80 mm receipt printers"],
+      ar: ["شغال من غير نت على كمبيوتر المحل", "التعامل مع قطع الكهربا والرومات شغالة", "عدّ الوردية الأعمى", "موافقات برقم سري أو بكود", "تابلت للويتر", "طابعات إيصالات 58 و80 مم"],
+    },
+    integrations: {
+      en: ["Receipt and bar printers", "Cloud link for the owner", "Telegram shift summaries"],
+      ar: ["طابعات الإيصالات والبار", "ربط السحابة لصاحب المحل", "ملخص الوردية على تيليجرام"],
+    },
+    before: {
+      en: ["Start times written on paper", "Drinks forgotten on the bill", "The drawer never matches at night"],
+      ar: ["وقت البداية مكتوب على ورقة", "مشروبات بتتنسي من الحساب", "الدرج عمره ما بيظبط آخر الليل"],
+    },
+    photo: "/images/site/cafe-cashier-v2.webp",
+    photoAlt: { en: "A cashier at the counter of a café", ar: "كاشير على كاونتر كافيه" },
+    screen: {
+      nav: [{ en: "Floor", ar: "الصالة" }, { en: "Bar", ar: "البار" }, { en: "Reservations", ar: "الحجوزات" }, { en: "Shift", ar: "الوردية" }],
+      stats: [
+        { label: { en: "Rooms running", ar: "رومات شغالة" }, value: "6/9" },
+        { label: { en: "Open checks", ar: "حسابات مفتوحة" }, value: "14" },
+        { label: { en: "Sales today", ar: "مبيعات النهارده" }, value: "4,860" },
+      ],
+      chart: [24, 38, 52, 46, 70, 92, 80],
+      rows: [
+        { name: { en: "PS5-2 · Multi", ar: "PS5-2 · مالتي" }, meta: { en: "Started 19:10 · 1 h 32 m", ar: "بدأ 19:10 · ساعة و32 د" }, value: "118" },
+        { name: { en: "Table 4 · 3 orders", ar: "ترابيزة 4 · 3 طلبات" }, meta: { en: "Bar: ready", ar: "البار: جاهز" }, value: "95" },
+        { name: { en: "VIP room · package", ar: "روم VIP · باقة" }, meta: { en: "Free drink left: 1", ar: "فاضل مشروب ببلاش: 1" }, value: "250" },
+      ],
+    },
+    keywords: {
+      en: ["PlayStation cafe management software Egypt", "gaming lounge system", "cafe POS Egypt"],
+      ar: ["برنامج بلايستيشن", "برنامج كافيه وبلايستيشن", "سيستم بلايستيشن", "برنامج حساب وقت البلايستيشن", "برنامج كافيه"],
+    },
+  },
+  {
+    slug: "wifi-cards",
+    icon: "Wifi",
+    name: { en: "WiFi cards system", ar: "نظام كروت الواي فاي" },
+    hint: { en: "Prepaid internet on MikroTik", ar: "إنترنت بالكروت على ميكروتيك" },
+    tagline: { en: "Sell internet by the card — the router enforces every limit.", ar: "بيع النت بالكارت — والراوتر نفسه بيطبّق كل حد." },
+    summary: {
+      en: "For cafés, shops, hostels and residential areas that sell internet: you set each card's data, speed, validity, time and devices; print cards that look like the familiar ones; sell and top up from a cashier screen; let customers buy online from the WiFi login page; and get Telegram alerts. Limits live on the MikroTik router, so they hold even if the server or the power goes down.",
+      ar: "للكافيهات والمحلات والهوستلات والمناطق السكنية اللي بتبيع نت: انت بتحدد لكل كارت الجيجات والسرعة والصلاحية والوقت وعدد الأجهزة؛ وبتطبع كروت شكل الكروت المعروفة؛ وبتبيع وتشحن من شاشة كاشير؛ والزبون يقدر يشتري أونلاين من صفحة دخول الواي فاي؛ وتنبيهات على تيليجرام. الحدود متسجّلة على راوتر ميكروتيك نفسه، فبتفضل شغالة حتى لو السيرفر أو الكهربا قطعت.",
+    },
+    audience: {
+      en: ["Cafés & lounges", "Shops selling internet", "Hostels & furnished apartments", "Residential areas"],
+      ar: ["الكافيهات والصالات", "محلات بيع النت", "الهوستلات والشقق المفروشة", "المناطق السكنية"],
+    },
+    modules: [
+      { title: { en: "Plans you define", ar: "باقات بتحددها انت" }, text: { en: "Data in MB/GB, upload/download speed, validity from first use, time and devices — empty means no limit.", ar: "الجيجات، وسرعة التحميل والرفع، والصلاحية من أول استخدام، والوقت، وعدد الأجهزة — الخانة الفاضية يعني من غير حد." } },
+      { title: { en: "Printed cards", ar: "كروت مطبوعة" }, text: { en: "Your logo, shop name, price, the code in large print and your support number — on 58/80 mm or A4.", ar: "لوجوك واسم المحل والسعر، والكود بخط كبير ورقم الدعم بتاعك — على 58 أو 80 مم أو ورق A4." } },
+      { title: { en: "Cashier screen", ar: "شاشة الكاشير" }, text: { en: "Sell and print in two taps, top up a card, close the shift with the real cash and the difference.", ar: "بيع وطباعة بضغطتين، وشحن الكارت، وقفل الوردية بالنقدية الفعلية والفرق." } },
+      { title: { en: "Buy online", ar: "شراء أونلاين" }, text: { en: "A customer without a card pays from the WiFi login page (wallets and cards) and connects at once.", ar: "الزبون اللي معهوش كارت يدفع من صفحة دخول الواي فاي (محافظ وكروت) ويتصل على طول." } },
+      { title: { en: "Reports & alerts", ar: "التقارير والتنبيهات" }, text: { en: "Revenue by day, plan, staff and hour; Telegram alerts when a router drops or cards run low.", ar: "الإيراد باليوم والباقة والموظف والساعة؛ وتنبيه تيليجرام لما راوتر يفصل أو الكروت تقرّب تخلص." } },
+      { title: { en: "Easy setup", ar: "تركيب سهل" }, text: { en: "A wizard prepares a MikroTik router — even factory-new — from its IP and admin password.", ar: "معالج بيجهّز راوتر ميكروتيك — حتى لو جديد — من الـ IP وباسورد الأدمن بس." } },
+    ],
+    highlights: {
+      en: ["Limits enforced by the router itself", "Survives power cuts", "Owner and cashier roles", "Daily backup", "One server for many shops", "Dashboard as a phone app"],
+      ar: ["الحدود بيطبّقها الراوتر نفسه", "بيستحمل قطع الكهربا", "صلاحيات المالك والكاشير", "نسخة احتياطية كل يوم", "سيرفر واحد لكذا محل", "لوحة التحكم كتطبيق على الموبايل"],
+    },
+    integrations: {
+      en: ["MikroTik routers", "Online payments (wallets and cards)", "Telegram alerts", "Thermal printers"],
+      ar: ["راوترات ميكروتيك", "الدفع الأونلاين (محافظ وكروت)", "تنبيهات تيليجرام", "الطابعات الحرارية"],
+    },
+    before: {
+      en: ["Cards written by hand in a notebook", "A user who keeps going after his quota", "No idea what was sold today"],
+      ar: ["الكروت متكتبة بإيد في كشكول", "يوزر خلّص الجيجات ولسه شغال", "مش عارف اتباع إيه النهارده"],
+    },
+    photo: "/images/site/shop-phone-v2.webp",
+    photoAlt: { en: "A customer using his phone in a shop", ar: "زبون بيستخدم موبايله في محل" },
+    screen: {
+      nav: [{ en: "Cards", ar: "الكروت" }, { en: "Sell", ar: "البيع" }, { en: "Routers", ar: "الراوترات" }, { en: "Reports", ar: "التقارير" }],
+      stats: [
+        { label: { en: "Cards sold today", ar: "كروت اتباعت النهارده" }, value: "86" },
+        { label: { en: "Online now", ar: "متصلين دلوقتي" }, value: "41" },
+        { label: { en: "Revenue today", ar: "إيراد النهارده" }, value: "1,720" },
+      ],
+      chart: [40, 46, 58, 52, 66, 74, 88],
+      rows: [
+        { name: { en: "Card 10 GB · 30 days", ar: "كارت 10 جيجا · 30 يوم" }, meta: { en: "Sold by cashier 1", ar: "باعه كاشير 1" }, value: "100" },
+        { name: { en: "Router · main hall", ar: "راوتر · الصالة" }, meta: { en: "Online · 27 users", ar: "شغال · 27 مستخدم" }, value: { en: "OK", ar: "تمام" } },
+        { name: { en: "Online purchase · 2 GB", ar: "شراء أونلاين · 2 جيجا" }, meta: { en: "Paid by wallet", ar: "اتدفع بمحفظة" }, value: "25" },
+      ],
+    },
+    keywords: {
+      en: ["WiFi hotspot cards software Egypt", "MikroTik hotspot billing", "prepaid internet cards system"],
+      ar: ["برنامج كروت واي فاي", "سيستم كروت نت", "برنامج هوت سبوت ميكروتيك", "برنامج بيع كروت انترنت"],
+    },
+  },
   {
     slug: "pos-cashier",
     icon: "ScanBarcode",
@@ -554,9 +665,9 @@ export const systemFaqs: { q: T; a: T }[] = [
 export const serviceSystems: Record<string, string[]> = {
   "website-development": ["clinic-management", "restaurant-system", "school-management"],
   "mobile-app-development": ["restaurant-system", "gym-management", "pharmacy-system"],
-  "custom-software": ["inventory-warehouse", "accounting-hr", "pos-cashier"],
+  "custom-software": ["cafe-playstation", "inventory-warehouse", "accounting-hr", "pos-cashier"],
   "ai-chatbots": ["clinic-management", "restaurant-system"],
-  "business-automation": ["accounting-hr", "inventory-warehouse"],
+  "business-automation": ["wifi-cards", "accounting-hr", "inventory-warehouse"],
   "ecommerce-development": ["pos-cashier", "inventory-warehouse"],
 };
 

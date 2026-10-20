@@ -3,6 +3,7 @@
 // and what happens after someone gets in touch. Plain language throughout.
 
 import type { Locale } from "@/lib/site";
+import { readySystems } from "@/lib/systems";
 
 type T = Record<Locale, string>;
 
@@ -41,7 +42,7 @@ export const teamRoles: { role: T; text: T }[] = [
 export const companyFacts: { value: string | T; label: T }[] = [
   { value: "2023", label: { en: "Founded in Cairo", ar: "سنة التأسيس في القاهرة" } },
   { value: "6", label: { en: "Kinds of service", ar: "أنواع خدمات" } },
-  { value: "8", label: { en: "Ready-made systems", ar: "أنظمة جاهزة" } },
+  { value: String(readySystems.length), label: { en: "Ready-made systems", ar: "أنظمة جاهزة" } },
   { value: { en: "AR · EN", ar: "عربي · إنجليزي" }, label: { en: "Everything in both languages", ar: "كل حاجة باللغتين" } },
 ];
 

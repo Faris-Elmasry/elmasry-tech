@@ -92,6 +92,18 @@ export const pageSeo: Record<string, PageSeo> = {
     h1: { en: "E-commerce website development in Egypt", ar: "تصميم متجر إلكتروني في مصر" },
     intro: { en: "E-commerce website development in Egypt that sells online and in your shop from the same stock. Customers pay the way they like — card, wallet, instalments or cash on delivery — shipping is booked for you, and the shop cashier keeps selling even when the internet drops.", ar: "تصميم متجر إلكتروني في مصر يبيع أونلاين وفي المحل من نفس المخزون. العميل يدفع بالطريقة اللي تريحه — فيزا أو محفظة أو تقسيط أو كاش عند الاستلام — والشحن بيتحجز لوحده، وكاشير المحل بيكمّل بيع حتى لو النت فصل." },
   },
+  "system:cafe-playstation": {
+    title: { en: "PlayStation & Café Management Software in Egypt", ar: "برنامج بلايستيشن وكافيه لحساب الوقت والطلبات" },
+    description: { en: "PlayStation and café software in Egypt: time by the hour with single/multi prices, packages, table and room orders, a bar screen, reservations and blind shift counts — works offline.", ar: "برنامج بلايستيشن وكافيه في مصر: حساب الوقت بالساعة سنجل ومالتي، والباقات، وطلبات الترابيزات والرومات، وشاشة البار، والحجوزات، وقفل الوردية — وشغال من غير نت." },
+    h1: { en: "PlayStation & café management software", ar: "برنامج بلايستيشن وكافيه" },
+    intro: { en: "PlayStation and café management software for gaming lounges, cafés, billiards and VIP rooms in Egypt: time by the hour, packages, orders and a bar screen, reservations with deposits, blind cash counts and a Z report — on a PC in the shop, working without internet.", ar: "برنامج بلايستيشن وكافيه لصالات الجيمنج والكافيهات والبلياردو والرومات الـ VIP: الوقت بالساعة، والباقات، والطلبات وشاشة البار، والحجوزات بعربون، وعدّ الدرج وتقرير Z — على كمبيوتر في المحل وشغال من غير نت." },
+  },
+  "system:wifi-cards": {
+    title: { en: "WiFi Cards & MikroTik Hotspot Software in Egypt", ar: "برنامج كروت واي فاي وهوت سبوت ميكروتيك" },
+    description: { en: "WiFi cards software for MikroTik in Egypt: plans by data, speed and validity, printed cards, a cashier screen, online purchase from the login page and Telegram alerts.", ar: "برنامج كروت واي فاي لميكروتيك في مصر: باقات بالجيجات والسرعة والصلاحية، وطباعة الكروت، وشاشة كاشير، وشراء أونلاين من صفحة الدخول، وتنبيهات تيليجرام." },
+    h1: { en: "WiFi cards software for MikroTik", ar: "برنامج كروت واي فاي لميكروتيك" },
+    intro: { en: "WiFi cards software for cafés, shops, hostels and residential areas that sell internet on MikroTik: you set each card's data, speed, validity and devices, print cards, sell and top up from a cashier screen — and the router itself enforces every limit, even through power cuts.", ar: "برنامج كروت واي فاي للكافيهات والمحلات والهوستلات والمناطق السكنية اللي بتبيع نت على ميكروتيك: بتحدد لكل كارت الجيجات والسرعة والصلاحية وعدد الأجهزة، وبتطبع الكروت وتبيع وتشحن من شاشة كاشير — والراوتر نفسه بيطبّق كل حد حتى لو الكهربا قطعت." },
+  },
   "system:pos-cashier": {
     title: { en: "POS Cashier Software in Egypt — Works Offline", ar: "برنامج كاشير يشتغل بدون نت | نقاط بيع POS" },
     description: { en: "POS and cashier software in Egypt for shops, cafés and chains: barcode, receipts, shift closing and live sales — works offline. Book a free demo today.", ar: "برنامج كاشير للمحلات والكافيهات في مصر: سيستم كاشير بالباركود وتقفيل الورديات، وبرنامج نقاط بيع POS بيشتغل بدون انترنت. احجز عرض تجريبي مجاني دلوقتي." },
