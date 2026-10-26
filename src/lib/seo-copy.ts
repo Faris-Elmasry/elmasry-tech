@@ -105,10 +105,10 @@ export const pageSeo: Record<string, PageSeo> = {
     intro: { en: "WiFi cards software for cafés, shops, hostels and residential areas that sell internet on MikroTik: you set each card's data, speed, validity and devices, print cards, sell and top up from a cashier screen — and the router itself enforces every limit, even through power cuts.", ar: "برنامج كروت واي فاي للكافيهات والمحلات والهوستلات والمناطق السكنية اللي بتبيع نت على ميكروتيك: بتحدد لكل كارت الجيجات والسرعة والصلاحية وعدد الأجهزة، وبتطبع الكروت وتبيع وتشحن من شاشة كاشير — والراوتر نفسه بيطبّق كل حد حتى لو الكهربا قطعت." },
   },
   "system:pos-cashier": {
-    title: { en: "POS Cashier Software in Egypt — Works Offline", ar: "برنامج كاشير يشتغل بدون نت | نقاط بيع POS" },
-    description: { en: "POS and cashier software in Egypt for shops, cafés and chains: barcode, receipts, shift closing and live sales — works offline. Book a free demo today.", ar: "برنامج كاشير للمحلات والكافيهات في مصر: سيستم كاشير بالباركود وتقفيل الورديات، وبرنامج نقاط بيع POS بيشتغل بدون انترنت. احجز عرض تجريبي مجاني دلوقتي." },
-    h1: { en: "POS & cashier software in Egypt", ar: "برنامج كاشير للمحلات والكافيهات في مصر" },
-    intro: { en: "POS and cashier software for shops, cafés and chains in Egypt: scan, print the receipt, close the shift to the last pound — and see today’s sales from your phone. It keeps working offline and catches up by itself.", ar: "برنامج كاشير للمحلات والكافيهات والسلاسل في مصر: امسح الباركود، اطبع الفاتورة، اقفل الوردية بالمليم — وشوف مبيعات النهارده من موبايلك. بيشتغل من غير نت ويحدّث نفسه أول ما يرجع." },
+    title: { en: "POS Cashier & Instalment Software in Egypt", ar: "برنامج كاشير وتقسيط ومحلات موبايلات" },
+    description: { en: "Cashier software in Egypt for shops and mobile stores: barcode, shifts, instalment contracts, IMEI and warranty, repairs — works offline. Book a free demo.", ar: "برنامج كاشير وتقسيط في مصر للمحلات ومحلات الموبايلات: باركود وورديات وعقود أقساط وتتبع IMEI والضمان وصيانة، وبيشتغل من غير نت. احجز عرض تجريبي مجاني." },
+    h1: { en: "POS, instalments & mobile-shop software", ar: "برنامج كاشير وتقسيط ومحلات موبايلات" },
+    intro: { en: "Cashier software for shops, supermarkets and mobile stores in Egypt: scan, print the receipt and close the shift; sell on instalments with a down payment, months and a guarantor; track every phone by IMEI with its warranty; run repairs. It works offline and is ready to connect to the e-receipt system.", ar: "برنامج كاشير للمحلات والسوبر ماركت ومحلات الموبايلات في مصر: امسح الباركود، اطبع الفاتورة، اقفل الوردية؛ وبيع بالتقسيط بمقدم وشهور وضامن؛ وتتبّع كل موبايل بالـ IMEI وضمانه؛ وقسم صيانة. بيشتغل من غير نت وجاهز للربط بمنظومة الإيصال الإلكتروني." },
   },
   "system:inventory-warehouse": {
     title: { en: "Inventory & Warehouse Software in Egypt", ar: "برنامج مخازن وجرد للشركات والمحلات" },
@@ -123,10 +123,10 @@ export const pageSeo: Record<string, PageSeo> = {
     intro: { en: "Clinic management software for clinics, medical centres and dentists in Egypt: bookings at reception or online, WhatsApp reminders so fewer patients forget, the patient’s full file, prescriptions and bills — private and protected.", ar: "برنامج عيادات للعيادات والمراكز الطبية وعيادات الأسنان: الحجز من الاستقبال أو أونلاين، وتذكير على واتساب عشان المريض مينساش، وملف المريض كامل، والروشتة والفاتورة — بخصوصية وأمان." },
   },
   "system:pharmacy-system": {
-    title: { en: "Pharmacy Management Software in Egypt", ar: "برنامج صيدليات بالباركود وتنبيه الصلاحية" },
-    description: { en: "Pharmacy management software in Egypt: a fast barcode counter, alternatives, expiry alerts, supplier orders and delivery for every pharmacy. Free demo.", ar: "برنامج صيدليات في مصر: سيستم صيدلية بصرف سريع بالباركود وبدايل، وتنبيه قبل انتهاء الصلاحية، وطلبيات الموردين والتوصيل. احجز عرض تجريبي مجاني دلوقتي." },
-    h1: { en: "Pharmacy management software in Egypt", ar: "برنامج صيدليات بالباركود" },
-    intro: { en: "Pharmacy management software for single pharmacies and chains in Egypt: a fast counter, a medicine list with alternatives, expiry tracking, supplier orders and returns, delivery orders and transfers between branches.", ar: "برنامج صيدليات للصيدليات الفردي والسلاسل: صرف سريع، وقايمة أدوية بالبدايل، ومتابعة الصلاحية، وطلبيات الموردين والمرتجع، وطلبات التوصيل، والتحويل بين الفروع." },
+    title: { en: "Pharmacy Software in Egypt — Alternatives, Expiry, Insurance", ar: "برنامج صيدليات بالبدايل والصلاحية والتأمين" },
+    description: { en: "Pharmacy software in Egypt: sell by strip or box, alternatives, earliest-expiry-first, insurance co-pay, controlled-drugs register and delivery. Free demo.", ar: "برنامج صيدليات في مصر: بيع بالشريط والعلبة، وبدايل بنفس المادة الفعالة، وصرف الأقرب انتهاءً، وتحمّل شركات التأمين، وسجل المخدرة، والتوصيل. احجز عرض مجاني." },
+    h1: { en: "Pharmacy management software in Egypt", ar: "برنامج صيدليات بالبدايل والصلاحية" },
+    intro: { en: "Pharmacy software for Egypt: search by name, ingredient or barcode and sell by strip or box; alternatives with the same ingredient; the earliest expiry goes out first and an expired batch can’t be sold; insurance and contract companies with the patient’s co-pay; a controlled-drugs register; home-delivery orders. Ready to connect to the e-receipt system.", ar: "برنامج صيدليات في مصر: دوّر بالاسم أو المادة الفعالة أو الباركود وبيع بالشريط أو العلبة؛ وبدايل بنفس المادة؛ والأقرب انتهاءً يخرج الأول والتشغيلة المنتهية مستحيل تتباع؛ وشركات التأمين والتعاقدات بنسبة تحمّل المريض؛ وسجل للأدوية المخدرة؛ وطلبات التوصيل. وجاهز للربط بمنظومة الإيصال الإلكتروني." },
   },
   "system:gym-management": {
     title: { en: "Gym Management Software in Egypt", ar: "برنامج جيم لإدارة الاشتراكات والحضور" },
@@ -141,10 +141,22 @@ export const pageSeo: Record<string, PageSeo> = {
     intro: { en: "Restaurant and café POS software for Egypt: tables, takeaway and delivery, a kitchen screen, recipes that take ingredients out of stock with every sale, delivery areas and riders — and app orders on the same screen.", ar: "برنامج مطاعم وكافيهات فيه كل حاجة: الصالة والترابيزات، والتيك أواي والتوصيل، وشاشة المطبخ، ووصفات بتخصم الخامات مع كل بيعة، ومناطق التوصيل والطيارين — وطلبات التطبيقات على نفس الشاشة." },
   },
   "system:school-management": {
-    title: { en: "School Management Software in Egypt", ar: "برنامج إدارة مدارس وسناتر وحضور وغياب" },
-    description: { en: "School management software in Egypt: registration, timetables, attendance, grades, fees and instalments, with a page for parents. Book a free demo.", ar: "برنامج إدارة مدارس في مصر وبرنامج سنتر دروس: التسجيل والجداول والحضور والغياب والدرجات والمصاريف والأقساط، مع صفحة لأولياء الأمور. احجز عرض تجريبي مجاني." },
-    h1: { en: "School management software in Egypt", ar: "برنامج إدارة مدارس وسناتر" },
-    intro: { en: "School management software for schools, training centres and academies in Egypt: registration, student files, timetables, attendance, grades, fees and instalments — with a page for parents and students and instant notifications.", ar: "برنامج إدارة مدارس وسناتر وأكاديميات: التسجيل، وملفات الطلاب، والجداول، والحضور، والدرجات، والمصاريف والأقساط — مع صفحة لأولياء الأمور والطلاب وإشعارات فورية." },
+    title: { en: "Tutoring Center Management Software in Egypt", ar: "برنامج سنتر دروس خصوصية وحضور بالكارت" },
+    description: { en: "Tutoring center software in Egypt: groups and timetables, QR card attendance, fees and reminders, exams, teacher shares and a parents’ app. Book a free demo.", ar: "برنامج إدارة سنتر دروس خصوصية في مصر: مجموعات ومواعيد، وحضور بكارت QR، ومصاريف وتذكير، وامتحانات، ونصيب المدرس، وتطبيق لولي الأمر. احجز عرض مجاني." },
+    h1: { en: "Tutoring center management software", ar: "برنامج سنتر دروس خصوصية" },
+    intro: { en: "Management software for private-lesson centres in Egypt: students with their guardian’s number, groups by subject, grade, teacher and room, QR card attendance that flags unpaid students, absence messages, fees, exams and the teacher’s share — plus an app for students and parents.", ar: "برنامج إدارة سناتر الدروس الخصوصية في مصر: الطلاب برقم ولي الأمر، والمجموعات بالمادة والصف والمدرس والقاعة، والحضور بكارت QR وتنبيه اللي مدفعش، ورسائل الغياب، والمصاريف والامتحانات ونصيب المدرس — وتطبيق للطالب وولي الأمر." },
+  },
+  "system:salon-barber": {
+    title: { en: "Salon & Barbershop Software in Egypt", ar: "برنامج صالون وحلاق بالحجز والدور والعمولات" },
+    description: { en: "Salon and barbershop software in Egypt: booking calendar per barber, walk-in queue, online booking on WhatsApp, cashier and barber commissions. Free demo.", ar: "برنامج صالون وحلاق في مصر: حجوزات لكل حلاق، ودور انتظار بشاشة، وحجز أونلاين بتأكيد واتساب، وكاشير، وعمولة الحلاقين. احجز عرض تجريبي مجاني." },
+    h1: { en: "Salon & barbershop software in Egypt", ar: "برنامج صالون وحلاق" },
+    intro: { en: "Software for barbershops and salons in Egypt: a booking calendar with a column per barber that never double-books, a numbered walk-in queue with a TV screen, online booking confirmed by WhatsApp, a cashier with tips, barber commissions, deposits, session packs and gift cards.", ar: "برنامج لمحلات الحلاقة والصالونات في مصر: كالندر حجوزات بعمود لكل حلاق ومستحيل يحجز اتنين في نفس الوقت، ودور بأرقام وشاشة تلفزيون، وحجز أونلاين بتأكيد واتساب، وكاشير بالبقشيش، وعمولة الحلاقين، والعربون وباقات الجلسات وكروت الهدية." },
+  },
+  "system:medical-lab": {
+    title: { en: "Medical Lab Software in Egypt — Results & Reports", ar: "برنامج معمل تحاليل بالنتايج والتقارير" },
+    description: { en: "Medical laboratory software in Egypt: reception and barcode labels, results with flags, lab-doctor approval, Arabic/English reports, WhatsApp links and quality control.", ar: "برنامج معمل تحاليل في مصر: استقبال وليبل باركود، ونتايج بعلامات، واعتماد طبيب المعمل، وتقارير عربي/إنجليزي، وروابط واتساب، ومراقبة جودة. احجز عرض مجاني." },
+    h1: { en: "Medical lab software in Egypt", ar: "برنامج معمل تحاليل" },
+    intro: { en: "Medical laboratory software for Egypt: reception with tests, packages and contract companies; a barcode label per tube; samples received or rejected; results with high/low/critical flags; approval by the lab doctor only; an Arabic/English report or a WhatsApp link for the patient; quality control, reagent stock, urgent orders and home visits.", ar: "برنامج معامل تحاليل في مصر: استقبال بالتحاليل والباقات وشركات التعاقد؛ وليبل باركود لكل أنبوبة؛ واستلام العينة أو رفضها؛ ونتايج بعلامة عالي/واطي/حرج؛ والاعتماد لطبيب المعمل بس؛ وتقرير عربي/إنجليزي أو رابط واتساب للمريض؛ ومراقبة جودة ومخزون كواشف وتحاليل مستعجلة وزيارات منزلية." },
   },
   "system:accounting-hr": {
     title: { en: "Accounting & Payroll Software in Egypt", ar: "برنامج حسابات ورواتب بالفاتورة الإلكترونية" },

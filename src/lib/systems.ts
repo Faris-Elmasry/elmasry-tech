@@ -43,7 +43,7 @@ export interface ReadySystem {
 }
 
 export const readySystems: ReadySystem[] = [
-  // Our own, finished products first (they run in shops today); described by what they really do.
+  // Our own finished products first; every entry describes only what the product really does.
   {
     slug: "cafe-playstation",
     icon: "Gamepad2",
@@ -157,56 +157,276 @@ export const readySystems: ReadySystem[] = [
   {
     slug: "pos-cashier",
     icon: "ScanBarcode",
-    name: { en: "Cashier & sales", ar: "الكاشير والمبيعات" },
-    hint: { en: "Shops, cafés, restaurants", ar: "المحلات والكافيهات والمطاعم" },
-    tagline: { en: "A fast cashier that keeps selling when the internet drops.", ar: "كاشير سريع، بيكمّل بيع حتى لو النت فصل." },
+    name: { en: "Cashier, sales & instalments", ar: "الكاشير والمبيعات والتقسيط" },
+    hint: { en: "Shops, phone stores, instalments", ar: "المحلات والموبايلات والتقسيط" },
+    tagline: { en: "A fast cashier that sells on instalments and tracks every phone by IMEI.", ar: "كاشير سريع، وبيع بالتقسيط، وكل موبايل متتبّع بالـ IMEI." },
     summary: {
-      en: "For shops, cafés and chains: scan, print the receipt, close the shift to the last pound — and see today’s sales from your phone. It keeps working offline and catches up by itself.",
-      ar: "للمحلات والكافيهات والسلاسل: امسح الباركود، اطبع الفاتورة، اقفل الوردية بالمليم — وشوف مبيعات النهارده من موبايلك. بيشتغل من غير نت ويحدّث نفسه أول ما يرجع.",
+      en: "For shops, supermarkets and mobile stores: scan, print the receipt and close the shift — then sell on instalments with a down payment, months, optional interest and a guarantor, collect each instalment with a receipt, and chase late payers on WhatsApp. Phone shops get IMEI tracking, warranty and a repair desk. It keeps working offline, catches up by itself, and is ready to connect to the e-receipt system.",
+      ar: "للمحلات والسوبر ماركت ومحلات الموبايلات: امسح الباركود، اطبع الفاتورة، اقفل الوردية — وبيع بالتقسيط بمقدم وعدد شهور وفايدة اختيارية وضامن، وحصّل كل قسط بإيصال، وافتكر المتأخرين على واتساب. ومحلات الموبايلات معاها تتبع بالـ IMEI والضمان وقسم صيانة. بيشتغل من غير نت ويحدّث نفسه أول ما يرجع، وجاهز للربط بمنظومة الإيصال الإلكتروني.",
     },
     audience: {
-      en: ["Shops & supermarkets", "Cafés & restaurants", "Mobile & electronics stores", "Chains with branches"],
-      ar: ["المحلات والسوبر ماركت", "الكافيهات والمطاعم", "محلات الموبايل والإلكترونيات", "السلاسل اللي ليها فروع"],
+      en: ["Shops & supermarkets", "Mobile & electronics stores", "Shops that sell on instalments", "Chains with branches"],
+      ar: ["المحلات والسوبر ماركت", "محلات الموبايلات والإلكترونيات", "المحلات اللي بتبيع بالتقسيط", "السلاسل اللي ليها فروع"],
     },
     modules: [
-      { title: { en: "Selling screen", ar: "شاشة البيع" }, text: { en: "Barcode, quick buttons, discounts, paying half cash half card, and parked bills.", ar: "باركود، وزراير سريعة، وخصومات، ودفع نص كاش ونص فيزا، وتعليق الفاتورة." } },
+      { title: { en: "Selling screen", ar: "شاشة البيع" }, text: { en: "Barcode, quick buttons, discounts, half cash half card, parked bills — and returns linked to the original receipt.", ar: "باركود، وزراير سريعة، وخصومات، ونص كاش ونص فيزا، وتعليق الفاتورة — والمرتجع مربوط بالفاتورة الأصلية." } },
       { title: { en: "Shifts & cash drawer", ar: "الورديات والدرج" }, text: { en: "Open and close shifts, count the cash, and see any difference per cashier.", ar: "افتح واقفل الوردية، اعدّ الفلوس، وشوف أي فرق لكل كاشير." } },
-      { title: { en: "Returns & exchanges", ar: "المرتجع والاستبدال" }, text: { en: "Linked to the original receipt, and the item goes back to stock by itself.", ar: "مربوط بالفاتورة الأصلية، والصنف بيرجع المخزن لوحده." } },
-      { title: { en: "Customers & points", ar: "العملاء والنقاط" }, text: { en: "Customer accounts, money they owe, and loyalty points.", ar: "حسابات العملاء، والآجل، ونقاط الولاء." } },
-      { title: { en: "Stock & buying", ar: "المخزن والمشتريات" }, text: { en: "Supplier bills, an alert before items run out, and stock counts.", ar: "فواتير الموردين، وتنبيه قبل ما الصنف يخلص، والجرد." } },
-      { title: { en: "Reports", ar: "التقارير" }, text: { en: "Sales by item, cashier, branch and hour — and today’s profit.", ar: "المبيعات حسب الصنف والكاشير والفرع والساعة — ومكسب النهارده." } },
+      { title: { en: "Instalments", ar: "التقسيط" }, text: { en: "Down payment, months, interest (none, a percentage or a fixed sum), a guarantor — and instalments that add up exactly. Collect in full or in part, with a printed receipt.", ar: "مقدم، وشهور، وفايدة (من غير أو نسبة أو مبلغ ثابت)، وضامن — وأقساط مجموعها بالظبط. حصّل كامل أو جزء، والإيصال بيتطبع." } },
+      { title: { en: "Late payers", ar: "المتأخرين" }, text: { en: "Every late instalment with its days and amount, an optional late fee once per instalment, and a WhatsApp button with a ready message.", ar: "كل قسط متأخر بأيامه ومبلغه، وغرامة تأخير اختيارية مرة واحدة لكل قسط، وزرار واتساب برسالة جاهزة." } },
+      { title: { en: "Phones by IMEI & warranty", ar: "الموبايلات بالـ IMEI والضمان" }, text: { en: "Receive devices by IMEI; the same IMEI can never be sold twice; look one up to see who bought it, when, and whether the warranty is still valid.", ar: "استلام الأجهزة بالـ IMEI، ونفس الـ IMEI مستحيل يتباع مرتين، وبحث بيقولك اتباع لمين وإمتى والضمان ساري ولا خلص." } },
+      { title: { en: "Repairs", ar: "الصيانة" }, text: { en: "Take a device in with the fault and a deposit, follow it from inspection to ready, and hand it over with the balance worked out.", ar: "استلم الجهاز بالعطل وعربون، وتابعه من الفحص لحد الجاهز، وسلّمه والمطلوب متحسب بعد العربون." } },
     ],
     highlights: {
-      en: ["Works offline, catches up online", "Receipt and barcode printers", "Each cashier sees only their part", "All branches on one screen", "Ready for e-receipts", "Receipts in Arabic or English"],
-      ar: ["يشتغل من غير نت ويحدّث لما يرجع", "طابعات فواتير وباركود", "كل كاشير يشوف اللي يخصه", "كل الفروع على شاشة واحدة", "جاهز للإيصال الإلكتروني", "فواتير بالعربي أو الإنجليزي"],
+      en: ["Works offline, catches up online", "Instalments that add up to the last piastre", "A phone can't be sold twice", "Early settlement and rescheduling", "Each cashier sees only their part", "Ready to connect to the e-receipt system"],
+      ar: ["يشتغل من غير نت ويحدّث لما يرجع", "أقساط مجموعها بالظبط للقرش", "الموبايل مستحيل يتباع مرتين", "سداد مبكر وإعادة جدولة", "كل كاشير يشوف اللي يخصه", "جاهز للربط بمنظومة الإيصال الإلكتروني"],
     },
     integrations: {
-      en: ["Barcode scanners", "Receipt printers", "Cash drawers", "Card machines", "Your online store"],
-      ar: ["قارئ الباركود", "طابعة الفواتير", "درج الفلوس", "ماكينة الفيزا", "متجرك الأونلاين"],
+      en: ["Barcode scanners", "Receipt printers", "Cash drawers", "WhatsApp messages", "Consumer-finance companies (recorded and settled)"],
+      ar: ["قارئ الباركود", "طابعة الفواتير", "درج الفلوس", "رسائل واتساب", "شركات التمويل الاستهلاكي (تسجيل وتسوية)"],
     },
     before: {
-      en: ["Sales written in a notebook", "Cash counted twice, still short", "“How much did we sell today?” — nobody knows"],
-      ar: ["المبيعات مكتوبة في كشكول", "الفلوس بتتعد مرتين وبرضه ناقصة", "«بعنا بكام النهارده؟» — محدش عارف"],
+      en: ["Instalments in a notebook, and nobody follows the dates", "The phone’s IMEI on a paper slip, the warranty argued over", "“Who is late this month?” — nobody knows"],
+      ar: ["الأقساط في كشكول ومحدش بيتابع المواعيد", "الـ IMEI على ورقة والضمان بيتخانق عليه", "«مين متأخر الشهر ده؟» — محدش عارف"],
     },
     photo: "/images/site/grocery.webp",
     photoAlt: { en: "A grocer arranging fruit in his shop", ar: "صاحب محل بيرتّب الفاكهة في محله" },
     screen: {
-      nav: [{ en: "Sales", ar: "البيع" }, { en: "Shifts", ar: "الورديات" }, { en: "Stock", ar: "المخزون" }, { en: "Reports", ar: "التقارير" }],
+      nav: [{ en: "Sales", ar: "البيع" }, { en: "Instalments", ar: "التقسيط" }, { en: "Devices", ar: "الأجهزة" }, { en: "Repairs", ar: "الصيانة" }],
       stats: [
-        { label: { en: "Today’s sales", ar: "مبيعات اليوم" }, value: "48,250" },
-        { label: { en: "Invoices", ar: "الفواتير" }, value: "312" },
-        { label: { en: "Avg. basket", ar: "متوسط الفاتورة" }, value: "154" },
+        { label: { en: "Due this month", ar: "مستحق الشهر ده" }, value: "38,400" },
+        { label: { en: "Late contracts", ar: "عقود متأخرة" }, value: "7" },
+        { label: { en: "Devices in stock", ar: "أجهزة في المخزن" }, value: "53" },
       ],
       chart: [38, 52, 46, 70, 64, 88, 76],
       rows: [
-        { name: { en: "Invoice #10482", ar: "فاتورة 10482" }, meta: { en: "Cashier 2 · Cash", ar: "كاشير 2 · نقدي" }, value: "620.00" },
-        { name: { en: "Invoice #10481", ar: "فاتورة 10481" }, meta: { en: "Cashier 1 · Card", ar: "كاشير 1 · بطاقة" }, value: "1,140.50" },
-        { name: { en: "Return #R-219", ar: "مرتجع R-219" }, meta: { en: "Linked to #10455", ar: "مرتبط بفاتورة 10455" }, value: "-85.00" },
+        { name: { en: "Contract C-0127 · 12 months", ar: "عقد C-0127 · 12 شهر" }, meta: { en: "Instalment 3 collected", ar: "القسط 3 اتحصّل" }, value: "1,450" },
+        { name: { en: "IMEI …4821", ar: "IMEI …4821" }, meta: { en: "Sold · warranty valid", ar: "اتباع · الضمان ساري" }, value: { en: "Valid", ar: "ساري" } },
+        { name: { en: "Repair ticket #31", ar: "تذكرة صيانة 31" }, meta: { en: "Waiting for approval", ar: "مستني موافقة" }, value: { en: "Open", ar: "مفتوحة" } },
       ],
     },
     keywords: {
-      en: ["POS system Egypt", "cashier system", "offline POS", "retail POS"],
-      ar: ["برنامج كاشير", "سيستم كاشير", "نظام نقاط البيع", "برنامج كاشير يعمل بدون انترنت"],
+      en: ["POS system Egypt", "cashier system", "installment sales software Egypt", "mobile shop software IMEI", "offline POS"],
+      ar: ["برنامج كاشير", "سيستم كاشير", "برنامج تقسيط", "برنامج محل موبايلات", "برنامج بيع بالتقسيط", "برنامج كاشير يعمل بدون انترنت"],
+    },
+  },
+  {
+    slug: "pharmacy-system",
+    icon: "Pill",
+    name: { en: "Pharmacy system", ar: "نظام الصيدليات" },
+    hint: { en: "Alternatives, expiry, insurance, delivery", ar: "البدايل والصلاحية والتأمين والتوصيل" },
+    tagline: { en: "Fewer expired boxes, a faster counter, clearer profit.", ar: "هالك أقل، وصرف أسرع، ومكسب أوضح." },
+    summary: {
+      en: "For pharmacies: search by name, active ingredient or barcode and sell by the strip or the box; suggest alternatives with the same ingredient; sell the earliest expiry first and never sell an expired batch; handle insurance and contract companies with the patient’s co-pay; keep a controlled-drugs register; run home-delivery orders. Ready to connect to the e-receipt system.",
+      ar: "للصيدليات: دوّر بالاسم أو المادة الفعالة أو الباركود وبيع بالشريط أو بالعلبة؛ والسيستم يقترح بدايل بنفس المادة؛ ويصرف الأقرب انتهاءً الأول ومستحيل يبيع تشغيلة منتهية؛ ويتعامل مع شركات التأمين والتعاقدات بنسبة تحمّل المريض؛ وفيه سجل للأدوية المخدرة؛ وطلبات التوصيل للمنزل. وجاهز للربط بمنظومة الإيصال الإلكتروني.",
+    },
+    audience: {
+      en: ["Independent pharmacies", "Pharmacies that work with insurance companies", "Pharmacies with delivery", "Medical supply shops"],
+      ar: ["الصيدليات المستقلة", "الصيدليات اللي بتتعامل مع شركات تأمين", "الصيدليات اللي بتوصّل", "محلات المستلزمات الطبية"],
+    },
+    modules: [
+      { title: { en: "Counter", ar: "شاشة الصرف" }, text: { en: "Search by name (Arabic or English), ingredient or barcode; sell by strip or box, with a prescription alert before adding such a drug.", ar: "دوّر بالاسم (عربي أو إنجليزي) أو المادة الفعالة أو الباركود، وبيع بالشريط أو بالعلبة، وتنبيه روشتة قبل ما تضيف دواء محتاج روشتة." } },
+      { title: { en: "Alternatives", ar: "البدايل" }, text: { en: "Same active ingredient and strength, shown with stock, price and the nearest expiry — add or swap right from the counter.", ar: "نفس المادة الفعالة ونفس التركيز، ومعاها المخزون والسعر وأقرب تاريخ انتهاء — إضافة أو استبدال من الكاشير." } },
+      { title: { en: "Expiry & batches", ar: "الصلاحية والتشغيلات" }, text: { en: "The earliest expiry goes out first, an expired batch can’t be sold, and a report shows expired / 30 / 90 days with a daily alert.", ar: "الأقرب انتهاءً بيخرج الأول، والتشغيلة المنتهية مستحيل تتباع، وتقرير منتهي / 30 / 90 يوم وتنبيه يومي." } },
+      { title: { en: "Insurance & contracts", ar: "التأمين والتعاقدات" }, text: { en: "Contract discount or price list, the patient’s co-pay by product category, what the insurer owes you, and a monthly statement per company.", ar: "خصم التعاقد أو قايمة أسعار، ونسبة تحمّل المريض حسب فئة الصنف، والمستحق على شركة التأمين، وكشف شهري لكل شركة." } },
+      { title: { en: "Controlled drugs", ar: "الأدوية المخدرة" }, text: { en: "Flag the drug, ask for the prescription number, doctor and patient ID at sale, and print the register: receipts, dispensing and balance.", ar: "علّم الدواء، واطلب رقم الروشتة والدكتور وبطاقة المريض وقت البيع، واطبع السجل: وارد ومنصرف ورصيد." } },
+      { title: { en: "Delivery orders", ar: "طلبات التوصيل" }, text: { en: "Choose home delivery at the counter for a customer with an address, then follow the order: new, out for delivery, delivered.", ar: "اختار «توصيل للمنزل» من الكاشير لعميل ليه عنوان، وتابع الطلب: جديد، خرج للتوصيل، تم التسليم." } },
+    ],
+    highlights: {
+      en: ["Sell by strip or by box", "Earliest expiry out first", "An expired batch can’t be sold", "Insurance co-pay by category", "Controlled-drugs register", "Ready to connect to the e-receipt system"],
+      ar: ["بيع بالشريط أو بالعلبة", "الأقرب انتهاءً يخرج الأول", "التشغيلة المنتهية مستحيل تتباع", "تحمّل المريض حسب الفئة", "سجل الأدوية المخدرة", "جاهز للربط بمنظومة الإيصال الإلكتروني"],
+    },
+    integrations: {
+      en: ["Barcode scanners", "Import your medicine list from a CSV file", "Insurance & contract companies", "Daily backup with a tested restore"],
+      ar: ["قارئ الباركود", "استيراد قايمة أدويتك من ملف CSV", "شركات التأمين والتعاقدات", "نسخة احتياطية يومية واسترجاع متجرّب"],
+    },
+    before: {
+      en: ["Expired boxes found on the shelf too late", "Hunting for an alternative from memory", "The insurer’s balance counted by hand at month end"],
+      ar: ["علب منتهية بتتلاقي على الرف متأخر", "البحث عن بديل من الذاكرة", "مستحق شركة التأمين بيتحسب بالإيد آخر الشهر"],
+    },
+    photo: "/images/site/pharmacy.webp",
+    photoAlt: { en: "A pharmacist reaching for a box on the pharmacy shelves", ar: "صيدلي بيجيب علبة من على رفوف الصيدلية" },
+    screen: {
+      nav: [{ en: "Counter", ar: "الصرف" }, { en: "Expiry", ar: "الصلاحية" }, { en: "Insurance", ar: "التأمين" }, { en: "Delivery", ar: "التوصيل" }],
+      stats: [
+        { label: { en: "Sales today", ar: "مبيعات اليوم" }, value: "21,780" },
+        { label: { en: "Near expiry", ar: "قرب الانتهاء" }, value: "18" },
+        { label: { en: "Due from insurers", ar: "مستحق على التأمين" }, value: "6,240" },
+      ],
+      chart: [44, 50, 62, 58, 70, 82, 66],
+      rows: [
+        { name: { en: "Painkiller 24 tabs", ar: "مسكن 24 قرص" }, meta: { en: "Batch 4471 · 2 months", ar: "تشغيلة 4471 · شهران" }, value: "36" },
+        { name: { en: "Contract company · co-pay 20%", ar: "شركة تعاقد · تحمّل المريض 20%" }, meta: { en: "Invoice #I-205", ar: "فاتورة I-205" }, value: "184" },
+        { name: { en: "Delivery #D-882", ar: "توصيل D-882" }, meta: { en: "Out for delivery", ar: "خرج للتوصيل" }, value: { en: "On the way", ar: "في الطريق" } },
+      ],
+    },
+    keywords: {
+      en: ["pharmacy management system Egypt", "pharmacy POS", "pharmacy insurance software Egypt"],
+      ar: ["برنامج صيدليات", "برنامج إدارة صيدلية", "سيستم صيدلية", "برنامج صيدلية بالباركود", "برنامج صيدلية بالتأمين"],
+    },
+  },
+  {
+    slug: "school-management",
+    icon: "GraduationCap",
+    name: { en: "Tutoring centres system", ar: "نظام السناتر ومراكز الدروس" },
+    hint: { en: "Groups, card attendance, fees", ar: "المجموعات والحضور بالكارت والمصاريف" },
+    tagline: { en: "Groups, attendance and fees — with the parent always in the picture.", ar: "المجموعات والحضور والمصاريف — وولي الأمر دايمًا في الصورة." },
+    summary: {
+      en: "For private-lesson centres: students with their guardian’s number, groups by subject, grade, teacher and room with weekly times and monthly fees; attendance by QR card that flags who hasn’t paid; an absence message to the guardian; fees, exams and the teacher’s share — plus an app where students and parents see the card, timetable, attendance, fees, grades and homework.",
+      ar: "لسناتر الدروس الخصوصية: الطلاب برقم ولي الأمر، والمجموعات بالمادة والصف والمدرس والقاعة ومواعيد أسبوعية ومصاريف شهرية؛ والحضور بكارت QR وبيقولك مين مدفعش؛ ورسالة غياب لولي الأمر؛ والمصاريف والامتحانات ونصيب المدرس — وتطبيق للطالب وولي الأمر يشوفوا فيه الكارت والمواعيد والحضور والمصاريف والدرجات والواجبات.",
+    },
+    audience: {
+      en: ["Private-lesson centres", "Revision centres", "Teachers who run groups", "Academies that work in groups"],
+      ar: ["سناتر الدروس الخصوصية", "مراكز التقوية", "المدرسين اللي شغالين بمجموعات", "الأكاديميات اللي بتشتغل بنظام المجموعات"],
+    },
+    modules: [
+      { title: { en: "Students & groups", ar: "الطلاب والمجموعات" }, text: { en: "Student files with guardian’s name and number; groups with teacher, room, weekly times and monthly fee. A teacher in two groups at once, or a booked room, is refused.", ar: "ملف الطالب باسم ورقم ولي الأمر؛ ومجموعات بمدرس وقاعة ومواعيد أسبوعية ومصاريف شهرية. السيستم بيرفض مدرس في مجموعتين في نفس الوقت أو قاعة محجوزة." } },
+      { title: { en: "Card attendance", ar: "الحضور بالكارت" }, text: { en: "Scan the QR card or the student code: present or late is recorded and reception is told if the month isn’t paid.", ar: "امسح كارت الـ QR أو كود الطالب: بيتسجّل حاضر أو متأخر، والاستقبال بيعرف لو الشهر مش مدفوع." } },
+      { title: { en: "Session sheet & absences", ar: "كشف الحصة والغياب" }, text: { en: "Mark present, late, absent or excused; whoever didn’t come gets an absence message sent to the guardian.", ar: "علّم حاضر أو متأخر أو غايب أو بعذر؛ واللي مجاش بتروح لولي أمره رسالة غياب." } },
+      { title: { en: "Fees", ar: "المصاريف" }, text: { en: "Monthly per group or a session pack, part payments, a “who hasn’t paid” page and reminders to the guardian — by hand or automatically.", ar: "شهري لكل مجموعة أو باقة حصص، ودفع جزء، وصفحة «مين مدفعش»، وتذكير لولي الأمر يدوي أو تلقائي." } },
+      { title: { en: "Exams & teacher’s share", ar: "الامتحانات ونصيب المدرس" }, text: { en: "Fast grade entry with average and ranking, results sent to guardians; the teacher’s share is a percentage of what was actually collected.", ar: "إدخال درجات سريع بالمتوسط والترتيب وإرسال النتيجة لأولياء الأمور؛ ونصيب المدرس نسبة من اللي اتحصّل فعلًا." } },
+      { title: { en: "Student & parent app", ar: "تطبيق الطالب وولي الأمر" }, text: { en: "The card, timetable, attendance, fees, grades and homework — and a parent with several children switches between them.", ar: "الكارت والمواعيد والحضور والمصاريف والدرجات والواجبات — وولي الأمر اللي عنده كذا ابن بيبدّل بينهم." } },
+    ],
+    highlights: {
+      en: ["Sibling discount worked out at payment", "Cancel a session and the guardians are told", "Make-up sessions tracked", "Homework with a due date", "Supervisor approval for discounts", "Excel import and export"],
+      ar: ["خصم الإخوة بيتحسب عند الدفع", "إلغاء الحصة وأولياء الأمور بيتبلّغوا", "متابعة الحصص التعويضية", "واجبات بميعاد تسليم", "موافقة المشرف على الخصومات", "استيراد وتصدير Excel"],
+    },
+    integrations: {
+      en: ["WhatsApp messages to guardians", "QR cards and USB scanners", "Payments by cash, wallets, InstaPay or card", "Cashier shifts and daily backup"],
+      ar: ["رسائل واتساب لأولياء الأمور", "كروت QR وماسح USB", "الدفع كاش أو محافظ أو إنستاباي أو فيزا", "ورديات الخزنة ونسخة احتياطية يومية"],
+    },
+    before: {
+      en: ["Attendance on paper sheets", "“Who paid this month?” — ask the teacher", "Calling parents one by one about absences"],
+      ar: ["الحضور على ورق", "«مين دفع الشهر ده؟» — اسأل المدرس", "الاتصال بأولياء الأمور واحد واحد عن الغياب"],
+    },
+    photo: "/images/site/classroom-v2.webp",
+    photoAlt: { en: "A teacher writing on a whiteboard", ar: "مدرّس بيكتب على السبورة" },
+    screen: {
+      nav: [{ en: "Groups", ar: "المجموعات" }, { en: "Attendance", ar: "الحضور" }, { en: "Fees", ar: "المصاريف" }, { en: "Exams", ar: "الامتحانات" }],
+      stats: [
+        { label: { en: "Sessions today", ar: "حصص النهارده" }, value: "9" },
+        { label: { en: "Present now", ar: "حاضرين دلوقتي" }, value: "42" },
+        { label: { en: "Unpaid this month", ar: "مدفعوش الشهر ده" }, value: "17" },
+      ],
+      chart: [70, 74, 72, 78, 80, 84, 88],
+      rows: [
+        { name: { en: "Maths · Grade 3 secondary", ar: "رياضيات · تالتة ثانوي" }, meta: { en: "18:00 · Room 2 · 22 / 25", ar: "6:00 م · قاعة 2 · 22 من 25" }, value: { en: "Running", ar: "شغالة" } },
+        { name: { en: "Card scan · late", ar: "مسح كارت · متأخر" }, meta: { en: "Month not paid", ar: "الشهر مش مدفوع" }, value: { en: "Alert", ar: "تنبيه" } },
+        { name: { en: "Fees reminder", ar: "تذكير بالمصاريف" }, meta: { en: "Sent to guardians", ar: "اتبعت لأولياء الأمور" }, value: { en: "Sent", ar: "تم" } },
+      ],
+    },
+    keywords: {
+      en: ["tutoring center management software Egypt", "private lessons center system", "student attendance QR card system"],
+      ar: ["برنامج سنتر دروس خصوصية", "برنامج إدارة سنتر", "برنامج حضور وغياب بالكارت", "برنامج مجموعات ومصاريف طلاب", "برنامج مراكز التقوية"],
+    },
+  },
+  {
+    slug: "salon-barber",
+    icon: "Scissors",
+    name: { en: "Salon & barbershop system", ar: "نظام الصالونات والحلاقين" },
+    hint: { en: "Bookings, queue, commissions", ar: "الحجوزات والدور والعمولات" },
+    tagline: { en: "Every chair booked once, every barber’s commission counted.", ar: "كل كرسي متحجز مرة واحدة، وعمولة كل حلاق متحسبة." },
+    summary: {
+      en: "For barbershops and salons, one branch or several: a booking calendar with a column per barber that never double-books, a numbered queue for walk-ins with a TV screen, online booking confirmed by WhatsApp, a cashier for services and products with tips, each barber’s commission, deposits, session packs and gift cards.",
+      ar: "لمحلات الحلاقة والصالونات، فرع أو أكتر: كالندر حجوزات بعمود لكل حلاق ومستحيل يحجز اتنين في نفس الوقت، ودور بأرقام للي جاي من غير حجز وشاشة تلفزيون، وحجز أونلاين بتأكيد على واتساب، وكاشير للخدمات والمنتجات بالبقشيش، وعمولة كل حلاق، والعربون، وباقات الجلسات، وكروت الهدية.",
+    },
+    audience: {
+      en: ["Barbershops", "Salons", "Shops with several barbers", "Branches under one owner"],
+      ar: ["محلات الحلاقة", "الصالونات", "المحلات اللي فيها كذا حلاق", "الفروع تحت مالك واحد"],
+    },
+    modules: [
+      { title: { en: "Booking calendar", ar: "كالندر الحجوزات" }, text: { en: "A column per barber with their own hours and days off; a booking takes the service’s length, and two bookings for one barber at the same time are blocked in the database itself.", ar: "عمود لكل حلاق بمواعيد شغله وإجازاته؛ والحجز بياخد مدة الخدمة، ومفيش حجزين لنفس الحلاق في نفس الوقت — مقفولة في الداتابيز نفسها." } },
+      { title: { en: "Walk-in queue", ar: "دور الانتظار" }, text: { en: "A queue number and an estimated wait, “arrived → started → done”, and a TV screen for the shop.", ar: "رقم دور ووقت انتظار تقريبي، و«وصل ← بدأ ← خلص»، وشاشة دور للتلفزيون." } },
+      { title: { en: "Online booking", ar: "الحجز أونلاين" }, text: { en: "The client picks the service, barber and time, confirms his number with a WhatsApp code, and gets a link to view or cancel.", ar: "العميل يختار الخدمة والحلاق والميعاد، ويتأكد من رقمه بكود واتساب، وياخد رابط يشوف منه الحجز أو يلغيه." } },
+      { title: { en: "Cashier & shifts", ar: "الكاشير والورديات" }, text: { en: "Services and products with stock, discount, tips, cash / card / InstaPay / wallet or several at once, receipts, returns and a cash drawer.", ar: "خدمات ومنتجات بمخزون، وخصم، وبقشيش، ودفع كاش أو فيزا أو إنستاباي أو محفظة أو أكتر من طريقة، وفاتورة ومرتجع ودرج كاش." } },
+      { title: { en: "Barber commission", ar: "عمولة الحلاقين" }, text: { en: "A percentage or fixed sum per barber, different per service if you like; daily and monthly reports, and settlement recorded as an expense.", ar: "نسبة أو مبلغ ثابت لكل حلاق، وممكن تختلف لكل خدمة؛ تقرير يومي وشهري، والتسوية بتتسجّل مصروف." } },
+      { title: { en: "Clients, packs & loyalty", ar: "العملاء والباقات والولاء" }, text: { en: "Visit history and favourite barber, loyalty by visits, “10 haircuts” packs, gift cards with a code, and a deposit that’s kept if the client doesn’t show.", ar: "تاريخ الزيارات والحلاق المفضّل، وولاء بعدد الزيارات، وباقات «كارت 10 قصات»، وكروت هدية بكود، وعربون بيتحجز لو العميل مجاش." } },
+    ],
+    highlights: {
+      en: ["No double booking, enforced in the database", "A TV screen for the queue", "WhatsApp confirmation and reminder", "A barber sees only his day and commission", "Several branches, roles per screen", "Excel export and a tested backup restore"],
+      ar: ["مفيش حجز مزدوج — مقفول في الداتابيز", "شاشة دور للتلفزيون", "تأكيد وتذكير على واتساب", "الحلاق يشوف يومه وعمولته بس", "فروع كتير وصلاحيات لكل شاشة", "تصدير Excel واسترجاع نسخة متجرّب"],
+    },
+    integrations: {
+      en: ["WhatsApp confirmations and reminders", "TV queue screen", "Payment methods recorded: cash, card, InstaPay, wallets", "Daily backup"],
+      ar: ["تأكيدات وتذكيرات واتساب", "شاشة الدور للتلفزيون", "طرق الدفع المسجّلة: كاش وفيزا وإنستاباي ومحافظ", "نسخة احتياطية يومية"],
+    },
+    before: {
+      en: ["Bookings in a notebook, two clients at the same hour", "“Who’s next?” shouted across the shop", "Commissions worked out on paper every month"],
+      ar: ["الحجوزات في كشكول وعميلين في نفس الساعة", "«التالي مين؟» بتتنادي في المحل", "العمولات بتتحسب على ورق كل شهر"],
+    },
+    photo: "/images/site/boutique-v2.webp",
+    photoAlt: { en: "A well-groomed man in a shop", ar: "راجل شيك في محل" },
+    screen: {
+      nav: [{ en: "Calendar", ar: "الكالندر" }, { en: "Queue", ar: "الدور" }, { en: "Cashier", ar: "الكاشير" }, { en: "Commissions", ar: "العمولات" }],
+      stats: [
+        { label: { en: "Bookings today", ar: "حجوزات النهارده" }, value: "34" },
+        { label: { en: "In the queue", ar: "في الدور" }, value: "5" },
+        { label: { en: "Sales today", ar: "مبيعات النهارده" }, value: "6,150" },
+      ],
+      chart: [30, 44, 58, 52, 74, 90, 82],
+      rows: [
+        { name: { en: "Haircut + beard · Barber 2", ar: "حلاقة وذقن · حلاق 2" }, meta: { en: "16:30 · 45 min", ar: "4:30 م · 45 د" }, value: "180" },
+        { name: { en: "Queue #12", ar: "دور رقم 12" }, meta: { en: "Estimated wait 20 min", ar: "انتظار تقريبي 20 د" }, value: { en: "Waiting", ar: "منتظر" } },
+        { name: { en: "Pack · 10 haircuts", ar: "باقة · 10 قصات" }, meta: { en: "Session 4 of 10", ar: "الجلسة 4 من 10" }, value: { en: "Active", ar: "شغالة" } },
+      ],
+    },
+    keywords: {
+      en: ["barbershop management software Egypt", "salon booking system Egypt", "barber commission software"],
+      ar: ["برنامج حلاقة", "برنامج صالون", "برنامج حجوزات صالون", "برنامج إدارة صالون حلاقة", "سيستم حلاق"],
+    },
+  },
+  {
+    slug: "medical-lab",
+    icon: "FlaskConical",
+    name: { en: "Medical lab system", ar: "نظام معامل التحاليل" },
+    hint: { en: "Samples, results, approval, reports", ar: "العينات والنتايج والاعتماد والتقارير" },
+    tagline: { en: "From the tube label to an approved report — with the lab doctor in control.", ar: "من ليبل الأنبوبة لحد التقرير المعتمد — وطبيب المعمل ماسك الدفة." },
+    summary: {
+      en: "For medical labs: reception with tests and packages chosen from the keyboard, cash or contract companies, and a barcode label per tube; samples received or rejected with a reason; results typed with high/low/critical flags; approval by the lab doctor only; an Arabic/English report or a WhatsApp link for the patient; quality control, reagent stock, urgent orders and home visits.",
+      ar: "لمعامل التحاليل: استقبال بتختار فيه التحاليل والباقات بالكيبورد، نقدي أو شركة تعاقد، وليبل باركود لكل أنبوبة؛ واستلام العينة أو رفضها بسبب؛ وكتابة النتايج بعلامة عالي/واطي/حرج؛ والاعتماد لطبيب المعمل بس؛ وتقرير عربي/إنجليزي أو رابط واتساب للمريض؛ ومراقبة جودة ومخزون كواشف والتحاليل المستعجلة والزيارات المنزلية.",
+    },
+    audience: {
+      en: ["Medical laboratories", "Labs that work with contract companies", "Labs with home sample collection", "Labs that receive referrals from doctors"],
+      ar: ["معامل التحاليل الطبية", "المعامل اللي بتتعاقد مع شركات", "المعامل اللي بتسحب عينات من البيت", "المعامل اللي بيحوّلها دكاترة"],
+    },
+    modules: [
+      { title: { en: "Reception & billing", ar: "الاستقبال والحساب" }, text: { en: "Find or open a patient (age sets the reference range), pick tests and packages, cash or a contract company with the patient’s share, discounts above a limit need the supervisor’s code, and a barcode label per tube.", ar: "دوّر على المريض أو افتح ملف (السن بيحدد المدى المرجعي)، واختار التحاليل والباقات، نقدي أو شركة تعاقد بنسبة تحمّل المريض، والخصم فوق الحد بكود المشرف، وليبل باركود لكل أنبوبة." } },
+      { title: { en: "Samples & results", ar: "العينات والنتايج" }, text: { en: "Receive a sample or reject it with a reason (clotted, too little…) and draw again; type results with the flag showing as you type; derived values such as LDL are calculated and marked.", ar: "استلم العينة أو ارفضها بسبب (متجلطة، قليلة…) واسحب تاني؛ واكتب النتايج والعلامة بتظهر وانت بتكتب؛ والقيم المحسوبة زي LDL بتتحسب لوحدها ومتعلّمة." } },
+      { title: { en: "Lab-doctor approval", ar: "اعتماد طبيب المعمل" }, text: { en: "Only the lab doctor approves. A critical result needs confirmation that the treating doctor was told; any edit after approval needs a reason and is logged, then re-approved.", ar: "طبيب المعمل بس هو اللي يعتمد. والنتيجة الحرجة محتاجة تأكيد إنه بلّغ الطبيب المعالج؛ وأي تعديل بعد الاعتماد محتاج سبب وبيتسجّل ويتعتمد تاني." } },
+      { title: { en: "Reports & delivery", ar: "التقارير والتسليم" }, text: { en: "An A4 Arabic/English report with the lab doctor’s signature (print or PDF), or an expiring, unguessable WhatsApp link that shows approved results only.", ar: "تقرير A4 عربي/إنجليزي بتوقيع طبيب المعمل (طباعة أو PDF)، أو رابط واتساب بينتهي ومستحيل يتخمّن وبيعرض المعتمد بس." } },
+      { title: { en: "Quality & reagents", ar: "الجودة والكواشف" }, text: { en: "Daily quality-control readings checked by Westgard rules with a Levey-Jennings chart; if QC fails, approving that test is blocked. Reagent stock drops with every result, with low / near-expiry alerts.", ar: "قراءات مراقبة الجودة اليومية بقواعد Westgard ورسم Levey-Jennings؛ ولو الـ QC فشل اعتماد التحليل ده بيتمنع. ومخزون الكواشف بيتخصم مع كل نتيجة وتنبيهات «منخفض» و«قرب الانتهاء»." } },
+      { title: { en: "Companies & doctors", ar: "الشركات والدكاترة" }, text: { en: "A monthly statement per contract company, and the referring doctor’s commission worked out when the order is placed and paid once.", ar: "كشف حساب شهري لكل شركة تعاقد، وعمولة الدكتور المحوّل بتتحسب وقت الطلب وبتتدفع مرة واحدة." } },
+    ],
+    highlights: {
+      en: ["Urgent (STAT) orders jump the queue", "Home visits with address and rider", "Culture & sensitivity results", "Reception and accountant never see results", "Draft results survive a power cut", "Reference ranges reviewed by your lab doctor"],
+      ar: ["الفوري (STAT) بيقدّم في الطابور", "زيارات منزلية بعنوان ومندوب", "نتيجة المزرعة والحساسية", "الاستقبال والمحاسب مبيشوفوش النتايج", "مسودة النتايج بتتحفظ لو الكهربا قطعت", "المدى المرجعي يراجعه طبيب المعمل"],
+    },
+    integrations: {
+      en: ["Barcode tube labels", "WhatsApp result links", "Contract companies", "A4 reports in Arabic and English"],
+      ar: ["ليبل باركود للأنابيب", "روابط النتايج على واتساب", "شركات التعاقد", "تقارير A4 بالعربي والإنجليزي"],
+    },
+    before: {
+      en: ["Results written by hand and re-typed", "A tube with no label, a wrong name on the report", "Contract companies’ bills added up in Excel"],
+      ar: ["النتايج بتتكتب بالإيد وتتعاد كتابتها", "أنبوبة من غير ليبل واسم غلط على التقرير", "فواتير شركات التعاقد بتتجمّع في إكسل"],
+    },
+    photo: "/images/site/clinic-v2.webp",
+    photoAlt: { en: "Gloved hands of a medical worker holding tablets", ar: "إيدين بجوانتي لعامل طبي ماسكة أقراص" },
+    screen: {
+      nav: [{ en: "Reception", ar: "الاستقبال" }, { en: "Samples", ar: "العينات" }, { en: "Results", ar: "النتايج" }, { en: "Quality", ar: "الجودة" }],
+      stats: [
+        { label: { en: "Orders today", ar: "طلبات النهارده" }, value: "58" },
+        { label: { en: "Waiting for approval", ar: "مستنية اعتماد" }, value: "11" },
+        { label: { en: "Urgent", ar: "مستعجلة" }, value: "3" },
+      ],
+      chart: [34, 48, 60, 56, 72, 80, 68],
+      rows: [
+        { name: { en: "Order #A-1042 · Urgent", ar: "طلب A-1042 · مستعجل" }, meta: { en: "Critical result · confirm the call", ar: "نتيجة حرجة · أكّد الإبلاغ" }, value: { en: "Review", ar: "مراجعة" } },
+        { name: { en: "Sample rejected", ar: "عينة مرفوضة" }, meta: { en: "Clotted · draw again", ar: "متجلطة · اسحب تاني" }, value: { en: "Redraw", ar: "سحب تاني" } },
+        { name: { en: "Company statement · month", ar: "كشف شركة · الشهر" }, meta: { en: "Settlement due", ar: "التسوية مستحقة" }, value: { en: "Open", ar: "مفتوح" } },
+      ],
+    },
+    keywords: {
+      en: ["medical laboratory software Egypt", "lab information system Egypt", "lab results WhatsApp report"],
+      ar: ["برنامج معمل تحاليل", "برنامج معامل طبية", "سيستم معمل", "برنامج نتايج تحاليل واتساب"],
     },
   },
   {
@@ -320,61 +540,6 @@ export const readySystems: ReadySystem[] = [
     },
   },
   {
-    slug: "pharmacy-system",
-    icon: "Pill",
-    name: { en: "Pharmacy system", ar: "نظام الصيدليات" },
-    hint: { en: "Expiry alerts, stock, sales", ar: "تنبيهات الصلاحية والمخزون والمبيعات" },
-    tagline: { en: "Fewer expired boxes, a faster counter, clearer profit.", ar: "هالك أقل، وصرف أسرع، ومكسب أوضح." },
-    summary: {
-      en: "For single pharmacies and chains: a fast counter, a medicine list with alternatives, expiry tracking, supplier orders and returns, delivery orders and transfers between branches.",
-      ar: "للصيدليات الفردي والسلاسل: صرف سريع، وقايمة أدوية بالبدايل، ومتابعة الصلاحية، وطلبيات الموردين والمرتجع، وطلبات التوصيل، والتحويل بين الفروع.",
-    },
-    audience: {
-      en: ["Independent pharmacies", "Pharmacy chains", "Medical supply shops", "Pharmacies with delivery"],
-      ar: ["الصيدليات المستقلة", "سلاسل الصيدليات", "محلات المستلزمات الطبية", "الصيدليات اللي بتوصّل"],
-    },
-    modules: [
-      { title: { en: "Counter", ar: "شاشة الصرف" }, text: { en: "Search by name, ingredient or barcode; sell by strip or box.", ar: "دوّر بالاسم أو المادة الفعالة أو الباركود، وبيع بالشريط أو بالعلبة." } },
-      { title: { en: "Alternatives", ar: "البدايل" }, text: { en: "Suggests what you have with the same active ingredient.", ar: "يقترح الموجود عندك بنفس المادة الفعالة." } },
-      { title: { en: "Expiry control", ar: "متابعة الصلاحية" }, text: { en: "Alerts before boxes expire, and returns to the supplier.", ar: "تنبيه قبل ما العلب تنتهي، والمرتجع للمورد." } },
-      { title: { en: "Buying", ar: "المشتريات" }, text: { en: "Supplier orders, bonuses, discounts and balances.", ar: "طلبيات الموردين، والبونص، والخصم، والأرصدة." } },
-      { title: { en: "Delivery orders", ar: "طلبات التوصيل" }, text: { en: "Phone and WhatsApp orders, the rider and the money he brings back.", ar: "طلبات التليفون والواتساب، والطيار، والفلوس اللي راجع بيها." } },
-      { title: { en: "Branches", ar: "الفروع" }, text: { en: "Transfers, one price list and reports for all branches.", ar: "التحويلات، وقايمة أسعار واحدة، وتقارير لكل الفروع." } },
-    ],
-    highlights: {
-      en: ["Expiry and shortage alerts", "Sell by strip or by box", "Each customer’s medicine history", "Supplier balances & bonuses", "Shift and cash control", "The counter works offline"],
-      ar: ["تنبيهات الصلاحية والنواقص", "بيع بالشريط أو بالعلبة", "سجل أدوية كل عميل", "أرصدة الموردين والبونص", "متابعة الوردية والدرج", "شاشة الصرف تشتغل من غير نت"],
-    },
-    integrations: {
-      en: ["Barcode scanners", "Receipt printers", "WhatsApp orders", "Accounts"],
-      ar: ["قارئ الباركود", "طابعة الإيصالات", "طلبات الواتساب", "الحسابات"],
-    },
-    before: {
-      en: ["Expiry dates checked by hand", "Shortages discovered at the counter", "Delivery money tracked on paper"],
-      ar: ["الصلاحية بتتراجع بالإيد", "النواقص بتبان وأنت بتصرف", "فلوس التوصيل متسجلة في ورقة"],
-    },
-    photo: "/images/site/pharmacy.webp",
-    photoAlt: { en: "A pharmacist reaching for a box on the pharmacy shelves", ar: "صيدلي بيجيب علبة من على رفوف الصيدلية" },
-    screen: {
-      nav: [{ en: "Counter", ar: "الصرف" }, { en: "Stock", ar: "المخزون" }, { en: "Suppliers", ar: "الموردون" }, { en: "Delivery", ar: "التوصيل" }],
-      stats: [
-        { label: { en: "Sales today", ar: "مبيعات اليوم" }, value: "21,780" },
-        { label: { en: "Near expiry", ar: "قرب الانتهاء" }, value: "18" },
-        { label: { en: "Shortages", ar: "النواقص" }, value: "9" },
-      ],
-      chart: [44, 50, 62, 58, 70, 82, 66],
-      rows: [
-        { name: { en: "Panadol Extra 24 tabs", ar: "بانادول إكسترا 24 قرص" }, meta: { en: "Batch 4471 · 2 months", ar: "تشغيلة 4471 · شهران" }, value: "36" },
-        { name: { en: "Delivery #D-882", ar: "توصيل D-882" }, meta: { en: "Rider: Mahmoud", ar: "الطيار: محمود" }, value: { en: "On the way", ar: "في الطريق" } },
-        { name: { en: "Supplier order PO-311", ar: "طلبية مورد PO-311" }, meta: { en: "Bonus 10+1", ar: "بونص 10+1" }, value: { en: "Received", ar: "تم الاستلام" } },
-      ],
-    },
-    keywords: {
-      en: ["pharmacy management system Egypt", "pharmacy POS"],
-      ar: ["برنامج صيدليات", "برنامج إدارة صيدلية", "سيستم صيدلية", "برنامج صيدلية بالباركود"],
-    },
-  },
-  {
     slug: "gym-management",
     icon: "Dumbbell",
     name: { en: "Gym system", ar: "نظام الجيم" },
@@ -482,61 +647,6 @@ export const readySystems: ReadySystem[] = [
     keywords: {
       en: ["restaurant POS Egypt", "restaurant management system"],
       ar: ["برنامج مطاعم", "سيستم مطعم", "برنامج كاشير مطاعم", "برنامج إدارة مطعم"],
-    },
-  },
-  {
-    slug: "school-management",
-    icon: "GraduationCap",
-    name: { en: "Schools & centres", ar: "المدارس ومراكز التعليم" },
-    hint: { en: "Students, fees, timetables", ar: "الطلاب والمصاريف والجداول" },
-    tagline: { en: "Students, fees and timetables — with parents in the loop.", ar: "الطلاب والمصاريف والجداول — وأولياء الأمور في الصورة." },
-    summary: {
-      en: "For schools, training centres and academies: registration, student files, timetables, attendance, grades, fees and instalments — with a page for parents and students and instant notifications.",
-      ar: "للمدارس والسناتر والأكاديميات: التسجيل، وملفات الطلاب، والجداول، والحضور، والدرجات، والمصاريف والأقساط — مع صفحة لأولياء الأمور والطلاب وإشعارات فورية.",
-    },
-    audience: {
-      en: ["Private & international schools", "Training centres", "Language & coding academies", "Nurseries"],
-      ar: ["المدارس الخاصة والدولية", "مراكز التدريب", "أكاديميات اللغات والبرمجة", "الحضانات"],
-    },
-    modules: [
-      { title: { en: "Registration", ar: "التسجيل والقبول" }, text: { en: "Applications, interviews, documents and enrolment.", ar: "طلبات الالتحاق، والمقابلات، والأوراق، والتسجيل." } },
-      { title: { en: "Students & classes", ar: "الطلاب والفصول" }, text: { en: "Student files, classes, groups and transfers.", ar: "ملفات الطلاب، والفصول، والمجموعات، والتحويلات." } },
-      { title: { en: "Timetables & attendance", ar: "الجداول والحضور" }, text: { en: "Weekly timetables, teacher loads and daily attendance.", ar: "الجدول الأسبوعي، ونصاب المدرسين، والحضور اليومي." } },
-      { title: { en: "Exams & grades", ar: "الامتحانات والدرجات" }, text: { en: "Tests, grade sheets and report cards.", ar: "الامتحانات، وكشوف الدرجات، والشهادات." } },
-      { title: { en: "Fees & instalments", ar: "المصاريف والأقساط" }, text: { en: "Fee plans, sibling discounts and late payments.", ar: "خطط المصاريف، وخصم الإخوات، والمتأخرات." } },
-      { title: { en: "Parents’ page", ar: "صفحة ولي الأمر" }, text: { en: "Grades, attendance, invoices and announcements.", ar: "الدرجات، والحضور، والفواتير، والإعلانات." } },
-    ],
-    highlights: {
-      en: ["A page for parents and students", "Instalments with reminders", "Bus and transport lists", "Teacher accounts", "Report cards in Arabic & English", "Pay fees online"],
-      ar: ["صفحة لأولياء الأمور والطلاب", "أقساط بتذكير تلقائي", "قوايم الباصات", "حسابات للمدرسين", "شهادات بالعربي والإنجليزي", "دفع المصاريف أونلاين"],
-    },
-    integrations: {
-      en: ["Online payment", "WhatsApp / SMS", "Zoom / Google Meet", "Accounts"],
-      ar: ["الدفع الأونلاين", "واتساب ورسائل", "Zoom و Google Meet", "الحسابات"],
-    },
-    before: {
-      en: ["Attendance on paper sheets", "Fees tracked in three notebooks", "Parents call to ask about grades"],
-      ar: ["الحضور على ورق", "المصاريف متسجلة في تلات كشاكيل", "أولياء الأمور بيتصلوا يسألوا على الدرجات"],
-    },
-    photo: "/images/site/classroom-v2.webp",
-    photoAlt: { en: "A teacher explaining a lesson at the whiteboard", ar: "مدرّس بيشرح الدرس على السبورة" },
-    screen: {
-      nav: [{ en: "Students", ar: "الطلاب" }, { en: "Attendance", ar: "الحضور" }, { en: "Grades", ar: "الدرجات" }, { en: "Fees", ar: "الرسوم" }],
-      stats: [
-        { label: { en: "Students", ar: "الطلاب" }, value: "860" },
-        { label: { en: "Attendance today", ar: "حضور اليوم" }, value: "96%" },
-        { label: { en: "Fees collected", ar: "الرسوم المحصّلة" }, value: "78%" },
-      ],
-      chart: [70, 74, 72, 78, 80, 84, 88],
-      rows: [
-        { name: { en: "Grade 5 — B", ar: "الصف الخامس — ب" }, meta: { en: "28 / 29 present", ar: "28 من 29 حاضر" }, value: { en: "Taken", ar: "تم التسجيل" } },
-        { name: { en: "Instalment 2 / 4", ar: "القسط 2 من 4" }, meta: { en: "Due in 5 days · 124 students", ar: "يستحق خلال 5 أيام · 124 طالبًا" }, value: { en: "Reminded", ar: "تم التذكير" } },
-        { name: { en: "Mid-term — Math", ar: "منتصف الفصل — رياضيات" }, meta: { en: "Grades published", ar: "تم نشر الدرجات" }, value: { en: "Done", ar: "مكتمل" } },
-      ],
-    },
-    keywords: {
-      en: ["school management system Egypt", "academy management software"],
-      ar: ["برنامج إدارة مدارس", "برنامج مدرسة", "برنامج إدارة مراكز تدريب", "برنامج حضور وغياب"],
     },
   },
   {
@@ -663,10 +773,10 @@ export const systemFaqs: { q: T; a: T }[] = [
  * ways: service page → systems, system page → services).
  */
 export const serviceSystems: Record<string, string[]> = {
-  "website-development": ["clinic-management", "restaurant-system", "school-management"],
+  "website-development": ["clinic-management", "salon-barber", "school-management"],
   "mobile-app-development": ["restaurant-system", "gym-management", "pharmacy-system"],
-  "custom-software": ["cafe-playstation", "inventory-warehouse", "accounting-hr", "pos-cashier"],
-  "ai-chatbots": ["clinic-management", "restaurant-system"],
+  "custom-software": ["cafe-playstation", "pos-cashier", "pharmacy-system", "medical-lab", "inventory-warehouse", "accounting-hr"],
+  "ai-chatbots": ["medical-lab", "salon-barber", "clinic-management"],
   "business-automation": ["wifi-cards", "accounting-hr", "inventory-warehouse"],
   "ecommerce-development": ["pos-cashier", "inventory-warehouse"],
 };
