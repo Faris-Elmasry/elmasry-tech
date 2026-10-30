@@ -58,7 +58,8 @@ export const site = {
     // Shown only when NEXT_PUBLIC_LINKEDIN is set to a real company page: no dead link meanwhile.
     linkedin: (process.env.NEXT_PUBLIC_LINKEDIN || "").trim() || null,
   },
-  foundingYear: 2023,
+  /** Set only once confirmed by the owner; omitted from the site and JSON-LD until then. */
+  foundingYear: undefined as number | undefined,
 } as const;
 
 export function whatsappLink(message?: string) {

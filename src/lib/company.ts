@@ -40,7 +40,7 @@ export const teamRoles: { role: T; text: T }[] = [
 
 /** Honest facts (no inflated project counts). */
 export const companyFacts: { value: string | T; label: T }[] = [
-  { value: "2023", label: { en: "Founded in Cairo", ar: "سنة التأسيس في القاهرة" } },
+  { value: { en: "Cairo", ar: "القاهرة" }, label: { en: "Where we work from", ar: "بنشتغل منين" } },
   { value: "6", label: { en: "Kinds of service", ar: "أنواع خدمات" } },
   { value: String(readySystems.length), label: { en: "Ready-made systems", ar: "أنظمة جاهزة" } },
   { value: { en: "AR · EN", ar: "عربي · إنجليزي" }, label: { en: "Everything in both languages", ar: "كل حاجة باللغتين" } },

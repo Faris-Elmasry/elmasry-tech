@@ -44,7 +44,7 @@ export default async function AboutPage({ params }: PageProps<"/[locale]/about">
       <StudioHero
         locale={locale}
         crumbs={[{ name: label }]}
-        sheet={isAr ? "القاهرة · من 2023" : "Cairo · since 2023"}
+        sheet={isAr ? "القاهرة" : "Cairo"}
         kicker={isAr ? "من نحن · الاستوديو" : "About · the studio"}
         keyword={tr(seo.h1!, locale)}
         title={isAr ? "بنبني مواقع وتطبيقات وأنظمة جاهزة لأصحاب الشغل." : "We build websites, apps and ready systems for people who run businesses."}

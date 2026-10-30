@@ -74,7 +74,7 @@ export function organizationJsonLd(locale: Locale) {
     image: `${siteUrl}/${locale}/opengraph-image`,
     ...(site.email ? { email: site.email } : {}),
     ...(hasRealPhone ? { telephone: site.whatsapp } : {}),
-    foundingDate: String(site.foundingYear),
+    ...(site.foundingYear ? { foundingDate: String(site.foundingYear) } : {}),
     description: isAr
       ? "شركة برمجة في مصر لتصميم وتطوير المواقع وتطبيقات الموبايل والبرامج والأنظمة المخصصة وحلول الذكاء الاصطناعي والأتمتة."
       : "Software development company in Egypt building websites, mobile apps, custom business systems, AI solutions and automation.",
