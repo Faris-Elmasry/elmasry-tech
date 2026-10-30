@@ -55,3 +55,10 @@ The security checks in [15 §2](15-security-and-portfolio-2026-10.md) can be rep
 - The 404 page keeps the site's default title: metadata only works in the root `not-found`. Next adds `noindex` to every 404 anyway.
 - The 2 remaining `npm audit` items are `nodemailer` 7.x, held by next-auth's peer range. They are fed only our own SMTP settings.
 - Three old ESLint errors (`react-hooks/set-state-in-effect`) remain in admin pages that are now hidden from the menu (hero, services, testimonials).
+
+## 5. Deployed
+
+- **URL (temporary):** `https://elmasry-tech.72-61-178-220.sslip.io` (HTTPS via Let's Encrypt). Canonical, Open Graph, sitemap and robots all use this host until the real domain is switched in (section 2).
+- **Dokploy:** panel `https://panel.itafa2na.tech`, project `elmasry-tech` (environment `production`) with two services: the app `elmasry-tech-web` (Dockerfile build from GitHub `Faris-Elmasry/elmasry-tech`, branch `main`, port 3000) and the Postgres `elmasry-tech-db` (internal only, no external port).
+- **Admin login:** the email and password are in `~/.config/elmasry/website-admin.txt` on Faris's machine (mode 600). They are set as `ADMIN_EMAIL` / `ADMIN_PASSWORD` in the app's Environment. Change the password from the admin once logged in.
+- **Switching to the real domain:** follow section 2. Change the domain in Dokploy → Domains, and update `NEXT_PUBLIC_SITE_URL` (build arg) and `NEXTAUTH_URL`, then redeploy.
