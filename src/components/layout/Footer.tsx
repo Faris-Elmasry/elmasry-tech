@@ -139,12 +139,14 @@ export async function Footer({ locale }: { locale: Locale }) {
       <div className="mx-auto max-w-[1400px] px-5 sm:px-8">
       <div className="flex flex-col gap-4 border-t border-[var(--border)] py-6 text-sm text-[var(--text-subtle)] sm:flex-row sm:items-center sm:justify-between">
         <p>
-          © {year} {site.legalName}. {t("rights")} <span className="text-[var(--text-muted)]">{t("made_in")}</span>
+          © {year} {locale === "ar" ? site.nameAr : site.name}. {t("rights")} <span className="text-[var(--text-muted)]">{t("made_in")}</span>
         </p>
         <div className="flex items-center gap-6">
-          <a href={site.social.linkedin} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-[var(--text-primary)]">
-            LinkedIn
-          </a>
+          {site.social.linkedin ? (
+            <a href={site.social.linkedin} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-[var(--text-primary)]">
+              LinkedIn
+            </a>
+          ) : null}
           <a href={site.social.github} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-[var(--text-primary)]">
             GitHub
           </a>

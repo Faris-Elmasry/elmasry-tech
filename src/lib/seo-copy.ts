@@ -75,7 +75,7 @@ export const pageSeo: Record<string, PageSeo> = {
     intro: { en: "Custom software development in Egypt that follows your business, not the other way round. We sit with you, learn your daily routine, and build one system for sales, stock, money and staff — with clear permissions and live numbers on your phone.", ar: "برمجة أنظمة وبرامج حسب الطلب بتمشي على طريقة شغلك، مش العكس. بنقعد معاك، نفهم يومك ماشي إزاي، ونبني نظام واحد للمبيعات والمخزن والفلوس والموظفين — بصلاحيات واضحة لكل موظف، وأرقام لحظية تشوفها من موبايلك." },
   },
   "service:ai-chatbots": {
-    title: { en: "WhatsApp Chatbot & AI Solutions in Egypt", ar: "شات بوت واتساب للشركات — رد آلي بالمصري" },
+    title: { en: "WhatsApp Chatbot & AI in Egypt", ar: "شات بوت واتساب للشركات — رد آلي بالمصري" },
     description: { en: "WhatsApp chatbot for businesses in Egypt: an AI assistant that answers prices, bookings and orders in Egyptian Arabic, day and night. Free consultation.", ar: "شات بوت واتساب للشركات في مصر: رد آلي واتساب بالذكاء الاصطناعي بيجاوب على الأسعار والحجوزات والطلبات بالمصري ليل ونهار. اطلب استشارة مجانية وجرّبه بنفسك." },
     h1: { en: "WhatsApp chatbots & AI solutions in Egypt", ar: "شات بوت واتساب للشركات" },
     intro: { en: "A WhatsApp chatbot for your business answers the questions you get all day — prices, opening hours, availability, bookings — instantly, in Egyptian Arabic or English, only from information you approve, and hands the chat to a real person whenever it isn’t sure.", ar: "شات بوت واتساب للشركات بيرد على الأسئلة اللي بتجيلك طول اليوم: السعر كام، مواعيدكم إيه، الحاجة متاحة، عايز أحجز. بيرد فورًا بالمصري أو بالإنجليزي، ومن المعلومات اللي أنت موافق عليها بس، ولو مش متأكد بيحوّل المحادثة لحد من فريقك." },

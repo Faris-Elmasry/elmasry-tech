@@ -29,13 +29,13 @@ export const commitments: { title: T; text: T }[] = [
   { title: { en: "Arabic done right", ar: "عربي مظبوط" }, text: { en: "Screens built right-to-left from day one, with proper Arabic words.", ar: "شاشات معمولة من اليمين للشمال من أول يوم، بكلام عربي سليم." } },
 ];
 
-/** How a project team is formed (roles, not headcount). */
+/** The steps every project goes through (not a claim about headcount). */
 export const teamRoles: { role: T; text: T }[] = [
-  { role: { en: "The listener", ar: "اللي بيسمع" }, text: { en: "Learns how your business runs, writes the plan and keeps it on track.", ar: "يفهم شغلك ماشي إزاي، ويكتب الخطة، ويتابعها." } },
-  { role: { en: "The designer", ar: "المصمّم" }, text: { en: "Turns your steps into screens people understand on day one.", ar: "يحوّل خطواتك لشاشات الناس تفهمها من أول يوم." } },
-  { role: { en: "The builders", ar: "اللي بيبنوا" }, text: { en: "Build the website, app or system — carefully and checked twice.", ar: "يبنوا الموقع أو التطبيق أو النظام — بعناية ومراجعة مرتين." } },
-  { role: { en: "The tester", ar: "اللي بيجرّب" }, text: { en: "Tries every update on real phones and real scenarios before you do.", ar: "يجرّب كل تحديث على موبايلات وسيناريوهات حقيقية قبلك." } },
-  { role: { en: "The one who answers", ar: "اللي بيرد" }, text: { en: "Keeps it running, backed up, and answers you when you need help.", ar: "يخلّيه شغال ومتأمّن، ويرد عليك لما تحتاج مساعدة." } },
+  { role: { en: "Listen", ar: "نسمع" }, text: { en: "Learn how your business runs, write the plan and keep it on track.", ar: "نفهم شغلك ماشي إزاي، ونكتب الخطة، ونتابعها." } },
+  { role: { en: "Design", ar: "نصمّم" }, text: { en: "Turn your steps into screens people understand on day one.", ar: "نحوّل خطواتك لشاشات الناس تفهمها من أول يوم." } },
+  { role: { en: "Build", ar: "نبني" }, text: { en: "Build the website, app or system — carefully and checked twice.", ar: "نبني الموقع أو التطبيق أو النظام — بعناية ومراجعة مرتين." } },
+  { role: { en: "Test", ar: "نجرّب" }, text: { en: "Try every update on real phones and real scenarios before you do.", ar: "نجرّب كل تحديث على موبايلات وسيناريوهات حقيقية قبلك." } },
+  { role: { en: "Support", ar: "ندعم" }, text: { en: "Keep it running, backed up, and answer you when you need help.", ar: "نخلّيه شغال ومتأمّن، ونرد عليك لما تحتاج مساعدة." } },
 ];
 
 /** Honest facts (no inflated project counts). */

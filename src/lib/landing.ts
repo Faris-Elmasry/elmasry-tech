@@ -19,7 +19,7 @@ export const heroCopy = {
   cta: { en: "Start Your Project", ar: "ابدأ مشروعك" } as T,
   secondary: { en: "Explore our work", ar: "شوف شغلنا" } as T,
   features: {
-    en: ["Custom Development", "Web & Mobile Apps", "AI & Automation Solutions", "Scalable & Secure"],
+    en: ["Custom Development", "Web & Mobile Apps", "AI & Automation", "Scalable & Secure"],
     ar: ["برمجة حسب الطلب", "مواقع وتطبيقات موبايل", "ذكاء اصطناعي وأتمتة", "آمن وقابل للتوسع"],
   } as Record<Locale, string[]>,
   hint: { en: "Move over the lion", ar: "حرّك الماوس على الأسد" } as T,

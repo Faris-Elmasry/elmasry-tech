@@ -353,8 +353,8 @@ export const readySystems: ReadySystem[] = [
       en: ["Bookings in a notebook, two clients at the same hour", "“Who’s next?” shouted across the shop", "Commissions worked out on paper every month"],
       ar: ["الحجوزات في كشكول وعميلين في نفس الساعة", "«التالي مين؟» بتتنادي في المحل", "العمولات بتتحسب على ورق كل شهر"],
     },
-    photo: "/images/site/boutique-v2.webp",
-    photoAlt: { en: "A well-groomed man in a shop", ar: "راجل شيك في محل" },
+    photo: "/images/site/consultation-v2.webp",
+    photoAlt: { en: "Two men looking at a booking on a tablet", ar: "راجلين بيبصّوا على حجز على تابلت" },
     screen: {
       nav: [{ en: "Calendar", ar: "الكالندر" }, { en: "Queue", ar: "الدور" }, { en: "Cashier", ar: "الكاشير" }, { en: "Commissions", ar: "العمولات" }],
       stats: [

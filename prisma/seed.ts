@@ -131,15 +131,15 @@ async function main() {
 
   // ─── Site Settings ───
   const settingsData: Record<string, string> = {
-    site_name_en: "Elmasry Tech Solutions",
-    site_name_ar: "إلماسري تك",
+    site_name_en: "Elmasry Tech",
+    site_name_ar: "المصري تك",
     tagline_en: "Web · Mobile · Systems · SaaS",
     tagline_ar: "ويب · موبايل · أنظمة · SaaS",
     whatsapp: "+201000000000",
     email: "faris@elmasry.tech",
     location_en: "Cairo, Egypt",
     location_ar: "القاهرة، مصر",
-    linkedin: "https://linkedin.com/in/fariselmasry",
+    linkedin: "",
     github: "https://github.com/fariselmasry",
     available: "true",
     cv_url: "",

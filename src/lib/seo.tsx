@@ -88,7 +88,7 @@ export function organizationJsonLd(locale: Locale) {
       { "@type": "Place", name: "Middle East and North Africa" },
     ],
     knowsLanguage: ["ar", "en"],
-    sameAs: Object.values(site.social),
+    sameAs: Object.values(site.social).filter(Boolean),
     // What we offer, each linked to its own page (helps Google map services → URLs).
     hasOfferCatalog: {
       "@type": "OfferCatalog",

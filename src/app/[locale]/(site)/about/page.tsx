@@ -47,14 +47,14 @@ export default async function AboutPage({ params }: PageProps<"/[locale]/about">
         sheet={isAr ? "القاهرة · من 2023" : "Cairo · since 2023"}
         kicker={isAr ? "من نحن · الاستوديو" : "About · the studio"}
         keyword={tr(seo.h1!, locale)}
-        title={isAr ? "استوديو صغير، بيبني برامج لأصحاب الشغل." : "A small studio that builds software for people who run businesses."}
+        title={isAr ? "بنبني مواقع وتطبيقات وأنظمة جاهزة لأصحاب الشغل." : "We build websites, apps and ready systems for people who run businesses."}
         sub={tr(seo.intro!, locale)}
         aside={
           <Figure
             src="/images/site/developer.webp"
             alt={isAr ? "مهندس برمجيات شغال على شاشتين في مكتب" : "A software engineer working at two screens in an office"}
             fig="01"
-            caption={isAr ? "اللي بيبني نظامك، هو نفسه اللي بيرد عليك." : "The person building your system is the person who answers you."}
+            caption={isAr ? "مواقع وتطبيقات وأنظمة، من القاهرة." : "Websites, apps and systems, from Cairo."}
             ratio="aspect-[4/3]"
             preload
             sizes="(min-width: 1024px) 36vw, 100vw"
@@ -148,12 +148,12 @@ export default async function AboutPage({ params }: PageProps<"/[locale]/about">
       </section>
 
       {/* 03 — who is on your project */}
-      <Chapter index="03" label={isAr ? "مين معاك" : "Who’s with you"} title={isAr ? "فريق صغير كامل، من أول يوم لآخر يوم." : "A small, complete team from the first day to the last."}>
+      <Chapter index="03" label={isAr ? "بنعمل إيه" : "What we do"} title={isAr ? "مواقع وتطبيقات وأنظمة جاهزة — ومقرنا القاهرة." : "Websites, apps and ready systems — based in Cairo."}>
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
           <Rise className="lg:col-span-5">
             <Figure
-              src="/images/site/team-v2.webp"
-              alt={isAr ? "فريق بيتناقش في مشروع حوالين ترابيزة في المكتب" : "A team discussing a project around an office table"}
+              src="/images/site/consultation-v2.webp"
+              alt={isAr ? "راجلين بيبصّوا على شاشة تابلت مع بعض" : "Two men looking at a tablet screen together"}
               fig="03"
               caption={isAr ? "كل مشروع بيبدأ بورقة وقلم وأسئلة كتير." : "Every project starts with paper, a pen and a lot of questions."}
               ratio="aspect-[4/3]"
@@ -161,8 +161,8 @@ export default async function AboutPage({ params }: PageProps<"/[locale]/about">
             />
             <p className="mt-8 text-lg leading-relaxed text-[var(--text-muted)]">
               {isAr
-                ? "المؤسسين بنفسهم بيمسكوا كل مشروع، وبنجمّع حواليه الأدوار اللي محتاجها — من غير طبقات إدارة بتأخّر الشغل."
-                : "The founders lead every project personally, and we gather the roles it needs around them — without layers of management slowing things down."}
+                ? "بنعمل مواقع وتطبيقات وأنظمة جاهزة لأصحاب الشغل في مصر. أي مشروع عندنا بيعدّي على نفس الخطوات، من أول الاستماع لحد الدعم بعد التشغيل."
+                : "We build websites, apps and ready-made systems for business owners in Egypt. Every project goes through the same steps, from listening to support after launch."}
             </p>
           </Rise>
           <ol className="border-b border-[var(--border)] lg:col-span-7">

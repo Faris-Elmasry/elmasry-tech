@@ -47,8 +47,8 @@ export const privacyPolicy: LegalDoc = {
       heading: { en: "Who we are and how to reach us", ar: "من نحن وكيف تتواصل معنا" },
       short: { en: "We're a software company in Cairo, and you can always ask us about your data.", ar: "إحنا شركة برمجة في القاهرة، وتقدر تسألنا عن بياناتك في أي وقت." },
       body: {
-        en: `Elmasry Tech Solutions ("Elmasry Tech", "we") is a software development company based in Cairo, Egypt. For the data described in this policy, we decide why and how it is used, so we are responsible for it (the "controller" in the language of the law).\n\nFor any question or request about your personal data, contact us directly:\n- ${CONTACT.en}`,
-        ar: `‏Elmasry Tech Solutions ("Elmasry Tech" أو "نحن") شركة تطوير برمجيات مقرها القاهرة، مصر. وفيما يخص البيانات الموضحة في هذه السياسة، نحن من يحدد سبب استخدامها وطريقته، ولذلك نتحمل مسؤوليتها (المتحكم بالبيانات بلغة القانون).\n\nلأي سؤال أو طلب يخص بياناتك الشخصية، تواصل معنا مباشرة:\n- ${CONTACT.ar}`,
+        en: `Elmasry Tech ("we") is a software development company based in Cairo, Egypt. For the data described in this policy, we decide why and how it is used, so we are responsible for it (the "controller" in the language of the law).\n\nFor any question or request about your personal data, contact us directly:\n- ${CONTACT.en}`,
+        ar: `‏المصري تك (Elmasry Tech) ("نحن") شركة تطوير برمجيات مقرها القاهرة، مصر. وفيما يخص البيانات الموضحة في هذه السياسة، نحن من يحدد سبب استخدامها وطريقته، ولذلك نتحمل مسؤوليتها (المتحكم بالبيانات بلغة القانون).\n\nلأي سؤال أو طلب يخص بياناتك الشخصية، تواصل معنا مباشرة:\n- ${CONTACT.ar}`,
       },
     },
     {
@@ -189,8 +189,8 @@ export const termsOfService: LegalDoc = {
       heading: { en: "Who these terms apply to", ar: "على من تنطبق هذه الشروط" },
       short: { en: "These are the general rules; your signed offer has the details.", ar: "دي القواعد العامة، والتفاصيل في العرض اللي هتمضي عليه." },
       body: {
-        en: "\"We\" means Elmasry Tech Solutions, Cairo, Egypt. \"You\" means any visitor of this website or any client who uses our services. \"Services\" means custom software development (websites, apps, systems, AI and automation), ready-made systems (rented or licensed), hosting, support and maintenance.\n\nBy using the website or our services you accept these terms. A signed proposal, order or contract for a specific project forms part of the agreement and takes precedence over these general terms where they differ.",
-        ar: "يُقصد بـ\"نحن\" شركة Elmasry Tech Solutions، القاهرة، مصر. ويُقصد بـ\"أنت\" أي زائر لهذا الموقع أو أي عميل يستخدم خدماتنا. ويُقصد بـ\"الخدمات\" تطوير البرمجيات حسب الطلب (المواقع والتطبيقات والأنظمة والذكاء الاصطناعي والأتمتة)، والأنظمة الجاهزة (بالإيجار أو الترخيص)، والاستضافة، والدعم والصيانة.\n\nباستخدامك للموقع أو لخدماتنا فإنك توافق على هذه الشروط. ويُعد العرض أو أمر الشراء أو العقد الموقّع لأي مشروع جزءًا من الاتفاق، وتكون له الأولوية على هذه الشروط العامة عند الاختلاف.",
+        en: "\"We\" means Elmasry Tech, Cairo, Egypt. \"You\" means any visitor of this website or any client who uses our services. \"Services\" means custom software development (websites, apps, systems, AI and automation), ready-made systems (rented or licensed), hosting, support and maintenance.\n\nBy using the website or our services you accept these terms. A signed proposal, order or contract for a specific project forms part of the agreement and takes precedence over these general terms where they differ.",
+        ar: "يُقصد بـ\"نحن\" المصري تك (Elmasry Tech)، القاهرة، مصر. ويُقصد بـ\"أنت\" أي زائر لهذا الموقع أو أي عميل يستخدم خدماتنا. ويُقصد بـ\"الخدمات\" تطوير البرمجيات حسب الطلب (المواقع والتطبيقات والأنظمة والذكاء الاصطناعي والأتمتة)، والأنظمة الجاهزة (بالإيجار أو الترخيص)، والاستضافة، والدعم والصيانة.\n\nباستخدامك للموقع أو لخدماتنا فإنك توافق على هذه الشروط. ويُعد العرض أو أمر الشراء أو العقد الموقّع لأي مشروع جزءًا من الاتفاق، وتكون له الأولوية على هذه الشروط العامة عند الاختلاف.",
       },
     },
     {

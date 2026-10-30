@@ -29,7 +29,13 @@ function formatPhone(raw: string): string {
 
 export const site = {
   name: "Elmasry Tech",
-  legalName: "Elmasry Tech Solutions",
+  /**
+   * Not a registered legal name: we cannot verify one, so the public name is used everywhere
+   * (footer, privacy, terms, metadata). Put the real one here once the commercial register says so.
+   */
+  legalName: "Elmasry Tech",
+  /** Arabic rendering of the name, for Arabic copy. */
+  nameAr: "المصري تك",
   /** The public host, from NEXT_PUBLIC_SITE_URL — changing the domain is that one variable. */
   domain: new URL(siteUrl).host,
   /**
@@ -49,7 +55,8 @@ export const site = {
   social: {
     // github.com/fariselmasry was a 404; the account is Faris-Elmasry
     github: process.env.NEXT_PUBLIC_GITHUB || "https://github.com/Faris-Elmasry",
-    linkedin: process.env.NEXT_PUBLIC_LINKEDIN || "https://linkedin.com/in/fariselmasry",
+    // Shown only when NEXT_PUBLIC_LINKEDIN is set to a real company page: no dead link meanwhile.
+    linkedin: (process.env.NEXT_PUBLIC_LINKEDIN || "").trim() || null,
   },
   foundingYear: 2023,
 } as const;
