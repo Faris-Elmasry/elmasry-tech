@@ -18,6 +18,7 @@ export function GET() {
     `- [Home (English)](${localeUrl("en")})`,
     `- [Services](${localeUrl("ar", "/services")}): all services`,
     `- [Ready-made systems](${localeUrl("ar", "/systems")}): systems to rent or buy, with a free demo`,
+    `- [Owner app](${localeUrl("ar", "/owner-app")}): one app for the owner of several businesses — live numbers, alerts, approvals; works with our systems`,
     `- [Work](${localeUrl("ar", "/portfolio")}): our work`,
     `- [About](${localeUrl("ar", "/about")})`,
     `- [Contact](${localeUrl("ar", "/contact")}): free consultation${site.email ? `; email ${site.email}` : ""}; WhatsApp ${site.whatsapp}`,

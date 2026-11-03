@@ -30,6 +30,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...services.flatMap((s) => localized(`/services/${s.slug}`, 0.9, "monthly")),
     ...localized("/systems", 0.9, "monthly"),
     ...readySystems.flatMap((s) => localized(`/systems/${s.slug}`, 0.8, "monthly")),
+    ...localized("/owner-app", 0.8, "monthly"),
     ...localized("/guides", 0.7, "monthly", new Date(guidesUpdated)),
     ...guides.flatMap((g) => localized(`/guides/${g.slug}`, 0.7, "monthly", new Date(g.updated))),
     ...localized("/portfolio", 0.7, "weekly"),

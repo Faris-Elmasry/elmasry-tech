@@ -1,4 +1,5 @@
 import {
+  Bell,
   Boxes,
   BrainCircuit,
   Briefcase,
@@ -7,6 +8,7 @@ import {
   CalendarClock,
   Code,
   Dumbbell,
+  Fingerprint,
   FlaskConical,
   Gamepad2,
   Globe,
@@ -14,12 +16,14 @@ import {
   HeartPulse,
   KeyRound,
   LayoutDashboard,
+  Lock,
   PencilRuler,
   Pill,
   PlayCircle,
   Scissors,
   ScanBarcode,
   Settings,
+  SlidersHorizontal,
   ShoppingCart,
   Smartphone,
   Stethoscope,
@@ -28,12 +32,14 @@ import {
   UtensilsCrossed,
   Wifi,
   Workflow,
+  Zap,
   type LucideIcon,
 } from "lucide-react";
 
 // Explicit map instead of `import * as Icons` so only used icons are bundled.
 // Admin-entered service icons fall back to <Code /> if not listed here.
 const icons: Record<string, LucideIcon> = {
+  Bell,
   Boxes,
   BrainCircuit,
   Briefcase,
@@ -42,6 +48,7 @@ const icons: Record<string, LucideIcon> = {
   CalendarClock,
   Code,
   Dumbbell,
+  Fingerprint,
   FlaskConical,
   Gamepad2,
   Globe,
@@ -49,12 +56,14 @@ const icons: Record<string, LucideIcon> = {
   HeartPulse,
   KeyRound,
   LayoutDashboard,
+  Lock,
   PencilRuler,
   Pill,
   PlayCircle,
   Scissors,
   ScanBarcode,
   Settings,
+  SlidersHorizontal,
   ShoppingCart,
   Smartphone,
   Stethoscope,
@@ -63,6 +72,7 @@ const icons: Record<string, LucideIcon> = {
   UtensilsCrossed,
   Wifi,
   Workflow,
+  Zap,
 };
 
 export function DynamicIcon({ name, className }: { name: string; className?: string }) {

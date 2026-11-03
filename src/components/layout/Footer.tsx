@@ -96,6 +96,11 @@ export async function Footer({ locale }: { locale: Locale }) {
                 </Link>
               </li>
             ))}
+            <li>
+              <Link href={`/${locale}/owner-app`} className={item}>
+                {locale === "ar" ? "تطبيق صاحب العمل" : "Owner app"}
+              </Link>
+            </li>
           </ul>
         </nav>
 

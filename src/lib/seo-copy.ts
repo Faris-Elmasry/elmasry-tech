@@ -92,6 +92,12 @@ export const pageSeo: Record<string, PageSeo> = {
     h1: { en: "E-commerce website development in Egypt", ar: "تصميم متجر إلكتروني في مصر" },
     intro: { en: "E-commerce website development in Egypt that sells online and in your shop from the same stock. Customers pay the way they like — card, wallet, instalments or cash on delivery — shipping is booked for you, and the shop cashier keeps selling even when the internet drops.", ar: "تصميم متجر إلكتروني في مصر يبيع أونلاين وفي المحل من نفس المخزون. العميل يدفع بالطريقة اللي تريحه — فيزا أو محفظة أو تقسيط أو كاش عند الاستلام — والشحن بيتحجز لوحده، وكاشير المحل بيكمّل بيع حتى لو النت فصل." },
   },
+  "owner-app": {
+    title: { en: "Owner App — All Your Businesses on One Phone", ar: "تطبيق صاحب العمل — كل نشاطاتك على موبايل واحد" },
+    description: { en: "One app for the owner of several businesses: live sales numbers, filters, alerts and approvals from our café, gym, clinic, salon and POS systems. Try the demo.", ar: "تطبيق واحد لصاحب العمل: أرقام المبيعات لحظة بلحظة، وفلاتر وتنبيهات وموافقات من أنظمتنا للكافيه والجيم والعيادة والصالون والكاشير. جرّب الديمو." },
+    h1: { en: "Owner app: all your businesses on one phone", ar: "تطبيق صاحب العمل: كل نشاطاتك على موبايل واحد" },
+    intro: { en: "The owner app is one app for the owner of one or many businesses: today's sales, cash differences and discounts live, filters by period, branch and employee, alerts when something looks wrong, and approvals from your pocket. It works with our ready-made systems and opens in the browser — you can install it on your phone's home screen.", ar: "تطبيق صاحب العمل تطبيق واحد لصاحب نشاط واحد أو أكتر: مبيعات النهارده وفرق الدرج والخصومات لحظة بلحظة، وفلاتر بالفترة والفرع والموظف، وتنبيهات لما حاجة تبان غلط، وموافقات من جيبك. بيشتغل مع أنظمتنا الجاهزة وبيفتح من المتصفح — وتقدر تثبّته على شاشة موبايلك." },
+  },
   "system:cafe-playstation": {
     title: { en: "PlayStation & Café Management Software in Egypt", ar: "برنامج بلايستيشن وكافيه لحساب الوقت والطلبات" },
     description: { en: "PlayStation and café software in Egypt: time by the hour with single/multi prices, packages, table and room orders, a bar screen, reservations and blind shift counts — works offline.", ar: "برنامج بلايستيشن وكافيه في مصر: حساب الوقت بالساعة سنجل ومالتي، والباقات، وطلبات الترابيزات والرومات، وشاشة البار، والحجوزات، وقفل الوردية — وشغال من غير نت." },
@@ -157,6 +163,12 @@ export const pageSeo: Record<string, PageSeo> = {
     description: { en: "Medical laboratory software in Egypt: reception and barcode labels, results with flags, lab-doctor approval, Arabic/English reports, WhatsApp links and quality control.", ar: "برنامج معمل تحاليل في مصر: استقبال وليبل باركود، ونتايج بعلامات، واعتماد طبيب المعمل، وتقارير عربي/إنجليزي، وروابط واتساب، ومراقبة جودة. احجز عرض مجاني." },
     h1: { en: "Medical lab software in Egypt", ar: "برنامج معمل تحاليل" },
     intro: { en: "Medical laboratory software for Egypt: reception with tests, packages and contract companies; a barcode label per tube; samples received or rejected; results with high/low/critical flags; approval by the lab doctor only; an Arabic/English report or a WhatsApp link for the patient; quality control, reagent stock, urgent orders and home visits.", ar: "برنامج معامل تحاليل في مصر: استقبال بالتحاليل والباقات وشركات التعاقد؛ وليبل باركود لكل أنبوبة؛ واستلام العينة أو رفضها؛ ونتايج بعلامة عالي/واطي/حرج؛ والاعتماد لطبيب المعمل بس؛ وتقرير عربي/إنجليزي أو رابط واتساب للمريض؛ ومراقبة جودة ومخزون كواشف وتحاليل مستعجلة وزيارات منزلية." },
+  },
+  "system:attendance-payroll": {
+    title: { en: "Attendance & Payroll Software for Fingerprint Devices", ar: "برنامج حضور وانصراف ومرتبات من جهاز البصمة" },
+    description: { en: "Attendance and payroll software in Egypt: ZKTeco and Hikvision fingerprint devices, shifts, leaves, advances, PDF payslips and bank export. Try the live demo.", ar: "برنامج حضور وانصراف ومرتبات في مصر: بيسحب من أجهزة بصمة ZKTeco وHikvision، شفتات وإجازات وسلف، وكشوف PDF وملف تحويل بنك. جرّب الديمو الشغال دلوقتي." },
+    h1: { en: "Attendance & payroll software for fingerprint devices", ar: "برنامج حضور وانصراف ومرتبات من جهاز البصمة" },
+    intro: { en: "Attendance and payroll software for businesses with a fingerprint device in Egypt: it pulls the punches from your ZKTeco or Hikvision devices across branches, applies your shift, lateness and overtime rules, handles leaves, holidays and advances, and gives you the month's payroll with PDF payslips and a bank or wallet file. It runs on a PC without internet.", ar: "برنامج حضور وانصراف ومرتبات للشركات اللي عندها جهاز بصمة في مصر: بيسحب البصمات من أجهزة ZKTeco أو Hikvision على كل الفروع، وبيطبّق قواعد الشفتات والتأخير والإضافي اللي انت حاططها، وبيتعامل مع الإجازات والرسمي والسلف، وبيطلّع لك مرتبات الشهر بكشوف PDF وملف تحويل للبنك أو المحافظ. وبيشتغل على كمبيوتر من غير نت." },
   },
   "system:accounting-hr": {
     title: { en: "Accounting & Payroll Software in Egypt", ar: "برنامج حسابات ورواتب بالفاتورة الإلكترونية" },

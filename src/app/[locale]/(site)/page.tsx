@@ -5,7 +5,7 @@ import { setRequestLocale } from "next-intl/server";
 import { ArrowUpRight, Check } from "lucide-react";
 import { DevicesDemo } from "@/components/demos/devices/DevicesDemo";
 import { Rise } from "@/components/motion/Kinetic";
-import { ArrowLink, Chapter, ConsultActions, Faq, shell } from "@/components/studio/kit";
+import { ArrowLink, Chapter, ConsultActions, Faq, Figure, shell } from "@/components/studio/kit";
 import { HelloPhone, ServiceMock } from "@/components/studio/screens";
 import { PainFlip } from "@/components/studio/PainFlip";
 import { WorkShowcase } from "@/components/studio/WorkShowcase";
@@ -13,7 +13,9 @@ import { ServiceSwitcher } from "@/components/studio/ServiceSwitcher";
 import { SnapRail } from "@/components/studio/SnapRail";
 import { StepTrack } from "@/components/studio/StepTrack";
 import { ScrollLit } from "@/components/studio/ScrollLit";
+import { Button } from "@/components/ui/Button";
 import { DynamicIcon } from "@/components/ui/DynamicIcon";
+import { ownerApp } from "@/lib/owner-app";
 import { faqs, process, services, tr } from "@/lib/content";
 import { commitments } from "@/lib/company";
 import { readySystems, systemFaqs } from "@/lib/systems";
@@ -50,7 +52,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
   // Section numbers follow what is actually shown (the work section only exists once there is real work).
   let n = 0;
   const next = () => String(++n).padStart(2, "0");
-  const idx = { work: work.length > 0 ? next() : "", pain: next(), services: next(), systems: next(), steps: next(), why: next(), faq: next() };
+  const idx = { work: work.length > 0 ? next() : "", pain: next(), services: next(), systems: next(), owner: next(), steps: next(), why: next(), faq: next() };
 
   const notes = isAr ? ["اليوم الأول", "خلال 48 ساعة", "كل أسبوع", "يوم التشغيل وبعده"] : ["Day one", "Within 48 hours", "Every week", "Launch day — and after"];
 
@@ -155,6 +157,45 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
           </div>
         </div>
       </section>
+
+      {/* Owner app */}
+      <Chapter
+        index={idx.owner}
+        label={isAr ? "تطبيق صاحب العمل" : "Owner app"}
+        title={isAr ? "كل نشاطاتك في جيبك، على تطبيق واحد." : "All your businesses in your pocket, in one app."}
+        sub={isAr ? "مبيعات النهارده، وفرق الدرج، والتنبيهات، والموافقات — من أنظمتنا الجاهزة على موبايلك." : "Today's sales, cash differences, alerts and approvals — from our ready-made systems, on your phone."}
+      >
+        <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
+          <div className="lg:col-span-7">
+            <ul className="grid gap-x-8 gap-y-5 sm:grid-cols-2">
+              {ownerApp.features.map((f) => (
+                <Rise as="li" key={f.title.en} className="flex items-start gap-3">
+                  <DynamicIcon name={f.icon} className="mt-1 h-5 w-5 shrink-0 text-[var(--accent)]" />
+                  <span>
+                    <span className="block font-bold">{tr(f.title, locale)}</span>
+                    <span className="mt-1 block leading-relaxed text-[var(--text-muted)]">{tr(f.text, locale)}</span>
+                  </span>
+                </Rise>
+              ))}
+            </ul>
+            <div className="mt-10 flex flex-wrap items-center gap-3">
+              <Button href={`/${locale}/owner-app`} size="lg" rightIcon={<ArrowUpRight className="h-5 w-5 rtl:-scale-x-100" />}>
+                {isAr ? "شوف التطبيق وجرّبه" : "See the app and try it"}
+              </Button>
+            </div>
+          </div>
+          <Rise delay={0.1} className="lg:col-span-5">
+            <Figure
+              src={ownerApp.screens[0].src}
+              alt={tr(ownerApp.screens[0].alt, locale)}
+              caption={isAr ? "الشاشة الرئيسية — بيانات تجريبية" : "Home screen — sample data"}
+              ratio="aspect-[4/5]"
+              sizes="(min-width: 1024px) 36vw, 90vw"
+              className="mx-auto max-w-sm lg:max-w-none"
+            />
+          </Rise>
+        </div>
+      </Chapter>
 
       {/* How we work */}
       <Chapter

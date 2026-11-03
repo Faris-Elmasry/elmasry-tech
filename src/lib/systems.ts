@@ -40,12 +40,21 @@ export interface ReadySystem {
   photoAlt: T;
   screen: SystemScreen;
   keywords: Record<Locale, string[]>;
+  /**
+   * Demo access. "open": a public live demo (login shown on its own page) — link it directly.
+   * "account": a gated demo that needs an account from us — never link it, offer a WhatsApp
+   * request for a demo account instead.
+   */
+  demo?: { kind: "open"; url: string; note: T } | { kind: "account" };
+  /** Tailwind aspect class for the hero photo when it is a screenshot (default 4/5). */
+  photoRatio?: string;
 }
 
 export const readySystems: ReadySystem[] = [
   // Our own finished products first; every entry describes only what the product really does.
   {
     slug: "cafe-playstation",
+    demo: { kind: "account" },
     icon: "Gamepad2",
     name: { en: "Café & PlayStation system", ar: "نظام الكافيه والبلايستيشن" },
     hint: { en: "Rooms by the hour, orders, shifts", ar: "الرومات بالساعة والطلبات والورديات" },
@@ -156,6 +165,7 @@ export const readySystems: ReadySystem[] = [
   },
   {
     slug: "pos-cashier",
+    demo: { kind: "account" },
     icon: "ScanBarcode",
     name: { en: "Cashier, sales & instalments", ar: "الكاشير والمبيعات والتقسيط" },
     hint: { en: "Shops, phone stores, instalments", ar: "المحلات والموبايلات والتقسيط" },
@@ -211,6 +221,7 @@ export const readySystems: ReadySystem[] = [
   },
   {
     slug: "pharmacy-system",
+    demo: { kind: "account" },
     icon: "Pill",
     name: { en: "Pharmacy system", ar: "نظام الصيدليات" },
     hint: { en: "Alternatives, expiry, insurance, delivery", ar: "البدايل والصلاحية والتأمين والتوصيل" },
@@ -266,6 +277,7 @@ export const readySystems: ReadySystem[] = [
   },
   {
     slug: "school-management",
+    demo: { kind: "account" },
     icon: "GraduationCap",
     name: { en: "Tutoring centres system", ar: "نظام السناتر ومراكز الدروس" },
     hint: { en: "Groups, card attendance, fees", ar: "المجموعات والحضور بالكارت والمصاريف" },
@@ -321,6 +333,7 @@ export const readySystems: ReadySystem[] = [
   },
   {
     slug: "salon-barber",
+    demo: { kind: "account" },
     icon: "Scissors",
     name: { en: "Salon & barbershop system", ar: "نظام الصالونات والحلاقين" },
     hint: { en: "Bookings, queue, commissions", ar: "الحجوزات والدور والعمولات" },
@@ -376,6 +389,7 @@ export const readySystems: ReadySystem[] = [
   },
   {
     slug: "medical-lab",
+    demo: { kind: "account" },
     icon: "FlaskConical",
     name: { en: "Medical lab system", ar: "نظام معامل التحاليل" },
     hint: { en: "Samples, results, approval, reports", ar: "العينات والنتايج والاعتماد والتقارير" },
@@ -486,6 +500,7 @@ export const readySystems: ReadySystem[] = [
   },
   {
     slug: "clinic-management",
+    demo: { kind: "account" },
     icon: "Stethoscope",
     name: { en: "Clinic system", ar: "نظام العيادات" },
     hint: { en: "Bookings, patient files, bills", ar: "الحجوزات وملفات المرضى والفواتير" },
@@ -541,6 +556,7 @@ export const readySystems: ReadySystem[] = [
   },
   {
     slug: "gym-management",
+    demo: { kind: "account" },
     icon: "Dumbbell",
     name: { en: "Gym system", ar: "نظام الجيم" },
     hint: { en: "Memberships, attendance", ar: "الاشتراكات والحضور" },
@@ -647,6 +663,71 @@ export const readySystems: ReadySystem[] = [
     keywords: {
       en: ["restaurant POS Egypt", "restaurant management system"],
       ar: ["برنامج مطاعم", "سيستم مطعم", "برنامج كاشير مطاعم", "برنامج إدارة مطعم"],
+    },
+  },
+  {
+    slug: "attendance-payroll",
+    icon: "Fingerprint",
+    demo: {
+      kind: "open",
+      url: "https://attendance-demo.72-61-178-220.sslip.io",
+      note: {
+        en: "Sample data only. The login is shown on the demo's own sign-in page. The demo resets to its original data every day.",
+        ar: "بيانات وهمية بس. بيانات الدخول مكتوبة في صفحة الدخول نفسها، والديمو بيرجع لأصله كل يوم.",
+      },
+    },
+    name: { en: "Attendance & payroll system", ar: "نظام الحضور والمرتبات" },
+    hint: { en: "Fingerprint devices to payslips", ar: "من جهاز البصمة لكشف المرتب" },
+    tagline: { en: "Fingerprints in, payslips out — and every rule is yours.", ar: "البصمات تدخل، وكشوف المرتبات تطلع — والقواعد كلها بتاعتك." },
+    summary: {
+      en: "For companies, factories, shops and clinics with a fingerprint device: pull attendance from ZKTeco (pull, or push by ADMS), Hikvision or an Excel/CSV file, across several branches and devices; set shifts (night shifts too), lateness, early leave and overtime rules, leaves and official holidays, and advances paid back in instalments; then get the month's payroll, a PDF payslip per person, a bank or wallet transfer file and a ready WhatsApp message per employee. It runs on a PC without internet, with an optional cloud sync.",
+      ar: "للشركات والمصانع والمحلات والعيادات اللي عندها جهاز بصمة: بيسحب الحضور من ZKTeco (سحب، أو دفع من الجهاز بـ ADMS) أو Hikvision أو ملف إكسل/CSV، على كذا فرع وكذا جهاز؛ وانت بتحدد الشفتات (والشفت الليلي كمان) وقواعد التأخير والانصراف بدري والإضافي، والإجازات والإجازات الرسمية، والسلف بالأقساط؛ وبعدها تطلع لك مرتبات الشهر، وكشف PDF لكل موظف، وملف تحويل للبنك أو المحافظ، ورسالة واتساب جاهزة لكل موظف. بيشتغل على كمبيوتر من غير نت، ومعاه مزامنة سحابة اختيارية.",
+    },
+    audience: {
+      en: ["Companies and factories", "Shops with several branches", "Clinics and labs", "Any business with a fingerprint device"],
+      ar: ["الشركات والمصانع", "المحلات اللي ليها فروع", "العيادات والمعامل", "أي نشاط عنده جهاز بصمة"],
+    },
+    modules: [
+      { title: { en: "Fingerprint devices", ar: "أجهزة البصمة" }, text: { en: "ZKTeco by pull or by ADMS push, Hikvision, or an Excel/CSV import. Many devices and branches; one device being down doesn't stop the next.", ar: "ZKTeco بالسحب أو بالدفع (ADMS)، وHikvision، أو استيراد ملف إكسل/CSV. أجهزة وفروع كتير، وجهاز واقع مبيوقفش اللي بعده." } },
+      { title: { en: "Shifts & rules", ar: "الشفتات والقواعد" }, text: { en: "Day and night shifts, lateness, early leave and overtime rules you set, per shift.", ar: "شفتات نهارية وليلية، وقواعد التأخير والانصراف بدري والإضافي بتحددها انت لكل شفت." } },
+      { title: { en: "Leaves & holidays", ar: "الإجازات والرسمي" }, text: { en: "Leave and permission requests, official holidays, absences, and deductions or bonuses with a reason.", ar: "طلبات الإجازات والأذونات، والإجازات الرسمية، والغياب، والخصومات والمكافآت بسببها." } },
+      { title: { en: "Advances", ar: "السلف" }, text: { en: "An advance paid back in instalments, taken out of each month's pay automatically.", ar: "السلفة بتتسدد بالأقساط، وبتتخصم من مرتب كل شهر لوحدها." } },
+      { title: { en: "Payroll & payslips", ar: "المرتبات والكشوف" }, text: { en: "The month's payroll, a PDF payslip per employee, Excel, a bank or wallet transfer file, and a ready WhatsApp message to send.", ar: "مرتبات الشهر، وكشف PDF لكل موظف، وإكسل، وملف تحويل للبنك أو المحافظ، ورسالة واتساب جاهزة تبعتها." } },
+      { title: { en: "Insurance & tax rules", ar: "التأمينات والضريبة" }, text: { en: "Social-insurance and income-tax rules are off until you switch them on, and you edit the rates yourself. We set them up to be reviewed with your accountant — we don't present them as certified.", ar: "قواعد التأمينات الاجتماعية وضريبة كسب العمل مقفولة لحد ما تفعّلها، والنِّسب بتعدّلها من عندك. بنظبطها عشان تتراجع مع محاسبك — ومش بنقول إنها معتمدة." } },
+      { title: { en: "Month approval", ar: "اعتماد الشهر" }, text: { en: "Review the month, then approve it: the numbers are frozen and nobody changes them by accident.", ar: "بتراجع الشهر وبعدين تعتمده: الأرقام بتتحفظ زي ما هي ومحدش يعدّلها بالغلط." } },
+    ],
+    highlights: {
+      en: ["Works without internet on a PC", "Optional cloud sync", "Device clock check, with warning or automatic correction", "Insurance and tax rules you can configure", "Backup and restore from the settings screen", "Arabic and English"],
+      ar: ["شغال من غير نت على كمبيوتر", "مزامنة سحابة اختيارية", "فحص ساعة الجهاز بتنبيه أو ضبط تلقائي", "قواعد تأمينات وضريبة تتظبط من عندك", "نسخة احتياطية واسترجاع من الإعدادات", "بالعربي والإنجليزي"],
+    },
+    integrations: {
+      en: ["ZKTeco fingerprint devices", "Hikvision devices", "Excel / CSV files", "Bank or wallet transfer file", "WhatsApp message per employee"],
+      ar: ["أجهزة بصمة ZKTeco", "أجهزة Hikvision", "ملفات إكسل وCSV", "ملف تحويل البنك أو المحافظ", "رسالة واتساب لكل موظف"],
+    },
+    before: {
+      en: ["Printing the device log and counting late minutes by hand", "Night shifts that cross midnight and break the sheet", "Advances nobody remembers on payday"],
+      ar: ["طباعة سجل الجهاز وعدّ دقايق التأخير بالإيد", "شفت ليلي بيعدّي نص الليل ويبوّظ الكشف", "سلف محدش فاكرها يوم المرتبات"],
+    },
+    photo: "/images/site/attendance-payroll.webp",
+    photoAlt: { en: "The payroll screen of the demo (sample data)", ar: "شاشة المرتبات في النسخة التجريبية (بيانات وهمية)" },
+    photoRatio: "aspect-[4/3]",
+    screen: {
+      nav: [{ en: "Attendance", ar: "الحضور" }, { en: "Shifts", ar: "الشفتات" }, { en: "Advances", ar: "السلف" }, { en: "Payroll", ar: "المرتبات" }],
+      stats: [
+        { label: { en: "Present today", ar: "حضروا النهارده" }, value: "20/25" },
+        { label: { en: "Late", ar: "متأخرين" }, value: "3" },
+        { label: { en: "Month payroll", ar: "مرتبات الشهر" }, value: "284,000" },
+      ],
+      chart: [70, 92, 88, 95, 90, 60, 30],
+      rows: [
+        { name: { en: "Ahmed K. · morning shift", ar: "أحمد ك. · شيفت الصبح" }, meta: { en: "Checked in 07:34 · on time", ar: "دخول 07:34 · في الميعاد" }, value: "07:34" },
+        { name: { en: "Night shift · branch 2", ar: "شفت ليلي · فرع 2" }, meta: { en: "Crosses midnight · counted on the start day", ar: "بيعدّي نص الليل · بيتحسب على يوم الدخول" }, value: "08:10" },
+        { name: { en: "Advance · instalment 3 of 6", ar: "سلفة · قسط 3 من 6" }, meta: { en: "Taken out of this month's pay", ar: "بيتخصم من مرتب الشهر ده" }, value: "500" },
+      ],
+    },
+    keywords: {
+      en: ["attendance and payroll software Egypt", "fingerprint attendance system", "ZKTeco attendance software", "payslip software Egypt"],
+      ar: ["برنامج حضور وانصراف", "برنامج بصمة وحضور", "برنامج مرتبات", "برنامج ربط جهاز البصمة ZKTeco", "برنامج حساب مرتبات من البصمة"],
     },
   },
   {
@@ -775,9 +856,9 @@ export const systemFaqs: { q: T; a: T }[] = [
 export const serviceSystems: Record<string, string[]> = {
   "website-development": ["clinic-management", "salon-barber", "school-management"],
   "mobile-app-development": ["restaurant-system", "gym-management", "pharmacy-system"],
-  "custom-software": ["cafe-playstation", "pos-cashier", "pharmacy-system", "medical-lab", "inventory-warehouse", "accounting-hr"],
+  "custom-software": ["cafe-playstation", "pos-cashier", "pharmacy-system", "medical-lab", "inventory-warehouse", "accounting-hr", "attendance-payroll"],
   "ai-chatbots": ["medical-lab", "salon-barber", "clinic-management"],
-  "business-automation": ["wifi-cards", "accounting-hr", "inventory-warehouse"],
+  "business-automation": ["wifi-cards", "accounting-hr", "attendance-payroll", "inventory-warehouse"],
   "ecommerce-development": ["pos-cashier", "inventory-warehouse"],
 };
 

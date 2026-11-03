@@ -60,6 +60,9 @@ export default async function SystemPage({ params }: PageProps<"/[locale]/system
   const index = readySystems.findIndex((s) => s.slug === slug);
   const others = readySystems.filter((s) => s.slug !== slug);
   const demoMsg = isAr ? `أهلًا، عايز أحجز عرض تجريبي مجاني لـ ${name}.` : `Hi, I’d like to book a free demo of the ${sysName(name)}.`;
+  // Public live demo (open) vs gated demo (needs an account from us: never linked directly).
+  const demo = system.demo;
+  const accountMsg = isAr ? `أهلًا، عايز حساب تجريبي أجرّب بيه ${name} بنفسي.` : `Hi, I’d like a demo account to try the ${sysName(name)} myself.`;
 
   const productLd = {
     "@context": "https://schema.org",
@@ -108,16 +111,33 @@ export default async function SystemPage({ params }: PageProps<"/[locale]/system
         sub={tr(seo.intro!, locale)}
         actions={
           <>
-            <Button href={whatsappLink(demoMsg)} size="lg" leftIcon={<WhatsAppIcon className="h-5 w-5" />}>
-              {isAr ? "احجز عرض تجريبي مجاني" : "Book a free demo"}
-            </Button>
+            {demo?.kind === "open" && (
+              <Button href={demo.url} size="lg" rightIcon={<ArrowUpRight className="h-5 w-5 rtl:-scale-x-100" />}>
+                {isAr ? "جرّب الديمو" : "Try the demo"}
+              </Button>
+            )}
+            {demo?.kind === "account" ? (
+              <Button href={whatsappLink(accountMsg)} size="lg" leftIcon={<WhatsAppIcon className="h-5 w-5" />}>
+                {isAr ? "اطلب حساب تجريبي" : "Ask for a demo account"}
+              </Button>
+            ) : (
+              <Button href={whatsappLink(demoMsg)} variant={demo?.kind === "open" ? "outline" : "primary"} size="lg" leftIcon={<WhatsAppIcon className="h-5 w-5" />}>
+                {isAr ? "احجز عرض تجريبي مجاني" : "Book a free demo"}
+              </Button>
+            )}
             <Button href="#request" variant="outline" size="lg" rightIcon={<ArrowUpRight className="h-5 w-5 rtl:-scale-x-100" />}>
               {isAr ? "اطلبه أو اسأل عن السعر" : "Get it or ask the price"}
             </Button>
+            {demo?.kind === "open" && <p className="basis-full text-sm leading-relaxed text-[var(--text-muted)]">{tr(demo.note, locale)}</p>}
+            {demo?.kind === "account" && (
+              <p className="basis-full text-sm leading-relaxed text-[var(--text-muted)]">
+                {isAr ? "الديمو الشغال محتاج حساب مننا — ابعت لنا على الواتساب وهنفتح لك حساب تجريبي." : "The live demo needs an account from us — message us on WhatsApp and we’ll open a demo account for you."}
+              </p>
+            )}
           </>
         }
         aside={
-          <Figure src={system.photo} alt={tr(system.photoAlt, locale)} fig="01" caption={tr(system.photoAlt, locale)} ratio="aspect-[4/5]" preload sizes="(min-width: 1024px) 36vw, 100vw" />
+          <Figure src={system.photo} alt={tr(system.photoAlt, locale)} fig="01" caption={tr(system.photoAlt, locale)} ratio={system.photoRatio ?? "aspect-[4/5]"} preload sizes="(min-width: 1024px) 36vw, 100vw" />
         }
       >
         <ShortVersion
