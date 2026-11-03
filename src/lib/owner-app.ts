@@ -14,9 +14,9 @@ export const ownerApp = {
     { slug: "gym", url: "https://owner-mock.72-61-178-220.sslip.io/mock/pair/gym", label: { en: "Gym", ar: "جيم" } as T },
   ],
   /** System slugs (in src/lib/systems.ts) that already feed the app. */
-  works: ["cafe-playstation", "gym-management", "clinic-management", "medical-lab", "salon-barber", "school-management", "pos-cashier"],
+  works: ["cafe-playstation", "gym-management", "clinic-management", "medical-lab", "salon-barber", "school-management", "pos-cashier", "pharmacy-system"],
   /** Announced, not available yet. */
-  soon: ["pharmacy-system"],
+  soon: [] as string[],
   features: [
     { icon: "LayoutDashboard", title: { en: "One app, all your businesses", ar: "تطبيق واحد لكل نشاطاتك" }, text: { en: "Switch between your cafés, gym or shops from one list, instead of one app and one login for each.", ar: "بتبدّل بين الكافيه والجيم والمحلات من قايمة واحدة، بدل تطبيق ولوجين لكل نشاط." } },
     { icon: "Zap", title: { en: "Live numbers", ar: "أرقام لحظة بلحظة" }, text: { en: "Net sales with an hour-by-hour chart, cash-drawer difference, discounts, wasted and complimentary items, invoice count and the average invoice.", ar: "صافي المبيعات برسم بالساعة، وفرق الدرج، والخصومات، والأصناف التالفة والضيافة، وعدد الفواتير ومتوسط الفاتورة." } },
@@ -33,7 +33,7 @@ export const ownerApp = {
   faqs: [
     { q: { en: "Does it replace my current system?", ar: "هل بيحل محل نظامي الحالي؟" }, a: { en: "No. The app only shows what our systems already record, and lets you approve what needs your approval. The shop keeps working on its own system.", ar: "لأ. التطبيق بيعرض اللي أنظمتنا مسجّلاه فعلًا، وبيخليك توافق على اللي محتاج موافقتك. المحل بيكمّل شغل على نظامه." } },
     { q: { en: "Do I download it from a store?", ar: "أنزّله من المتجر؟" }, a: { en: "No. It opens in your phone's browser and you can install it on the home screen from there.", ar: "لأ. بيفتح من متصفح الموبايل، وتقدر تثبّته على الشاشة الرئيسية من هناك." } },
-    { q: { en: "Is my pharmacy supported?", ar: "والصيدلية؟" }, a: { en: "The pharmacy system is coming to the app. Today it works with the café, gym, clinic, lab, salon, tutoring-centre and cashier systems.", ar: "نظام الصيدلية جاي للتطبيق قريب. النهارده بيشتغل مع أنظمة الكافيه والجيم والعيادة والمعمل والصالون وسنتر الدروس والكاشير." } },
+    { q: { en: "Is my pharmacy supported?", ar: "والصيدلية؟" }, a: { en: "Yes. The pharmacy system feeds the app too: sales, margin, insurance due, expired and near-expiry stock, shortages and e-receipts — with no patient or prescription details.", ar: "أيوه. نظام الصيدلية بيوصل للتطبيق كمان: المبيعات، والمكسب، والمستحق من شركات التأمين، والمخزون المنتهي واللي قرب ينتهي، والنواقص، والإيصالات الإلكترونية — من غير أي بيانات مرضى أو روشتات." } },
     { q: { en: "Who sees my numbers?", ar: "مين بيشوف أرقامي؟" }, a: { en: "You choose per business how much goes to the cloud: full details, or totals only. Ask us and we'll walk you through the options.", ar: "انت بتختار لكل نشاط قد إيه يروح للسحابة: التفاصيل كاملة أو إجماليات بس. اسألنا ونشرح لك الاختيارات." } },
   ] as { q: T; a: T }[],
   screens: [
